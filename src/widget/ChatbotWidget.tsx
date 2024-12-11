@@ -358,27 +358,39 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
 
   const createConversation = async () => {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        await supabase.auth.signInAnonymously();
-        const { data: { user: anonUser } } = await supabase.auth.getUser();
-        if (!anonUser) throw new Error('Failed to create anonymous session');
+      // Get anonymous token from backend
+      const response = await fetch('https://deplo-dash.vercel.app/api/auth/anonymous', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create anonymous session');
       }
 
-      const { data, error } = await supabase
-        .from('conversations')
-        .insert({
+      const { data } = await response.json();
+      
+      // Use the token for subsequent requests
+      const conversationResponse = await fetch('https://deplo-dash.vercel.app/api/conversations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${data.session.access_token}`,
+        },
+        body: JSON.stringify({
           domain_id: domainId,
-          user_id: user.id,
-          session_id: sessionId, // Add the session_id
-          last_message_at: new Date().toISOString(),
-          status: 'active'
-        })
-        .select()
-        .single();
+          session_id: sessionId,
+        }),
+      });
 
-      if (error) throw error;
-      return data.id;
+      if (!conversationResponse.ok) {
+        throw new Error('Failed to create conversation');
+      }
+
+      const conversation = await conversationResponse.json();
+      return conversation.id;
     } catch (error) {
       console.error('Error creating conversation:', error);
       throw error;
@@ -390,39 +402,30 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       setIsLoading(true);
       setError(null);
 
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        await supabase.auth.signInAnonymously();
-        const { data: { user: anonUser } } = await supabase.auth.getUser();
-        if (!anonUser) throw new Error('Failed to create anonymous session');
-      }
-      
       // Create a new conversation if one doesn't exist
       const currentConversationId = conversationId || await createConversation();
       if (!conversationId) {
         setConversationId(currentConversationId);
       }
 
-      // Insert the message
-      const { data: messageData, error: messageError } = await supabase
-        .from('messages')
-        .insert({
+      // Send message through backend API
+      const response = await fetch('https://deplo-dash.vercel.app/api/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
           conversation_id: currentConversationId,
-          user_id: user.id,
           content,
           sender_type: 'user',
-          created_at: new Date().toISOString()
-        })
-        .select()
-        .single();
+        }),
+      });
 
-      if (messageError) throw messageError;
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
 
-      // Update conversation last_message_at
-      await supabase
-        .from('conversations')
-        .update({ last_message_at: new Date().toISOString() })
-        .eq('id', currentConversationId);
+      const messageData = await response.json();
 
       // Add message to local state
       if (!processedMessageIds.has(messageData.id)) {
