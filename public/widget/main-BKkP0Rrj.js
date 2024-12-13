@@ -2541,7 +2541,7 @@ class Wn {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-M3hPWhE1.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-BSYavlDx.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this._endPointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7338,11 +7338,11 @@ function lo({ domainId: s }) {
         /* @__PURE__ */ w.jsx("div", { className: "text-center mt-2", children: /* @__PURE__ */ w.jsx(
           "a",
           {
-            href: "https://corinna.ai",
+            href: "https://dashboard.ai",
             target: "_blank",
             rel: "noopener noreferrer",
             className: "text-sm text-gray-600 hover:text-gray-700",
-            children: "Powered by Corinna.ai"
+            children: "Powered by Dashboard.ai"
           }
         ) })
       ] })
@@ -7368,4 +7368,4 @@ uo();
 export {
   go as g
 };
-//# sourceMappingURL=main-DMRvH47F.js.map
+//# sourceMappingURL=main-BKkP0Rrj.js.map

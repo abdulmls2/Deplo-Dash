@@ -113,6 +113,7 @@ export const useConversationStore = create<ConversationStore>((set, get) => ({
         .eq('domain_id', currentDomainId)
         .neq('status', 'deleted')
         .order('last_message_at', { ascending: sortOrder === 'oldest' });
+        
 
       // Apply filter based on activeFilter
       switch (activeFilter) {
