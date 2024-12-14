@@ -1,17 +1,10 @@
-import OpenAI from 'openai';
-
-// Initialize OpenAI client
-export const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || import.meta.env.VITE_OPENAI_API_KEY
-});
-
 // Define the system prompt
 const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
 // Function to generate bot response using the API endpoint
 export const generateBotResponse = async (message: string, conversationId: string): Promise<string> => {
   try {
-    const response = await fetch('/api/chat', {
+    const response = await fetch('https://deplo-dash.vercel.app/api/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
