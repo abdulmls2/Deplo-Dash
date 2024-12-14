@@ -13,7 +13,9 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.7",
+    "@types/cors": "^2.8.17",
     "@types/react-beautiful-dnd": "^13.1.8",
+    "cors": "^2.8.5",
     "date-fns": "^3.6.0",
     "lucide-react": "^0.344.0",
     "openai": "^4.76.3",
