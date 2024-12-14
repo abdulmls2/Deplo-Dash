@@ -2542,7 +2542,7 @@ class ki {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-BUSCgROs.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-B39uJzRV.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this._endPointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7588,19 +7588,26 @@ const Bc = async (s, e) => {
     const t = await fetch("https://deplo-dash.vercel.app/api/chat", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Accept: "application/json"
       },
       body: JSON.stringify({
         message: s,
         conversationId: e
-      }),
-      mode: "cors"
+      })
     });
-    if (!t.ok)
-      throw new Error(`HTTP error! status: ${t.status}`);
+    if (!t.ok) {
+      console.error("API Response:", {
+        status: t.status,
+        statusText: t.statusText,
+        headers: Object.fromEntries(t.headers.entries())
+      });
+      const n = await t.text();
+      throw console.error("Error response body:", n), new Error(`HTTP error! status: ${t.status}`);
+    }
     return (await t.json()).response || "Sorry, I could not generate a response.";
   } catch (t) {
-    return console.error("Error generating response:", t), "Sorry, I encountered an error while processing your request. Please try again later.";
+    throw console.error("Error generating response:", t), t;
   }
 }, Wc = nc((s, e) => ({
   isLoading: !1,
@@ -8018,4 +8025,4 @@ Hc();
 export {
   Sn as g
 };
-//# sourceMappingURL=main-DGA5XGv-.js.map
+//# sourceMappingURL=main-D7mioFuC.js.map

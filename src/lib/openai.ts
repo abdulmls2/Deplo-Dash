@@ -7,16 +7,23 @@ export const generateBotResponse = async (message: string, conversationId: strin
     const response = await fetch('https://deplo-dash.vercel.app/api/chat', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
       body: JSON.stringify({
         message,
         conversationId
-      }),
-      mode: 'cors'
+      })
     });
 
     if (!response.ok) {
+      console.error('API Response:', {
+        status: response.status,
+        statusText: response.statusText,
+        headers: Object.fromEntries(response.headers.entries())
+      });
+      const errorText = await response.text();
+      console.error('Error response body:', errorText);
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
@@ -24,7 +31,7 @@ export const generateBotResponse = async (message: string, conversationId: strin
     return data.response || 'Sorry, I could not generate a response.';
   } catch (error) {
     console.error('Error generating response:', error);
-    return 'Sorry, I encountered an error while processing your request. Please try again later.';
+    throw error;
   }
 };
 

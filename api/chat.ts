@@ -8,27 +8,32 @@ const openai = new OpenAI({
 
 const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
+// Enable CORS middleware
+const cors = async (req: VercelRequest, res: VercelResponse) => {
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return true;
+  }
+  return false;
+};
+
 export default async function handler(
   req: VercelRequest,
   res: VercelResponse
 ) {
+  // Handle CORS
+  if (await cors(req, res)) return;
+
   console.log('API Request received:', {
     method: req.method,
     headers: req.headers,
     body: req.body
   });
-
-  // Handle CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS,POST');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  // Preflight request
-  if (req.method === 'OPTIONS') {
-    console.log('Handling OPTIONS request');
-    res.status(200).end();
-    return;
-  }
 
   if (req.method !== 'POST') {
     console.log('Method not allowed:', req.method);
