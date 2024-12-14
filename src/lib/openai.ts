@@ -8,6 +8,7 @@ export const generateBotResponse = async (message: string, conversationId: strin
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
       },
       body: JSON.stringify({
         message,
@@ -16,14 +17,23 @@ export const generateBotResponse = async (message: string, conversationId: strin
     });
 
     if (!response.ok) {
-      throw new Error('Failed to generate response');
+      const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+      console.error('API Error:', {
+        status: response.status,
+        statusText: response.statusText,
+        data: errorData
+      });
+      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
+    if (!data.response) {
+      throw new Error('Invalid response format from server');
+    }
     return data.response;
   } catch (error) {
     console.error('Error generating response:', error);
-    return 'Sorry, I encountered an error while processing your request.';
+    return 'Sorry, I encountered an error while processing your request. Please try again later.';
   }
 };
 

@@ -2542,7 +2542,7 @@ class ki {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-U9QPsf14.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-DpBU6USD.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this._endPointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7588,18 +7588,28 @@ const Bc = async (s, e) => {
     const t = await fetch("https://deplo-dash.vercel.app/api/chat", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Accept: "application/json"
       },
       body: JSON.stringify({
         message: s,
         conversationId: e
       })
     });
-    if (!t.ok)
-      throw new Error("Failed to generate response");
-    return (await t.json()).response;
+    if (!t.ok) {
+      const n = await t.json().catch(() => ({ error: "Unknown error" }));
+      throw console.error("API Error:", {
+        status: t.status,
+        statusText: t.statusText,
+        data: n
+      }), new Error(n.error || `HTTP error! status: ${t.status}`);
+    }
+    const r = await t.json();
+    if (!r.response)
+      throw new Error("Invalid response format from server");
+    return r.response;
   } catch (t) {
-    return console.error("Error generating response:", t), "Sorry, I encountered an error while processing your request.";
+    return console.error("Error generating response:", t), "Sorry, I encountered an error while processing your request. Please try again later.";
   }
 }, Wc = nc((s, e) => ({
   isLoading: !1,
@@ -8017,4 +8027,4 @@ Hc();
 export {
   Sn as g
 };
-//# sourceMappingURL=main-31m3FH6o.js.map
+//# sourceMappingURL=main-CmOZWLa5.js.map
