@@ -18,16 +18,12 @@ export default async function handler(
     body: req.body
   });
 
-  // Set CORS headers
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  // Handle CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
+  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS,POST');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  // Handle preflight request
+  // Preflight request
   if (req.method === 'OPTIONS') {
     console.log('Handling OPTIONS request');
     res.status(200).end();
