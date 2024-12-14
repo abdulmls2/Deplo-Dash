@@ -1,3 +1,4 @@
+// Vercel Serverless Function for OpenAI Chat API
 import { OpenAI } from 'openai';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
@@ -47,7 +48,7 @@ export default async function handler(
       return res.status(500).json({ error: 'OpenAI API key is not configured' });
     }
 
-    const { message, conversationId } = req.body;
+    const { message } = req.body;
 
     // Validate request body
     if (!message) {
