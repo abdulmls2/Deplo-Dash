@@ -2542,7 +2542,7 @@ class ki {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-B39uJzRV.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-DVajjYRV.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this._endPointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7585,7 +7585,7 @@ $t`
 `;
 const Bc = async (s, e) => {
   try {
-    const t = await fetch("https://deplo-dash.vercel.app/api/chat", {
+    const t = await fetch("/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -8025,4 +8025,4 @@ Hc();
 export {
   Sn as g
 };
-//# sourceMappingURL=main-D7mioFuC.js.map
+//# sourceMappingURL=main-C-PHdDBT.js.map
