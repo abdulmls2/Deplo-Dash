@@ -1,14 +1,14 @@
 {
   "version": 2,
   "functions": {
-    "pages/api/**/*.ts": {
+    "api/**/*.ts": {
       "runtime": "@vercel/node@3.0.0"
     }
   },
   "routes": [
     {
       "src": "/api/chat",
-      "dest": "/api/chat.ts",
+      "dest": "/pages/api/chat.ts",
       "methods": ["POST", "OPTIONS"]
     },
     {
