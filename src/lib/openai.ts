@@ -4,7 +4,10 @@ const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal i
 // Function to generate bot response using the API endpoint
 export const generateBotResponse = async (message: string, conversationId: string): Promise<string> => {
   try {
-    const response = await fetch('https://deplo-dash.vercel.app/api/chat', {
+    // Always use the absolute URL for the API endpoint
+    const API_URL = 'https://deplo-dash.vercel.app/api/chat';
+    
+    const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -2542,7 +2542,7 @@ class ki {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-DVajjYRV.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-DvFt_zyH.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this._endPointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7585,7 +7585,7 @@ $t`
 `;
 const Bc = async (s, e) => {
   try {
-    const t = await fetch("/api/chat", {
+    const r = await fetch("https://deplo-dash.vercel.app/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -7596,16 +7596,16 @@ const Bc = async (s, e) => {
         conversationId: e
       })
     });
-    if (!t.ok) {
+    if (!r.ok) {
       console.error("API Response:", {
-        status: t.status,
-        statusText: t.statusText,
-        headers: Object.fromEntries(t.headers.entries())
+        status: r.status,
+        statusText: r.statusText,
+        headers: Object.fromEntries(r.headers.entries())
       });
-      const n = await t.text();
-      throw console.error("Error response body:", n), new Error(`HTTP error! status: ${t.status}`);
+      const i = await r.text();
+      throw console.error("Error response body:", i), new Error(`HTTP error! status: ${r.status}`);
     }
-    return (await t.json()).response || "Sorry, I could not generate a response.";
+    return (await r.json()).response || "Sorry, I could not generate a response.";
   } catch (t) {
     throw console.error("Error generating response:", t), t;
   }
@@ -8025,4 +8025,4 @@ Hc();
 export {
   Sn as g
 };
-//# sourceMappingURL=main-C-PHdDBT.js.map
+//# sourceMappingURL=main-B32WhGBI.js.map
