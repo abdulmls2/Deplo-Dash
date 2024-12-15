@@ -8,7 +8,7 @@
   "routes": [
     {
       "src": "/api/chat",
-      "dest": "/pages/api/chat",
+      "dest": "/api/chat.ts",
       "methods": ["POST", "OPTIONS"]
     },
     {
