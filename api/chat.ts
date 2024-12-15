@@ -12,7 +12,7 @@ const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal i
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
   res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Origin', '*');  // Changed to allow any origin for testing
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
   res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
 
@@ -27,25 +27,35 @@ export default async function handler(
   req: VercelRequest,
   res: VercelResponse
 ) {
-  // Handle CORS
-  if (await cors(req, res)) return;
-
-  console.log('API Request received:', {
-    method: req.method,
-    headers: req.headers,
-    body: req.body
-  });
-
-  if (req.method !== 'POST') {
-    console.log('Method not allowed:', req.method);
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
   try {
+    // Handle CORS
+    if (await cors(req, res)) return;
+
+    console.log('API Request received:', {
+      method: req.method,
+      headers: req.headers,
+      body: req.body,
+      env: {
+        hasApiKey: !!process.env.OPENAI_API_KEY,
+        nodeEnv: process.env.NODE_ENV
+      }
+    });
+
+    if (req.method !== 'POST') {
+      console.log('Method not allowed:', req.method);
+      return res.status(405).json({ error: 'Method not allowed' });
+    }
+
     // Validate API key
     if (!process.env.OPENAI_API_KEY) {
       console.error('OpenAI API key is not set');
-      return res.status(500).json({ error: 'OpenAI API key is not configured' });
+      return res.status(500).json({ 
+        error: 'OpenAI API key is not configured',
+        env: process.env.NODE_ENV === 'development' ? {
+          hasApiKey: !!process.env.OPENAI_API_KEY,
+          nodeEnv: process.env.NODE_ENV
+        } : undefined
+      });
     }
 
     const { message } = req.body;
@@ -75,12 +85,22 @@ export default async function handler(
     console.error('Error details:', {
       name: error.name,
       message: error.message,
-      stack: error.stack
+      stack: error.stack,
+      env: {
+        hasApiKey: !!process.env.OPENAI_API_KEY,
+        nodeEnv: process.env.NODE_ENV
+      }
     });
     
     return res.status(500).json({ 
       error: 'Internal server error',
-      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+      details: process.env.NODE_ENV === 'development' ? {
+        message: error.message,
+        env: {
+          hasApiKey: !!process.env.OPENAI_API_KEY,
+          nodeEnv: process.env.NODE_ENV
+        }
+      } : undefined
     });
   }
 }
