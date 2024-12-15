@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { User, Tag } from 'lucide-react';
 import { useConversationStore } from '../../lib/store/conversationStore';
 import { useDomain } from '../../context/DomainContext';
 import { formatDistanceToNow } from 'date-fns';
+import { supabase } from '../../lib/supabase';
 
 interface ConversationListProps {
   onSelectConversation: (conversationId: string) => void;
@@ -12,6 +13,31 @@ interface ConversationListProps {
 export default function ConversationList({ onSelectConversation, selectedId }: ConversationListProps) {
   const { conversations, fetchConversations, isLoading, setCurrentDomainId } = useConversationStore();
   const { currentDomain } = useDomain();
+  const [latestMessages, setLatestMessages] = useState<{[key: string]: string}>({});
+
+  useEffect(() => {
+    const fetchLatestMessages = async () => {
+      const messages: {[key: string]: string} = {};
+      for (const conversation of conversations) {
+        const { data } = await supabase
+          .from('messages')
+          .select('content')
+          .eq('conversation_id', conversation.id)
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .single();
+        
+        if (data) {
+          messages[conversation.id] = data.content;
+        }
+      }
+      setLatestMessages(messages);
+    };
+
+    if (conversations.length > 0) {
+      fetchLatestMessages();
+    }
+  }, [conversations]);
 
   useEffect(() => {
     if (currentDomain) {
@@ -66,6 +92,12 @@ export default function ConversationList({ onSelectConversation, selectedId }: C
                   </span>
                 )}
               </div>
+              
+              {latestMessages[conversation.id] && (
+                <p className="text-sm text-gray-600 truncate mb-1">
+                  {latestMessages[conversation.id]}
+                </p>
+              )}
               
               {conversation.tags && conversation.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1 mt-1">
