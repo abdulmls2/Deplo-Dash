@@ -284,6 +284,13 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     };
   }, [conversationId, isExpanded]);
 
+  // Scroll down when widget reopened
+  useEffect(() => {
+    if (isExpanded && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [isExpanded]);
+
   useEffect(() => {
     // Initialize session and load existing conversation
     const initializeSession = async () => {
