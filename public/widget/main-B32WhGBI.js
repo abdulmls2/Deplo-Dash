@@ -1,5 +1,5 @@
 import * as te from "react";
-import Ce, { forwardRef as wn, createElement as Ir, useState as ne, useRef as Dr, useEffect as de } from "react";
+import Ce, { forwardRef as wn, createElement as Ir, useState as ne, useRef as Dr, useEffect as fe } from "react";
 import bn from "react-dom";
 var ae = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
 function Sn(s) {
@@ -90,7 +90,7 @@ function On() {
     }
     var E = !1, I = !1, $ = !1, H = !1, re = !1, q;
     q = Symbol.for("react.module.reference");
-    function he(d) {
+    function de(d) {
       return !!(typeof d == "string" || typeof d == "function" || d === n || d === a || re || d === i || d === l || d === h || H || d === y || E || I || $ || typeof d == "object" && d !== null && (d.$$typeof === p || d.$$typeof === f || d.$$typeof === o || d.$$typeof === c || d.$$typeof === u || // This needs to include all possible module reference object
       // types supported by any Flight configuration anywhere since
       // we don't know which Flight build this will end up being used
@@ -152,13 +152,13 @@ function On() {
         }
       return null;
     }
-    var Z = Object.assign, fe = 0, me, Y, Ie, De, w, _, U;
+    var Z = Object.assign, he = 0, me, Y, Ie, De, w, _, U;
     function J() {
     }
     J.__reactDisabledLog = !0;
     function lt() {
       {
-        if (fe === 0) {
+        if (he === 0) {
           me = console.log, Y = console.info, Ie = console.warn, De = console.error, w = console.group, _ = console.groupCollapsed, U = console.groupEnd;
           var d = {
             configurable: !0,
@@ -176,12 +176,12 @@ function On() {
             groupEnd: d
           });
         }
-        fe++;
+        he++;
       }
     }
     function Dt() {
       {
-        if (fe--, fe === 0) {
+        if (he--, he === 0) {
           var d = {
             configurable: !0,
             enumerable: !0,
@@ -211,7 +211,7 @@ function On() {
             })
           });
         }
-        fe < 0 && T("disabledDepth fell below zero. This is a bug in React. Please file an issue.");
+        he < 0 && T("disabledDepth fell below zero. This is a bug in React. Please file an issue.");
       }
     }
     var Le = P.ReactCurrentDispatcher, Lt;
@@ -602,7 +602,7 @@ Check the top-level render call using <` + v + ">.");
     var Ar = {};
     function $r(d, g, v, k, D, N) {
       {
-        var C = he(d);
+        var C = de(d);
         if (!C) {
           var j = "";
           (d === void 0 || typeof d == "object" && d !== null && Object.keys(d).length === 0) && (j += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.");
@@ -2542,7 +2542,7 @@ class ki {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-DcNd31Xb.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-DvFt_zyH.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this._endPointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7092,17 +7092,17 @@ function Jo() {
           value: $,
           getSnapshot: E
         }
-      }), q = re[0].inst, he = re[1];
+      }), q = re[0].inst, de = re[1];
       return u(function() {
-        q.value = $, q.getSnapshot = E, y(q) && he({
+        q.value = $, q.getSnapshot = E, y(q) && de({
           inst: q
         });
       }, [O, $, E]), c(function() {
-        y(q) && he({
+        y(q) && de({
           inst: q
         });
         var ke = function() {
-          y(q) && he({
+          y(q) && de({
             inst: q
           });
         };
@@ -7221,17 +7221,17 @@ function Ko() {
             }
             return H = V, V;
           }
-          var fe = $, me = H;
-          if (n(fe, oe))
+          var he = $, me = H;
+          if (n(he, oe))
             return me;
           var Y = y(oe);
           return m !== void 0 && m(me, Y) ? me : ($ = oe, H = Y, Y);
-        }, q = p === void 0 ? null : p, he = function() {
+        }, q = p === void 0 ? null : p, de = function() {
           return re(f());
         }, ke = q === null ? void 0 : function() {
           return re(q());
         };
-        return [he, ke];
+        return [de, ke];
       }, [f, p, y, m]), T = P[0], O = P[1], E = i(h, T, O);
       return o(function() {
         A.hasValue = !0, A.value = E;
@@ -7654,7 +7654,7 @@ const Bc = async (s, e) => {
 })), ms = "chatbot_session_id", qc = 180;
 function zc({ domainId: s }) {
   const [e, t] = ne(!1), [r, n] = ne(""), [i, a] = ne([]), [o, c] = ne([]), [u, l] = ne("history"), [h, f] = ne(null), [p, y] = ne(!1), [m] = ne(/* @__PURE__ */ new Set()), [S, A] = ne(null), [P, T] = ne(null), O = Dr(null), [E, I] = ne(!1), $ = Dr(null), { sendMessage: H } = Wc();
-  de(() => {
+  fe(() => {
     if (!P) return;
     const w = W.channel("new-conversations").on(
       "postgres_changes",
@@ -7671,7 +7671,7 @@ function zc({ domainId: s }) {
     return () => {
       w.unsubscribe();
     };
-  }, [P]), de(() => {
+  }, [P]), fe(() => {
     if (!P) return;
     const w = W.channel("conversations-updates").on(
       "postgres_changes",
@@ -7692,7 +7692,7 @@ function zc({ domainId: s }) {
     return () => {
       w.unsubscribe();
     };
-  }, [P, h]), de(() => {
+  }, [P, h]), fe(() => {
     var w;
     (w = O.current) == null || w.scrollIntoView({ behavior: "smooth" });
   }, [i]);
@@ -7706,12 +7706,12 @@ function zc({ domainId: s }) {
         console.error("Error loading conversation history:", w);
       }
   };
-  de(() => {
+  fe(() => {
     P && re();
   }, [P]);
   const q = async () => {
     a([]), f(null), I(!1), l("chat");
-  }, he = () => {
+  }, de = () => {
     l("history"), a([]), f(null), I(!1);
   }, ke = async (w) => {
     try {
@@ -7722,7 +7722,7 @@ function zc({ domainId: s }) {
       console.error("Error loading conversation:", _);
     }
   };
-  de(() => {
+  fe(() => {
     if (!h) return;
     const w = W.channel(`conversation-status:${h}`).on(
       "postgres_changes",
@@ -7739,7 +7739,7 @@ function zc({ domainId: s }) {
     return () => {
       w.unsubscribe();
     };
-  }, [h]), de(() => {
+  }, [h]), fe(() => {
     $.current = new Audio("https://assets.mixkit.co/active_storage/sfx/2354/2354-preview.mp3");
   }, []);
   const oe = () => {
@@ -7747,7 +7747,7 @@ function zc({ domainId: s }) {
       console.log("Error playing notification:", w);
     }));
   };
-  de(() => {
+  fe(() => {
     if (!h) {
       console.log("No conversation ID yet, skipping subscription");
       return;
@@ -7765,7 +7765,7 @@ function zc({ domainId: s }) {
       (_) => {
         if (console.log("Received real-time event:", _), _.eventType === "INSERT") {
           const U = _.new;
-          console.log("New message:", U), a((J) => m.has(U.id) ? (console.log("Message already exists, skipping"), J) : (m.add(U.id), U.sender_type === "bot" && oe(), console.log("Adding new message to state"), [...J, U]));
+          console.log("New message:", U), a((J) => m.has(U.id) ? (console.log("Message already exists, skipping"), J) : (m.add(U.id), U.sender_type === "bot" && e && oe(), console.log("Adding new message to state"), [...J, U]));
         }
       }
     );
@@ -7774,9 +7774,7 @@ function zc({ domainId: s }) {
     }), () => {
       console.log("Cleaning up subscription for conversation:", h), w.unsubscribe();
     };
-  }, [h, e]), de(() => {
-    e && O.current && O.current.scrollIntoView({ behavior: "smooth" });
-  }, [e]), de(() => {
+  }, [h, e]), fe(() => {
     (async () => {
       let _ = localStorage.getItem(ms);
       _ || (_ = window.crypto.randomUUID(), localStorage.setItem(ms, _)), T(_), await V(_);
@@ -7825,7 +7823,7 @@ function zc({ domainId: s }) {
     } catch (w) {
       throw console.error("Error creating conversation:", w), w;
     }
-  }, fe = async (w) => {
+  }, he = async (w) => {
     try {
       y(!0), A(null);
       const { data: { user: _ } } = await W.auth.getUser();
@@ -7838,9 +7836,9 @@ function zc({ domainId: s }) {
       y(!1);
     }
   }, me = async (w) => {
-    w.preventDefault(), !(!r.trim() || p) && await fe(r.trim());
+    w.preventDefault(), !(!r.trim() || p) && await he(r.trim());
   };
-  de(() => {
+  fe(() => {
     s && (async () => {
       try {
         const { data: _ } = await W.from("domain_settings").select("*").eq("domain_id", s).single();
@@ -7890,7 +7888,7 @@ function zc({ domainId: s }) {
         u === "chat" && /* @__PURE__ */ b.jsxs(
           "button",
           {
-            onClick: he,
+            onClick: de,
             className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
             style: { color: Y.headerTextColor },
             children: [
@@ -8027,4 +8025,4 @@ Hc();
 export {
   Sn as g
 };
-//# sourceMappingURL=main-B0G6Ckfw.js.map
+//# sourceMappingURL=main-B32WhGBI.js.map
