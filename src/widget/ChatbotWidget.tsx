@@ -282,7 +282,17 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       console.log('Cleaning up subscription for conversation:', conversationId);
       channel.unsubscribe();
     };
-  }, [conversationId, isExpanded]);
+  }, [conversationId, isExpanded]);const startNewConversation = async () => {
+    if (!isArchived) {
+      setError('Archive current conversation first');
+      return;
+    }
+  
+    const newConversationId = await createConversation();
+    setConversationId(newConversationId);
+    setMessages([]);
+    setError(null);
+  };
 
   // Scroll down when widget reopened
   useEffect(() => {
