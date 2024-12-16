@@ -254,7 +254,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
               processedMessageIds.add(newMessage.id);
 
               // Play sound for new messages from bot
-              if (newMessage.sender_type === 'bot' && isExpanded) {
+              if (newMessage.sender_type === 'bot') {
                 playNotificationSound();
               }
 
