@@ -44,6 +44,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const [isArchived, setIsArchived] = useState(false);
   const notificationSound = useRef<HTMLAudioElement | null>(null);
   const { sendMessage: chatbotSendMessage } = useChatbotStore();
+  const [processedConversationIds] = useState(new Set<string>());
 
   // Subscribe to new conversations
   useEffect(() => {
@@ -375,19 +376,28 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
         if (!anonUser) throw new Error('Failed to create anonymous session');
       }
 
+      const newConversation = {
+        domain_id: domainId,
+        user_id: user.id,
+        session_id: sessionId,
+        last_message_at: new Date().toISOString(),
+        status: 'active'
+      };
+
       const { data, error } = await supabase
         .from('conversations')
-        .insert({
-          domain_id: domainId,
-          user_id: user.id,
-          session_id: sessionId, // Add the session_id
-          last_message_at: new Date().toISOString(),
-          status: 'active'
-        })
+        .insert(newConversation)
         .select()
         .single();
 
       if (error) throw error;
+
+      // Only add if not already processed
+      if (!processedConversationIds.has(data.id)) {
+        processedConversationIds.add(data.id);
+        setConversations(prev => [data, ...prev]);
+      }
+      
       return data.id;
     } catch (error) {
       console.error('Error creating conversation:', error);
@@ -407,25 +417,11 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       
       // Create a new conversation if one doesn't exist
       const currentConversationId = conversationId || await createConversation();
-      
-      // Update conversation ID immediately
       if (!conversationId) {
         setConversationId(currentConversationId);
       }
 
-      // Optimistically add the user message to the UI
-      const newMessage = {
-        id: window.crypto.randomUUID(),
-        content: content,
-        sender_type: 'user' as const,
-        created_at: new Date().toISOString(),
-        conversation_id: currentConversationId
-      };
-      
-      setMessages(prevMessages => [...prevMessages, newMessage]);
-      processedMessageIds.add(newMessage.id);
-
-      // Send message through chatbot store
+      // Send message through chatbot store which will handle OpenAI integration
       await chatbotSendMessage(content, currentConversationId);
 
       setMessage('');
@@ -495,6 +491,57 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const buttonStyle = {
     backgroundColor: config.color,
   };
+
+  // Update the real-time subscription for conversations
+  useEffect(() => {
+    if (!sessionId) return;
+
+    const channel = supabase
+      .channel('new-conversations')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'conversations',
+          filter: `session_id=eq.${sessionId}`,
+        },
+        (payload) => {
+          if (payload.eventType === 'INSERT') {
+            setConversations(prevConversations => {
+              // Multiple duplicate checks
+              if (processedConversationIds.has(payload.new.id) || 
+                  prevConversations.some(conv => conv.id === payload.new.id)) {
+                return prevConversations;
+              }
+              
+              processedConversationIds.add(payload.new.id);
+              return [payload.new, ...prevConversations];
+            });
+          } else if (payload.eventType === 'UPDATE') {
+            setConversations(prevConversations =>
+              prevConversations.map(conv =>
+                conv.id === payload.new.id ? { ...conv, ...payload.new } : conv
+              )
+            );
+          }
+        }
+      )
+      .subscribe((status) => {
+        console.log('Conversation subscription status:', status);
+      });
+
+    return () => {
+      channel.unsubscribe();
+    };
+  }, [sessionId]);
+
+  // Add this effect to clean up processed IDs when switching views
+  useEffect(() => {
+    if (view === 'history') {
+      processedConversationIds.clear();
+    }
+  }, [view]);
 
   return (
     <div className="fixed bottom-6 right-6 flex flex-col items-end z-[9999]">
