@@ -45,6 +45,20 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const notificationSound = useRef<HTMLAudioElement | null>(null);
   const { sendMessage: chatbotSendMessage } = useChatbotStore();
 
+  // Add this helper function at the top of the component
+  const isMessageDuplicate = (newMsg: Message, existingMessages: Message[]) => {
+    return existingMessages.some(msg => 
+      // Check for exact ID match
+      msg.id === newMsg.id ||
+      // Check for temp ID being replaced by real ID
+      (msg.id.startsWith('temp-') && msg.content === newMsg.content && msg.sender_type === newMsg.sender_type) ||
+      // Check for exact content match within a small time window (2 seconds)
+      (msg.content === newMsg.content && 
+       msg.sender_type === newMsg.sender_type && 
+       Math.abs(new Date(msg.created_at).getTime() - new Date(newMsg.created_at).getTime()) < 2000)
+    );
+  };
+
   // Subscribe to new conversations
   useEffect(() => {
     if (!sessionId) return;
@@ -228,11 +242,11 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
 
     console.log('Setting up subscription for conversation:', conversationId);
 
-    const channel = supabase.channel('messages')
+    const channel = supabase.channel(`messages-${conversationId}`)
       .on(
         'postgres_changes',
         {
-          event: '*', // Listen to all events (INSERT, UPDATE, DELETE)
+          event: '*',
           schema: 'public',
           table: 'messages',
           filter: `conversation_id=eq.${conversationId}`
@@ -245,12 +259,19 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             console.log('New message:', newMessage);
 
             setMessages(prevMessages => {
-              // Check if message already exists
-              if (processedMessageIds.has(newMessage.id)) {
+              // Use the enhanced duplicate detection
+              if (isMessageDuplicate(newMessage, prevMessages)) {
                 console.log('Message already exists, skipping');
                 return prevMessages;
               }
-              
+
+              // If this is a real message replacing a temp message, remove the temp message
+              const updatedMessages = prevMessages.filter(msg => 
+                !(msg.id.startsWith('temp-') && 
+                  msg.content === newMessage.content && 
+                  msg.sender_type === newMessage.sender_type)
+              );
+
               // Add message ID to processed set
               processedMessageIds.add(newMessage.id);
 
@@ -260,25 +281,16 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
               }
 
               console.log('Adding new message to state');
-              return [...prevMessages, newMessage];
+              return [...updatedMessages, newMessage];
             });
           }
         }
       );
 
-    // Subscribe and log status
     channel.subscribe((status) => {
       console.log('Subscription status:', status);
-      if (status === 'SUBSCRIBED') {
-        console.log('Successfully subscribed to messages');
-      } else if (status === 'CLOSED') {
-        console.log('Subscription closed');
-      } else if (status === 'CHANNEL_ERROR') {
-        console.error('Subscription error');
-      }
     });
 
-    // Cleanup subscription
     return () => {
       console.log('Cleaning up subscription for conversation:', conversationId);
       channel.unsubscribe();
@@ -427,6 +439,22 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       if (!conversationId) {
         setConversationId(currentConversationId);
       }
+
+      // Create a temporary message object for immediate display
+      const tempMessage: Message = {
+        id: `temp-${Date.now()}`,
+        content: content,
+        sender_type: 'user',
+        created_at: new Date().toISOString(),
+      };
+
+      // Add to messages only if it's not a duplicate
+      setMessages(prevMessages => {
+        if (isMessageDuplicate(tempMessage, prevMessages)) {
+          return prevMessages;
+        }
+        return [...prevMessages, tempMessage];
+      });
 
       // Send message through chatbot store which will handle OpenAI integration
       await chatbotSendMessage(content, currentConversationId);
