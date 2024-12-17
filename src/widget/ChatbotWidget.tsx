@@ -61,7 +61,8 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
         },
         (payload) => {
           if (payload.eventType === 'INSERT') {
-            setConversations(prevConversations => [payload.new, ...prevConversations]);
+            const newConversation = payload.new as Conversation;
+            setConversations(prevConversations => [newConversation, ...prevConversations]);
           }
         }
       )
@@ -311,7 +312,8 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
         .eq('status', 'active')
         .order('last_message_at', { ascending: false })
         .limit(1)
-        .single();
+        .single()
+        .throwOnError();
 
       if (error) {
         if (error.code === 'PGRST116') {
@@ -362,18 +364,36 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const createConversation = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
+      
+      // If no user, create anonymous session
       if (!user) {
         await supabase.auth.signInAnonymously();
         const { data: { user: anonUser } } = await supabase.auth.getUser();
         if (!anonUser) throw new Error('Failed to create anonymous session');
+        
+        const { data, error } = await supabase
+          .from('conversations')
+          .insert({
+            domain_id: domainId,
+            user_id: anonUser.id,
+            session_id: sessionId,
+            last_message_at: new Date().toISOString(),
+            status: 'active'
+          })
+          .select()
+          .single();
+
+        if (error) throw error;
+        return data.id;
       }
 
+      // If user exists, proceed with user.id
       const { data, error } = await supabase
         .from('conversations')
         .insert({
           domain_id: domainId,
           user_id: user.id,
-          session_id: sessionId, // Add the session_id
+          session_id: sessionId,
           last_message_at: new Date().toISOString(),
           status: 'active'
         })
