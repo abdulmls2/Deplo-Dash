@@ -305,23 +305,24 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
 
   const loadExistingConversation = async (currentSessionId: string) => {
     try {
-      const { data: conversation, error } = await supabase
+      // First check if there are any conversations
+      const { data: conversations, error: fetchError } = await supabase
         .from('conversations')
         .select('*')
         .eq('session_id', currentSessionId)
         .eq('status', 'active')
         .order('last_message_at', { ascending: false })
-        .limit(1)
-        .single()
-        .throwOnError();
+        .limit(1);
 
-      if (error) {
-        if (error.code === 'PGRST116') {
-          // No conversation found for this session, will create new one when needed
-          return;
-        }
-        throw error;
+      if (fetchError) throw fetchError;
+      
+      // If no conversations found, return early
+      if (!conversations || conversations.length === 0) {
+        console.log('No active conversations found for this session');
+        return;
       }
+
+      const conversation = conversations[0];
 
       // Check if conversation has expired
       const expiryDate = new Date();
@@ -356,8 +357,11 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
         setMessages(uniqueMessages);
       }
     } catch (error) {
-      console.error('Error loading existing conversation:', error);
-      setError('Failed to load conversation history');
+      // Only log actual errors, not "no results" cases
+      if (error instanceof Error && !error.message.includes('no rows returned')) {
+        console.error('Error loading existing conversation:', error);
+        setError('Failed to load conversation history');
+      }
     }
   };
 
