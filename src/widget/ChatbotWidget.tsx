@@ -398,45 +398,49 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       }
     };
   
-    const sendMessage = async (content: string) => {
+     const sendMessage = async (content: string) => {
         try {
-          setIsLoading(true);
-          setError(null);
-    
-          const { data: { user } } = await supabase.auth.getUser();
-          if (!user) {
-              await supabase.auth.signInAnonymously();
-          }
-          
-          // Create a new conversation if one doesn't exist
-          let currentConversationId = conversationId;
-          if (!currentConversationId) {
-              currentConversationId = await createConversation();
-              setConversationId(currentConversationId);
-              setupMessageSubscription(currentConversationId);
-          }
-    
-    
-          const newMessage: Message = {
-              id: window.crypto.randomUUID(),
-              content: content,
-              sender_type: 'user',
-              created_at: new Date().toISOString(),
-            };
-           
-            
-          setMessages((prevMessages) => [...prevMessages, newMessage]);
-          processedMessageIds.add(newMessage.id);
-    
-           // Send message through chatbot store which will handle OpenAI integration
-           await chatbotSendMessage(content, currentConversationId);
+            setIsLoading(true);
+            setError(null);
 
-          setMessage('');
+            const { data: { user } } = await supabase.auth.getUser();
+            if (!user) {
+                await supabase.auth.signInAnonymously();
+            }
+
+            // Create a new conversation if one doesn't exist
+            let currentConversationId = conversationId;
+            if (!currentConversationId) {
+                currentConversationId = await createConversation();
+                setConversationId(currentConversationId);
+                setupMessageSubscription(currentConversationId);
+            }
+
+
+            const newMessage: Message = {
+                id: window.crypto.randomUUID(),
+                content: content,
+                sender_type: 'user',
+                created_at: new Date().toISOString(),
+            };
+
+            setMessages((prevMessages) => {
+                if(processedMessageIds.has(newMessage.id)){
+                    return prevMessages;
+                }
+               processedMessageIds.add(newMessage.id);
+                return [...prevMessages, newMessage];
+            });
+
+            // Send message through chatbot store which will handle OpenAI integration
+            await chatbotSendMessage(content, currentConversationId);
+
+            setMessage('');
         } catch (error) {
-          console.error('Error sending message:', error);
-          setError('Failed to send message. Please try again.');
+            console.error('Error sending message:', error);
+            setError('Failed to send message. Please try again.');
         } finally {
-          setIsLoading(false);
+            setIsLoading(false);
         }
     };
   
