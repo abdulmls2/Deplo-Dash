@@ -407,11 +407,25 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       
       // Create a new conversation if one doesn't exist
       const currentConversationId = conversationId || await createConversation();
+      
+      // Update conversation ID immediately
       if (!conversationId) {
         setConversationId(currentConversationId);
       }
 
-      // Send message through chatbot store which will handle OpenAI integration
+      // Optimistically add the user message to the UI
+      const newMessage = {
+        id: window.crypto.randomUUID(),
+        content: content,
+        sender_type: 'user' as const,
+        created_at: new Date().toISOString(),
+        conversation_id: currentConversationId
+      };
+      
+      setMessages(prevMessages => [...prevMessages, newMessage]);
+      processedMessageIds.add(newMessage.id);
+
+      // Send message through chatbot store
       await chatbotSendMessage(content, currentConversationId);
 
       setMessage('');
