@@ -1,5 +1,5 @@
-import * as ee from "react";
-import $e, { forwardRef as wn, createElement as Ir, useState as ne, useRef as Dr, useEffect as he } from "react";
+import * as te from "react";
+import Ce, { forwardRef as wn, createElement as Ir, useState as ne, useRef as Dr, useEffect as fe } from "react";
 import bn from "react-dom";
 var ae = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
 function Sn(s) {
@@ -24,7 +24,7 @@ function En(s) {
     });
   }), t;
 }
-var tr = { exports: {} }, Xe = {};
+var tr = { exports: {} }, Ge = {};
 /**
  * @license React
  * react-jsx-runtime.production.min.js
@@ -36,9 +36,9 @@ var tr = { exports: {} }, Xe = {};
  */
 var Lr;
 function kn() {
-  if (Lr) return Xe;
+  if (Lr) return Ge;
   Lr = 1;
-  var s = $e, e = Symbol.for("react.element"), t = Symbol.for("react.fragment"), r = Object.prototype.hasOwnProperty, n = s.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner, i = { key: !0, ref: !0, __self: !0, __source: !0 };
+  var s = Ce, e = Symbol.for("react.element"), t = Symbol.for("react.fragment"), r = Object.prototype.hasOwnProperty, n = s.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner, i = { key: !0, ref: !0, __self: !0, __source: !0 };
   function a(o, c, u) {
     var l, h = {}, f = null, p = null;
     u !== void 0 && (f = "" + u), c.key !== void 0 && (f = "" + c.key), c.ref !== void 0 && (p = c.ref);
@@ -46,11 +46,11 @@ function kn() {
     if (o && o.defaultProps) for (l in c = o.defaultProps, c) h[l] === void 0 && (h[l] = c[l]);
     return { $$typeof: e, type: o, key: f, ref: p, props: h, _owner: n.current };
   }
-  return Xe.Fragment = t, Xe.jsx = a, Xe.jsxs = a, Xe;
+  return Ge.Fragment = t, Ge.jsx = a, Ge.jsxs = a, Ge;
 }
-var Ze = {}, Nr;
+var Ke = {}, Nr;
 function On() {
-  if (Nr) return Ze;
+  if (Nr) return Ke;
   Nr = 1;
   var s = {};
   /**
@@ -63,11 +63,11 @@ function On() {
    * LICENSE file in the root directory of this source tree.
    */
   return s.NODE_ENV !== "production" && function() {
-    var e = $e, t = Symbol.for("react.element"), r = Symbol.for("react.portal"), n = Symbol.for("react.fragment"), i = Symbol.for("react.strict_mode"), a = Symbol.for("react.profiler"), o = Symbol.for("react.provider"), c = Symbol.for("react.context"), u = Symbol.for("react.forward_ref"), l = Symbol.for("react.suspense"), h = Symbol.for("react.suspense_list"), f = Symbol.for("react.memo"), p = Symbol.for("react.lazy"), y = Symbol.for("react.offscreen"), m = Symbol.iterator, b = "@@iterator";
+    var e = Ce, t = Symbol.for("react.element"), r = Symbol.for("react.portal"), n = Symbol.for("react.fragment"), i = Symbol.for("react.strict_mode"), a = Symbol.for("react.profiler"), o = Symbol.for("react.provider"), c = Symbol.for("react.context"), u = Symbol.for("react.forward_ref"), l = Symbol.for("react.suspense"), h = Symbol.for("react.suspense_list"), f = Symbol.for("react.memo"), p = Symbol.for("react.lazy"), y = Symbol.for("react.offscreen"), m = Symbol.iterator, S = "@@iterator";
     function A(d) {
       if (d === null || typeof d != "object")
         return null;
-      var g = m && d[m] || d[b];
+      var g = m && d[m] || d[S];
       return typeof g == "function" ? g : null;
     }
     var P = e.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
@@ -80,34 +80,34 @@ function On() {
     }
     function O(d, g, v) {
       {
-        var k = P.ReactDebugCurrentFrame, L = k.getStackAddendum();
-        L !== "" && (g += "%s", v = v.concat([L]));
-        var M = v.map(function(C) {
+        var k = P.ReactDebugCurrentFrame, D = k.getStackAddendum();
+        D !== "" && (g += "%s", v = v.concat([D]));
+        var N = v.map(function(C) {
           return String(C);
         });
-        M.unshift("Warning: " + g), Function.prototype.apply.call(console[d], console, M);
+        N.unshift("Warning: " + g), Function.prototype.apply.call(console[d], console, N);
       }
     }
-    var E = !1, I = !1, $ = !1, V = !1, te = !1, z;
-    z = Symbol.for("react.module.reference");
-    function fe(d) {
-      return !!(typeof d == "string" || typeof d == "function" || d === n || d === a || te || d === i || d === l || d === h || V || d === y || E || I || $ || typeof d == "object" && d !== null && (d.$$typeof === p || d.$$typeof === f || d.$$typeof === o || d.$$typeof === c || d.$$typeof === u || // This needs to include all possible module reference object
+    var E = !1, I = !1, $ = !1, H = !1, re = !1, q;
+    q = Symbol.for("react.module.reference");
+    function de(d) {
+      return !!(typeof d == "string" || typeof d == "function" || d === n || d === a || re || d === i || d === l || d === h || H || d === y || E || I || $ || typeof d == "object" && d !== null && (d.$$typeof === p || d.$$typeof === f || d.$$typeof === o || d.$$typeof === c || d.$$typeof === u || // This needs to include all possible module reference object
       // types supported by any Flight configuration anywhere since
       // we don't know which Flight build this will end up being used
       // with.
-      d.$$typeof === z || d.getModuleId !== void 0));
+      d.$$typeof === q || d.getModuleId !== void 0));
     }
-    function xe(d, g, v) {
+    function ke(d, g, v) {
       var k = d.displayName;
       if (k)
         return k;
-      var L = g.displayName || g.name || "";
-      return L !== "" ? v + "(" + L + ")" : v;
+      var D = g.displayName || g.name || "";
+      return D !== "" ? v + "(" + D + ")" : v;
     }
     function oe(d) {
       return d.displayName || "Context";
     }
-    function Y(d) {
+    function V(d) {
       if (d == null)
         return null;
       if (typeof d.tag == "number" && T("Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue."), typeof d == "function")
@@ -137,14 +137,14 @@ function On() {
             var v = d;
             return oe(v._context) + ".Provider";
           case u:
-            return xe(d, d.render, "ForwardRef");
+            return ke(d, d.render, "ForwardRef");
           case f:
             var k = d.displayName || null;
-            return k !== null ? k : Y(d.type) || "Memo";
+            return k !== null ? k : V(d.type) || "Memo";
           case p: {
-            var L = d, M = L._payload, C = L._init;
+            var D = d, N = D._payload, C = D._init;
             try {
-              return Y(C(M));
+              return V(C(N));
             } catch {
               return null;
             }
@@ -152,18 +152,18 @@ function On() {
         }
       return null;
     }
-    var X = Object.assign, ge = 0, ve, ye, re, Le, Ne, _, S;
-    function D() {
+    var Z = Object.assign, he = 0, me, Y, Ie, De, w, _, U;
+    function J() {
     }
-    D.__reactDisabledLog = !0;
-    function F() {
+    J.__reactDisabledLog = !0;
+    function lt() {
       {
-        if (ge === 0) {
-          ve = console.log, ye = console.info, re = console.warn, Le = console.error, Ne = console.group, _ = console.groupCollapsed, S = console.groupEnd;
+        if (he === 0) {
+          me = console.log, Y = console.info, Ie = console.warn, De = console.error, w = console.group, _ = console.groupCollapsed, U = console.groupEnd;
           var d = {
             configurable: !0,
             enumerable: !0,
-            value: D,
+            value: J,
             writable: !0
           };
           Object.defineProperties(console, {
@@ -176,77 +176,77 @@ function On() {
             groupEnd: d
           });
         }
-        ge++;
+        he++;
       }
     }
-    function de() {
+    function Dt() {
       {
-        if (ge--, ge === 0) {
+        if (he--, he === 0) {
           var d = {
             configurable: !0,
             enumerable: !0,
             writable: !0
           };
           Object.defineProperties(console, {
-            log: X({}, d, {
-              value: ve
+            log: Z({}, d, {
+              value: me
             }),
-            info: X({}, d, {
-              value: ye
+            info: Z({}, d, {
+              value: Y
             }),
-            warn: X({}, d, {
-              value: re
+            warn: Z({}, d, {
+              value: Ie
             }),
-            error: X({}, d, {
-              value: Le
+            error: Z({}, d, {
+              value: De
             }),
-            group: X({}, d, {
-              value: Ne
+            group: Z({}, d, {
+              value: w
             }),
-            groupCollapsed: X({}, d, {
+            groupCollapsed: Z({}, d, {
               value: _
             }),
-            groupEnd: X({}, d, {
-              value: S
+            groupEnd: Z({}, d, {
+              value: U
             })
           });
         }
-        ge < 0 && T("disabledDepth fell below zero. This is a bug in React. Please file an issue.");
+        he < 0 && T("disabledDepth fell below zero. This is a bug in React. Please file an issue.");
       }
     }
-    var Ge = P.ReactCurrentDispatcher, Me;
-    function ht(d, g, v) {
+    var Le = P.ReactCurrentDispatcher, Lt;
+    function ut(d, g, v) {
       {
-        if (Me === void 0)
+        if (Lt === void 0)
           try {
             throw Error();
-          } catch (L) {
-            var k = L.stack.trim().match(/\n( *(at )?)/);
-            Me = k && k[1] || "";
+          } catch (D) {
+            var k = D.stack.trim().match(/\n( *(at )?)/);
+            Lt = k && k[1] || "";
           }
         return `
-` + Me + d;
+` + Lt + d;
       }
     }
-    var Nt = !1, ft;
+    var Nt = !1, dt;
     {
       var Js = typeof WeakMap == "function" ? WeakMap : Map;
-      ft = new Js();
+      dt = new Js();
     }
     function wr(d, g) {
       if (!d || Nt)
         return "";
       {
-        var v = ft.get(d);
+        var v = dt.get(d);
         if (v !== void 0)
           return v;
       }
       var k;
       Nt = !0;
-      var L = Error.prepareStackTrace;
+      var D = Error.prepareStackTrace;
       Error.prepareStackTrace = void 0;
-      var M;
-      M = Ge.current, Ge.current = null, F();
+      var N;
+      N = Le.current, Le.current = null, lt();
       try {
         if (g) {
           var C = function() {
@@ -259,50 +259,50 @@ function On() {
           }), typeof Reflect == "object" && Reflect.construct) {
             try {
               Reflect.construct(C, []);
-            } catch (G) {
-              k = G;
+            } catch (K) {
+              k = K;
             }
             Reflect.construct(d, [], C);
           } else {
             try {
               C.call();
-            } catch (G) {
-              k = G;
+            } catch (K) {
+              k = K;
             }
             d.call(C.prototype);
           }
         } else {
           try {
             throw Error();
-          } catch (G) {
-            k = G;
+          } catch (K) {
+            k = K;
           }
           d();
         }
-      } catch (G) {
-        if (G && k && typeof G.stack == "string") {
-          for (var j = G.stack.split(`
-`), J = k.stack.split(`
-`), B = j.length - 1, W = J.length - 1; B >= 1 && W >= 0 && j[B] !== J[W]; )
-            W--;
-          for (; B >= 1 && W >= 0; B--, W--)
-            if (j[B] !== J[W]) {
-              if (B !== 1 || W !== 1)
+      } catch (K) {
+        if (K && k && typeof K.stack == "string") {
+          for (var j = K.stack.split(`
+`), G = k.stack.split(`
+`), F = j.length - 1, B = G.length - 1; F >= 1 && B >= 0 && j[F] !== G[B]; )
+            B--;
+          for (; F >= 1 && B >= 0; F--, B--)
+            if (j[F] !== G[B]) {
+              if (F !== 1 || B !== 1)
                 do
-                  if (B--, W--, W < 0 || j[B] !== J[W]) {
+                  if (F--, B--, B < 0 || j[F] !== G[B]) {
                     var se = `
-` + j[B].replace(" at new ", " at ");
-                    return d.displayName && se.includes("<anonymous>") && (se = se.replace("<anonymous>", d.displayName)), typeof d == "function" && ft.set(d, se), se;
+` + j[F].replace(" at new ", " at ");
+                    return d.displayName && se.includes("<anonymous>") && (se = se.replace("<anonymous>", d.displayName)), typeof d == "function" && dt.set(d, se), se;
                   }
-                while (B >= 1 && W >= 0);
+                while (F >= 1 && B >= 0);
               break;
             }
         }
       } finally {
-        Nt = !1, Ge.current = M, de(), Error.prepareStackTrace = L;
+        Nt = !1, Le.current = N, Dt(), Error.prepareStackTrace = D;
       }
-      var Fe = d ? d.displayName || d.name : "", Te = Fe ? ht(Fe) : "";
-      return typeof d == "function" && ft.set(d, Te), Te;
+      var Me = d ? d.displayName || d.name : "", Oe = Me ? ut(Me) : "";
+      return typeof d == "function" && dt.set(d, Oe), Oe;
     }
     function Gs(d, g, v) {
       return wr(d, !1);
@@ -311,59 +311,59 @@ function On() {
       var g = d.prototype;
       return !!(g && g.isReactComponent);
     }
-    function gt(d, g, v) {
+    function ht(d, g, v) {
       if (d == null)
         return "";
       if (typeof d == "function")
         return wr(d, Ks(d));
       if (typeof d == "string")
-        return ht(d);
+        return ut(d);
       switch (d) {
         case l:
-          return ht("Suspense");
+          return ut("Suspense");
         case h:
-          return ht("SuspenseList");
+          return ut("SuspenseList");
       }
       if (typeof d == "object")
         switch (d.$$typeof) {
           case u:
             return Gs(d.render);
           case f:
-            return gt(d.type, g, v);
+            return ht(d.type, g, v);
           case p: {
-            var k = d, L = k._payload, M = k._init;
+            var k = d, D = k._payload, N = k._init;
             try {
-              return gt(M(L), g, v);
+              return ht(N(D), g, v);
             } catch {
             }
           }
         }
       return "";
     }
-    var Ke = Object.prototype.hasOwnProperty, br = {}, Sr = P.ReactDebugCurrentFrame;
-    function pt(d) {
+    var Ye = Object.prototype.hasOwnProperty, br = {}, Sr = P.ReactDebugCurrentFrame;
+    function ft(d) {
       if (d) {
-        var g = d._owner, v = gt(d.type, d._source, g ? g.type : null);
+        var g = d._owner, v = ht(d.type, d._source, g ? g.type : null);
         Sr.setExtraStackFrame(v);
       } else
         Sr.setExtraStackFrame(null);
     }
-    function Qs(d, g, v, k, L) {
+    function Qs(d, g, v, k, D) {
       {
-        var M = Function.call.bind(Ke);
+        var N = Function.call.bind(Ye);
         for (var C in d)
-          if (M(d, C)) {
+          if (N(d, C)) {
             var j = void 0;
             try {
               if (typeof d[C] != "function") {
-                var J = Error((k || "React class") + ": " + v + " type `" + C + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof d[C] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
-                throw J.name = "Invariant Violation", J;
+                var G = Error((k || "React class") + ": " + v + " type `" + C + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof d[C] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
+                throw G.name = "Invariant Violation", G;
               }
               j = d[C](g, C, k, v, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
-            } catch (B) {
-              j = B;
+            } catch (F) {
+              j = F;
             }
-            j && !(j instanceof Error) && (pt(L), T("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", k || "React class", v, C, typeof j), pt(null)), j instanceof Error && !(j.message in br) && (br[j.message] = !0, pt(L), T("Failed %s type: %s", v, j.message), pt(null));
+            j && !(j instanceof Error) && (ft(D), T("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", k || "React class", v, C, typeof j), ft(null)), j instanceof Error && !(j.message in br) && (br[j.message] = !0, ft(D), T("Failed %s type: %s", v, j.message), ft(null));
           }
       }
     }
@@ -391,7 +391,7 @@ function On() {
       if (en(d))
         return T("The provided key is an unsupported type %s. This value must be coerced to a string before before using it here.", Zs(d)), Er(d);
     }
-    var Qe = P.ReactCurrentOwner, tn = {
+    var Je = P.ReactCurrentOwner, tn = {
       key: !0,
       ref: !0,
       __self: !0,
@@ -399,7 +399,7 @@ function On() {
     }, Or, xr, Ut;
     Ut = {};
     function rn(d) {
-      if (Ke.call(d, "ref")) {
+      if (Ye.call(d, "ref")) {
         var g = Object.getOwnPropertyDescriptor(d, "ref").get;
         if (g && g.isReactWarning)
           return !1;
@@ -407,7 +407,7 @@ function On() {
       return d.ref !== void 0;
     }
     function sn(d) {
-      if (Ke.call(d, "key")) {
+      if (Ye.call(d, "key")) {
         var g = Object.getOwnPropertyDescriptor(d, "key").get;
         if (g && g.isReactWarning)
           return !1;
@@ -415,9 +415,9 @@ function On() {
       return d.key !== void 0;
     }
     function nn(d, g) {
-      if (typeof d.ref == "string" && Qe.current && g && Qe.current.stateNode !== g) {
-        var v = Y(Qe.current.type);
-        Ut[v] || (T('Component "%s" contains the string ref "%s". Support for string refs will be removed in a future major release. This case cannot be automatically converted to an arrow function. We ask you to manually fix this case by using useRef() or createRef() instead. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-string-ref', Y(Qe.current.type), d.ref), Ut[v] = !0);
+      if (typeof d.ref == "string" && Je.current && g && Je.current.stateNode !== g) {
+        var v = V(Je.current.type);
+        Ut[v] || (T('Component "%s" contains the string ref "%s". Support for string refs will be removed in a future major release. This case cannot be automatically converted to an arrow function. We ask you to manually fix this case by using useRef() or createRef() instead. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-string-ref', V(Je.current.type), d.ref), Ut[v] = !0);
       }
     }
     function an(d, g) {
@@ -442,7 +442,7 @@ function On() {
         });
       }
     }
-    var cn = function(d, g, v, k, L, M, C) {
+    var cn = function(d, g, v, k, D, N, C) {
       var j = {
         // This tag allows us to uniquely identify this as a React Element
         $$typeof: t,
@@ -452,7 +452,7 @@ function On() {
         ref: v,
         props: C,
         // Record the component responsible for creating this element.
-        _owner: M
+        _owner: N
       };
       return j._store = {}, Object.defineProperty(j._store, "validated", {
         configurable: !1,
@@ -468,31 +468,31 @@ function On() {
         configurable: !1,
         enumerable: !1,
         writable: !1,
-        value: L
+        value: D
       }), Object.freeze && (Object.freeze(j.props), Object.freeze(j)), j;
     };
-    function ln(d, g, v, k, L) {
+    function ln(d, g, v, k, D) {
       {
-        var M, C = {}, j = null, J = null;
-        v !== void 0 && (kr(v), j = "" + v), sn(g) && (kr(g.key), j = "" + g.key), rn(g) && (J = g.ref, nn(g, L));
-        for (M in g)
-          Ke.call(g, M) && !tn.hasOwnProperty(M) && (C[M] = g[M]);
+        var N, C = {}, j = null, G = null;
+        v !== void 0 && (kr(v), j = "" + v), sn(g) && (kr(g.key), j = "" + g.key), rn(g) && (G = g.ref, nn(g, D));
+        for (N in g)
+          Ye.call(g, N) && !tn.hasOwnProperty(N) && (C[N] = g[N]);
         if (d && d.defaultProps) {
-          var B = d.defaultProps;
-          for (M in B)
-            C[M] === void 0 && (C[M] = B[M]);
+          var F = d.defaultProps;
+          for (N in F)
+            C[N] === void 0 && (C[N] = F[N]);
         }
-        if (j || J) {
-          var W = typeof d == "function" ? d.displayName || d.name || "Unknown" : d;
-          j && an(C, W), J && on(C, W);
+        if (j || G) {
+          var B = typeof d == "function" ? d.displayName || d.name || "Unknown" : d;
+          j && an(C, B), G && on(C, B);
         }
-        return cn(d, j, J, L, k, Qe.current, C);
+        return cn(d, j, G, D, k, Je.current, C);
       }
     }
     var Ft = P.ReactCurrentOwner, Tr = P.ReactDebugCurrentFrame;
-    function Ue(d) {
+    function Ne(d) {
       if (d) {
-        var g = d._owner, v = gt(d.type, d._source, g ? g.type : null);
+        var g = d._owner, v = ht(d.type, d._source, g ? g.type : null);
         Tr.setExtraStackFrame(v);
       } else
         Tr.setExtraStackFrame(null);
@@ -505,7 +505,7 @@ function On() {
     function Pr() {
       {
         if (Ft.current) {
-          var d = Y(Ft.current.type);
+          var d = V(Ft.current.type);
           if (d)
             return `
 
@@ -540,7 +540,7 @@ Check the top-level render call using <` + v + ">.");
           return;
         jr[v] = !0;
         var k = "";
-        d && d._owner && d._owner !== Ft.current && (k = " It was passed a child from " + Y(d._owner.type) + "."), Ue(d), T('Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.', v, k), Ue(null);
+        d && d._owner && d._owner !== Ft.current && (k = " It was passed a child from " + V(d._owner.type) + "."), Ne(d), T('Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.', v, k), Ne(null);
       }
     }
     function Cr(d, g) {
@@ -555,9 +555,9 @@ Check the top-level render call using <` + v + ">.");
         else if (Wt(d))
           d._store && (d._store.validated = !0);
         else if (d) {
-          var L = A(d);
-          if (typeof L == "function" && L !== d.entries)
-            for (var M = L.call(d), C; !(C = M.next()).done; )
+          var D = A(d);
+          if (typeof D == "function" && D !== d.entries)
+            for (var N = D.call(d), C; !(C = N.next()).done; )
               Wt(C.value) && Rr(C.value, g);
         }
       }
@@ -577,12 +577,12 @@ Check the top-level render call using <` + v + ">.");
         else
           return;
         if (v) {
-          var k = Y(g);
+          var k = V(g);
           Qs(v, d.props, "prop", k, d);
         } else if (g.PropTypes !== void 0 && !Bt) {
           Bt = !0;
-          var L = Y(g);
-          T("Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?", L || "Unknown");
+          var D = V(g);
+          T("Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?", D || "Unknown");
         }
         typeof g.getDefaultProps == "function" && !g.getDefaultProps.isReactClassApproved && T("getDefaultProps is only used on classic React.createClass definitions. Use a static property named `defaultProps` instead.");
       }
@@ -592,56 +592,56 @@ Check the top-level render call using <` + v + ">.");
         for (var g = Object.keys(d.props), v = 0; v < g.length; v++) {
           var k = g[v];
           if (k !== "children" && k !== "key") {
-            Ue(d), T("Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.", k), Ue(null);
+            Ne(d), T("Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.", k), Ne(null);
             break;
           }
         }
-        d.ref !== null && (Ue(d), T("Invalid attribute `ref` supplied to `React.Fragment`."), Ue(null));
+        d.ref !== null && (Ne(d), T("Invalid attribute `ref` supplied to `React.Fragment`."), Ne(null));
       }
     }
     var Ar = {};
-    function $r(d, g, v, k, L, M) {
+    function $r(d, g, v, k, D, N) {
       {
-        var C = fe(d);
+        var C = de(d);
         if (!C) {
           var j = "";
           (d === void 0 || typeof d == "object" && d !== null && Object.keys(d).length === 0) && (j += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.");
-          var J = un();
-          J ? j += J : j += Pr();
-          var B;
-          d === null ? B = "null" : Mt(d) ? B = "array" : d !== void 0 && d.$$typeof === t ? (B = "<" + (Y(d.type) || "Unknown") + " />", j = " Did you accidentally export a JSX literal instead of a component?") : B = typeof d, T("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", B, j);
+          var G = un();
+          G ? j += G : j += Pr();
+          var F;
+          d === null ? F = "null" : Mt(d) ? F = "array" : d !== void 0 && d.$$typeof === t ? (F = "<" + (V(d.type) || "Unknown") + " />", j = " Did you accidentally export a JSX literal instead of a component?") : F = typeof d, T("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", F, j);
         }
-        var W = ln(d, g, v, L, M);
-        if (W == null)
-          return W;
+        var B = ln(d, g, v, D, N);
+        if (B == null)
+          return B;
         if (C) {
           var se = g.children;
           if (se !== void 0)
             if (k)
               if (Mt(se)) {
-                for (var Fe = 0; Fe < se.length; Fe++)
-                  Cr(se[Fe], d);
+                for (var Me = 0; Me < se.length; Me++)
+                  Cr(se[Me], d);
                 Object.freeze && Object.freeze(se);
               } else
                 T("React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead.");
             else
               Cr(se, d);
         }
-        if (Ke.call(g, "key")) {
-          var Te = Y(d), G = Object.keys(g).filter(function(_n) {
+        if (Ye.call(g, "key")) {
+          var Oe = V(d), K = Object.keys(g).filter(function(_n) {
             return _n !== "key";
-          }), qt = G.length > 0 ? "{key: someKey, " + G.join(": ..., ") + ": ...}" : "{key: someKey}";
-          if (!Ar[Te + qt]) {
-            var yn = G.length > 0 ? "{" + G.join(": ..., ") + ": ...}" : "{}";
+          }), qt = K.length > 0 ? "{key: someKey, " + K.join(": ..., ") + ": ...}" : "{key: someKey}";
+          if (!Ar[Oe + qt]) {
+            var yn = K.length > 0 ? "{" + K.join(": ..., ") + ": ...}" : "{}";
             T(`A props object containing a "key" prop is being spread into JSX:
   let props = %s;
   <%s {...props} />
 React keys must be passed directly to JSX without using spread:
   let props = %s;
-  <%s key={someKey} {...props} />`, qt, Te, yn, Te), Ar[Te + qt] = !0;
+  <%s key={someKey} {...props} />`, qt, Oe, yn, Oe), Ar[Oe + qt] = !0;
           }
         }
-        return d === n ? fn(W) : hn(W), W;
+        return d === n ? fn(B) : hn(B), B;
       }
     }
     function gn(d, g, v) {
@@ -651,20 +651,20 @@ React keys must be passed directly to JSX without using spread:
       return $r(d, g, v, !1);
     }
     var mn = pn, vn = gn;
-    Ze.Fragment = n, Ze.jsx = mn, Ze.jsxs = vn;
-  }(), Ze;
+    Ke.Fragment = n, Ke.jsx = mn, Ke.jsxs = vn;
+  }(), Ke;
 }
 var xn = {};
 xn.NODE_ENV === "production" ? tr.exports = kn() : tr.exports = On();
-var w = tr.exports, rr, Tn = {}, mt = bn;
+var b = tr.exports, rr, Tn = {}, gt = bn;
 if (Tn.NODE_ENV === "production")
-  rr = mt.createRoot, mt.hydrateRoot;
+  rr = gt.createRoot, gt.hydrateRoot;
 else {
-  var Mr = mt.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+  var Mr = gt.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
   rr = function(s, e) {
     Mr.usingClientEntryPoint = !0;
     try {
-      return mt.createRoot(s, e);
+      return gt.createRoot(s, e);
     } finally {
       Mr.usingClientEntryPoint = !1;
     }
@@ -693,7 +693,7 @@ var Pn = {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const jn = (s) => s.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase().trim(), xt = (s, e) => {
+const jn = (s) => s.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase().trim(), kt = (s, e) => {
   const t = wn(
     ({
       color: r = "currentColor",
@@ -729,7 +729,7 @@ const jn = (s) => s.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase().trim(),
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Rn = xt("Archive", [
+const Rn = kt("Archive", [
   ["rect", { width: "20", height: "5", x: "2", y: "3", rx: "1", key: "1wp1u1" }],
   ["path", { d: "M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8", key: "1s80jp" }],
   ["path", { d: "M10 12h4", key: "a56b0p" }]
@@ -740,7 +740,7 @@ const Rn = xt("Archive", [
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Cn = xt("MessageSquarePlus", [
+const Cn = kt("MessageSquarePlus", [
   ["path", { d: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z", key: "1lielz" }],
   ["path", { d: "M12 7v6", key: "lw1j43" }],
   ["path", { d: "M9 10h6", key: "9gxzsh" }]
@@ -751,7 +751,7 @@ const Cn = xt("MessageSquarePlus", [
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const An = xt("MessageSquare", [
+const An = kt("MessageSquare", [
   ["path", { d: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z", key: "1lielz" }]
 ]);
 /**
@@ -760,12 +760,12 @@ const An = xt("MessageSquare", [
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const $n = xt("Send", [
+const $n = kt("Send", [
   ["path", { d: "m22 2-7 20-4-9-9-4Z", key: "1q3vgg" }],
   ["path", { d: "M22 2 11 13", key: "nzbqef" }]
 ]), In = (s) => {
   let e;
-  return s ? e = s : typeof fetch > "u" ? e = (...t) => Promise.resolve().then(() => Ye).then(({ default: r }) => r(...t)) : e = fetch, (...t) => e(...t);
+  return s ? e = s : typeof fetch > "u" ? e = (...t) => Promise.resolve().then(() => He).then(({ default: r }) => r(...t)) : e = fetch, (...t) => e(...t);
 };
 class pr extends Error {
   constructor(e, t = "FunctionsError", r) {
@@ -866,7 +866,7 @@ class Un {
     });
   }
 }
-var Q = {}, mr = {}, Tt = {}, lt = {}, Pt = {}, jt = {}, Fn = function() {
+var X = {}, mr = {}, Ot = {}, at = {}, xt = {}, Tt = {}, Fn = function() {
   if (typeof self < "u")
     return self;
   if (typeof window < "u")
@@ -874,28 +874,28 @@ var Q = {}, mr = {}, Tt = {}, lt = {}, Pt = {}, jt = {}, Fn = function() {
   if (typeof global < "u")
     return global;
   throw new Error("unable to locate global object");
-}, Ve = Fn();
-const Bn = Ve.fetch, vs = Ve.fetch.bind(Ve), ys = Ve.Headers, Wn = Ve.Request, qn = Ve.Response, Ye = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+}, ze = Fn();
+const Bn = ze.fetch, vs = ze.fetch.bind(ze), ys = ze.Headers, Wn = ze.Request, qn = ze.Response, He = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   Headers: ys,
   Request: Wn,
   Response: qn,
   default: vs,
   fetch: Bn
-}, Symbol.toStringTag, { value: "Module" })), zn = /* @__PURE__ */ En(Ye);
-var Rt = {};
-Object.defineProperty(Rt, "__esModule", { value: !0 });
+}, Symbol.toStringTag, { value: "Module" })), zn = /* @__PURE__ */ En(He);
+var Pt = {};
+Object.defineProperty(Pt, "__esModule", { value: !0 });
 class Hn extends Error {
   constructor(e) {
     super(e.message), this.name = "PostgrestError", this.details = e.details, this.hint = e.hint, this.code = e.code;
   }
 }
-Rt.default = Hn;
+Pt.default = Hn;
 var _s = ae && ae.__importDefault || function(s) {
   return s && s.__esModule ? s : { default: s };
 };
-Object.defineProperty(jt, "__esModule", { value: !0 });
-const Vn = _s(zn), Yn = _s(Rt);
+Object.defineProperty(Tt, "__esModule", { value: !0 });
+const Vn = _s(zn), Yn = _s(Pt);
 let Jn = class {
   constructor(e) {
     this.shouldThrowOnError = !1, this.method = e.method, this.url = e.url, this.headers = e.headers, this.schema = e.schema, this.body = e.body, this.shouldThrowOnError = e.shouldThrowOnError, this.signal = e.signal, this.isMaybeSingle = e.isMaybeSingle, e.fetch ? this.fetch = e.fetch : typeof fetch > "u" ? this.fetch = Vn.default : this.fetch = fetch;
@@ -931,8 +931,8 @@ let Jn = class {
           const A = await i.text();
           A === "" || (this.headers.Accept === "text/csv" || this.headers.Accept && this.headers.Accept.includes("application/vnd.pgrst.plan+text") ? l = A : l = JSON.parse(A));
         }
-        const m = (a = this.headers.Prefer) === null || a === void 0 ? void 0 : a.match(/count=(exact|planned|estimated)/), b = (o = i.headers.get("content-range")) === null || o === void 0 ? void 0 : o.split("/");
-        m && b && b.length > 1 && (h = parseInt(b[1])), this.isMaybeSingle && this.method === "GET" && Array.isArray(l) && (l.length > 1 ? (u = {
+        const m = (a = this.headers.Prefer) === null || a === void 0 ? void 0 : a.match(/count=(exact|planned|estimated)/), S = (o = i.headers.get("content-range")) === null || o === void 0 ? void 0 : o.split("/");
+        m && S && S.length > 1 && (h = parseInt(S[1])), this.isMaybeSingle && this.method === "GET" && Array.isArray(l) && (l.length > 1 ? (u = {
           // https://github.com/PostgREST/postgrest/blob/a867d79c42419af16c18c3fb019eba8df992626f/src/PostgREST/Error.hs#L553
           code: "PGRST116",
           details: `Results contain ${l.length} rows, application/vnd.pgrst.object+json requires 1 row`,
@@ -976,12 +976,12 @@ let Jn = class {
     })), n.then(e, t);
   }
 };
-jt.default = Jn;
+Tt.default = Jn;
 var Gn = ae && ae.__importDefault || function(s) {
   return s && s.__esModule ? s : { default: s };
 };
-Object.defineProperty(Pt, "__esModule", { value: !0 });
-const Kn = Gn(jt);
+Object.defineProperty(xt, "__esModule", { value: !0 });
+const Kn = Gn(Tt);
 let Qn = class extends Kn.default {
   /**
    * Perform a SELECT on the query result.
@@ -1144,12 +1144,12 @@ let Qn = class extends Kn.default {
     return this;
   }
 };
-Pt.default = Qn;
+xt.default = Qn;
 var Xn = ae && ae.__importDefault || function(s) {
   return s && s.__esModule ? s : { default: s };
 };
-Object.defineProperty(lt, "__esModule", { value: !0 });
-const Zn = Xn(Pt);
+Object.defineProperty(at, "__esModule", { value: !0 });
+const Zn = Xn(xt);
 let ei = class extends Zn.default {
   /**
    * Match only rows where `column` is equal to `value`.
@@ -1449,12 +1449,12 @@ let ei = class extends Zn.default {
     return this.url.searchParams.append(e, `${t}.${r}`), this;
   }
 };
-lt.default = ei;
+at.default = ei;
 var ti = ae && ae.__importDefault || function(s) {
   return s && s.__esModule ? s : { default: s };
 };
-Object.defineProperty(Tt, "__esModule", { value: !0 });
-const et = ti(lt);
+Object.defineProperty(Ot, "__esModule", { value: !0 });
+const Qe = ti(at);
 let ri = class {
   constructor(e, { headers: t = {}, schema: r, fetch: n }) {
     this.url = e, this.headers = t, this.schema = r, this.fetch = n;
@@ -1484,7 +1484,7 @@ let ri = class {
     const n = t ? "HEAD" : "GET";
     let i = !1;
     const a = (e ?? "*").split("").map((o) => /\s/.test(o) && !i ? "" : (o === '"' && (i = !i), o)).join("");
-    return this.url.searchParams.set("select", a), r && (this.headers.Prefer = `count=${r}`), new et.default({
+    return this.url.searchParams.set("select", a), r && (this.headers.Prefer = `count=${r}`), new Qe.default({
       method: n,
       url: this.url,
       headers: this.headers,
@@ -1528,7 +1528,7 @@ let ri = class {
         this.url.searchParams.set("columns", o.join(","));
       }
     }
-    return new et.default({
+    return new Qe.default({
       method: n,
       url: this.url,
       headers: this.headers,
@@ -1585,7 +1585,7 @@ let ri = class {
         this.url.searchParams.set("columns", u.join(","));
       }
     }
-    return new et.default({
+    return new Qe.default({
       method: a,
       url: this.url,
       headers: this.headers,
@@ -1618,7 +1618,7 @@ let ri = class {
    */
   update(e, { count: t } = {}) {
     const r = "PATCH", n = [];
-    return this.headers.Prefer && n.push(this.headers.Prefer), t && n.push(`count=${t}`), this.headers.Prefer = n.join(","), new et.default({
+    return this.headers.Prefer && n.push(this.headers.Prefer), t && n.push(`count=${t}`), this.headers.Prefer = n.join(","), new Qe.default({
       method: r,
       url: this.url,
       headers: this.headers,
@@ -1649,7 +1649,7 @@ let ri = class {
    */
   delete({ count: e } = {}) {
     const t = "DELETE", r = [];
-    return e && r.push(`count=${e}`), this.headers.Prefer && r.unshift(this.headers.Prefer), this.headers.Prefer = r.join(","), new et.default({
+    return e && r.push(`count=${e}`), this.headers.Prefer && r.unshift(this.headers.Prefer), this.headers.Prefer = r.join(","), new Qe.default({
       method: t,
       url: this.url,
       headers: this.headers,
@@ -1659,20 +1659,20 @@ let ri = class {
     });
   }
 };
-Tt.default = ri;
-var Ct = {}, At = {};
-Object.defineProperty(At, "__esModule", { value: !0 });
-At.version = void 0;
-At.version = "0.0.0-automated";
-Object.defineProperty(Ct, "__esModule", { value: !0 });
-Ct.DEFAULT_HEADERS = void 0;
-const si = At;
-Ct.DEFAULT_HEADERS = { "X-Client-Info": `postgrest-js/${si.version}` };
+Ot.default = ri;
+var jt = {}, Rt = {};
+Object.defineProperty(Rt, "__esModule", { value: !0 });
+Rt.version = void 0;
+Rt.version = "0.0.0-automated";
+Object.defineProperty(jt, "__esModule", { value: !0 });
+jt.DEFAULT_HEADERS = void 0;
+const si = Rt;
+jt.DEFAULT_HEADERS = { "X-Client-Info": `postgrest-js/${si.version}` };
 var ws = ae && ae.__importDefault || function(s) {
   return s && s.__esModule ? s : { default: s };
 };
 Object.defineProperty(mr, "__esModule", { value: !0 });
-const ni = ws(Tt), ii = ws(lt), ai = Ct;
+const ni = ws(Ot), ii = ws(at), ai = jt;
 let oi = class bs {
   // TODO: Add back shouldThrowOnError once we figure out the typings
   /**
@@ -1757,24 +1757,24 @@ let oi = class bs {
   }
 };
 mr.default = oi;
-var Je = ae && ae.__importDefault || function(s) {
+var Ve = ae && ae.__importDefault || function(s) {
   return s && s.__esModule ? s : { default: s };
 };
-Object.defineProperty(Q, "__esModule", { value: !0 });
-Q.PostgrestError = Q.PostgrestBuilder = Q.PostgrestTransformBuilder = Q.PostgrestFilterBuilder = Q.PostgrestQueryBuilder = Q.PostgrestClient = void 0;
-const Ss = Je(mr);
-Q.PostgrestClient = Ss.default;
-const Es = Je(Tt);
-Q.PostgrestQueryBuilder = Es.default;
-const ks = Je(lt);
-Q.PostgrestFilterBuilder = ks.default;
-const Os = Je(Pt);
-Q.PostgrestTransformBuilder = Os.default;
-const xs = Je(jt);
-Q.PostgrestBuilder = xs.default;
-const Ts = Je(Rt);
-Q.PostgrestError = Ts.default;
-var ci = Q.default = {
+Object.defineProperty(X, "__esModule", { value: !0 });
+X.PostgrestError = X.PostgrestBuilder = X.PostgrestTransformBuilder = X.PostgrestFilterBuilder = X.PostgrestQueryBuilder = X.PostgrestClient = void 0;
+const Ss = Ve(mr);
+X.PostgrestClient = Ss.default;
+const Es = Ve(Ot);
+X.PostgrestQueryBuilder = Es.default;
+const ks = Ve(at);
+X.PostgrestFilterBuilder = ks.default;
+const Os = Ve(xt);
+X.PostgrestTransformBuilder = Os.default;
+const xs = Ve(Tt);
+X.PostgrestBuilder = xs.default;
+const Ts = Ve(Pt);
+X.PostgrestError = Ts.default;
+var ci = X.default = {
   PostgrestClient: Ss.default,
   PostgrestQueryBuilder: Es.default,
   PostgrestFilterBuilder: ks.default,
@@ -1789,14 +1789,14 @@ const {
   PostgrestTransformBuilder: el,
   PostgrestBuilder: tl
 } = ci, ui = "2.10.7", di = { "X-Client-Info": `realtime-js/${ui}` }, hi = "1.0.0", Ps = 1e4, fi = 1e3;
-var He;
+var qe;
 (function(s) {
   s[s.connecting = 0] = "connecting", s[s.open = 1] = "open", s[s.closing = 2] = "closing", s[s.closed = 3] = "closed";
-})(He || (He = {}));
-var Z;
+})(qe || (qe = {}));
+var ee;
 (function(s) {
   s.closed = "closed", s.errored = "errored", s.joined = "joined", s.joining = "joining", s.leaving = "leaving";
-})(Z || (Z = {}));
+})(ee || (ee = {}));
 var le;
 (function(s) {
   s.close = "phx_close", s.error = "phx_error", s.join = "phx_join", s.reply = "phx_reply", s.leave = "phx_leave", s.access_token = "access_token";
@@ -1805,10 +1805,10 @@ var nr;
 (function(s) {
   s.websocket = "websocket";
 })(nr || (nr = {}));
-var Ce;
+var je;
 (function(s) {
   s.Connecting = "connecting", s.Open = "open", s.Closing = "closing", s.Closed = "closed";
-})(Ce || (Ce = {}));
+})(je || (je = {}));
 class gi {
   constructor() {
     this.HEADER_LENGTH = 1;
@@ -1845,10 +1845,10 @@ class js {
     }, this.timerCalc(this.tries + 1));
   }
 }
-var U;
+var M;
 (function(s) {
   s.abstime = "abstime", s.bool = "bool", s.date = "date", s.daterange = "daterange", s.float4 = "float4", s.float8 = "float8", s.int2 = "int2", s.int4 = "int4", s.int4range = "int4range", s.int8 = "int8", s.int8range = "int8range", s.json = "json", s.jsonb = "jsonb", s.money = "money", s.numeric = "numeric", s.oid = "oid", s.reltime = "reltime", s.text = "text", s.time = "time", s.timestamp = "timestamp", s.timestamptz = "timestamptz", s.timetz = "timetz", s.tsrange = "tsrange", s.tstzrange = "tstzrange";
-})(U || (U = {}));
+})(M || (M = {}));
 const Ur = (s, e, t = {}) => {
   var r;
   const n = (r = t.skipTypes) !== null && r !== void 0 ? r : [];
@@ -1862,34 +1862,34 @@ const Ur = (s, e, t = {}) => {
     return _i(e, t);
   }
   switch (s) {
-    case U.bool:
+    case M.bool:
       return mi(e);
-    case U.float4:
-    case U.float8:
-    case U.int2:
-    case U.int4:
-    case U.int8:
-    case U.numeric:
-    case U.oid:
+    case M.float4:
+    case M.float8:
+    case M.int2:
+    case M.int4:
+    case M.int8:
+    case M.numeric:
+    case M.oid:
       return vi(e);
-    case U.json:
-    case U.jsonb:
+    case M.json:
+    case M.jsonb:
       return yi(e);
-    case U.timestamp:
+    case M.timestamp:
       return wi(e);
-    case U.abstime:
-    case U.date:
-    case U.daterange:
-    case U.int4range:
-    case U.int8range:
-    case U.money:
-    case U.reltime:
-    case U.text:
-    case U.time:
-    case U.timestamptz:
-    case U.timetz:
-    case U.tsrange:
-    case U.tstzrange:
+    case M.abstime:
+    case M.date:
+    case M.daterange:
+    case M.int4range:
+    case M.int8range:
+    case M.money:
+    case M.reltime:
+    case M.text:
+    case M.time:
+    case M.timestamptz:
+    case M.timetz:
+    case M.tsrange:
+    case M.tstzrange:
       return ir(e);
     default:
       return ir(e);
@@ -2002,7 +2002,7 @@ var Fr;
 (function(s) {
   s.SYNC = "sync", s.JOIN = "join", s.LEAVE = "leave";
 })(Fr || (Fr = {}));
-class it {
+class rt {
   /**
    * Initializes the Presence.
    *
@@ -2025,12 +2025,12 @@ class it {
     };
     this.channel._on(r.state, {}, (n) => {
       const { onJoin: i, onLeave: a, onSync: o } = this.caller;
-      this.joinRef = this.channel._joinRef(), this.state = it.syncState(this.state, n, i, a), this.pendingDiffs.forEach((c) => {
-        this.state = it.syncDiff(this.state, c, i, a);
+      this.joinRef = this.channel._joinRef(), this.state = rt.syncState(this.state, n, i, a), this.pendingDiffs.forEach((c) => {
+        this.state = rt.syncDiff(this.state, c, i, a);
       }), this.pendingDiffs = [], o();
     }), this.channel._on(r.diff, {}, (n) => {
       const { onJoin: i, onLeave: a, onSync: o } = this.caller;
-      this.inPendingSyncState() ? this.pendingDiffs.push(n) : (this.state = it.syncDiff(this.state, n, i, a), o());
+      this.inPendingSyncState() ? this.pendingDiffs.push(n) : (this.state = rt.syncDiff(this.state, n, i, a), o());
     }), this.onJoin((n, i, a) => {
       this.channel._trigger("presence", {
         event: "join",
@@ -2066,7 +2066,7 @@ class it {
     }), this.map(a, (u, l) => {
       const h = i[u];
       if (h) {
-        const f = l.map((b) => b.presence_ref), p = h.map((b) => b.presence_ref), y = l.filter((b) => p.indexOf(b.presence_ref) < 0), m = h.filter((b) => f.indexOf(b.presence_ref) < 0);
+        const f = l.map((S) => S.presence_ref), p = h.map((S) => S.presence_ref), y = l.filter((S) => p.indexOf(S.presence_ref) < 0), m = h.filter((S) => f.indexOf(S.presence_ref) < 0);
         y.length > 0 && (o[u] = y), m.length > 0 && (c[u] = m);
       } else
         o[u] = l;
@@ -2173,21 +2173,21 @@ var qr;
 })(qr || (qr = {}));
 class vr {
   constructor(e, t = { config: {} }, r) {
-    this.topic = e, this.params = t, this.socket = r, this.bindings = {}, this.state = Z.closed, this.joinedOnce = !1, this.pushBuffer = [], this.subTopic = e.replace(/^realtime:/i, ""), this.params.config = Object.assign({
+    this.topic = e, this.params = t, this.socket = r, this.bindings = {}, this.state = ee.closed, this.joinedOnce = !1, this.pushBuffer = [], this.subTopic = e.replace(/^realtime:/i, ""), this.params.config = Object.assign({
       broadcast: { ack: !1, self: !1 },
       presence: { key: "" },
       private: !1
     }, t.config), this.timeout = this.socket.timeout, this.joinPush = new zt(this, le.join, this.params, this.timeout), this.rejoinTimer = new js(() => this._rejoinUntilConnected(), this.socket.reconnectAfterMs), this.joinPush.receive("ok", () => {
-      this.state = Z.joined, this.rejoinTimer.reset(), this.pushBuffer.forEach((n) => n.send()), this.pushBuffer = [];
+      this.state = ee.joined, this.rejoinTimer.reset(), this.pushBuffer.forEach((n) => n.send()), this.pushBuffer = [];
     }), this._onClose(() => {
-      this.rejoinTimer.reset(), this.socket.log("channel", `close ${this.topic} ${this._joinRef()}`), this.state = Z.closed, this.socket._remove(this);
+      this.rejoinTimer.reset(), this.socket.log("channel", `close ${this.topic} ${this._joinRef()}`), this.state = ee.closed, this.socket._remove(this);
     }), this._onError((n) => {
-      this._isLeaving() || this._isClosed() || (this.socket.log("channel", `error ${this.topic}`, n), this.state = Z.errored, this.rejoinTimer.scheduleTimeout());
+      this._isLeaving() || this._isClosed() || (this.socket.log("channel", `error ${this.topic}`, n), this.state = ee.errored, this.rejoinTimer.scheduleTimeout());
     }), this.joinPush.receive("timeout", () => {
-      this._isJoining() && (this.socket.log("channel", `timeout ${this.topic}`, this.joinPush.timeout), this.state = Z.errored, this.rejoinTimer.scheduleTimeout());
+      this._isJoining() && (this.socket.log("channel", `timeout ${this.topic}`, this.joinPush.timeout), this.state = ee.errored, this.rejoinTimer.scheduleTimeout());
     }), this._on(le.reply, {}, (n, i) => {
       this._trigger(this._replyEventName(i), n);
-    }), this.presence = new it(this), this.broadcastEndpointURL = Cs(this.socket.endPoint) + "/api/broadcast", this.private = this.params.config.private || !1;
+    }), this.presence = new rt(this), this.broadcastEndpointURL = Cs(this.socket.endPoint) + "/api/broadcast", this.private = this.params.config.private || !1;
   }
   /** Subscribe registers your client with the server */
   subscribe(e, t = this.timeout) {
@@ -2211,9 +2211,9 @@ class vr {
         } else {
           const f = this.bindings.postgres_changes, p = (h = f == null ? void 0 : f.length) !== null && h !== void 0 ? h : 0, y = [];
           for (let m = 0; m < p; m++) {
-            const b = f[m], { filter: { event: A, schema: P, table: T, filter: O } } = b, E = l && l[m];
+            const S = f[m], { filter: { event: A, schema: P, table: T, filter: O } } = S, E = l && l[m];
             if (E && E.event === A && E.schema === P && E.table === T && E.filter === O)
-              y.push(Object.assign(Object.assign({}, b), { id: E.id }));
+              y.push(Object.assign(Object.assign({}, S), { id: E.id }));
             else {
               this.unsubscribe(), e && e("CHANNEL_ERROR", new Error("mismatch between server and client bindings for postgres changes"));
               return;
@@ -2305,7 +2305,7 @@ class vr {
    * channel.unsubscribe().receive("ok", () => alert("left!") )
    */
   unsubscribe(e = this.timeout) {
-    this.state = Z.leaving;
+    this.state = ee.leaving;
     const t = () => {
       this.socket.log("channel", `leave ${this.topic}`), this._trigger(le.close, "leave", this._joinRef());
     };
@@ -2361,14 +2361,14 @@ class vr {
     if (t && !f)
       throw "channel onMessage callbacks must return the payload, modified or unmodified";
     ["insert", "update", "delete"].includes(a) ? (n = this.bindings.postgres_changes) === null || n === void 0 || n.filter((p) => {
-      var y, m, b;
-      return ((y = p.filter) === null || y === void 0 ? void 0 : y.event) === "*" || ((b = (m = p.filter) === null || m === void 0 ? void 0 : m.event) === null || b === void 0 ? void 0 : b.toLocaleLowerCase()) === a;
+      var y, m, S;
+      return ((y = p.filter) === null || y === void 0 ? void 0 : y.event) === "*" || ((S = (m = p.filter) === null || m === void 0 ? void 0 : m.event) === null || S === void 0 ? void 0 : S.toLocaleLowerCase()) === a;
     }).map((p) => p.callback(f, r)) : (i = this.bindings[a]) === null || i === void 0 || i.filter((p) => {
-      var y, m, b, A, P, T;
+      var y, m, S, A, P, T;
       if (["broadcast", "presence", "postgres_changes"].includes(a))
         if ("id" in p) {
           const O = p.id, E = (y = p.filter) === null || y === void 0 ? void 0 : y.event;
-          return O && ((m = t.ids) === null || m === void 0 ? void 0 : m.includes(O)) && (E === "*" || (E == null ? void 0 : E.toLocaleLowerCase()) === ((b = t.data) === null || b === void 0 ? void 0 : b.type.toLocaleLowerCase()));
+          return O && ((m = t.ids) === null || m === void 0 ? void 0 : m.includes(O)) && (E === "*" || (E == null ? void 0 : E.toLocaleLowerCase()) === ((S = t.data) === null || S === void 0 ? void 0 : S.type.toLocaleLowerCase()));
         } else {
           const O = (P = (A = p == null ? void 0 : p.filter) === null || A === void 0 ? void 0 : A.event) === null || P === void 0 ? void 0 : P.toLocaleLowerCase();
           return O === "*" || O === ((T = t == null ? void 0 : t.event) === null || T === void 0 ? void 0 : T.toLocaleLowerCase());
@@ -2377,10 +2377,10 @@ class vr {
         return p.type.toLocaleLowerCase() === a;
     }).map((p) => {
       if (typeof f == "object" && "ids" in f) {
-        const y = f.data, { schema: m, table: b, commit_timestamp: A, type: P, errors: T } = y;
+        const y = f.data, { schema: m, table: S, commit_timestamp: A, type: P, errors: T } = y;
         f = Object.assign(Object.assign({}, {
           schema: m,
-          table: b,
+          table: S,
           commit_timestamp: A,
           eventType: P,
           new: {},
@@ -2393,19 +2393,19 @@ class vr {
   }
   /** @internal */
   _isClosed() {
-    return this.state === Z.closed;
+    return this.state === ee.closed;
   }
   /** @internal */
   _isJoined() {
-    return this.state === Z.joined;
+    return this.state === ee.joined;
   }
   /** @internal */
   _isJoining() {
-    return this.state === Z.joining;
+    return this.state === ee.joining;
   }
   /** @internal */
   _isLeaving() {
-    return this.state === Z.leaving;
+    return this.state === ee.leaving;
   }
   /** @internal */
   _replyEventName(e) {
@@ -2467,7 +2467,7 @@ class vr {
   }
   /** @internal */
   _rejoin(e = this.timeout) {
-    this._isLeaving() || (this.socket._leaveOpenTopic(this.topic), this.state = Z.joining, this.joinPush.resend(e));
+    this._isLeaving() || (this.socket._leaveOpenTopic(this.topic), this.state = ee.joining, this.joinPush.resend(e));
   }
   /** @internal */
   _getPayloadRecords(e) {
@@ -2512,7 +2512,7 @@ class ki {
       message: []
     }, this._resolveFetch = (i) => {
       let a;
-      return i ? a = i : typeof fetch > "u" ? a = (...o) => Promise.resolve().then(() => Ye).then(({ default: c }) => c(...o)) : a = fetch, (...o) => a(...o);
+      return i ? a = i : typeof fetch > "u" ? a = (...o) => Promise.resolve().then(() => He).then(({ default: c }) => c(...o)) : a = fetch, (...o) => a(...o);
     }, this.endPoint = `${e}/${nr.websocket}`, this.httpEndpoint = Cs(e), t != null && t.transport ? this.transport = t.transport : this.transport = null, t != null && t.params && (this.params = t.params), t != null && t.headers && (this.headers = Object.assign(Object.assign({}, this.headers), t.headers)), t != null && t.timeout && (this.timeout = t.timeout), t != null && t.logger && (this.logger = t.logger), t != null && t.heartbeatIntervalMs && (this.heartbeatIntervalMs = t.heartbeatIntervalMs);
     const n = (r = t == null ? void 0 : t.params) === null || r === void 0 ? void 0 : r.apikey;
     if (n && (this.accessToken = n, this.apiKey = n), this.reconnectAfterMs = t != null && t.reconnectAfterMs ? t.reconnectAfterMs : (i) => [1e3, 2e3, 5e3, 1e4][i - 1] || 1e4, this.encode = t != null && t.encode ? t.encode : (i, a) => a(JSON.stringify(i)), this.decode = t != null && t.decode ? t.decode : this.serializer.decode.bind(this.serializer), this.reconnectTimer = new js(async () => {
@@ -2542,7 +2542,7 @@ class ki {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-CVNIexme.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-DJwnVsUX.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this._endPointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -2593,21 +2593,21 @@ class ki {
    */
   connectionState() {
     switch (this.conn && this.conn.readyState) {
-      case He.connecting:
-        return Ce.Connecting;
-      case He.open:
-        return Ce.Open;
-      case He.closing:
-        return Ce.Closing;
+      case qe.connecting:
+        return je.Connecting;
+      case qe.open:
+        return je.Open;
+      case qe.closing:
+        return je.Closing;
       default:
-        return Ce.Closed;
+        return je.Closed;
     }
   }
   /**
    * Returns `true` is the connection is open.
    */
   isConnected() {
-    return this.connectionState() === Ce.Open;
+    return this.connectionState() === je.Open;
   }
   channel(e, t = { config: {} }) {
     const r = new vr(`realtime:${e}`, t, this);
@@ -2762,7 +2762,7 @@ class Oi {
     }, this.onerror = () => {
     }, this.onmessage = () => {
     }, this.onopen = () => {
-    }, this.readyState = He.connecting, this.send = () => {
+    }, this.readyState = qe.connecting, this.send = () => {
     }, this.url = null, this.url = e, this.close = r.close;
   }
 }
@@ -2771,7 +2771,7 @@ class yr extends Error {
     super(e), this.__isStorageError = !0, this.name = "StorageError";
   }
 }
-function H(s) {
+function z(s) {
   return typeof s == "object" && s !== null && "__isStorageError" in s;
 }
 class xi extends yr {
@@ -2820,9 +2820,9 @@ var Ti = function(s, e, t, r) {
 };
 const As = (s) => {
   let e;
-  return s ? e = s : typeof fetch > "u" ? e = (...t) => Promise.resolve().then(() => Ye).then(({ default: r }) => r(...t)) : e = fetch, (...t) => e(...t);
+  return s ? e = s : typeof fetch > "u" ? e = (...t) => Promise.resolve().then(() => He).then(({ default: r }) => r(...t)) : e = fetch, (...t) => e(...t);
 }, Pi = () => Ti(void 0, void 0, void 0, function* () {
-  return typeof Response > "u" ? (yield Promise.resolve().then(() => Ye)).Response : Response;
+  return typeof Response > "u" ? (yield Promise.resolve().then(() => He)).Response : Response;
 }), or = (s) => {
   if (Array.isArray(s))
     return s.map((t) => or(t));
@@ -2834,7 +2834,7 @@ const As = (s) => {
     e[n] = or(r);
   }), e;
 };
-var Ie = function(s, e, t, r) {
+var Ae = function(s, e, t, r) {
   function n(i) {
     return i instanceof t ? i : new t(function(a) {
       a(i);
@@ -2861,7 +2861,7 @@ var Ie = function(s, e, t, r) {
     u((r = r.apply(s, e || [])).next());
   });
 };
-const Ht = (s) => s.msg || s.message || s.error_description || s.error || JSON.stringify(s), ji = (s, e, t) => Ie(void 0, void 0, void 0, function* () {
+const Ht = (s) => s.msg || s.message || s.error_description || s.error || JSON.stringify(s), ji = (s, e, t) => Ae(void 0, void 0, void 0, function* () {
   const r = yield Pi();
   s instanceof r && !(t != null && t.noResolveJson) ? s.json().then((n) => {
     e(new xi(Ht(n), s.status || 500));
@@ -2872,8 +2872,8 @@ const Ht = (s) => s.msg || s.message || s.error_description || s.error || JSON.s
   const n = { method: s, headers: (e == null ? void 0 : e.headers) || {} };
   return s === "GET" ? n : (n.headers = Object.assign({ "Content-Type": "application/json" }, e == null ? void 0 : e.headers), r && (n.body = JSON.stringify(r)), Object.assign(Object.assign({}, n), t));
 };
-function ut(s, e, t, r, n, i) {
-  return Ie(this, void 0, void 0, function* () {
+function ot(s, e, t, r, n, i) {
+  return Ae(this, void 0, void 0, function* () {
     return new Promise((a, o) => {
       s(t, Ri(e, r, n, i)).then((c) => {
         if (!c.ok)
@@ -2883,32 +2883,32 @@ function ut(s, e, t, r, n, i) {
     });
   });
 }
-function kt(s, e, t, r) {
-  return Ie(this, void 0, void 0, function* () {
-    return ut(s, "GET", e, t, r);
+function St(s, e, t, r) {
+  return Ae(this, void 0, void 0, function* () {
+    return ot(s, "GET", e, t, r);
   });
 }
-function Se(s, e, t, r, n) {
-  return Ie(this, void 0, void 0, function* () {
-    return ut(s, "POST", e, r, n, t);
+function we(s, e, t, r, n) {
+  return Ae(this, void 0, void 0, function* () {
+    return ot(s, "POST", e, r, n, t);
   });
 }
 function Ci(s, e, t, r, n) {
-  return Ie(this, void 0, void 0, function* () {
-    return ut(s, "PUT", e, r, n, t);
+  return Ae(this, void 0, void 0, function* () {
+    return ot(s, "PUT", e, r, n, t);
   });
 }
 function Ai(s, e, t, r) {
-  return Ie(this, void 0, void 0, function* () {
-    return ut(s, "HEAD", e, Object.assign(Object.assign({}, t), { noResolveJson: !0 }), r);
+  return Ae(this, void 0, void 0, function* () {
+    return ot(s, "HEAD", e, Object.assign(Object.assign({}, t), { noResolveJson: !0 }), r);
   });
 }
 function $s(s, e, t, r, n) {
-  return Ie(this, void 0, void 0, function* () {
-    return ut(s, "DELETE", e, r, n, t);
+  return Ae(this, void 0, void 0, function* () {
+    return ot(s, "DELETE", e, r, n, t);
   });
 }
-var K = function(s, e, t, r) {
+var Q = function(s, e, t, r) {
   function n(i) {
     return i instanceof t ? i : new t(function(a) {
       a(i);
@@ -2959,7 +2959,7 @@ class Ii {
    * @param fileBody The body of the file to be stored in the bucket.
    */
   uploadOrUpdate(e, t, r, n) {
-    return K(this, void 0, void 0, function* () {
+    return Q(this, void 0, void 0, function* () {
       try {
         let i;
         const a = Object.assign(Object.assign({}, zr), n);
@@ -2972,7 +2972,7 @@ class Ii {
           error: null
         } : { data: null, error: f };
       } catch (i) {
-        if (H(i))
+        if (z(i))
           return { data: null, error: i };
         throw i;
       }
@@ -2985,7 +2985,7 @@ class Ii {
    * @param fileBody The body of the file to be stored in the bucket.
    */
   upload(e, t, r) {
-    return K(this, void 0, void 0, function* () {
+    return Q(this, void 0, void 0, function* () {
       return this.uploadOrUpdate("POST", e, t, r);
     });
   }
@@ -2996,7 +2996,7 @@ class Ii {
    * @param fileBody The body of the file to be stored in the bucket.
    */
   uploadToSignedUrl(e, t, r, n) {
-    return K(this, void 0, void 0, function* () {
+    return Q(this, void 0, void 0, function* () {
       const i = this._removeEmptyFolders(e), a = this._getFinalPath(i), o = new URL(this.url + `/object/upload/sign/${a}`);
       o.searchParams.set("token", t);
       try {
@@ -3013,7 +3013,7 @@ class Ii {
           error: null
         } : { data: null, error: f };
       } catch (c) {
-        if (H(c))
+        if (z(c))
           return { data: null, error: c };
         throw c;
       }
@@ -3027,17 +3027,17 @@ class Ii {
    * @param options.upsert If set to true, allows the file to be overwritten if it already exists.
    */
   createSignedUploadUrl(e, t) {
-    return K(this, void 0, void 0, function* () {
+    return Q(this, void 0, void 0, function* () {
       try {
         let r = this._getFinalPath(e);
         const n = Object.assign({}, this.headers);
         t != null && t.upsert && (n["x-upsert"] = "true");
-        const i = yield Se(this.fetch, `${this.url}/object/upload/sign/${r}`, {}, { headers: n }), a = new URL(this.url + i.url), o = a.searchParams.get("token");
+        const i = yield we(this.fetch, `${this.url}/object/upload/sign/${r}`, {}, { headers: n }), a = new URL(this.url + i.url), o = a.searchParams.get("token");
         if (!o)
           throw new yr("No token returned by API");
         return { data: { signedUrl: a.toString(), path: e, token: o }, error: null };
       } catch (r) {
-        if (H(r))
+        if (z(r))
           return { data: null, error: r };
         throw r;
       }
@@ -3050,7 +3050,7 @@ class Ii {
    * @param fileBody The body of the file to be stored in the bucket.
    */
   update(e, t, r) {
-    return K(this, void 0, void 0, function* () {
+    return Q(this, void 0, void 0, function* () {
       return this.uploadOrUpdate("PUT", e, t, r);
     });
   }
@@ -3062,16 +3062,16 @@ class Ii {
    * @param options The destination options.
    */
   move(e, t, r) {
-    return K(this, void 0, void 0, function* () {
+    return Q(this, void 0, void 0, function* () {
       try {
-        return { data: yield Se(this.fetch, `${this.url}/object/move`, {
+        return { data: yield we(this.fetch, `${this.url}/object/move`, {
           bucketId: this.bucketId,
           sourceKey: e,
           destinationKey: t,
           destinationBucket: r == null ? void 0 : r.destinationBucket
         }, { headers: this.headers }), error: null };
       } catch (n) {
-        if (H(n))
+        if (z(n))
           return { data: null, error: n };
         throw n;
       }
@@ -3085,16 +3085,16 @@ class Ii {
    * @param options The destination options.
    */
   copy(e, t, r) {
-    return K(this, void 0, void 0, function* () {
+    return Q(this, void 0, void 0, function* () {
       try {
-        return { data: { path: (yield Se(this.fetch, `${this.url}/object/copy`, {
+        return { data: { path: (yield we(this.fetch, `${this.url}/object/copy`, {
           bucketId: this.bucketId,
           sourceKey: e,
           destinationKey: t,
           destinationBucket: r == null ? void 0 : r.destinationBucket
         }, { headers: this.headers })).Key }, error: null };
       } catch (n) {
-        if (H(n))
+        if (z(n))
           return { data: null, error: n };
         throw n;
       }
@@ -3109,13 +3109,13 @@ class Ii {
    * @param options.transform Transform the asset before serving it to the client.
    */
   createSignedUrl(e, t, r) {
-    return K(this, void 0, void 0, function* () {
+    return Q(this, void 0, void 0, function* () {
       try {
-        let n = this._getFinalPath(e), i = yield Se(this.fetch, `${this.url}/object/sign/${n}`, Object.assign({ expiresIn: t }, r != null && r.transform ? { transform: r.transform } : {}), { headers: this.headers });
+        let n = this._getFinalPath(e), i = yield we(this.fetch, `${this.url}/object/sign/${n}`, Object.assign({ expiresIn: t }, r != null && r.transform ? { transform: r.transform } : {}), { headers: this.headers });
         const a = r != null && r.download ? `&download=${r.download === !0 ? "" : r.download}` : "";
         return i = { signedUrl: encodeURI(`${this.url}${i.signedURL}${a}`) }, { data: i, error: null };
       } catch (n) {
-        if (H(n))
+        if (z(n))
           return { data: null, error: n };
         throw n;
       }
@@ -3129,15 +3129,15 @@ class Ii {
    * @param options.download triggers the file as a download if set to true. Set this parameter as the name of the file if you want to trigger the download with a different filename.
    */
   createSignedUrls(e, t, r) {
-    return K(this, void 0, void 0, function* () {
+    return Q(this, void 0, void 0, function* () {
       try {
-        const n = yield Se(this.fetch, `${this.url}/object/sign/${this.bucketId}`, { expiresIn: t, paths: e }, { headers: this.headers }), i = r != null && r.download ? `&download=${r.download === !0 ? "" : r.download}` : "";
+        const n = yield we(this.fetch, `${this.url}/object/sign/${this.bucketId}`, { expiresIn: t, paths: e }, { headers: this.headers }), i = r != null && r.download ? `&download=${r.download === !0 ? "" : r.download}` : "";
         return {
           data: n.map((a) => Object.assign(Object.assign({}, a), { signedUrl: a.signedURL ? encodeURI(`${this.url}${a.signedURL}${i}`) : null })),
           error: null
         };
       } catch (n) {
-        if (H(n))
+        if (z(n))
           return { data: null, error: n };
         throw n;
       }
@@ -3150,16 +3150,16 @@ class Ii {
    * @param options.transform Transform the asset before serving it to the client.
    */
   download(e, t) {
-    return K(this, void 0, void 0, function* () {
+    return Q(this, void 0, void 0, function* () {
       const n = typeof (t == null ? void 0 : t.transform) < "u" ? "render/image/authenticated" : "object", i = this.transformOptsToQueryString((t == null ? void 0 : t.transform) || {}), a = i ? `?${i}` : "";
       try {
         const o = this._getFinalPath(e);
-        return { data: yield (yield kt(this.fetch, `${this.url}/${n}/${o}${a}`, {
+        return { data: yield (yield St(this.fetch, `${this.url}/${n}/${o}${a}`, {
           headers: this.headers,
           noResolveJson: !0
         })).blob(), error: null };
       } catch (o) {
-        if (H(o))
+        if (z(o))
           return { data: null, error: o };
         throw o;
       }
@@ -3170,15 +3170,15 @@ class Ii {
    * @param path
    */
   info(e) {
-    return K(this, void 0, void 0, function* () {
+    return Q(this, void 0, void 0, function* () {
       const t = this._getFinalPath(e);
       try {
-        const r = yield kt(this.fetch, `${this.url}/object/info/${t}`, {
+        const r = yield St(this.fetch, `${this.url}/object/info/${t}`, {
           headers: this.headers
         });
         return { data: or(r), error: null };
       } catch (r) {
-        if (H(r))
+        if (z(r))
           return { data: null, error: r };
         throw r;
       }
@@ -3189,14 +3189,14 @@ class Ii {
    * @param path
    */
   exists(e) {
-    return K(this, void 0, void 0, function* () {
+    return Q(this, void 0, void 0, function* () {
       const t = this._getFinalPath(e);
       try {
         return yield Ai(this.fetch, `${this.url}/object/${t}`, {
           headers: this.headers
         }), { data: !0, error: null };
       } catch (r) {
-        if (H(r) && r instanceof ar) {
+        if (z(r) && r instanceof ar) {
           const n = r.originalError;
           if ([400, 404].includes(n == null ? void 0 : n.status))
             return { data: !1, error: r };
@@ -3229,11 +3229,11 @@ class Ii {
    * @param paths An array of files to delete, including the path and file name. For example [`'folder/image.png'`].
    */
   remove(e) {
-    return K(this, void 0, void 0, function* () {
+    return Q(this, void 0, void 0, function* () {
       try {
         return { data: yield $s(this.fetch, `${this.url}/object/${this.bucketId}`, { prefixes: e }, { headers: this.headers }), error: null };
       } catch (t) {
-        if (H(t))
+        if (z(t))
           return { data: null, error: t };
         throw t;
       }
@@ -3303,12 +3303,12 @@ class Ii {
    * @param path The folder path.
    */
   list(e, t, r) {
-    return K(this, void 0, void 0, function* () {
+    return Q(this, void 0, void 0, function* () {
       try {
         const n = Object.assign(Object.assign(Object.assign({}, $i), t), { prefix: e || "" });
-        return { data: yield Se(this.fetch, `${this.url}/object/list/${this.bucketId}`, n, { headers: this.headers }, r), error: null };
+        return { data: yield we(this.fetch, `${this.url}/object/list/${this.bucketId}`, n, { headers: this.headers }, r), error: null };
       } catch (n) {
-        if (H(n))
+        if (z(n))
           return { data: null, error: n };
         throw n;
       }
@@ -3332,7 +3332,7 @@ class Ii {
   }
 }
 const Di = "2.7.1", Li = { "X-Client-Info": `storage-js/${Di}` };
-var Be = function(s, e, t, r) {
+var Ue = function(s, e, t, r) {
   function n(i) {
     return i instanceof t ? i : new t(function(a) {
       a(i);
@@ -3367,11 +3367,11 @@ class Ni {
    * Retrieves the details of all Storage buckets within an existing project.
    */
   listBuckets() {
-    return Be(this, void 0, void 0, function* () {
+    return Ue(this, void 0, void 0, function* () {
       try {
-        return { data: yield kt(this.fetch, `${this.url}/bucket`, { headers: this.headers }), error: null };
+        return { data: yield St(this.fetch, `${this.url}/bucket`, { headers: this.headers }), error: null };
       } catch (e) {
-        if (H(e))
+        if (z(e))
           return { data: null, error: e };
         throw e;
       }
@@ -3383,11 +3383,11 @@ class Ni {
    * @param id The unique identifier of the bucket you would like to retrieve.
    */
   getBucket(e) {
-    return Be(this, void 0, void 0, function* () {
+    return Ue(this, void 0, void 0, function* () {
       try {
-        return { data: yield kt(this.fetch, `${this.url}/bucket/${e}`, { headers: this.headers }), error: null };
+        return { data: yield St(this.fetch, `${this.url}/bucket/${e}`, { headers: this.headers }), error: null };
       } catch (t) {
-        if (H(t))
+        if (z(t))
           return { data: null, error: t };
         throw t;
       }
@@ -3409,9 +3409,9 @@ class Ni {
   createBucket(e, t = {
     public: !1
   }) {
-    return Be(this, void 0, void 0, function* () {
+    return Ue(this, void 0, void 0, function* () {
       try {
-        return { data: yield Se(this.fetch, `${this.url}/bucket`, {
+        return { data: yield we(this.fetch, `${this.url}/bucket`, {
           id: e,
           name: e,
           public: t.public,
@@ -3419,7 +3419,7 @@ class Ni {
           allowed_mime_types: t.allowedMimeTypes
         }, { headers: this.headers }), error: null };
       } catch (r) {
-        if (H(r))
+        if (z(r))
           return { data: null, error: r };
         throw r;
       }
@@ -3438,7 +3438,7 @@ class Ni {
    * Each mime type specified can be a wildcard, e.g. image/*, or a specific mime type, e.g. image/png.
    */
   updateBucket(e, t) {
-    return Be(this, void 0, void 0, function* () {
+    return Ue(this, void 0, void 0, function* () {
       try {
         return { data: yield Ci(this.fetch, `${this.url}/bucket/${e}`, {
           id: e,
@@ -3448,7 +3448,7 @@ class Ni {
           allowed_mime_types: t.allowedMimeTypes
         }, { headers: this.headers }), error: null };
       } catch (r) {
-        if (H(r))
+        if (z(r))
           return { data: null, error: r };
         throw r;
       }
@@ -3460,11 +3460,11 @@ class Ni {
    * @param id The unique identifier of the bucket you would like to empty.
    */
   emptyBucket(e) {
-    return Be(this, void 0, void 0, function* () {
+    return Ue(this, void 0, void 0, function* () {
       try {
-        return { data: yield Se(this.fetch, `${this.url}/bucket/${e}/empty`, {}, { headers: this.headers }), error: null };
+        return { data: yield we(this.fetch, `${this.url}/bucket/${e}/empty`, {}, { headers: this.headers }), error: null };
       } catch (t) {
-        if (H(t))
+        if (z(t))
           return { data: null, error: t };
         throw t;
       }
@@ -3477,11 +3477,11 @@ class Ni {
    * @param id The unique identifier of the bucket you would like to delete.
    */
   deleteBucket(e) {
-    return Be(this, void 0, void 0, function* () {
+    return Ue(this, void 0, void 0, function* () {
       try {
         return { data: yield $s(this.fetch, `${this.url}/bucket/${e}`, {}, { headers: this.headers }), error: null };
       } catch (t) {
-        if (H(t))
+        if (z(t))
           return { data: null, error: t };
         throw t;
       }
@@ -3502,9 +3502,9 @@ class Mi extends Ni {
   }
 }
 const Ui = "2.46.1";
-let nt = "";
-typeof Deno < "u" ? nt = "deno" : typeof document < "u" ? nt = "web" : typeof navigator < "u" && navigator.product === "ReactNative" ? nt = "react-native" : nt = "node";
-const Fi = { "X-Client-Info": `supabase-js-${nt}/${Ui}` }, Bi = {
+let tt = "";
+typeof Deno < "u" ? tt = "deno" : typeof document < "u" ? tt = "web" : typeof navigator < "u" && navigator.product === "ReactNative" ? tt = "react-native" : tt = "node";
+const Fi = { "X-Client-Info": `supabase-js-${tt}/${Ui}` }, Bi = {
   headers: Fi
 }, Wi = {
   schema: "public"
@@ -3610,10 +3610,10 @@ function ra() {
     return (s == "x" ? e : e & 3 | 8).toString(16);
   });
 }
-const ce = () => typeof document < "u", Pe = {
+const ce = () => typeof document < "u", xe = {
   tested: !1,
   writable: !1
-}, at = () => {
+}, st = () => {
   if (!ce())
     return !1;
   try {
@@ -3622,15 +3622,15 @@ const ce = () => typeof document < "u", Pe = {
   } catch {
     return !1;
   }
-  if (Pe.tested)
-    return Pe.writable;
+  if (xe.tested)
+    return xe.writable;
   const s = `lswt-${Math.random()}${Math.random()}`;
   try {
-    globalThis.localStorage.setItem(s, s), globalThis.localStorage.removeItem(s), Pe.tested = !0, Pe.writable = !0;
+    globalThis.localStorage.setItem(s, s), globalThis.localStorage.removeItem(s), xe.tested = !0, xe.writable = !0;
   } catch {
-    Pe.tested = !0, Pe.writable = !1;
+    xe.tested = !0, xe.writable = !1;
   }
-  return Pe.writable;
+  return xe.writable;
 };
 function Vt(s) {
   const e = {}, t = new URL(s);
@@ -3647,10 +3647,10 @@ function Vt(s) {
 }
 const Ls = (s) => {
   let e;
-  return s ? e = s : typeof fetch > "u" ? e = (...t) => Promise.resolve().then(() => Ye).then(({ default: r }) => r(...t)) : e = fetch, (...t) => e(...t);
+  return s ? e = s : typeof fetch > "u" ? e = (...t) => Promise.resolve().then(() => He).then(({ default: r }) => r(...t)) : e = fetch, (...t) => e(...t);
 }, sa = (s) => typeof s == "object" && s !== null && "status" in s && "ok" in s && "json" in s && typeof s.json == "function", Ns = async (s, e, t) => {
   await s.setItem(e, JSON.stringify(t));
-}, vt = async (s, e) => {
+}, pt = async (s, e) => {
   const t = await s.getItem(e);
   if (!t)
     return null;
@@ -3659,7 +3659,7 @@ const Ls = (s) => {
   } catch {
     return t;
   }
-}, yt = async (s, e) => {
+}, mt = async (s, e) => {
   await s.removeItem(e);
 };
 function na(s) {
@@ -3669,14 +3669,14 @@ function na(s) {
     a = e.indexOf(s.charAt(l++)), o = e.indexOf(s.charAt(l++)), c = e.indexOf(s.charAt(l++)), u = e.indexOf(s.charAt(l++)), r = a << 2 | o >> 4, n = (o & 15) << 4 | c >> 2, i = (c & 3) << 6 | u, t = t + String.fromCharCode(r), c != 64 && n != 0 && (t = t + String.fromCharCode(n)), u != 64 && i != 0 && (t = t + String.fromCharCode(i));
   return t;
 }
-class $t {
+class Ct {
   constructor() {
-    this.promise = new $t.promiseConstructor((e, t) => {
+    this.promise = new Ct.promiseConstructor((e, t) => {
       this.resolve = e, this.reject = t;
     });
   }
 }
-$t.promiseConstructor = Promise;
+Ct.promiseConstructor = Promise;
 function Vr(s) {
   const e = /^([a-z0-9_-]{4})*($|[a-z0-9_-]{3}=?$|[a-z0-9_-]{2}(==)?$)$/i, t = s.split(".");
   if (t.length !== 3)
@@ -3737,7 +3737,7 @@ async function da(s) {
   const t = await la(s);
   return ua(t);
 }
-async function We(s, e, t = !1) {
+async function Fe(s, e, t = !1) {
   const r = ca();
   let n = r;
   t && (n += "/PASSWORD_RECOVERY"), await Ns(s, `${e}-code-verifier`, n);
@@ -3776,12 +3776,12 @@ class Ms extends _r {
     super(e), this.name = "AuthUnknownError", this.originalError = t;
   }
 }
-class De extends _r {
+class $e extends _r {
   constructor(e, t, r, n) {
     super(e, r, n), this.name = t, this.status = r;
   }
 }
-class we extends De {
+class ye extends $e {
   constructor() {
     super("Auth session missing!", "AuthSessionMissingError", 400, void 0);
   }
@@ -3789,17 +3789,17 @@ class we extends De {
 function ma(s) {
   return x(s) && s.name === "AuthSessionMissingError";
 }
-class Yt extends De {
+class Yt extends $e {
   constructor() {
     super("Auth session or user missing", "AuthInvalidTokenResponseError", 500, void 0);
   }
 }
-class _t extends De {
+class vt extends $e {
   constructor(e) {
     super(e, "AuthInvalidCredentialsError", 400, void 0);
   }
 }
-class wt extends De {
+class yt extends $e {
   constructor(e, t = null) {
     super(e, "AuthImplicitGrantRedirectError", 500, void 0), this.details = null, this.details = t;
   }
@@ -3812,7 +3812,7 @@ class wt extends De {
     };
   }
 }
-class Yr extends De {
+class Yr extends $e {
   constructor(e, t = null) {
     super(e, "AuthPKCEGrantCodeExchangeError", 500, void 0), this.details = null, this.details = t;
   }
@@ -3825,7 +3825,7 @@ class Yr extends De {
     };
   }
 }
-class lr extends De {
+class lr extends $e {
   constructor(e, t) {
     super(e, "AuthRetryableFetchError", t, void 0);
   }
@@ -3833,7 +3833,7 @@ class lr extends De {
 function Jt(s) {
   return x(s) && s.name === "AuthRetryableFetchError";
 }
-class Jr extends De {
+class Jr extends $e {
   constructor(e, t, r) {
     super(e, "AuthWeakPasswordError", t, "weak_password"), this.reasons = r;
   }
@@ -3846,29 +3846,29 @@ var va = function(s, e) {
       e.indexOf(r[n]) < 0 && Object.prototype.propertyIsEnumerable.call(s, r[n]) && (t[r[n]] = s[r[n]]);
   return t;
 };
-const je = (s) => s.msg || s.message || s.error_description || s.error || JSON.stringify(s), ya = [502, 503, 504];
+const Te = (s) => s.msg || s.message || s.error_description || s.error || JSON.stringify(s), ya = [502, 503, 504];
 async function Gr(s) {
   var e;
   if (!sa(s))
-    throw new lr(je(s), 0);
+    throw new lr(Te(s), 0);
   if (ya.includes(s.status))
-    throw new lr(je(s), s.status);
+    throw new lr(Te(s), s.status);
   let t;
   try {
     t = await s.json();
   } catch (i) {
-    throw new Ms(je(i), i);
+    throw new Ms(Te(i), i);
   }
   let r;
   const n = fa(s);
   if (n && n.getTime() >= Ds["2024-01-01"].timestamp && typeof t == "object" && t && typeof t.code == "string" ? r = t.code : typeof t == "object" && t && typeof t.error_code == "string" && (r = t.error_code), r) {
     if (r === "weak_password")
-      throw new Jr(je(t), s.status, ((e = t.weak_password) === null || e === void 0 ? void 0 : e.reasons) || []);
+      throw new Jr(Te(t), s.status, ((e = t.weak_password) === null || e === void 0 ? void 0 : e.reasons) || []);
     if (r === "session_not_found")
-      throw new we();
+      throw new ye();
   } else if (typeof t == "object" && t && typeof t.weak_password == "object" && t.weak_password && Array.isArray(t.weak_password.reasons) && t.weak_password.reasons.length && t.weak_password.reasons.reduce((i, a) => i && typeof a == "string", !0))
-    throw new Jr(je(t), s.status, t.weak_password.reasons);
-  throw new ga(je(t), s.status || 500, r);
+    throw new Jr(Te(t), s.status, t.weak_password.reasons);
+  throw new ga(Te(t), s.status || 500, r);
 }
 const _a = (s, e, t, r) => {
   const n = { method: s, headers: (e == null ? void 0 : e.headers) || {} };
@@ -3892,7 +3892,7 @@ async function wa(s, e, t, r, n, i) {
   try {
     o = await s(t, Object.assign({}, a));
   } catch (c) {
-    throw console.error(c), new lr(je(c), 0);
+    throw console.error(c), new lr(Te(c), 0);
   }
   if (o.ok || await Gr(o), r != null && r.noResolveJson)
     return o;
@@ -3902,7 +3902,7 @@ async function wa(s, e, t, r, n, i) {
     await Gr(c);
   }
 }
-function be(s) {
+function _e(s) {
   var e;
   let t = null;
   ka(s) && (t = Object.assign({}, s), s.expires_at || (t.expires_at = ta(s.expires_in)));
@@ -3910,10 +3910,10 @@ function be(s) {
   return { data: { session: t, user: r }, error: null };
 }
 function Kr(s) {
-  const e = be(s);
+  const e = _e(s);
   return !e.error && s.weak_password && typeof s.weak_password == "object" && Array.isArray(s.weak_password.reasons) && s.weak_password.reasons.length && s.weak_password.message && typeof s.weak_password.message == "string" && s.weak_password.reasons.reduce((t, r) => t && typeof r == "string", !0) && (e.data.weak_password = s.weak_password), e;
 }
-function Ee(s) {
+function be(s) {
   var e;
   return { data: { user: (e = s.user) !== null && e !== void 0 ? e : s }, error: null };
 }
@@ -3986,7 +3986,7 @@ class xa {
         body: { email: e, data: t.data },
         headers: this.headers,
         redirectTo: t.redirectTo,
-        xform: Ee
+        xform: be
       });
     } catch (r) {
       if (x(r))
@@ -4032,7 +4032,7 @@ class xa {
       return await R(this.fetch, "POST", `${this.url}/admin/users`, {
         body: e,
         headers: this.headers,
-        xform: Ee
+        xform: be
       });
     } catch (t) {
       if (x(t))
@@ -4062,8 +4062,8 @@ class xa {
         throw l.error;
       const h = await l.json(), f = (a = l.headers.get("x-total-count")) !== null && a !== void 0 ? a : 0, p = (c = (o = l.headers.get("link")) === null || o === void 0 ? void 0 : o.split(",")) !== null && c !== void 0 ? c : [];
       return p.length > 0 && (p.forEach((y) => {
-        const m = parseInt(y.split(";")[0].split("=")[1].substring(0, 1)), b = JSON.parse(y.split(";")[1].split("=")[1]);
-        u[`${b}Page`] = m;
+        const m = parseInt(y.split(";")[0].split("=")[1].substring(0, 1)), S = JSON.parse(y.split(";")[1].split("=")[1]);
+        u[`${S}Page`] = m;
       }), u.total = parseInt(f)), { data: Object.assign(Object.assign({}, h), u), error: null };
     } catch (u) {
       if (x(u))
@@ -4082,7 +4082,7 @@ class xa {
     try {
       return await R(this.fetch, "GET", `${this.url}/admin/users/${e}`, {
         headers: this.headers,
-        xform: Ee
+        xform: be
       });
     } catch (t) {
       if (x(t))
@@ -4102,7 +4102,7 @@ class xa {
       return await R(this.fetch, "PUT", `${this.url}/admin/users/${e}`, {
         body: t,
         headers: this.headers,
-        xform: Ee
+        xform: be
       });
     } catch (r) {
       if (x(r))
@@ -4126,7 +4126,7 @@ class xa {
         body: {
           should_soft_delete: t
         },
-        xform: Ee
+        xform: be
       });
     } catch (r) {
       if (x(r))
@@ -4160,12 +4160,12 @@ class xa {
   }
 }
 const Ta = {
-  getItem: (s) => at() ? globalThis.localStorage.getItem(s) : null,
+  getItem: (s) => st() ? globalThis.localStorage.getItem(s) : null,
   setItem: (s, e) => {
-    at() && globalThis.localStorage.setItem(s, e);
+    st() && globalThis.localStorage.setItem(s, e);
   },
   removeItem: (s) => {
-    at() && globalThis.localStorage.removeItem(s);
+    st() && globalThis.localStorage.removeItem(s);
   }
 };
 function Qr(s = {}) {
@@ -4192,11 +4192,11 @@ function Pa() {
       typeof self < "u" && (self.globalThis = self);
     }
 }
-const qe = {
+const Be = {
   /**
    * @experimental
    */
-  debug: !!(globalThis && at() && globalThis.localStorage && globalThis.localStorage.getItem("supabase.gotrue-js.locks.debug") === "true")
+  debug: !!(globalThis && st() && globalThis.localStorage && globalThis.localStorage.getItem("supabase.gotrue-js.locks.debug") === "true")
 };
 class Us extends Error {
   constructor(e) {
@@ -4206,10 +4206,10 @@ class Us extends Error {
 class ja extends Us {
 }
 async function Ra(s, e, t) {
-  qe.debug && console.log("@supabase/gotrue-js: navigatorLock: acquire lock", s, e);
+  Be.debug && console.log("@supabase/gotrue-js: navigatorLock: acquire lock", s, e);
   const r = new globalThis.AbortController();
   return e > 0 && setTimeout(() => {
-    r.abort(), qe.debug && console.log("@supabase/gotrue-js: navigatorLock acquire timed out", s);
+    r.abort(), Be.debug && console.log("@supabase/gotrue-js: navigatorLock acquire timed out", s);
   }, e), await globalThis.navigator.locks.request(s, e === 0 ? {
     mode: "exclusive",
     ifAvailable: !0
@@ -4218,16 +4218,16 @@ async function Ra(s, e, t) {
     signal: r.signal
   }, async (n) => {
     if (n) {
-      qe.debug && console.log("@supabase/gotrue-js: navigatorLock: acquired", s, n.name);
+      Be.debug && console.log("@supabase/gotrue-js: navigatorLock: acquired", s, n.name);
       try {
         return await t();
       } finally {
-        qe.debug && console.log("@supabase/gotrue-js: navigatorLock: released", s, n.name);
+        Be.debug && console.log("@supabase/gotrue-js: navigatorLock: released", s, n.name);
       }
     } else {
       if (e === 0)
-        throw qe.debug && console.log("@supabase/gotrue-js: navigatorLock: not immediately available", s), new ja(`Acquiring an exclusive Navigator LockManager lock "${s}" immediately failed`);
-      if (qe.debug)
+        throw Be.debug && console.log("@supabase/gotrue-js: navigatorLock: not immediately available", s), new ja(`Acquiring an exclusive Navigator LockManager lock "${s}" immediately failed`);
+      if (Be.debug)
         try {
           const i = await globalThis.navigator.locks.query();
           console.log("@supabase/gotrue-js: Navigator LockManager state", JSON.stringify(i, null, "  "));
@@ -4249,17 +4249,17 @@ const Ca = {
   flowType: "implicit",
   debug: !1,
   hasCustomAuthorizationHeader: !1
-}, tt = 30 * 1e3, Xr = 3;
+}, Xe = 30 * 1e3, Xr = 3;
 async function Zr(s, e, t) {
   return await t();
 }
-class ot {
+class nt {
   /**
    * Create a new client for use in the browser.
    */
   constructor(e) {
     var t, r;
-    this.memoryStorage = null, this.stateChangeEmitters = /* @__PURE__ */ new Map(), this.autoRefreshTicker = null, this.visibilityChangedCallback = null, this.refreshingDeferred = null, this.initializePromise = null, this.detectSessionInUrl = !0, this.hasCustomAuthorizationHeader = !1, this.suppressGetSessionWarning = !1, this.lockAcquired = !1, this.pendingInLock = [], this.broadcastChannel = null, this.logger = console.log, this.instanceID = ot.nextInstanceID, ot.nextInstanceID += 1, this.instanceID > 0 && ce() && console.warn("Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.");
+    this.memoryStorage = null, this.stateChangeEmitters = /* @__PURE__ */ new Map(), this.autoRefreshTicker = null, this.visibilityChangedCallback = null, this.refreshingDeferred = null, this.initializePromise = null, this.detectSessionInUrl = !0, this.hasCustomAuthorizationHeader = !1, this.suppressGetSessionWarning = !1, this.lockAcquired = !1, this.pendingInLock = [], this.broadcastChannel = null, this.logger = console.log, this.instanceID = nt.nextInstanceID, nt.nextInstanceID += 1, this.instanceID > 0 && ce() && console.warn("Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.");
     const n = Object.assign(Object.assign({}, Ca), e);
     if (this.logDebugMessages = !!n.debug, typeof n.debug == "function" && (this.logger = n.debug), this.persistSession = n.persistSession, this.storageKey = n.storageKey, this.autoRefreshToken = n.autoRefreshToken, this.admin = new xa({
       url: n.url,
@@ -4273,7 +4273,7 @@ class ot {
       listFactors: this._listFactors.bind(this),
       challengeAndVerify: this._challengeAndVerify.bind(this),
       getAuthenticatorAssuranceLevel: this._getAuthenticatorAssuranceLevel.bind(this)
-    }, this.persistSession ? n.storage ? this.storage = n.storage : at() ? this.storage = Ta : (this.memoryStorage = {}, this.storage = Qr(this.memoryStorage)) : (this.memoryStorage = {}, this.storage = Qr(this.memoryStorage)), ce() && globalThis.BroadcastChannel && this.persistSession && this.storageKey) {
+    }, this.persistSession ? n.storage ? this.storage = n.storage : st() ? this.storage = Ta : (this.memoryStorage = {}, this.storage = Qr(this.memoryStorage)) : (this.memoryStorage = {}, this.storage = Qr(this.memoryStorage)), ce() && globalThis.BroadcastChannel && this.persistSession && this.storageKey) {
       try {
         this.broadcastChannel = new globalThis.BroadcastChannel(this.storageKey);
       } catch (i) {
@@ -4337,7 +4337,7 @@ class ot {
           data: (r = (t = e == null ? void 0 : e.options) === null || t === void 0 ? void 0 : t.data) !== null && r !== void 0 ? r : {},
           gotrue_meta_security: { captcha_token: (n = e == null ? void 0 : e.options) === null || n === void 0 ? void 0 : n.captchaToken }
         },
-        xform: be
+        xform: _e
       }), { data: a, error: o } = i;
       if (o || !a)
         return { data: { user: null, session: null }, error: o };
@@ -4366,7 +4366,7 @@ class ot {
       if ("email" in e) {
         const { email: l, password: h, options: f } = e;
         let p = null, y = null;
-        this.flowType === "pkce" && ([p, y] = await We(this.storage, this.storageKey)), i = await R(this.fetch, "POST", `${this.url}/signup`, {
+        this.flowType === "pkce" && ([p, y] = await Fe(this.storage, this.storageKey)), i = await R(this.fetch, "POST", `${this.url}/signup`, {
           headers: this.headers,
           redirectTo: f == null ? void 0 : f.emailRedirectTo,
           body: {
@@ -4377,7 +4377,7 @@ class ot {
             code_challenge: p,
             code_challenge_method: y
           },
-          xform: be
+          xform: _e
         });
       } else if ("phone" in e) {
         const { phone: l, password: h, options: f } = e;
@@ -4390,10 +4390,10 @@ class ot {
             channel: (n = f == null ? void 0 : f.channel) !== null && n !== void 0 ? n : "sms",
             gotrue_meta_security: { captcha_token: f == null ? void 0 : f.captchaToken }
           },
-          xform: be
+          xform: _e
         });
       } else
-        throw new _t("You must provide either an email or phone number and a password");
+        throw new vt("You must provide either an email or phone number and a password");
       const { data: a, error: o } = i;
       if (o || !a)
         return { data: { user: null, session: null }, error: o };
@@ -4439,7 +4439,7 @@ class ot {
           xform: Kr
         });
       } else
-        throw new _t("You must provide either an email or phone number and a password");
+        throw new vt("You must provide either an email or phone number and a password");
       const { data: r, error: n } = t;
       return n ? { data: { user: null, session: null }, error: n } : !r || !r.session || !r.user ? { data: { user: null, session: null }, error: new Yt() } : (r.session && (await this._saveSession(r.session), await this._notifyAllSubscribers("SIGNED_IN", r.session)), {
         data: Object.assign({ user: r.user, session: r.session }, r.weak_password ? { weakPassword: r.weak_password } : null),
@@ -4471,7 +4471,7 @@ class ot {
     return await this.initializePromise, this._acquireLock(-1, async () => this._exchangeCodeForSession(e));
   }
   async _exchangeCodeForSession(e) {
-    const t = await vt(this.storage, `${this.storageKey}-code-verifier`), [r, n] = (t ?? "").split("/");
+    const t = await pt(this.storage, `${this.storageKey}-code-verifier`), [r, n] = (t ?? "").split("/");
     try {
       const { data: i, error: a } = await R(this.fetch, "POST", `${this.url}/token?grant_type=pkce`, {
         headers: this.headers,
@@ -4479,9 +4479,9 @@ class ot {
           auth_code: e,
           code_verifier: r
         },
-        xform: be
+        xform: _e
       });
-      if (await yt(this.storage, `${this.storageKey}-code-verifier`), a)
+      if (await mt(this.storage, `${this.storageKey}-code-verifier`), a)
         throw a;
       return !i || !i.session || !i.user ? {
         data: { user: null, session: null, redirectType: null },
@@ -4508,7 +4508,7 @@ class ot {
           nonce: a,
           gotrue_meta_security: { captcha_token: t == null ? void 0 : t.captchaToken }
         },
-        xform: be
+        xform: _e
       }), { data: c, error: u } = o;
       return u ? { data: { user: null, session: null }, error: u } : !c || !c.session || !c.user ? {
         data: { user: null, session: null },
@@ -4543,7 +4543,7 @@ class ot {
       if ("email" in e) {
         const { email: o, options: c } = e;
         let u = null, l = null;
-        this.flowType === "pkce" && ([u, l] = await We(this.storage, this.storageKey));
+        this.flowType === "pkce" && ([u, l] = await Fe(this.storage, this.storageKey));
         const { error: h } = await R(this.fetch, "POST", `${this.url}/otp`, {
           headers: this.headers,
           body: {
@@ -4571,7 +4571,7 @@ class ot {
         });
         return { data: { user: null, session: null, messageId: u == null ? void 0 : u.message_id }, error: l };
       }
-      throw new _t("You must provide either an email or phone number.");
+      throw new vt("You must provide either an email or phone number.");
     } catch (o) {
       if (x(o))
         return { data: { user: null, session: null }, error: o };
@@ -4590,7 +4590,7 @@ class ot {
         headers: this.headers,
         body: Object.assign(Object.assign({}, e), { gotrue_meta_security: { captcha_token: i } }),
         redirectTo: n,
-        xform: be
+        xform: _e
       });
       if (o)
         throw o;
@@ -4622,7 +4622,7 @@ class ot {
     var t, r, n;
     try {
       let i = null, a = null;
-      return this.flowType === "pkce" && ([i, a] = await We(this.storage, this.storageKey)), await R(this.fetch, "POST", `${this.url}/sso`, {
+      return this.flowType === "pkce" && ([i, a] = await Fe(this.storage, this.storageKey)), await R(this.fetch, "POST", `${this.url}/sso`, {
         body: Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, "providerId" in e ? { provider_id: e.providerId } : null), "domain" in e ? { domain: e.domain } : null), { redirect_to: (r = (t = e.options) === null || t === void 0 ? void 0 : t.redirectTo) !== null && r !== void 0 ? r : void 0 }), !((n = e == null ? void 0 : e.options) === null || n === void 0) && n.captchaToken ? { gotrue_meta_security: { captcha_token: e.options.captchaToken } } : null), { skip_http_redirect: !0, code_challenge: i, code_challenge_method: a }),
         headers: this.headers,
         xform: ba
@@ -4647,7 +4647,7 @@ class ot {
         if (r)
           throw r;
         if (!t)
-          throw new we();
+          throw new ye();
         const { error: n } = await R(this.fetch, "GET", `${this.url}/reauthenticate`, {
           headers: this.headers,
           jwt: t.access_token
@@ -4688,7 +4688,7 @@ class ot {
         });
         return { data: { user: null, session: null, messageId: a == null ? void 0 : a.message_id }, error: o };
       }
-      throw new _t("You must provide either an email or phone number and a type");
+      throw new vt("You must provide either an email or phone number and a type");
     } catch (t) {
       if (x(t))
         return { data: { user: null, session: null }, error: t };
@@ -4771,7 +4771,7 @@ class ot {
     this._debug("#__loadSession()", "begin"), this.lockAcquired || this._debug("#__loadSession()", "used outside of an acquired lock!", new Error().stack);
     try {
       let e = null;
-      const t = await vt(this.storage, this.storageKey);
+      const t = await pt(this.storage, this.storageKey);
       if (this._debug("#getSession()", "session from storage", t), t !== null && (this._isValidSession(t) ? e = t : (this._debug("#getSession()", "session from storage is not valid"), await this._removeSession())), !e)
         return { data: { session: null }, error: null };
       const r = e.expires_at ? e.expires_at <= Date.now() / 1e3 : !1;
@@ -4805,21 +4805,21 @@ class ot {
       return e ? await R(this.fetch, "GET", `${this.url}/user`, {
         headers: this.headers,
         jwt: e,
-        xform: Ee
+        xform: be
       }) : await this._useSession(async (t) => {
         var r, n, i;
         const { data: a, error: o } = t;
         if (o)
           throw o;
-        return !(!((r = a.session) === null || r === void 0) && r.access_token) && !this.hasCustomAuthorizationHeader ? { data: { user: null }, error: new we() } : await R(this.fetch, "GET", `${this.url}/user`, {
+        return !(!((r = a.session) === null || r === void 0) && r.access_token) && !this.hasCustomAuthorizationHeader ? { data: { user: null }, error: new ye() } : await R(this.fetch, "GET", `${this.url}/user`, {
           headers: this.headers,
           jwt: (i = (n = a.session) === null || n === void 0 ? void 0 : n.access_token) !== null && i !== void 0 ? i : void 0,
-          xform: Ee
+          xform: be
         });
       });
     } catch (t) {
       if (x(t))
-        return ma(t) && (await this._removeSession(), await yt(this.storage, `${this.storageKey}-code-verifier`)), { data: { user: null }, error: t };
+        return ma(t) && (await this._removeSession(), await mt(this.storage, `${this.storageKey}-code-verifier`)), { data: { user: null }, error: t };
       throw t;
     }
   }
@@ -4836,16 +4836,16 @@ class ot {
         if (i)
           throw i;
         if (!n.session)
-          throw new we();
+          throw new ye();
         const a = n.session;
         let o = null, c = null;
-        this.flowType === "pkce" && e.email != null && ([o, c] = await We(this.storage, this.storageKey));
+        this.flowType === "pkce" && e.email != null && ([o, c] = await Fe(this.storage, this.storageKey));
         const { data: u, error: l } = await R(this.fetch, "PUT", `${this.url}/user`, {
           headers: this.headers,
           redirectTo: t == null ? void 0 : t.emailRedirectTo,
           body: Object.assign(Object.assign({}, e), { code_challenge: o, code_challenge_method: c }),
           jwt: a.access_token,
-          xform: Ee
+          xform: be
         });
         if (l)
           throw l;
@@ -4874,7 +4874,7 @@ class ot {
   async _setSession(e) {
     try {
       if (!e.access_token || !e.refresh_token)
-        throw new we();
+        throw new ye();
       const t = Date.now() / 1e3;
       let r = t, n = !0, i = null;
       const a = Vr(e.access_token);
@@ -4925,7 +4925,7 @@ class ot {
           e = (r = a.session) !== null && r !== void 0 ? r : void 0;
         }
         if (!(e != null && e.refresh_token))
-          throw new we();
+          throw new ye();
         const { session: n, error: i } = await this._callRefreshToken(e.refresh_token);
         return i ? { data: { user: null, session: null }, error: i } : n ? { data: { user: n.user, session: n }, error: null } : { data: { user: null, session: null }, error: null };
       });
@@ -4941,9 +4941,9 @@ class ot {
   async _getSessionFromURL(e) {
     try {
       if (!ce())
-        throw new wt("No browser detected.");
+        throw new yt("No browser detected.");
       if (this.flowType === "implicit" && !this._isImplicitGrantFlow())
-        throw new wt("Not a valid implicit grant flow url.");
+        throw new yt("Not a valid implicit grant flow url.");
       if (this.flowType == "pkce" && !e)
         throw new Yr("Not a valid PKCE flow url.");
       const t = Vt(window.location.href);
@@ -4957,23 +4957,23 @@ class ot {
         return O.searchParams.delete("code"), window.history.replaceState(window.history.state, "", O.toString()), { data: { session: P.session, redirectType: null }, error: null };
       }
       if (t.error || t.error_description || t.error_code)
-        throw new wt(t.error_description || "Error in URL with unspecified error_description", {
+        throw new yt(t.error_description || "Error in URL with unspecified error_description", {
           error: t.error || "unspecified_error",
           code: t.error_code || "unspecified_code"
         });
       const { provider_token: r, provider_refresh_token: n, access_token: i, refresh_token: a, expires_in: o, expires_at: c, token_type: u } = t;
       if (!i || !o || !a || !u)
-        throw new wt("No session defined in URL");
+        throw new yt("No session defined in URL");
       const l = Math.round(Date.now() / 1e3), h = parseInt(o);
       let f = l + h;
       c && (f = parseInt(c));
       const p = f - l;
-      p * 1e3 <= tt && console.warn(`@supabase/gotrue-js: Session as retrieved from URL expires in ${p}s, should have been closer to ${h}s`);
+      p * 1e3 <= Xe && console.warn(`@supabase/gotrue-js: Session as retrieved from URL expires in ${p}s, should have been closer to ${h}s`);
       const y = f - h;
       l - y >= 120 ? console.warn("@supabase/gotrue-js: Session as retrieved from URL was issued over 120s ago, URL could be stale", y, f, l) : l - y < 0 && console.warn("@supabase/gotrue-js: Session as retrieved from URL was issued in the future? Check the device clock for skew", y, f, l);
-      const { data: m, error: b } = await this._getUser(i);
-      if (b)
-        throw b;
+      const { data: m, error: S } = await this._getUser(i);
+      if (S)
+        throw S;
       const A = {
         provider_token: r,
         provider_refresh_token: n,
@@ -5002,7 +5002,7 @@ class ot {
    * Checks if the current URL and backing storage contain parameters given by a PKCE flow
    */
   async _isPKCEFlow() {
-    const e = Vt(window.location.href), t = await vt(this.storage, `${this.storageKey}-code-verifier`);
+    const e = Vt(window.location.href), t = await pt(this.storage, `${this.storageKey}-code-verifier`);
     return !!(e.code && t);
   }
   /**
@@ -5028,7 +5028,7 @@ class ot {
         if (o && !(pa(o) && (o.status === 404 || o.status === 401 || o.status === 403)))
           return { error: o };
       }
-      return e !== "others" && (await this._removeSession(), await yt(this.storage, `${this.storageKey}-code-verifier`)), { error: null };
+      return e !== "others" && (await this._removeSession(), await mt(this.storage, `${this.storageKey}-code-verifier`)), { error: null };
     });
   }
   /**
@@ -5069,7 +5069,7 @@ class ot {
    */
   async resetPasswordForEmail(e, t = {}) {
     let r = null, n = null;
-    this.flowType === "pkce" && ([r, n] = await We(
+    this.flowType === "pkce" && ([r, n] = await Fe(
       this.storage,
       this.storageKey,
       !0
@@ -5173,11 +5173,11 @@ class ot {
       return await aa(async (n) => (n > 0 && await ia(200 * Math.pow(2, n - 1)), this._debug(t, "refreshing attempt", n), await R(this.fetch, "POST", `${this.url}/token?grant_type=refresh_token`, {
         body: { refresh_token: e },
         headers: this.headers,
-        xform: be
+        xform: _e
       })), (n, i) => {
         const a = 200 * Math.pow(2, n);
         return i && Jt(i) && // retryable only if the request can be sent before the backoff overflows the tick duration
-        Date.now() + a - r < tt;
+        Date.now() + a - r < Xe;
       });
     } catch (r) {
       if (this._debug(t, "error", r), x(r))
@@ -5207,7 +5207,7 @@ class ot {
     const t = "#_recoverAndRefresh()";
     this._debug(t, "begin");
     try {
-      const r = await vt(this.storage, this.storageKey);
+      const r = await pt(this.storage, this.storageKey);
       if (this._debug(t, "session from storage", r), !this._isValidSession(r)) {
         this._debug(t, "session is not valid"), r !== null && await this._removeSession();
         return;
@@ -5230,18 +5230,18 @@ class ot {
   async _callRefreshToken(e) {
     var t, r;
     if (!e)
-      throw new we();
+      throw new ye();
     if (this.refreshingDeferred)
       return this.refreshingDeferred.promise;
     const n = `#_callRefreshToken(${e.substring(0, 5)}...)`;
     this._debug(n, "begin");
     try {
-      this.refreshingDeferred = new $t();
+      this.refreshingDeferred = new Ct();
       const { data: i, error: a } = await this._refreshAccessToken(e);
       if (a)
         throw a;
       if (!i.session)
-        throw new we();
+        throw new ye();
       await this._saveSession(i.session), await this._notifyAllSubscribers("TOKEN_REFRESHED", i.session);
       const o = { session: i.session, error: null };
       return this.refreshingDeferred.resolve(o), o;
@@ -5284,7 +5284,7 @@ class ot {
     this._debug("#_saveSession()", e), this.suppressGetSessionWarning = !0, await Ns(this.storage, this.storageKey, e);
   }
   async _removeSession() {
-    this._debug("#_removeSession()"), await yt(this.storage, this.storageKey), await this._notifyAllSubscribers("SIGNED_OUT", null);
+    this._debug("#_removeSession()"), await mt(this.storage, this.storageKey), await this._notifyAllSubscribers("SIGNED_OUT", null);
   }
   /**
    * Removes any registered visibilitychange callback.
@@ -5308,7 +5308,7 @@ class ot {
    */
   async _startAutoRefresh() {
     await this._stopAutoRefresh(), this._debug("#_startAutoRefresh()");
-    const e = setInterval(() => this._autoRefreshTokenTick(), tt);
+    const e = setInterval(() => this._autoRefreshTokenTick(), Xe);
     this.autoRefreshTicker = e, e && typeof e == "object" && typeof e.unref == "function" ? e.unref() : typeof Deno < "u" && typeof Deno.unrefTimer == "function" && Deno.unrefTimer(e), setTimeout(async () => {
       await this.initializePromise, await this._autoRefreshTokenTick();
     }, 0);
@@ -5374,8 +5374,8 @@ class ot {
                 this._debug("#_autoRefreshTokenTick()", "no session");
                 return;
               }
-              const n = Math.floor((r.expires_at * 1e3 - e) / tt);
-              this._debug("#_autoRefreshTokenTick()", `access token expires in ${n} ticks, a tick lasts ${tt}ms, refresh threshold is ${Xr} ticks`), n <= Xr && await this._callRefreshToken(r.refresh_token);
+              const n = Math.floor((r.expires_at * 1e3 - e) / Xe);
+              this._debug("#_autoRefreshTokenTick()", `access token expires in ${n} ticks, a tick lasts ${Xe}ms, refresh threshold is ${Xr} ticks`), n <= Xr && await this._callRefreshToken(r.refresh_token);
             });
           } catch (t) {
             console.error("Auto refresh tick failed with error. This is likely a transient error.", t);
@@ -5427,7 +5427,7 @@ class ot {
   async _getUrlForProvider(e, t, r) {
     const n = [`provider=${encodeURIComponent(t)}`];
     if (r != null && r.redirectTo && n.push(`redirect_to=${encodeURIComponent(r.redirectTo)}`), r != null && r.scopes && n.push(`scopes=${encodeURIComponent(r.scopes)}`), this.flowType === "pkce") {
-      const [i, a] = await We(this.storage, this.storageKey), o = new URLSearchParams({
+      const [i, a] = await Fe(this.storage, this.storageKey), o = new URLSearchParams({
         code_challenge: `${encodeURIComponent(i)}`,
         code_challenge_method: `${encodeURIComponent(a)}`
       });
@@ -5576,8 +5576,8 @@ class ot {
     }));
   }
 }
-ot.nextInstanceID = 0;
-const Aa = ot;
+nt.nextInstanceID = 0;
+const Aa = nt;
 class $a extends Aa {
   constructor(e) {
     super(e);
@@ -5783,33 +5783,33 @@ class Da {
     (e === "TOKEN_REFRESHED" || e === "SIGNED_IN") && this.changedAccessToken !== r ? (this.realtime.setAuth(r ?? null), this.changedAccessToken = r) : e === "SIGNED_OUT" && (this.realtime.setAuth(this.supabaseKey), t == "STORAGE" && this.auth.signOut(), this.changedAccessToken = void 0);
   }
 }
-const La = (s, e, t) => new Da(s, e, t), Na = "https://zozodfjzxzlwzkhmfhwh.supabase.co", Ma = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpvem9kZmp6eHpsd3praG1maHdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIwNDM3MjMsImV4cCI6MjA0NzYxOTcyM30.ywmi4WD1fZN3hRu-krtGmY1-IYSJSODh1tKK4Ytt18Q", q = La(Na, Ma);
+const La = (s, e, t) => new Da(s, e, t), Na = "https://zozodfjzxzlwzkhmfhwh.supabase.co", Ma = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpvem9kZmp6eHpsd3praG1maHdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIwNDM3MjMsImV4cCI6MjA0NzYxOTcyM30.ywmi4WD1fZN3hRu-krtGmY1-IYSJSODh1tKK4Ytt18Q", W = La(Na, Ma);
 function ue(s) {
   const e = Object.prototype.toString.call(s);
   return s instanceof Date || typeof s == "object" && e === "[object Date]" ? new s.constructor(+s) : typeof s == "number" || e === "[object Number]" || typeof s == "string" || e === "[object String]" ? new Date(s) : /* @__PURE__ */ new Date(NaN);
 }
-function Ae(s, e) {
+function Re(s, e) {
   return s instanceof Date ? new s.constructor(e) : new Date(e);
 }
 const Fs = 6048e5, Ua = 864e5;
 let Fa = {};
-function It() {
+function At() {
   return Fa;
 }
-function ct(s, e) {
+function it(s, e) {
   var o, c, u, l;
-  const t = It(), r = (e == null ? void 0 : e.weekStartsOn) ?? ((c = (o = e == null ? void 0 : e.locale) == null ? void 0 : o.options) == null ? void 0 : c.weekStartsOn) ?? t.weekStartsOn ?? ((l = (u = t.locale) == null ? void 0 : u.options) == null ? void 0 : l.weekStartsOn) ?? 0, n = ue(s), i = n.getDay(), a = (i < r ? 7 : 0) + i - r;
+  const t = At(), r = (e == null ? void 0 : e.weekStartsOn) ?? ((c = (o = e == null ? void 0 : e.locale) == null ? void 0 : o.options) == null ? void 0 : c.weekStartsOn) ?? t.weekStartsOn ?? ((l = (u = t.locale) == null ? void 0 : u.options) == null ? void 0 : l.weekStartsOn) ?? 0, n = ue(s), i = n.getDay(), a = (i < r ? 7 : 0) + i - r;
   return n.setDate(n.getDate() - a), n.setHours(0, 0, 0, 0), n;
 }
-function Ot(s) {
-  return ct(s, { weekStartsOn: 1 });
+function Et(s) {
+  return it(s, { weekStartsOn: 1 });
 }
 function Bs(s) {
-  const e = ue(s), t = e.getFullYear(), r = Ae(s, 0);
+  const e = ue(s), t = e.getFullYear(), r = Re(s, 0);
   r.setFullYear(t + 1, 0, 4), r.setHours(0, 0, 0, 0);
-  const n = Ot(r), i = Ae(s, 0);
+  const n = Et(r), i = Re(s, 0);
   i.setFullYear(t, 0, 4), i.setHours(0, 0, 0, 0);
-  const a = Ot(i);
+  const a = Et(i);
   return e.getTime() >= n.getTime() ? t + 1 : e.getTime() >= a.getTime() ? t : t - 1;
 }
 function es(s) {
@@ -5835,8 +5835,8 @@ function Ba(s, e) {
   return Math.round((n - i) / Ua);
 }
 function Wa(s) {
-  const e = Bs(s), t = Ae(s, 0);
-  return t.setFullYear(e, 0, 4), t.setHours(0, 0, 0, 0), Ot(t);
+  const e = Bs(s), t = Re(s, 0);
+  return t.setFullYear(e, 0, 4), t.setHours(0, 0, 0, 0), Et(t);
 }
 function qa(s) {
   return s instanceof Date || typeof s == "object" && Object.prototype.toString.call(s) === "[object Date]";
@@ -5848,7 +5848,7 @@ function za(s) {
   return !isNaN(Number(e));
 }
 function Ha(s) {
-  const e = ue(s), t = Ae(s, 0);
+  const e = ue(s), t = Re(s, 0);
   return t.setFullYear(e.getFullYear(), 0, 1), t.setHours(0, 0, 0, 0), t;
 }
 const Va = {
@@ -5960,7 +5960,7 @@ const Ja = {
   nextWeek: "eeee 'at' p",
   other: "P"
 }, Za = (s, e, t, r) => Xa[s];
-function rt(s) {
+function Ze(s) {
   return (e, t) => {
     const r = t != null && t.context ? String(t.context) : "standalone";
     let n;
@@ -6102,31 +6102,31 @@ const eo = {
   return t + "th";
 }, oo = {
   ordinalNumber: ao,
-  era: rt({
+  era: Ze({
     values: eo,
     defaultWidth: "wide"
   }),
-  quarter: rt({
+  quarter: Ze({
     values: to,
     defaultWidth: "wide",
     argumentCallback: (s) => s - 1
   }),
-  month: rt({
+  month: Ze({
     values: ro,
     defaultWidth: "wide"
   }),
-  day: rt({
+  day: Ze({
     values: so,
     defaultWidth: "wide"
   }),
-  dayPeriod: rt({
+  dayPeriod: Ze({
     values: no,
     defaultWidth: "wide",
     formattingValues: io,
     defaultFormattingWidth: "wide"
   })
 };
-function st(s) {
+function et(s) {
   return (e, t = {}) => {
     const r = t.width, n = r && s.matchPatterns[r] || s.matchPatterns[s.defaultMatchWidth], i = e.match(n);
     if (!i)
@@ -6239,32 +6239,32 @@ const ho = /^(\d+)(th|st|nd|rd)?/i, fo = /\d+/i, go = {
     parsePattern: fo,
     valueCallback: (s) => parseInt(s, 10)
   }),
-  era: st({
+  era: et({
     matchPatterns: go,
     defaultMatchWidth: "wide",
     parsePatterns: po,
     defaultParseWidth: "any"
   }),
-  quarter: st({
+  quarter: et({
     matchPatterns: mo,
     defaultMatchWidth: "wide",
     parsePatterns: vo,
     defaultParseWidth: "any",
     valueCallback: (s) => s + 1
   }),
-  month: st({
+  month: et({
     matchPatterns: yo,
     defaultMatchWidth: "wide",
     parsePatterns: _o,
     defaultParseWidth: "any"
   }),
-  day: st({
+  day: et({
     matchPatterns: wo,
     defaultMatchWidth: "wide",
     parsePatterns: bo,
     defaultParseWidth: "any"
   }),
-  dayPeriod: st({
+  dayPeriod: et({
     matchPatterns: So,
     defaultMatchWidth: "any",
     parsePatterns: Eo,
@@ -6287,45 +6287,45 @@ function xo(s) {
   return Ba(e, Ha(e)) + 1;
 }
 function To(s) {
-  const e = ue(s), t = +Ot(e) - +Wa(e);
+  const e = ue(s), t = +Et(e) - +Wa(e);
   return Math.round(t / Fs) + 1;
 }
 function Ws(s, e) {
   var l, h, f, p;
-  const t = ue(s), r = t.getFullYear(), n = It(), i = (e == null ? void 0 : e.firstWeekContainsDate) ?? ((h = (l = e == null ? void 0 : e.locale) == null ? void 0 : l.options) == null ? void 0 : h.firstWeekContainsDate) ?? n.firstWeekContainsDate ?? ((p = (f = n.locale) == null ? void 0 : f.options) == null ? void 0 : p.firstWeekContainsDate) ?? 1, a = Ae(s, 0);
+  const t = ue(s), r = t.getFullYear(), n = At(), i = (e == null ? void 0 : e.firstWeekContainsDate) ?? ((h = (l = e == null ? void 0 : e.locale) == null ? void 0 : l.options) == null ? void 0 : h.firstWeekContainsDate) ?? n.firstWeekContainsDate ?? ((p = (f = n.locale) == null ? void 0 : f.options) == null ? void 0 : p.firstWeekContainsDate) ?? 1, a = Re(s, 0);
   a.setFullYear(r + 1, 0, i), a.setHours(0, 0, 0, 0);
-  const o = ct(a, e), c = Ae(s, 0);
+  const o = it(a, e), c = Re(s, 0);
   c.setFullYear(r, 0, i), c.setHours(0, 0, 0, 0);
-  const u = ct(c, e);
+  const u = it(c, e);
   return t.getTime() >= o.getTime() ? r + 1 : t.getTime() >= u.getTime() ? r : r - 1;
 }
 function Po(s, e) {
   var o, c, u, l;
-  const t = It(), r = (e == null ? void 0 : e.firstWeekContainsDate) ?? ((c = (o = e == null ? void 0 : e.locale) == null ? void 0 : o.options) == null ? void 0 : c.firstWeekContainsDate) ?? t.firstWeekContainsDate ?? ((l = (u = t.locale) == null ? void 0 : u.options) == null ? void 0 : l.firstWeekContainsDate) ?? 1, n = Ws(s, e), i = Ae(s, 0);
-  return i.setFullYear(n, 0, r), i.setHours(0, 0, 0, 0), ct(i, e);
+  const t = At(), r = (e == null ? void 0 : e.firstWeekContainsDate) ?? ((c = (o = e == null ? void 0 : e.locale) == null ? void 0 : o.options) == null ? void 0 : c.firstWeekContainsDate) ?? t.firstWeekContainsDate ?? ((l = (u = t.locale) == null ? void 0 : u.options) == null ? void 0 : l.firstWeekContainsDate) ?? 1, n = Ws(s, e), i = Re(s, 0);
+  return i.setFullYear(n, 0, r), i.setHours(0, 0, 0, 0), it(i, e);
 }
 function jo(s, e) {
-  const t = ue(s), r = +ct(t, e) - +Po(t, e);
+  const t = ue(s), r = +it(t, e) - +Po(t, e);
   return Math.round(r / Fs) + 1;
 }
-function N(s, e) {
+function L(s, e) {
   const t = s < 0 ? "-" : "", r = Math.abs(s).toString().padStart(e, "0");
   return t + r;
 }
-const _e = {
+const ve = {
   // Year
   y(s, e) {
     const t = s.getFullYear(), r = t > 0 ? t : 1 - t;
-    return N(e === "yy" ? r % 100 : r, e.length);
+    return L(e === "yy" ? r % 100 : r, e.length);
   },
   // Month
   M(s, e) {
     const t = s.getMonth();
-    return e === "M" ? String(t + 1) : N(t + 1, 2);
+    return e === "M" ? String(t + 1) : L(t + 1, 2);
   },
   // Day of the month
   d(s, e) {
-    return N(s.getDate(), e.length);
+    return L(s.getDate(), e.length);
   },
   // AM or PM
   a(s, e) {
@@ -6345,28 +6345,28 @@ const _e = {
   },
   // Hour [1-12]
   h(s, e) {
-    return N(s.getHours() % 12 || 12, e.length);
+    return L(s.getHours() % 12 || 12, e.length);
   },
   // Hour [0-23]
   H(s, e) {
-    return N(s.getHours(), e.length);
+    return L(s.getHours(), e.length);
   },
   // Minute
   m(s, e) {
-    return N(s.getMinutes(), e.length);
+    return L(s.getMinutes(), e.length);
   },
   // Second
   s(s, e) {
-    return N(s.getSeconds(), e.length);
+    return L(s.getSeconds(), e.length);
   },
   // Fraction of second
   S(s, e) {
     const t = e.length, r = s.getMilliseconds(), n = Math.trunc(
       r * Math.pow(10, t - 3)
     );
-    return N(n, e.length);
+    return L(n, e.length);
   }
-}, ze = {
+}, We = {
   am: "am",
   pm: "pm",
   midnight: "midnight",
@@ -6397,21 +6397,21 @@ const _e = {
       const r = s.getFullYear(), n = r > 0 ? r : 1 - r;
       return t.ordinalNumber(n, { unit: "year" });
     }
-    return _e.y(s, e);
+    return ve.y(s, e);
   },
   // Local week-numbering year
   Y: function(s, e, t, r) {
     const n = Ws(s, r), i = n > 0 ? n : 1 - n;
     if (e === "YY") {
       const a = i % 100;
-      return N(a, 2);
+      return L(a, 2);
     }
-    return e === "Yo" ? t.ordinalNumber(i, { unit: "year" }) : N(i, e.length);
+    return e === "Yo" ? t.ordinalNumber(i, { unit: "year" }) : L(i, e.length);
   },
   // ISO week-numbering year
   R: function(s, e) {
     const t = Bs(s);
-    return N(t, e.length);
+    return L(t, e.length);
   },
   // Extended year. This is a single number designating the year of this calendar system.
   // The main difference between `y` and `u` localizers are B.C. years:
@@ -6424,7 +6424,7 @@ const _e = {
   // while `uu` pads single digit years to 2 characters and returns other years unchanged.
   u: function(s, e) {
     const t = s.getFullYear();
-    return N(t, e.length);
+    return L(t, e.length);
   },
   // Quarter
   Q: function(s, e, t) {
@@ -6433,7 +6433,7 @@ const _e = {
       case "Q":
         return String(r);
       case "QQ":
-        return N(r, 2);
+        return L(r, 2);
       case "Qo":
         return t.ordinalNumber(r, { unit: "quarter" });
       case "QQQ":
@@ -6461,7 +6461,7 @@ const _e = {
       case "q":
         return String(r);
       case "qq":
-        return N(r, 2);
+        return L(r, 2);
       case "qo":
         return t.ordinalNumber(r, { unit: "quarter" });
       case "qqq":
@@ -6488,7 +6488,7 @@ const _e = {
     switch (e) {
       case "M":
       case "MM":
-        return _e.M(s, e);
+        return ve.M(s, e);
       case "Mo":
         return t.ordinalNumber(r + 1, { unit: "month" });
       case "MMM":
@@ -6513,7 +6513,7 @@ const _e = {
       case "L":
         return String(r + 1);
       case "LL":
-        return N(r + 1, 2);
+        return L(r + 1, 2);
       case "Lo":
         return t.ordinalNumber(r + 1, { unit: "month" });
       case "LLL":
@@ -6534,21 +6534,21 @@ const _e = {
   // Local week of year
   w: function(s, e, t, r) {
     const n = jo(s, r);
-    return e === "wo" ? t.ordinalNumber(n, { unit: "week" }) : N(n, e.length);
+    return e === "wo" ? t.ordinalNumber(n, { unit: "week" }) : L(n, e.length);
   },
   // ISO week of year
   I: function(s, e, t) {
     const r = To(s);
-    return e === "Io" ? t.ordinalNumber(r, { unit: "week" }) : N(r, e.length);
+    return e === "Io" ? t.ordinalNumber(r, { unit: "week" }) : L(r, e.length);
   },
   // Day of the month
   d: function(s, e, t) {
-    return e === "do" ? t.ordinalNumber(s.getDate(), { unit: "date" }) : _e.d(s, e);
+    return e === "do" ? t.ordinalNumber(s.getDate(), { unit: "date" }) : ve.d(s, e);
   },
   // Day of year
   D: function(s, e, t) {
     const r = xo(s);
-    return e === "Do" ? t.ordinalNumber(r, { unit: "dayOfYear" }) : N(r, e.length);
+    return e === "Do" ? t.ordinalNumber(r, { unit: "dayOfYear" }) : L(r, e.length);
   },
   // Day of week
   E: function(s, e, t) {
@@ -6586,7 +6586,7 @@ const _e = {
       case "e":
         return String(i);
       case "ee":
-        return N(i, 2);
+        return L(i, 2);
       case "eo":
         return t.ordinalNumber(i, { unit: "day" });
       case "eee":
@@ -6619,7 +6619,7 @@ const _e = {
       case "c":
         return String(i);
       case "cc":
-        return N(i, e.length);
+        return L(i, e.length);
       case "co":
         return t.ordinalNumber(i, { unit: "day" });
       case "ccc":
@@ -6652,7 +6652,7 @@ const _e = {
       case "i":
         return String(n);
       case "ii":
-        return N(n, e.length);
+        return L(n, e.length);
       case "io":
         return t.ordinalNumber(n, { unit: "day" });
       case "iii":
@@ -6710,7 +6710,7 @@ const _e = {
   b: function(s, e, t) {
     const r = s.getHours();
     let n;
-    switch (r === 12 ? n = ze.noon : r === 0 ? n = ze.midnight : n = r / 12 >= 1 ? "pm" : "am", e) {
+    switch (r === 12 ? n = We.noon : r === 0 ? n = We.midnight : n = r / 12 >= 1 ? "pm" : "am", e) {
       case "b":
       case "bb":
         return t.dayPeriod(n, {
@@ -6739,7 +6739,7 @@ const _e = {
   B: function(s, e, t) {
     const r = s.getHours();
     let n;
-    switch (r >= 17 ? n = ze.evening : r >= 12 ? n = ze.afternoon : r >= 4 ? n = ze.morning : n = ze.night, e) {
+    switch (r >= 17 ? n = We.evening : r >= 12 ? n = We.afternoon : r >= 4 ? n = We.morning : n = We.night, e) {
       case "B":
       case "BB":
       case "BBB":
@@ -6766,33 +6766,33 @@ const _e = {
       let r = s.getHours() % 12;
       return r === 0 && (r = 12), t.ordinalNumber(r, { unit: "hour" });
     }
-    return _e.h(s, e);
+    return ve.h(s, e);
   },
   // Hour [0-23]
   H: function(s, e, t) {
-    return e === "Ho" ? t.ordinalNumber(s.getHours(), { unit: "hour" }) : _e.H(s, e);
+    return e === "Ho" ? t.ordinalNumber(s.getHours(), { unit: "hour" }) : ve.H(s, e);
   },
   // Hour [0-11]
   K: function(s, e, t) {
     const r = s.getHours() % 12;
-    return e === "Ko" ? t.ordinalNumber(r, { unit: "hour" }) : N(r, e.length);
+    return e === "Ko" ? t.ordinalNumber(r, { unit: "hour" }) : L(r, e.length);
   },
   // Hour [1-24]
   k: function(s, e, t) {
     let r = s.getHours();
-    return r === 0 && (r = 24), e === "ko" ? t.ordinalNumber(r, { unit: "hour" }) : N(r, e.length);
+    return r === 0 && (r = 24), e === "ko" ? t.ordinalNumber(r, { unit: "hour" }) : L(r, e.length);
   },
   // Minute
   m: function(s, e, t) {
-    return e === "mo" ? t.ordinalNumber(s.getMinutes(), { unit: "minute" }) : _e.m(s, e);
+    return e === "mo" ? t.ordinalNumber(s.getMinutes(), { unit: "minute" }) : ve.m(s, e);
   },
   // Second
   s: function(s, e, t) {
-    return e === "so" ? t.ordinalNumber(s.getSeconds(), { unit: "second" }) : _e.s(s, e);
+    return e === "so" ? t.ordinalNumber(s.getSeconds(), { unit: "second" }) : ve.s(s, e);
   },
   // Fraction of second
   S: function(s, e) {
-    return _e.S(s, e);
+    return ve.S(s, e);
   },
   // Timezone (ISO-8601. If offset is 0, output is always `'Z'`)
   X: function(s, e, t) {
@@ -6804,11 +6804,11 @@ const _e = {
         return ns(r);
       case "XXXX":
       case "XX":
-        return Re(r);
+        return Pe(r);
       case "XXXXX":
       case "XXX":
       default:
-        return Re(r, ":");
+        return Pe(r, ":");
     }
   },
   // Timezone (ISO-8601. If offset is 0, output is `'+00:00'` or equivalent)
@@ -6819,11 +6819,11 @@ const _e = {
         return ns(r);
       case "xxxx":
       case "xx":
-        return Re(r);
+        return Pe(r);
       case "xxxxx":
       case "xxx":
       default:
-        return Re(r, ":");
+        return Pe(r, ":");
     }
   },
   // Timezone (GMT)
@@ -6836,7 +6836,7 @@ const _e = {
         return "GMT" + ss(r, ":");
       case "OOOO":
       default:
-        return "GMT" + Re(r, ":");
+        return "GMT" + Pe(r, ":");
     }
   },
   // Timezone (specific non-location)
@@ -6849,29 +6849,29 @@ const _e = {
         return "GMT" + ss(r, ":");
       case "zzzz":
       default:
-        return "GMT" + Re(r, ":");
+        return "GMT" + Pe(r, ":");
     }
   },
   // Seconds timestamp
   t: function(s, e, t) {
     const r = Math.trunc(s.getTime() / 1e3);
-    return N(r, e.length);
+    return L(r, e.length);
   },
   // Milliseconds timestamp
   T: function(s, e, t) {
     const r = s.getTime();
-    return N(r, e.length);
+    return L(r, e.length);
   }
 };
 function ss(s, e = "") {
   const t = s > 0 ? "-" : "+", r = Math.abs(s), n = Math.trunc(r / 60), i = r % 60;
-  return i === 0 ? t + String(n) : t + String(n) + e + N(i, 2);
+  return i === 0 ? t + String(n) : t + String(n) + e + L(i, 2);
 }
 function ns(s, e) {
-  return s % 60 === 0 ? (s > 0 ? "-" : "+") + N(Math.abs(s) / 60, 2) : Re(s, e);
+  return s % 60 === 0 ? (s > 0 ? "-" : "+") + L(Math.abs(s) / 60, 2) : Pe(s, e);
 }
-function Re(s, e = "") {
-  const t = s > 0 ? "-" : "+", r = Math.abs(s), n = N(Math.trunc(r / 60), 2), i = N(r % 60, 2);
+function Pe(s, e = "") {
+  const t = s > 0 ? "-" : "+", r = Math.abs(s), n = L(Math.trunc(r / 60), 2), i = L(r % 60, 2);
   return t + n + e + i;
 }
 const is = (s, e) => {
@@ -6938,16 +6938,16 @@ function Mo(s, e, t) {
   return `Use \`${s.toLowerCase()}\` instead of \`${s}\` (in \`${e}\`) for formatting ${r} to the input \`${t}\`; see: https://github.com/date-fns/date-fns/blob/master/docs/unicodeTokens.md`;
 }
 const Uo = /[yYQqMLwIdDecihHKkms]o|(\w)\1*|''|'(''|[^'])+('|$)|./g, Fo = /P+p+|P+|p+|''|'(''|[^'])+('|$)|./g, Bo = /^'([^]*?)'?$/, Wo = /''/g, qo = /[a-zA-Z]/;
-function bt(s, e, t) {
+function _t(s, e, t) {
   var l, h, f, p;
-  const r = It(), n = r.locale ?? Oo, i = r.firstWeekContainsDate ?? ((h = (l = r.locale) == null ? void 0 : l.options) == null ? void 0 : h.firstWeekContainsDate) ?? 1, a = r.weekStartsOn ?? ((p = (f = r.locale) == null ? void 0 : f.options) == null ? void 0 : p.weekStartsOn) ?? 0, o = ue(s);
+  const r = At(), n = r.locale ?? Oo, i = r.firstWeekContainsDate ?? ((h = (l = r.locale) == null ? void 0 : l.options) == null ? void 0 : h.firstWeekContainsDate) ?? 1, a = r.weekStartsOn ?? ((p = (f = r.locale) == null ? void 0 : f.options) == null ? void 0 : p.weekStartsOn) ?? 0, o = ue(s);
   if (!za(o))
     throw new RangeError("Invalid time value");
   let c = e.match(Fo).map((y) => {
     const m = y[0];
     if (m === "p" || m === "P") {
-      const b = Co[m];
-      return b(y, n.formatLong);
+      const S = Co[m];
+      return S(y, n.formatLong);
     }
     return y;
   }).join("").match(Uo).map((y) => {
@@ -6974,8 +6974,8 @@ function bt(s, e, t) {
     if (!y.isToken) return y.value;
     const m = y.value;
     (Lo(m) || Do(m)) && No(m, e, String(s));
-    const b = rs[m[0]];
-    return b(o, m, n.localize, u);
+    const S = rs[m[0]];
+    return S(o, m, n.localize, u);
   }).join("");
 }
 function zo(s) {
@@ -6997,7 +6997,7 @@ const Ho = { BASE_URL: "./", DEV: !1, MODE: "production", PROD: !0, SSR: !1, VIT
   } }, u = e = s(r, n, c);
   return c;
 }, Vo = (s) => s ? as(s) : as;
-var ur = { exports: {} }, Kt = {}, St = { exports: {} }, Qt = {};
+var ur = { exports: {} }, Kt = {}, wt = { exports: {} }, Qt = {};
 /**
  * @license React
  * use-sync-external-store-shim.production.min.js
@@ -7011,18 +7011,18 @@ var os;
 function Yo() {
   if (os) return Qt;
   os = 1;
-  var s = $e;
+  var s = Ce;
   function e(h, f) {
     return h === f && (h !== 0 || 1 / h === 1 / f) || h !== h && f !== f;
   }
   var t = typeof Object.is == "function" ? Object.is : e, r = s.useState, n = s.useEffect, i = s.useLayoutEffect, a = s.useDebugValue;
   function o(h, f) {
-    var p = f(), y = r({ inst: { value: p, getSnapshot: f } }), m = y[0].inst, b = y[1];
+    var p = f(), y = r({ inst: { value: p, getSnapshot: f } }), m = y[0].inst, S = y[1];
     return i(function() {
-      m.value = p, m.getSnapshot = f, c(m) && b({ inst: m });
+      m.value = p, m.getSnapshot = f, c(m) && S({ inst: m });
     }, [h, p, f]), n(function() {
-      return c(m) && b({ inst: m }), h(function() {
-        c(m) && b({ inst: m });
+      return c(m) && S({ inst: m }), h(function() {
+        c(m) && S({ inst: m });
       });
     }, [h]), a(p), p;
   }
@@ -7058,7 +7058,7 @@ function Jo() {
    */
   return s.NODE_ENV !== "production" && function() {
     typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ < "u" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart == "function" && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
-    var e = $e, t = e.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+    var e = Ce, t = e.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
     function r(O) {
       {
         for (var E = arguments.length, I = new Array(E > 1 ? E - 1 : 0), $ = 1; $ < E; $++)
@@ -7068,12 +7068,12 @@ function Jo() {
     }
     function n(O, E, I) {
       {
-        var $ = t.ReactDebugCurrentFrame, V = $.getStackAddendum();
-        V !== "" && (E += "%s", I = I.concat([V]));
-        var te = I.map(function(z) {
-          return String(z);
+        var $ = t.ReactDebugCurrentFrame, H = $.getStackAddendum();
+        H !== "" && (E += "%s", I = I.concat([H]));
+        var re = I.map(function(q) {
+          return String(q);
         });
-        te.unshift("Warning: " + E), Function.prototype.apply.call(console[O], console, te);
+        re.unshift("Warning: " + E), Function.prototype.apply.call(console[O], console, re);
       }
     }
     function i(O, E) {
@@ -7084,29 +7084,29 @@ function Jo() {
       h || e.startTransition !== void 0 && (h = !0, r("You are using an outdated, pre-release alpha of React 18 that does not support useSyncExternalStore. The use-sync-external-store shim will not work correctly. Upgrade to a newer pre-release."));
       var $ = E();
       if (!f) {
-        var V = E();
-        a($, V) || (r("The result of getSnapshot should be cached to avoid an infinite loop"), f = !0);
+        var H = E();
+        a($, H) || (r("The result of getSnapshot should be cached to avoid an infinite loop"), f = !0);
       }
-      var te = o({
+      var re = o({
         inst: {
           value: $,
           getSnapshot: E
         }
-      }), z = te[0].inst, fe = te[1];
+      }), q = re[0].inst, de = re[1];
       return u(function() {
-        z.value = $, z.getSnapshot = E, y(z) && fe({
-          inst: z
+        q.value = $, q.getSnapshot = E, y(q) && de({
+          inst: q
         });
       }, [O, $, E]), c(function() {
-        y(z) && fe({
-          inst: z
+        y(q) && de({
+          inst: q
         });
-        var xe = function() {
-          y(z) && fe({
-            inst: z
+        var ke = function() {
+          y(q) && de({
+            inst: q
           });
         };
-        return O(xe);
+        return O(ke);
       }, [O]), l($), $;
     }
     function y(O) {
@@ -7121,16 +7121,16 @@ function Jo() {
     function m(O, E, I) {
       return E();
     }
-    var b = typeof window < "u" && typeof window.document < "u" && typeof window.document.createElement < "u", A = !b, P = A ? m : p, T = e.useSyncExternalStore !== void 0 ? e.useSyncExternalStore : P;
+    var S = typeof window < "u" && typeof window.document < "u" && typeof window.document.createElement < "u", A = !S, P = A ? m : p, T = e.useSyncExternalStore !== void 0 ? e.useSyncExternalStore : P;
     Xt.useSyncExternalStore = T, typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ < "u" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop == "function" && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
   }(), Xt;
 }
 var ls;
 function zs() {
-  if (ls) return St.exports;
+  if (ls) return wt.exports;
   ls = 1;
   var s = {};
-  return s.NODE_ENV === "production" ? St.exports = Yo() : St.exports = Jo(), St.exports;
+  return s.NODE_ENV === "production" ? wt.exports = Yo() : wt.exports = Jo(), wt.exports;
 }
 /**
  * @license React
@@ -7145,7 +7145,7 @@ var us;
 function Go() {
   if (us) return Kt;
   us = 1;
-  var s = $e, e = zs();
+  var s = Ce, e = zs();
   function t(u, l) {
     return u === l && (u !== 0 || 1 / u === 1 / l) || u !== u && l !== l;
   }
@@ -7166,8 +7166,8 @@ function Go() {
           return O = I;
         }
         if ($ = O, r(T, I)) return $;
-        var V = f(I);
-        return p !== void 0 && p($, V) ? $ : (T = I, O = V);
+        var H = f(I);
+        return p !== void 0 && p($, H) ? $ : (T = I, O = H);
       }
       var P = !1, T, O, E = h === void 0 ? null : h;
       return [function() {
@@ -7176,10 +7176,10 @@ function Go() {
         return A(E());
       }];
     }, [l, h, f, p]);
-    var b = n(u, y[0], y[1]);
+    var S = n(u, y[0], y[1]);
     return a(function() {
-      m.hasValue = !0, m.value = b;
-    }, [b]), c(b), b;
+      m.hasValue = !0, m.value = S;
+    }, [S]), c(S), S;
   }, Kt;
 }
 var Zt = {}, ds;
@@ -7198,40 +7198,40 @@ function Ko() {
    */
   return s.NODE_ENV !== "production" && function() {
     typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ < "u" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart == "function" && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
-    var e = $e, t = zs();
+    var e = Ce, t = zs();
     function r(h, f) {
       return h === f && (h !== 0 || 1 / h === 1 / f) || h !== h && f !== f;
     }
     var n = typeof Object.is == "function" ? Object.is : r, i = t.useSyncExternalStore, a = e.useRef, o = e.useEffect, c = e.useMemo, u = e.useDebugValue;
     function l(h, f, p, y, m) {
-      var b = a(null), A;
-      b.current === null ? (A = {
+      var S = a(null), A;
+      S.current === null ? (A = {
         hasValue: !1,
         value: null
-      }, b.current = A) : A = b.current;
+      }, S.current = A) : A = S.current;
       var P = c(function() {
-        var I = !1, $, V, te = function(oe) {
+        var I = !1, $, H, re = function(oe) {
           if (!I) {
             I = !0, $ = oe;
-            var Y = y(oe);
+            var V = y(oe);
             if (m !== void 0 && A.hasValue) {
-              var X = A.value;
-              if (m(X, Y))
-                return V = X, X;
+              var Z = A.value;
+              if (m(Z, V))
+                return H = Z, Z;
             }
-            return V = Y, Y;
+            return H = V, V;
           }
-          var ge = $, ve = V;
-          if (n(ge, oe))
-            return ve;
-          var ye = y(oe);
-          return m !== void 0 && m(ve, ye) ? ve : ($ = oe, V = ye, ye);
-        }, z = p === void 0 ? null : p, fe = function() {
-          return te(f());
-        }, xe = z === null ? void 0 : function() {
-          return te(z());
+          var he = $, me = H;
+          if (n(he, oe))
+            return me;
+          var Y = y(oe);
+          return m !== void 0 && m(me, Y) ? me : ($ = oe, H = Y, Y);
+        }, q = p === void 0 ? null : p, de = function() {
+          return re(f());
+        }, ke = q === null ? void 0 : function() {
+          return re(q());
         };
-        return [fe, xe];
+        return [de, ke];
       }, [f, p, y, m]), T = P[0], O = P[1], E = i(h, T, O);
       return o(function() {
         A.hasValue = !0, A.value = E;
@@ -7243,7 +7243,7 @@ function Ko() {
 var Qo = {};
 Qo.NODE_ENV === "production" ? ur.exports = Go() : ur.exports = Ko();
 var Xo = ur.exports;
-const Zo = /* @__PURE__ */ Sn(Xo), Hs = { BASE_URL: "./", DEV: !1, MODE: "production", PROD: !0, SSR: !1, VITE_OPENAI_API_KEY: "", VITE_SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpvem9kZmp6eHpsd3praG1maHdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIwNDM3MjMsImV4cCI6MjA0NzYxOTcyM30.ywmi4WD1fZN3hRu-krtGmY1-IYSJSODh1tKK4Ytt18Q", VITE_SUPABASE_URL: "https://zozodfjzxzlwzkhmfhwh.supabase.co" }, { useDebugValue: ec } = $e, { useSyncExternalStoreWithSelector: tc } = Zo;
+const Zo = /* @__PURE__ */ Sn(Xo), Hs = { BASE_URL: "./", DEV: !1, MODE: "production", PROD: !0, SSR: !1, VITE_OPENAI_API_KEY: "", VITE_SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpvem9kZmp6eHpsd3praG1maHdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIwNDM3MjMsImV4cCI6MjA0NzYxOTcyM30.ywmi4WD1fZN3hRu-krtGmY1-IYSJSODh1tKK4Ytt18Q", VITE_SUPABASE_URL: "https://zozodfjzxzlwzkhmfhwh.supabase.co" }, { useDebugValue: ec } = Ce, { useSyncExternalStoreWithSelector: tc } = Zo;
 let hs = !1;
 const rc = (s) => s;
 function sc(s, e = rc, t) {
@@ -7266,14 +7266,14 @@ const fs = (s) => {
   const e = typeof s == "function" ? Vo(s) : s, t = (r, n) => sc(e, r, n);
   return Object.assign(t, e), t;
 }, nc = (s) => s ? fs(s) : fs;
-let ic = { data: "" }, ac = (s) => typeof window == "object" ? ((s ? s.querySelector("#_goober") : window._goober) || Object.assign((s || document.head).appendChild(document.createElement("style")), { innerHTML: " ", id: "_goober" })).firstChild : s || ic, oc = /(?:([\u0080-\uFFFF\w-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|(}\s*)/g, cc = /\/\*[^]*?\*\/|  +/g, gs = /\n+/g, ke = (s, e) => {
+let ic = { data: "" }, ac = (s) => typeof window == "object" ? ((s ? s.querySelector("#_goober") : window._goober) || Object.assign((s || document.head).appendChild(document.createElement("style")), { innerHTML: " ", id: "_goober" })).firstChild : s || ic, oc = /(?:([\u0080-\uFFFF\w-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|(}\s*)/g, cc = /\/\*[^]*?\*\/|  +/g, gs = /\n+/g, Se = (s, e) => {
   let t = "", r = "", n = "";
   for (let i in s) {
     let a = s[i];
-    i[0] == "@" ? i[1] == "i" ? t = i + " " + a + ";" : r += i[1] == "f" ? ke(a, i) : i + "{" + ke(a, i[1] == "k" ? "" : e) + "}" : typeof a == "object" ? r += ke(a, e ? e.replace(/([^,])+/g, (o) => i.replace(/([^,]*:\S+\([^)]*\))|([^,])+/g, (c) => /&/.test(c) ? c.replace(/&/g, o) : o ? o + " " + c : c)) : i) : a != null && (i = /^--/.test(i) ? i : i.replace(/[A-Z]/g, "-$&").toLowerCase(), n += ke.p ? ke.p(i, a) : i + ":" + a + ";");
+    i[0] == "@" ? i[1] == "i" ? t = i + " " + a + ";" : r += i[1] == "f" ? Se(a, i) : i + "{" + Se(a, i[1] == "k" ? "" : e) + "}" : typeof a == "object" ? r += Se(a, e ? e.replace(/([^,])+/g, (o) => i.replace(/([^,]*:\S+\([^)]*\))|([^,])+/g, (c) => /&/.test(c) ? c.replace(/&/g, o) : o ? o + " " + c : c)) : i) : a != null && (i = /^--/.test(i) ? i : i.replace(/[A-Z]/g, "-$&").toLowerCase(), n += Se.p ? Se.p(i, a) : i + ":" + a + ";");
   }
   return t + (e && n ? e + "{" + n + "}" : n) + r;
-}, pe = {}, Vs = (s) => {
+}, ge = {}, Vs = (s) => {
   if (typeof s == "object") {
     let e = "";
     for (let t in s) e += t + Vs(s[t]);
@@ -7281,48 +7281,48 @@ let ic = { data: "" }, ac = (s) => typeof window == "object" ? ((s ? s.querySele
   }
   return s;
 }, lc = (s, e, t, r, n) => {
-  let i = Vs(s), a = pe[i] || (pe[i] = ((c) => {
+  let i = Vs(s), a = ge[i] || (ge[i] = ((c) => {
     let u = 0, l = 11;
     for (; u < c.length; ) l = 101 * l + c.charCodeAt(u++) >>> 0;
     return "go" + l;
   })(i));
-  if (!pe[a]) {
+  if (!ge[a]) {
     let c = i !== s ? s : ((u) => {
       let l, h, f = [{}];
       for (; l = oc.exec(u.replace(cc, "")); ) l[4] ? f.shift() : l[3] ? (h = l[3].replace(gs, " ").trim(), f.unshift(f[0][h] = f[0][h] || {})) : f[0][l[1]] = l[2].replace(gs, " ").trim();
       return f[0];
     })(s);
-    pe[a] = ke(n ? { ["@keyframes " + a]: c } : c, t ? "" : "." + a);
+    ge[a] = Se(n ? { ["@keyframes " + a]: c } : c, t ? "" : "." + a);
   }
-  let o = t && pe.g ? pe.g : null;
-  return t && (pe.g = pe[a]), ((c, u, l, h) => {
+  let o = t && ge.g ? ge.g : null;
+  return t && (ge.g = ge[a]), ((c, u, l, h) => {
     h ? u.data = u.data.replace(h, c) : u.data.indexOf(c) === -1 && (u.data = l ? c + u.data : u.data + c);
-  })(pe[a], e, r, o), a;
+  })(ge[a], e, r, o), a;
 }, uc = (s, e, t) => s.reduce((r, n, i) => {
   let a = e[i];
   if (a && a.call) {
     let o = a(t), c = o && o.props && o.props.className || /^go/.test(o) && o;
-    a = c ? "." + c : o && typeof o == "object" ? o.props ? "" : ke(o, "") : o === !1 ? "" : o;
+    a = c ? "." + c : o && typeof o == "object" ? o.props ? "" : Se(o, "") : o === !1 ? "" : o;
   }
   return r + n + (a ?? "");
 }, "");
-function Dt(s) {
+function $t(s) {
   let e = this || {}, t = s.call ? s(e.p) : s;
   return lc(t.unshift ? t.raw ? uc(t, [].slice.call(arguments, 1), e.p) : t.reduce((r, n) => Object.assign(r, n && n.call ? n(e.p) : n), {}) : t, ac(e.target), e.g, e.o, e.k);
 }
 let Ys, dr, hr;
-Dt.bind({ g: 1 });
-let me = Dt.bind({ k: 1 });
+$t.bind({ g: 1 });
+let pe = $t.bind({ k: 1 });
 function dc(s, e, t, r) {
-  ke.p = e, Ys = s, dr = t, hr = r;
+  Se.p = e, Ys = s, dr = t, hr = r;
 }
-function Oe(s, e) {
+function Ee(s, e) {
   let t = this || {};
   return function() {
     let r = arguments;
     function n(i, a) {
       let o = Object.assign({}, i), c = o.className || n.className;
-      t.p = Object.assign({ theme: dr && dr() }, o), t.o = / *go\d+/.test(c), o.className = Dt.apply(t, r) + (c ? " " + c : "");
+      t.p = Object.assign({ theme: dr && dr() }, o), t.o = / *go\d+/.test(c), o.className = $t.apply(t, r) + (c ? " " + c : "");
       let u = s;
       return s[0] && (u = o.as || s, delete o.as), hr && u[0] && hr(o), Ys(u, o);
     }
@@ -7341,14 +7341,14 @@ var hc = (s) => typeof s == "function", fr = (s, e) => hc(s) ? s(e) : s, fc = /*
     }
     return s;
   };
-})(), pc = 20, Et = /* @__PURE__ */ new Map(), mc = 1e3, ps = (s) => {
-  if (Et.has(s)) return;
+})(), pc = 20, bt = /* @__PURE__ */ new Map(), mc = 1e3, ps = (s) => {
+  if (bt.has(s)) return;
   let e = setTimeout(() => {
-    Et.delete(s), Lt({ type: 4, toastId: s });
+    bt.delete(s), It({ type: 4, toastId: s });
   }, mc);
-  Et.set(s, e);
+  bt.set(s, e);
 }, vc = (s) => {
-  let e = Et.get(s);
+  let e = bt.get(s);
   e && clearTimeout(e);
 }, gr = (s, e) => {
   switch (e.type) {
@@ -7372,29 +7372,29 @@ var hc = (s) => typeof s == "function", fr = (s, e) => hc(s) ? s(e) : s, fc = /*
       let n = e.time - (s.pausedAt || 0);
       return { ...s, pausedAt: void 0, toasts: s.toasts.map((i) => ({ ...i, pauseDuration: i.pauseDuration + n })) };
   }
-}, yc = [], er = { toasts: [], pausedAt: void 0 }, Lt = (s) => {
+}, yc = [], er = { toasts: [], pausedAt: void 0 }, It = (s) => {
   er = gr(er, s), yc.forEach((e) => {
     e(er);
   });
-}, _c = (s, e = "blank", t) => ({ createdAt: Date.now(), visible: !0, type: e, ariaProps: { role: "status", "aria-live": "polite" }, message: s, pauseDuration: 0, ...t, id: (t == null ? void 0 : t.id) || fc() }), dt = (s) => (e, t) => {
+}, _c = (s, e = "blank", t) => ({ createdAt: Date.now(), visible: !0, type: e, ariaProps: { role: "status", "aria-live": "polite" }, message: s, pauseDuration: 0, ...t, id: (t == null ? void 0 : t.id) || fc() }), ct = (s) => (e, t) => {
   let r = _c(e, s, t);
-  return Lt({ type: 2, toast: r }), r.id;
-}, ie = (s, e) => dt("blank")(s, e);
-ie.error = dt("error");
-ie.success = dt("success");
-ie.loading = dt("loading");
-ie.custom = dt("custom");
+  return It({ type: 2, toast: r }), r.id;
+}, ie = (s, e) => ct("blank")(s, e);
+ie.error = ct("error");
+ie.success = ct("success");
+ie.loading = ct("loading");
+ie.custom = ct("custom");
 ie.dismiss = (s) => {
-  Lt({ type: 3, toastId: s });
+  It({ type: 3, toastId: s });
 };
-ie.remove = (s) => Lt({ type: 4, toastId: s });
+ie.remove = (s) => It({ type: 4, toastId: s });
 ie.promise = (s, e, t) => {
   let r = ie.loading(e.loading, { ...t, ...t == null ? void 0 : t.loading });
   return s.then((n) => (ie.success(fr(e.success, n), { id: r, ...t, ...t == null ? void 0 : t.success }), n)).catch((n) => {
     ie.error(fr(e.error, n), { id: r, ...t, ...t == null ? void 0 : t.error });
   }), s;
 };
-var wc = me`
+var wc = pe`
 from {
   transform: scale(0) rotate(45deg);
 	opacity: 0;
@@ -7402,7 +7402,7 @@ from {
 to {
  transform: scale(1) rotate(45deg);
   opacity: 1;
-}`, bc = me`
+}`, bc = pe`
 from {
   transform: scale(0);
   opacity: 0;
@@ -7410,7 +7410,7 @@ from {
 to {
   transform: scale(1);
   opacity: 1;
-}`, Sc = me`
+}`, Sc = pe`
 from {
   transform: scale(0) rotate(90deg);
 	opacity: 0;
@@ -7418,7 +7418,7 @@ from {
 to {
   transform: scale(1) rotate(90deg);
 	opacity: 1;
-}`, Ec = Oe("div")`
+}`, Ec = Ee("div")`
   width: 20px;
   opacity: 0;
   height: 20px;
@@ -7451,14 +7451,14 @@ to {
     animation-delay: 180ms;
     transform: rotate(90deg);
   }
-`, kc = me`
+`, kc = pe`
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
-`, Oc = Oe("div")`
+`, Oc = Ee("div")`
   width: 12px;
   height: 12px;
   box-sizing: border-box;
@@ -7467,7 +7467,7 @@ to {
   border-color: ${(s) => s.secondary || "#e0e0e0"};
   border-right-color: ${(s) => s.primary || "#616161"};
   animation: ${kc} 1s linear infinite;
-`, xc = me`
+`, xc = pe`
 from {
   transform: scale(0) rotate(45deg);
 	opacity: 0;
@@ -7475,7 +7475,7 @@ from {
 to {
   transform: scale(1) rotate(45deg);
 	opacity: 1;
-}`, Tc = me`
+}`, Tc = pe`
 0% {
 	height: 0;
 	width: 0;
@@ -7489,7 +7489,7 @@ to {
 100% {
   opacity: 1;
   height: 10px;
-}`, Pc = Oe("div")`
+}`, Pc = Ee("div")`
   width: 20px;
   opacity: 0;
   height: 20px;
@@ -7516,16 +7516,16 @@ to {
     height: 10px;
     width: 6px;
   }
-`, jc = Oe("div")`
+`, jc = Ee("div")`
   position: absolute;
-`, Rc = Oe("div")`
+`, Rc = Ee("div")`
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   min-width: 20px;
   min-height: 20px;
-`, Cc = me`
+`, Cc = pe`
 from {
   transform: scale(0.6);
   opacity: 0.4;
@@ -7533,7 +7533,7 @@ from {
 to {
   transform: scale(1);
   opacity: 1;
-}`, Ac = Oe("div")`
+}`, Ac = Ee("div")`
   position: relative;
   transform: scale(0.6);
   opacity: 0.4;
@@ -7542,14 +7542,14 @@ to {
     forwards;
 `, $c = ({ toast: s }) => {
   let { icon: e, type: t, iconTheme: r } = s;
-  return e !== void 0 ? typeof e == "string" ? ee.createElement(Ac, null, e) : e : t === "blank" ? null : ee.createElement(Rc, null, ee.createElement(Oc, { ...r }), t !== "loading" && ee.createElement(jc, null, t === "error" ? ee.createElement(Ec, { ...r }) : ee.createElement(Pc, { ...r })));
+  return e !== void 0 ? typeof e == "string" ? te.createElement(Ac, null, e) : e : t === "blank" ? null : te.createElement(Rc, null, te.createElement(Oc, { ...r }), t !== "loading" && te.createElement(jc, null, t === "error" ? te.createElement(Ec, { ...r }) : te.createElement(Pc, { ...r })));
 }, Ic = (s) => `
 0% {transform: translate3d(0,${s * -200}%,0) scale(.6); opacity:.5;}
 100% {transform: translate3d(0,0,0) scale(1); opacity:1;}
 `, Dc = (s) => `
 0% {transform: translate3d(0,0,-1px) scale(1); opacity:1;}
 100% {transform: translate3d(0,${s * -150}%,-1px) scale(.6); opacity:0;}
-`, Lc = "0%{opacity:0;} 100%{opacity:1;}", Nc = "0%{opacity:1;} 100%{opacity:0;}", Mc = Oe("div")`
+`, Lc = "0%{opacity:0;} 100%{opacity:1;}", Nc = "0%{opacity:1;} 100%{opacity:0;}", Mc = Ee("div")`
   display: flex;
   align-items: center;
   background: #fff;
@@ -7561,7 +7561,7 @@ to {
   pointer-events: auto;
   padding: 8px 10px;
   border-radius: 8px;
-`, Uc = Oe("div")`
+`, Uc = Ee("div")`
   display: flex;
   justify-content: center;
   margin: 4px 10px;
@@ -7570,14 +7570,14 @@ to {
   white-space: pre-line;
 `, Fc = (s, e) => {
   let t = s.includes("top") ? 1 : -1, [r, n] = gc() ? [Lc, Nc] : [Ic(t), Dc(t)];
-  return { animation: e ? `${me(r)} 0.35s cubic-bezier(.21,1.02,.73,1) forwards` : `${me(n)} 0.4s forwards cubic-bezier(.06,.71,.55,1)` };
+  return { animation: e ? `${pe(r)} 0.35s cubic-bezier(.21,1.02,.73,1) forwards` : `${pe(n)} 0.4s forwards cubic-bezier(.06,.71,.55,1)` };
 };
-ee.memo(({ toast: s, position: e, style: t, children: r }) => {
-  let n = s.height ? Fc(s.position || e || "top-center", s.visible) : { opacity: 0 }, i = ee.createElement($c, { toast: s }), a = ee.createElement(Uc, { ...s.ariaProps }, fr(s.message, s));
-  return ee.createElement(Mc, { className: s.className, style: { ...n, ...t, ...s.style } }, typeof r == "function" ? r({ icon: i, message: a }) : ee.createElement(ee.Fragment, null, i, a));
+te.memo(({ toast: s, position: e, style: t, children: r }) => {
+  let n = s.height ? Fc(s.position || e || "top-center", s.visible) : { opacity: 0 }, i = te.createElement($c, { toast: s }), a = te.createElement(Uc, { ...s.ariaProps }, fr(s.message, s));
+  return te.createElement(Mc, { className: s.className, style: { ...n, ...t, ...s.style } }, typeof r == "function" ? r({ icon: i, message: a }) : te.createElement(te.Fragment, null, i, a));
 });
-dc(ee.createElement);
-Dt`
+dc(te.createElement);
+$t`
   z-index: 9999;
   > * {
     pointer-events: auto;
@@ -7621,9 +7621,9 @@ const Bc = async (s, e) => {
         content: t,
         sender_type: "user",
         user_id: null
-      }, { error: i } = await q.from("messages").insert(n);
+      }, { error: i } = await W.from("messages").insert(n);
       if (i) throw i;
-      const { data: a, error: o } = await q.from("conversations").select("live_mode").eq("id", r).single();
+      const { data: a, error: o } = await W.from("conversations").select("live_mode").eq("id", r).single();
       if (o) throw o;
       if (a.live_mode)
         console.log("Live mode enabled, skipping OpenAI response");
@@ -7637,13 +7637,13 @@ const Bc = async (s, e) => {
             content: u,
             sender_type: "bot",
             user_id: null
-          }, { error: h } = await q.from("messages").insert(l);
+          }, { error: h } = await W.from("messages").insert(l);
           if (h) throw h;
         } catch (u) {
           console.error("Error generating bot response:", u), ie.error("Failed to generate bot response");
         }
       }
-      const { error: c } = await q.from("conversations").update({ last_message_at: (/* @__PURE__ */ new Date()).toISOString() }).eq("id", r);
+      const { error: c } = await W.from("conversations").update({ last_message_at: (/* @__PURE__ */ new Date()).toISOString() }).eq("id", r);
       if (c) throw c;
     } catch (n) {
       console.error("Error sending message:", n), s({ error: n.message }), ie.error("Failed to send message");
@@ -7653,10 +7653,10 @@ const Bc = async (s, e) => {
   }
 })), ms = "chatbot_session_id", qc = 180;
 function zc({ domainId: s }) {
-  const [e, t] = ne(!1), [r, n] = ne(""), [i, a] = ne([]), [o, c] = ne([]), [u, l] = ne("history"), [h, f] = ne(null), [p, y] = ne(!1), [m] = ne(/* @__PURE__ */ new Set()), [b, A] = ne(null), [P, T] = ne(null), O = Dr(null), [E, I] = ne(!1), $ = Dr(null), { sendMessage: V } = Wc();
-  he(() => {
+  const [e, t] = ne(!1), [r, n] = ne(""), [i, a] = ne([]), [o, c] = ne([]), [u, l] = ne("history"), [h, f] = ne(null), [p, y] = ne(!1), [m] = ne(/* @__PURE__ */ new Set()), [S, A] = ne(null), [P, T] = ne(null), O = Dr(null), [E, I] = ne(!1), $ = Dr(null), { sendMessage: H } = Wc();
+  fe(() => {
     if (!P) return;
-    const _ = q.channel("new-conversations").on(
+    const w = W.channel("new-conversations").on(
       "postgres_changes",
       {
         event: "INSERT",
@@ -7664,16 +7664,16 @@ function zc({ domainId: s }) {
         table: "conversations",
         filter: `session_id=eq.${P}`
       },
-      (S) => {
-        S.eventType === "INSERT" && c((D) => [S.new, ...D]);
+      (_) => {
+        _.eventType === "INSERT" && c((U) => [_.new, ...U]);
       }
     ).subscribe();
     return () => {
-      _.unsubscribe();
+      w.unsubscribe();
     };
-  }, [P]), he(() => {
+  }, [P]), fe(() => {
     if (!P) return;
-    const _ = q.channel("conversations-updates").on(
+    const w = W.channel("conversations-updates").on(
       "postgres_changes",
       {
         event: "*",
@@ -7681,50 +7681,50 @@ function zc({ domainId: s }) {
         table: "conversations",
         filter: `session_id=eq.${P}`
       },
-      (S) => {
-        S.eventType === "UPDATE" && (c(
-          (D) => D.map(
-            (F) => F.id === S.new.id ? { ...F, ...S.new } : F
+      (_) => {
+        _.eventType === "UPDATE" && (c(
+          (U) => U.map(
+            (J) => J.id === _.new.id ? { ...J, ..._.new } : J
           )
-        ), S.new.id === h && I(S.new.status === "archived"));
+        ), _.new.id === h && I(_.new.status === "archived"));
       }
     ).subscribe();
     return () => {
-      _.unsubscribe();
+      w.unsubscribe();
     };
-  }, [P, h]), he(() => {
-    var _;
-    (_ = O.current) == null || _.scrollIntoView({ behavior: "smooth" });
+  }, [P, h]), fe(() => {
+    var w;
+    (w = O.current) == null || w.scrollIntoView({ behavior: "smooth" });
   }, [i]);
-  const te = async () => {
+  const re = async () => {
     if (P)
       try {
-        const { data: _, error: S } = await q.from("conversations").select("*").eq("session_id", P).order("last_message_at", { ascending: !1 });
-        if (S) throw S;
-        c(_ || []);
-      } catch (_) {
-        console.error("Error loading conversation history:", _);
+        const { data: w, error: _ } = await W.from("conversations").select("*").eq("session_id", P).order("last_message_at", { ascending: !1 });
+        if (_) throw _;
+        c(w || []);
+      } catch (w) {
+        console.error("Error loading conversation history:", w);
       }
   };
-  he(() => {
-    P && te();
+  fe(() => {
+    P && re();
   }, [P]);
-  const z = async () => {
+  const q = async () => {
     a([]), f(null), I(!1), l("chat");
-  }, fe = () => {
+  }, de = () => {
     l("history"), a([]), f(null), I(!1);
-  }, xe = async (_) => {
+  }, ke = async (w) => {
     try {
-      f(_.id), I(_.status === "archived");
-      const { data: S } = await q.from("messages").select("*").eq("conversation_id", _.id).order("created_at", { ascending: !0 });
-      S && (a(S), m.clear(), S.forEach((D) => m.add(D.id))), l("chat");
-    } catch (S) {
-      console.error("Error loading conversation:", S);
+      f(w.id), I(w.status === "archived");
+      const { data: _ } = await W.from("messages").select("*").eq("conversation_id", w.id).order("created_at", { ascending: !0 });
+      _ && (a(_), m.clear(), _.forEach((U) => m.add(U.id))), l("chat");
+    } catch (_) {
+      console.error("Error loading conversation:", _);
     }
   };
-  he(() => {
+  fe(() => {
     if (!h) return;
-    const _ = q.channel(`conversation-status:${h}`).on(
+    const w = W.channel(`conversation-status:${h}`).on(
       "postgres_changes",
       {
         event: "UPDATE",
@@ -7732,137 +7732,129 @@ function zc({ domainId: s }) {
         table: "conversations",
         filter: `id=eq.${h}`
       },
-      (S) => {
-        S.new.status === "archived" ? (I(!0), oe()) : I(!1);
+      (_) => {
+        _.new.status === "archived" ? (I(!0), oe()) : I(!1);
       }
     ).subscribe();
     return () => {
-      _.unsubscribe();
+      w.unsubscribe();
     };
-  }, [h]), he(() => {
+  }, [h]), fe(() => {
     $.current = new Audio("https://assets.mixkit.co/active_storage/sfx/2354/2354-preview.mp3");
   }, []);
   const oe = () => {
-    $.current && ($.current.currentTime = 0, $.current.play().catch((_) => {
-      console.log("Error playing notification:", _);
+    $.current && ($.current.currentTime = 0, $.current.play().catch((w) => {
+      console.log("Error playing notification:", w);
     }));
-  }, Y = (_) => {
-    console.log("Setting up subscription for conversation:", _);
-    const S = q.channel("messages").on(
+  };
+  fe(() => {
+    if (!h) {
+      console.log("No conversation ID yet, skipping subscription");
+      return;
+    }
+    console.log("Setting up subscription for conversation:", h);
+    const w = W.channel("messages").on(
       "postgres_changes",
       {
         event: "*",
         // Listen to all events (INSERT, UPDATE, DELETE)
         schema: "public",
         table: "messages",
-        filter: `conversation_id=eq.${_}`
+        filter: `conversation_id=eq.${h}`
       },
-      (D) => {
-        if (console.log("Received real-time event:", D), D.eventType === "INSERT") {
-          const F = D.new;
-          console.log("New message:", F), a((de) => m.has(F.id) ? (console.log("Message already exists, skipping"), de) : (m.add(F.id), F.sender_type === "bot" && oe(), console.log("Adding new message to state"), [...de, F]));
+      (_) => {
+        if (console.log("Received real-time event:", _), _.eventType === "INSERT") {
+          const U = _.new;
+          console.log("New message:", U), a((J) => m.has(U.id) ? (console.log("Message already exists, skipping"), J) : (m.add(U.id), U.sender_type === "bot" && oe(), console.log("Adding new message to state"), [...J, U]));
         }
       }
     );
-    return S.subscribe((D) => {
-      console.log("Subscription status:", D), D === "SUBSCRIBED" ? console.log("Successfully subscribed to messages") : D === "CLOSED" ? console.log("Subscription closed") : D === "CHANNEL_ERROR" && console.error("Subscription error");
-    }), S;
-  };
-  he(() => {
-    let _ = null;
-    return h && (_ = Y(h)), () => {
-      _ && (console.log("Cleaning up subscription for conversation:", h), _.unsubscribe());
+    return w.subscribe((_) => {
+      console.log("Subscription status:", _), _ === "SUBSCRIBED" ? console.log("Successfully subscribed to messages") : _ === "CLOSED" ? console.log("Subscription closed") : _ === "CHANNEL_ERROR" && console.error("Subscription error");
+    }), () => {
+      console.log("Cleaning up subscription for conversation:", h), w.unsubscribe();
     };
-  }, [h, e]), he(() => {
-    e && O.current && O.current.scrollIntoView({ behavior: "smooth" });
-  }, [e]), he(() => {
+  }, [h, e]), fe(() => {
     (async () => {
-      let S = localStorage.getItem(ms);
-      S || (S = window.crypto.randomUUID(), localStorage.setItem(ms, S)), T(S), await X(S);
+      let _ = localStorage.getItem(ms);
+      _ || (_ = window.crypto.randomUUID(), localStorage.setItem(ms, _)), T(_), await V(_);
     })();
   }, []);
-  const X = async (_) => {
+  const V = async (w) => {
     try {
-      const { data: S, error: D } = await q.from("conversations").select("*").eq("session_id", _).eq("status", "active").order("last_message_at", { ascending: !1 }).limit(1).single();
-      if (D) {
-        if (D.code === "PGRST116")
+      const { data: _, error: U } = await W.from("conversations").select("*").eq("session_id", w).eq("status", "active").order("last_message_at", { ascending: !1 }).limit(1).single();
+      if (U) {
+        if (U.code === "PGRST116")
           return;
-        throw D;
+        throw U;
       }
-      const F = /* @__PURE__ */ new Date();
-      if (F.setDate(F.getDate() - qc), new Date(S.last_message_at) < F) {
-        await q.from("conversations").update({ status: "archived" }).eq("id", S.id);
+      const J = /* @__PURE__ */ new Date();
+      if (J.setDate(J.getDate() - qc), new Date(_.last_message_at) < J) {
+        await W.from("conversations").update({ status: "archived" }).eq("id", _.id);
         return;
       }
-      f(S.id);
-      const { data: de } = await q.from("messages").select("*").eq("conversation_id", S.id).order("created_at", { ascending: !0 });
-      if (de) {
-        const Ge = de.filter((Me) => m.has(Me.id) ? !1 : (m.add(Me.id), !0));
-        a(Ge);
+      f(_.id);
+      const { data: lt } = await W.from("messages").select("*").eq("conversation_id", _.id).order("created_at", { ascending: !0 });
+      if (lt) {
+        const Dt = lt.filter((Le) => m.has(Le.id) ? !1 : (m.add(Le.id), !0));
+        a(Dt);
       }
-    } catch (S) {
-      console.error("Error loading existing conversation:", S), A("Failed to load conversation history");
+    } catch (_) {
+      console.error("Error loading existing conversation:", _), A("Failed to load conversation history");
     }
-  }, ge = async () => {
+  }, Z = async () => {
     try {
-      const { data: { user: _ } } = await q.auth.getUser();
-      if (!_) {
-        await q.auth.signInAnonymously();
-        const { data: { user: F } } = await q.auth.getUser();
-        if (!F) throw new Error("Failed to create anonymous session");
+      const { data: { user: w } } = await W.auth.getUser();
+      if (!w) {
+        await W.auth.signInAnonymously();
+        const { data: { user: J } } = await W.auth.getUser();
+        if (!J) throw new Error("Failed to create anonymous session");
       }
-      const { data: S, error: D } = await q.from("conversations").insert({
+      const { data: _, error: U } = await W.from("conversations").insert({
         domain_id: s,
-        user_id: _.id,
+        user_id: w.id,
         session_id: P,
         // Add the session_id
         last_message_at: (/* @__PURE__ */ new Date()).toISOString(),
         status: "active"
       }).select().single();
-      if (D) throw D;
-      return S.id;
-    } catch (_) {
-      throw console.error("Error creating conversation:", _), _;
+      if (U) throw U;
+      return _.id;
+    } catch (w) {
+      throw console.error("Error creating conversation:", w), w;
     }
-  }, ve = async (_) => {
+  }, he = async (w) => {
     try {
       y(!0), A(null);
-      const { data: { user: S } } = await q.auth.getUser();
-      S || await q.auth.signInAnonymously();
-      let D = h;
-      D || (D = await ge(), f(D), Y(D));
-      const F = {
-        id: window.crypto.randomUUID(),
-        content: _,
-        sender_type: "user",
-        created_at: (/* @__PURE__ */ new Date()).toISOString()
-      };
-      a((de) => m.has(F.id) ? de : (m.add(F.id), [...de, F])), await V(_, D), n("");
-    } catch (S) {
-      console.error("Error sending message:", S), A("Failed to send message. Please try again.");
+      const { data: { user: _ } } = await W.auth.getUser();
+      _ || await W.auth.signInAnonymously();
+      const U = h || await Z();
+      h || f(U), await H(w, U), n("");
+    } catch (_) {
+      console.error("Error sending message:", _), A("Failed to send message. Please try again.");
     } finally {
       y(!1);
     }
-  }, ye = async (_) => {
-    _.preventDefault(), !(!r.trim() || p) && await ve(r.trim());
+  }, me = async (w) => {
+    w.preventDefault(), !(!r.trim() || p) && await he(r.trim());
   };
-  he(() => {
+  fe(() => {
     s && (async () => {
       try {
-        const { data: S } = await q.from("domain_settings").select("*").eq("domain_id", s).single();
-        Le(S ? {
-          chatbotName: S.chatbot_name,
-          greetingMessage: S.greeting_message || "Hello! How can I help you today?",
-          color: S.primary_color || "#FF6B00",
-          headerTextColor: S.header_text_color || "#000000"
+        const { data: _ } = await W.from("domain_settings").select("*").eq("domain_id", s).single();
+        Ie(_ ? {
+          chatbotName: _.chatbot_name,
+          greetingMessage: _.greeting_message || "Hello! How can I help you today?",
+          color: _.primary_color || "#FF6B00",
+          headerTextColor: _.header_text_color || "#000000"
         } : {
           chatbotName: "Friendly Assistant",
           greetingMessage: "Hello! How can I help you today?",
           color: "#FF6B00",
           headerTextColor: "#000000"
         });
-      } catch (S) {
-        console.error("Error fetching chatbot config:", S), Le({
+      } catch (_) {
+        console.error("Error fetching chatbot config:", _), Ie({
           chatbotName: "Friendly Assistant",
           greetingMessage: "Hello! How can I help you today?",
           color: "#FF6B00",
@@ -7871,136 +7863,136 @@ function zc({ domainId: s }) {
       }
     })();
   }, [s]);
-  const [re, Le] = ne({
+  const [Y, Ie] = ne({
     chatbotName: "Chatbot",
     greetingMessage: "Hello! How can I help you today?",
     color: "#FF6B00",
     headerTextColor: "#000000"
-  }), Ne = {
-    backgroundColor: re.color
+  }), De = {
+    backgroundColor: Y.color
   };
-  return /* @__PURE__ */ w.jsxs("div", { className: "fixed bottom-6 right-6 flex flex-col items-end z-[9999]", children: [
-    e && /* @__PURE__ */ w.jsxs("div", { className: "mb-4 w-[380px] bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden", children: [
-      /* @__PURE__ */ w.jsxs("div", { className: "p-4 border-b flex items-center gap-3", style: { backgroundColor: re.color }, children: [
-        /* @__PURE__ */ w.jsxs("div", { className: "relative flex-shrink-0", children: [
-          /* @__PURE__ */ w.jsx("div", { className: "w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center", children: /* @__PURE__ */ w.jsx("span", { className: "text-lg", children: "🤖" }) }),
-          /* @__PURE__ */ w.jsx("div", { className: "absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white", style: Ne })
+  return /* @__PURE__ */ b.jsxs("div", { className: "fixed bottom-6 right-6 flex flex-col items-end z-[9999]", children: [
+    e && /* @__PURE__ */ b.jsxs("div", { className: "mb-4 w-[380px] bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden", children: [
+      /* @__PURE__ */ b.jsxs("div", { className: "p-4 border-b flex items-center gap-3", style: { backgroundColor: Y.color }, children: [
+        /* @__PURE__ */ b.jsxs("div", { className: "relative flex-shrink-0", children: [
+          /* @__PURE__ */ b.jsx("div", { className: "w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center", children: /* @__PURE__ */ b.jsx("span", { className: "text-lg", children: "🤖" }) }),
+          /* @__PURE__ */ b.jsx("div", { className: "absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white", style: De })
         ] }),
-        /* @__PURE__ */ w.jsxs("div", { className: "flex-1", children: [
-          /* @__PURE__ */ w.jsx("h3", { className: "font-medium", style: { color: re.headerTextColor }, children: re.chatbotName }),
-          /* @__PURE__ */ w.jsxs("p", { className: "text-sm", style: { color: re.headerTextColor }, children: [
+        /* @__PURE__ */ b.jsxs("div", { className: "flex-1", children: [
+          /* @__PURE__ */ b.jsx("h3", { className: "font-medium", style: { color: Y.headerTextColor }, children: Y.chatbotName }),
+          /* @__PURE__ */ b.jsxs("p", { className: "text-sm", style: { color: Y.headerTextColor }, children: [
             "from ",
-            re.chatbotName
+            Y.chatbotName
           ] })
         ] }),
-        u === "chat" && /* @__PURE__ */ w.jsxs(
+        u === "chat" && /* @__PURE__ */ b.jsxs(
           "button",
           {
-            onClick: fe,
+            onClick: de,
             className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
-            style: { color: re.headerTextColor },
+            style: { color: Y.headerTextColor },
             children: [
-              /* @__PURE__ */ w.jsx(An, { className: "h-4 w-4" }),
+              /* @__PURE__ */ b.jsx(An, { className: "h-4 w-4" }),
               "History"
             ]
           }
         )
       ] }),
-      /* @__PURE__ */ w.jsx("div", { className: "h-[400px] overflow-y-auto p-4 bg-gray-50 relative", children: u === "history" ? /* @__PURE__ */ w.jsxs("div", { className: "space-y-4 h-full", children: [
-        /* @__PURE__ */ w.jsxs("div", { className: "flex justify-between items-center mb-4", children: [
-          /* @__PURE__ */ w.jsx("h3", { className: "font-medium text-gray-900", children: "Conversation History" }),
-          /* @__PURE__ */ w.jsxs(
+      /* @__PURE__ */ b.jsx("div", { className: "h-[400px] overflow-y-auto p-4 bg-gray-50 relative", children: u === "history" ? /* @__PURE__ */ b.jsxs("div", { className: "space-y-4 h-full", children: [
+        /* @__PURE__ */ b.jsxs("div", { className: "flex justify-between items-center mb-4", children: [
+          /* @__PURE__ */ b.jsx("h3", { className: "font-medium text-gray-900", children: "Conversation History" }),
+          /* @__PURE__ */ b.jsxs(
             "button",
             {
-              onClick: z,
+              onClick: q,
               className: "flex items-center gap-2 px-3 py-1.5 bg-orange-500 text-white text-sm rounded-lg hover:bg-orange-600",
               children: [
-                /* @__PURE__ */ w.jsx(Cn, { className: "h-4 w-4" }),
+                /* @__PURE__ */ b.jsx(Cn, { className: "h-4 w-4" }),
                 "Start New Chat"
               ]
             }
           )
         ] }),
-        o.map((_) => /* @__PURE__ */ w.jsxs(
+        o.map((w) => /* @__PURE__ */ b.jsxs(
           "button",
           {
-            onClick: () => xe(_),
+            onClick: () => ke(w),
             className: "w-full text-left p-4 rounded-lg hover:bg-gray-100 transition-colors border border-gray-200",
             children: [
-              /* @__PURE__ */ w.jsxs("div", { className: "flex justify-between items-center mb-1", children: [
-                /* @__PURE__ */ w.jsx("span", { className: "text-sm font-medium text-gray-900", children: bt(new Date(_.created_at), "PPP") }),
-                /* @__PURE__ */ w.jsx("span", { className: `text-xs px-2 py-1 rounded-full ${_.status === "archived" ? "bg-gray-100 text-gray-600" : "bg-green-100 text-green-600"}`, children: _.status === "archived" ? "Archived" : "Active" })
+              /* @__PURE__ */ b.jsxs("div", { className: "flex justify-between items-center mb-1", children: [
+                /* @__PURE__ */ b.jsx("span", { className: "text-sm font-medium text-gray-900", children: _t(new Date(w.created_at), "PPP") }),
+                /* @__PURE__ */ b.jsx("span", { className: `text-xs px-2 py-1 rounded-full ${w.status === "archived" ? "bg-gray-100 text-gray-600" : "bg-green-100 text-green-600"}`, children: w.status === "archived" ? "Archived" : "Active" })
               ] }),
-              /* @__PURE__ */ w.jsxs("p", { className: "text-sm text-gray-600", children: [
+              /* @__PURE__ */ b.jsxs("p", { className: "text-sm text-gray-600", children: [
                 "Last message: ",
-                bt(new Date(_.last_message_at), "p")
+                _t(new Date(w.last_message_at), "p")
               ] })
             ]
           },
-          _.id
+          w.id
         )),
-        o.length === 0 && /* @__PURE__ */ w.jsx("div", { className: "flex flex-col items-center justify-center h-full text-center", children: /* @__PURE__ */ w.jsx("p", { className: "mb-4", children: "No previous conversations found" }) })
-      ] }) : /* @__PURE__ */ w.jsxs("div", { className: "space-y-4", children: [
-        u === "chat" && /* @__PURE__ */ w.jsxs("div", { className: "flex gap-2", children: [
-          /* @__PURE__ */ w.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
-          /* @__PURE__ */ w.jsxs("div", { className: "bg-white p-3 rounded-lg shadow-sm max-w-[80%]", children: [
-            /* @__PURE__ */ w.jsx("p", { className: "text-sm", children: re.greetingMessage }),
-            /* @__PURE__ */ w.jsx("span", { className: "text-xs text-gray-500 mt-1 block", children: bt(/* @__PURE__ */ new Date(), "h:mm a") })
+        o.length === 0 && /* @__PURE__ */ b.jsx("div", { className: "flex flex-col items-center justify-center h-full text-center", children: /* @__PURE__ */ b.jsx("p", { className: "mb-4", children: "No previous conversations found" }) })
+      ] }) : /* @__PURE__ */ b.jsxs("div", { className: "space-y-4", children: [
+        u === "chat" && /* @__PURE__ */ b.jsxs("div", { className: "flex gap-2", children: [
+          /* @__PURE__ */ b.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
+          /* @__PURE__ */ b.jsxs("div", { className: "bg-white p-3 rounded-lg shadow-sm max-w-[80%]", children: [
+            /* @__PURE__ */ b.jsx("p", { className: "text-sm", children: Y.greetingMessage }),
+            /* @__PURE__ */ b.jsx("span", { className: "text-xs text-gray-500 mt-1 block", children: _t(/* @__PURE__ */ new Date(), "h:mm a") })
           ] })
         ] }),
-        i.map((_) => /* @__PURE__ */ w.jsxs(
+        i.map((w) => /* @__PURE__ */ b.jsxs(
           "div",
           {
-            className: `flex gap-2 ${_.sender_type === "user" ? "justify-end" : ""}`,
+            className: `flex gap-2 ${w.sender_type === "user" ? "justify-end" : ""}`,
             children: [
-              _.sender_type === "bot" && /* @__PURE__ */ w.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
-              /* @__PURE__ */ w.jsxs(
+              w.sender_type === "bot" && /* @__PURE__ */ b.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
+              /* @__PURE__ */ b.jsxs(
                 "div",
                 {
-                  className: `p-3 rounded-lg max-w-[80%] ${_.sender_type === "user" ? "bg-orange-500 text-white ml-auto" : "bg-white shadow-sm"}`,
+                  className: `p-3 rounded-lg max-w-[80%] ${w.sender_type === "user" ? "bg-orange-500 text-white ml-auto" : "bg-white shadow-sm"}`,
                   children: [
-                    /* @__PURE__ */ w.jsx("p", { className: "text-sm", children: _.content }),
-                    /* @__PURE__ */ w.jsx("span", { className: `text-xs mt-1 block ${_.sender_type === "user" ? "text-orange-100" : "text-gray-500"}`, children: bt(new Date(_.created_at), "h:mm a") })
+                    /* @__PURE__ */ b.jsx("p", { className: "text-sm", children: w.content }),
+                    /* @__PURE__ */ b.jsx("span", { className: `text-xs mt-1 block ${w.sender_type === "user" ? "text-orange-100" : "text-gray-500"}`, children: _t(new Date(w.created_at), "h:mm a") })
                   ]
                 }
               ),
-              _.sender_type === "user" && /* @__PURE__ */ w.jsx("div", { className: "w-8 h-8 rounded-full bg-orange-100 flex-shrink-0 flex items-center justify-center", children: "👤" })
+              w.sender_type === "user" && /* @__PURE__ */ b.jsx("div", { className: "w-8 h-8 rounded-full bg-orange-100 flex-shrink-0 flex items-center justify-center", children: "👤" })
             ]
           },
-          _.id
+          w.id
         )),
-        E && /* @__PURE__ */ w.jsx("div", { className: "flex justify-center", children: /* @__PURE__ */ w.jsxs("div", { className: "bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600", children: [
-          /* @__PURE__ */ w.jsx(Rn, { className: "h-4 w-4" }),
-          /* @__PURE__ */ w.jsx("span", { className: "text-sm", children: "This conversation has been archived" })
+        E && /* @__PURE__ */ b.jsx("div", { className: "flex justify-center", children: /* @__PURE__ */ b.jsxs("div", { className: "bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600", children: [
+          /* @__PURE__ */ b.jsx(Rn, { className: "h-4 w-4" }),
+          /* @__PURE__ */ b.jsx("span", { className: "text-sm", children: "This conversation has been archived" })
         ] }) }),
-        /* @__PURE__ */ w.jsx("div", { ref: O })
+        /* @__PURE__ */ b.jsx("div", { ref: O })
       ] }) }),
-      u === "chat" && /* @__PURE__ */ w.jsxs("form", { onSubmit: ye, className: "p-4 border-t bg-white", children: [
-        /* @__PURE__ */ w.jsxs("div", { className: "flex gap-2", children: [
-          /* @__PURE__ */ w.jsx("div", { className: "flex-1 relative", children: /* @__PURE__ */ w.jsx(
+      u === "chat" && /* @__PURE__ */ b.jsxs("form", { onSubmit: me, className: "p-4 border-t bg-white", children: [
+        /* @__PURE__ */ b.jsxs("div", { className: "flex gap-2", children: [
+          /* @__PURE__ */ b.jsx("div", { className: "flex-1 relative", children: /* @__PURE__ */ b.jsx(
             "input",
             {
               type: "text",
               value: r,
-              onChange: (_) => n(_.target.value),
+              onChange: (w) => n(w.target.value),
               placeholder: "Type your message...",
               className: "w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 pr-10 disabled:opacity-50 disabled:cursor-not-allowed",
-              style: { "--tw-ring-color": re.color },
+              style: { "--tw-ring-color": Y.color },
               disabled: p || E
             }
           ) }),
-          /* @__PURE__ */ w.jsx(
+          /* @__PURE__ */ b.jsx(
             "button",
             {
               type: "submit",
               disabled: !r.trim() || p || E,
               className: "p-2 rounded-full text-white flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed",
-              style: Ne,
-              children: p ? /* @__PURE__ */ w.jsx("div", { className: "h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" }) : /* @__PURE__ */ w.jsx($n, { className: "h-5 w-5" })
+              style: De,
+              children: p ? /* @__PURE__ */ b.jsx("div", { className: "h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" }) : /* @__PURE__ */ b.jsx($n, { className: "h-5 w-5" })
             }
           )
         ] }),
-        /* @__PURE__ */ w.jsx("div", { className: "text-center mt-2", children: /* @__PURE__ */ w.jsx(
+        /* @__PURE__ */ b.jsx("div", { className: "text-center mt-2", children: /* @__PURE__ */ b.jsx(
           "a",
           {
             href: "https://dashboard.ai",
@@ -8012,11 +8004,11 @@ function zc({ domainId: s }) {
         ) })
       ] })
     ] }),
-    /* @__PURE__ */ w.jsx(
+    /* @__PURE__ */ b.jsx(
       "button",
       {
         className: "w-14 h-14 rounded-full text-white flex items-center justify-center shadow-lg",
-        style: Ne,
+        style: De,
         onClick: () => t(!e),
         children: e ? "×" : "💬"
       }
@@ -8027,10 +8019,10 @@ function Hc() {
   const s = document.createElement("div");
   s.id = "chatbot-widget-root", document.body.appendChild(s);
   const e = window.CHATBOT_CONFIG || {};
-  rr(s).render(/* @__PURE__ */ w.jsx(zc, { domainId: e.domainId }));
+  rr(s).render(/* @__PURE__ */ b.jsx(zc, { domainId: e.domainId }));
 }
 Hc();
 export {
   Sn as g
 };
-//# sourceMappingURL=main-DNvWiWnT.js.map
+//# sourceMappingURL=main-DHUh9AOE.js.map
