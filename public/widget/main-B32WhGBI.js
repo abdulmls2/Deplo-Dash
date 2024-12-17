@@ -2542,7 +2542,7 @@ class ki {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-DJwnVsUX.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-DvFt_zyH.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this._endPointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7765,7 +7765,7 @@ function zc({ domainId: s }) {
       (_) => {
         if (console.log("Received real-time event:", _), _.eventType === "INSERT") {
           const U = _.new;
-          console.log("New message:", U), a((J) => m.has(U.id) ? (console.log("Message already exists, skipping"), J) : (m.add(U.id), U.sender_type === "bot" && oe(), console.log("Adding new message to state"), [...J, U]));
+          console.log("New message:", U), a((J) => m.has(U.id) ? (console.log("Message already exists, skipping"), J) : (m.add(U.id), U.sender_type === "bot" && e && oe(), console.log("Adding new message to state"), [...J, U]));
         }
       }
     );
@@ -8025,4 +8025,4 @@ Hc();
 export {
   Sn as g
 };
-//# sourceMappingURL=main-DHUh9AOE.js.map
+//# sourceMappingURL=main-B32WhGBI.js.map
