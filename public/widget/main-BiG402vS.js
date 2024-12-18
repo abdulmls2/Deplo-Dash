@@ -2554,7 +2554,7 @@ class Oi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-BdKTi8tc.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-oqcOEuud.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this._endPointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7792,7 +7792,7 @@ function Hc({ domainId: s }) {
             const J = F.filter(
               (re) => !(re.id.startsWith("temp-") && re.content === I.content && re.sender_type === I.sender_type)
             );
-            return m.add(I.id), I.sender_type === "bot" && e && Y(), console.log("Adding new message to state"), [...J, I];
+            return m.add(I.id), I.sender_type === "bot" && Y(), console.log("Adding new message to state"), [...J, I];
           });
         }
       }
@@ -7802,7 +7802,7 @@ function Hc({ domainId: s }) {
     }), () => {
       console.log("Cleaning up subscription for conversation:", h), _.unsubscribe();
     };
-  }, [h, e]), pe(() => {
+  }, [h]), pe(() => {
     (async () => {
       let w = localStorage.getItem(ms);
       w || (w = window.crypto.randomUUID(), localStorage.setItem(ms, w)), j(w), await ee(w);
@@ -8086,4 +8086,4 @@ Vc();
 export {
   Sn as g
 };
-//# sourceMappingURL=main-BVod5VDK.js.map
+//# sourceMappingURL=main-BiG402vS.js.map

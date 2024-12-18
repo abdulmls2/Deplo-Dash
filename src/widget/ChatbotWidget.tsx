@@ -275,8 +275,8 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
               // Add message ID to processed set
               processedMessageIds.add(newMessage.id);
 
-              // Play sound for new messages from bot
-              if (newMessage.sender_type === 'bot' && isExpanded) {
+              // Play sound for all bot messages, regardless of widget state
+              if (newMessage.sender_type === 'bot') {
                 playNotificationSound();
               }
 
@@ -295,7 +295,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       console.log('Cleaning up subscription for conversation:', conversationId);
       channel.unsubscribe();
     };
-  }, [conversationId, isExpanded]);
+  }, [conversationId]);
 
   useEffect(() => {
     // Initialize session and load existing conversation
