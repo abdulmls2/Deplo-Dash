@@ -2554,7 +2554,7 @@ class Oi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-oqcOEuud.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-yP_pMJKF.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this._endPointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7716,8 +7716,8 @@ function Hc({ domainId: s }) {
     };
   }, [T, h]), pe(() => {
     var _;
-    (_ = O.current) == null || _.scrollIntoView({ behavior: "smooth" });
-  }, [i]);
+    e && ((_ = O.current) == null || _.scrollIntoView({ behavior: "smooth" }));
+  }, [i, e]);
   const z = async () => {
     if (T)
       try {
@@ -7802,7 +7802,7 @@ function Hc({ domainId: s }) {
     }), () => {
       console.log("Cleaning up subscription for conversation:", h), _.unsubscribe();
     };
-  }, [h]), pe(() => {
+  }, [h, e]), pe(() => {
     (async () => {
       let w = localStorage.getItem(ms);
       w || (w = window.crypto.randomUUID(), localStorage.setItem(ms, w)), j(w), await ee(w);
@@ -8086,4 +8086,4 @@ Vc();
 export {
   Sn as g
 };
-//# sourceMappingURL=main-BiG402vS.js.map
+//# sourceMappingURL=main-DhfcoBkF.js.map

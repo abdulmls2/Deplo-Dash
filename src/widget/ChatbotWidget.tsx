@@ -125,8 +125,10 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   }, [sessionId, conversationId]);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+    if (isExpanded) {
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages, isExpanded]);
 
   // Load conversation history
   const loadConversationHistory = async () => {
@@ -295,7 +297,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       console.log('Cleaning up subscription for conversation:', conversationId);
       channel.unsubscribe();
     };
-  }, [conversationId]);
+  }, [conversationId, isExpanded]);
 
   useEffect(() => {
     // Initialize session and load existing conversation
