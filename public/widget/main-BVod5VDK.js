@@ -2554,7 +2554,7 @@ class Oi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-Bjv6X6w4.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-BdKTi8tc.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this._endPointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7948,16 +7948,13 @@ function Hc({ domainId: s }) {
               children: /* @__PURE__ */ b.jsx($n, { className: "h-4 w-4" })
             }
           ),
-          /* @__PURE__ */ b.jsxs(
+          /* @__PURE__ */ b.jsx(
             "button",
             {
               onClick: Te,
               className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
               style: { color: te.headerTextColor },
-              children: [
-                /* @__PURE__ */ b.jsx(An, { className: "h-4 w-4" }),
-                "History"
-              ]
+              children: /* @__PURE__ */ b.jsx(An, { className: "h-4 w-4" })
             }
           )
         ] })
@@ -8089,4 +8086,4 @@ Vc();
 export {
   Sn as g
 };
-//# sourceMappingURL=main-DXE2Hbq5.js.map
+//# sourceMappingURL=main-BVod5VDK.js.map

@@ -585,7 +585,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   style={{ color: config.headerTextColor }}
                 >
                   <MessageSquare className="h-4 w-4" />
-                  History
                 </button>
               </div>
             )}
