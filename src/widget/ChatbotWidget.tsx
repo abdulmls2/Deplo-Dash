@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Send, Paperclip, X, Archive, MessageSquare, MessageSquarePlus, ChevronLeft } from 'lucide-react';
+import { Send, Paperclip, X, Archive, MessageSquare, MessageSquarePlus, ChevronLeft, RefreshCw } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { format } from 'date-fns';
 import { useConversationStore } from '../lib/store/conversationStore';
@@ -527,6 +527,32 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     backgroundColor: config.color,
   };
 
+  // Add this function near your other handler functions
+  const handleRefreshChat = async () => {
+    if (conversationId) {
+      try {
+        // Clear current messages
+        setMessages([]);
+        processedMessageIds.clear();
+        
+        // Reload messages for current conversation
+        const { data: messages } = await supabase
+          .from('messages')
+          .select('*')
+          .eq('conversation_id', conversationId)
+          .order('created_at', { ascending: true });
+
+        if (messages) {
+          setMessages(messages);
+          messages.forEach(msg => processedMessageIds.add(msg.id));
+        }
+      } catch (error) {
+        console.error('Error refreshing chat:', error);
+        setError('Failed to refresh chat');
+      }
+    }
+  };
+
   return (
     <div className="fixed bottom-6 right-6 flex flex-col items-end z-[9999]">
       {isExpanded && (
@@ -544,14 +570,24 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
               <p className="text-sm" style={{ color: config.headerTextColor }}>from {config.chatbotName}</p>
             </div>
             {view === 'chat' && (
-              <button
-                onClick={handleBackToHistory}
-                className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
-                style={{ color: config.headerTextColor }}
-              >
-                <MessageSquare className="h-4 w-4" />
-                History
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={handleRefreshChat}
+                  className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
+                  style={{ color: config.headerTextColor }}
+                  title="Refresh chat"
+                >
+                  <RefreshCw className="h-4 w-4" />
+                </button>
+                <button
+                  onClick={handleBackToHistory}
+                  className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
+                  style={{ color: config.headerTextColor }}
+                >
+                  <MessageSquare className="h-4 w-4" />
+                  History
+                </button>
+              </div>
             )}
           </div>
 
