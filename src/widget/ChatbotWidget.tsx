@@ -110,7 +110,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
               )
             );
 
-            // If this is the current conversation, update archived status
+            // If this is the current conversation, update archived status and rating
             if (payload.new.id === conversationId) {
               setIsArchived(payload.new.status === 'archived');
             }
@@ -172,8 +172,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     try {
       setConversationId(conversation.id);
       setIsArchived(conversation.status === 'archived');
-      
-      console.log('Selected conversation:', conversation);
       
       const { data: messages } = await supabase
         .from('messages')
