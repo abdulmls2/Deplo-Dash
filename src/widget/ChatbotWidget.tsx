@@ -27,6 +27,7 @@ interface Conversation {
   created_at: string;
   status: 'active' | 'archived';
   last_message_at: string;
+  rating?: 'bad' | 'ok' | 'good';
 }
 
 export default function ChatbotWidget({ domainId }: { domainId: string }) {
@@ -110,7 +111,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
               )
             );
 
-            // If this is the current conversation, update archived status and rating
+            // If this is the current conversation, update archived status
             if (payload.new.id === conversationId) {
               setIsArchived(payload.new.status === 'archived');
             }
@@ -158,6 +159,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     setMessages([]);
     setConversationId(null);
     setIsArchived(false);
+    setConversationRating(null);  // Reset conversation rating
     setView('chat');
   };
 
@@ -173,6 +175,9 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       setConversationId(conversation.id);
       setIsArchived(conversation.status === 'archived');
       
+      // Always reset the conversation rating when loading a new conversation
+      setConversationRating(null);
+      
       const { data: messages } = await supabase
         .from('messages')
         .select('*')
@@ -183,6 +188,11 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
         setMessages(messages);
         processedMessageIds.clear();
         messages.forEach(msg => processedMessageIds.add(msg.id));
+      }
+      
+      // Only set the rating after loading messages, to ensure it's for this specific conversation
+      if (conversation.status === 'archived') {
+        setConversationRating(conversation.rating || null);
       }
       
       setView('chat');
@@ -555,6 +565,32 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     }
   };
 
+  const [conversationRating, setConversationRating] = useState<'bad' | 'ok' | 'good' | null>(null);
+
+  const handleRateConversation = async (rating: 'bad' | 'ok' | 'good') => {
+    if (!conversationId) return;
+
+    try {
+      const { error } = await supabase
+        .from('conversations')
+        .update({ rating })
+        .eq('id', conversationId);
+
+      if (error) throw error;
+
+      setConversationRating(rating);
+      
+      // Optimistically update the local state
+      setConversations(prevConversations => 
+        prevConversations.map(conv => 
+          conv.id === conversationId ? { ...conv, rating } : conv
+        )
+      );
+    } catch (error) {
+      console.error('Error rating conversation:', error);
+    }
+  };
+
   return (
     <div className="fixed bottom-6 right-6 flex flex-col items-end z-[9999]">
       {isExpanded && (
@@ -686,11 +722,56 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                 </div>
               ))}
               {isArchived && (
-                <div className="flex justify-center">
-                  <div className="bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600">
+                <div className="flex justify-center flex-col items-center w-full p-4">
+                  <div className="bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600 mb-4">
                     <Archive className="h-4 w-4" />
                     <span className="text-sm">This conversation has been archived</span>
                   </div>
+                  {!conversationRating && (
+                    <div className="flex flex-col items-center justify-center w-full">
+                      <div className="text-center mb-4">
+                        <h4 className="text-lg font-semibold text-gray-800 mb-2">How was this conversation?</h4>
+                        <p className="text-sm text-gray-600">Help us improve by sharing your experience</p>
+                      </div>
+                      <div className="flex gap-4">
+                        <button 
+                          onClick={() => handleRateConversation('bad')} 
+                          className="flex flex-col items-center justify-center w-20 h-20 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors p-2"
+                        >
+                          <span className="text-3xl mb-1">👎</span>
+                          <span className="text-sm font-medium">Bad</span>
+                        </button>
+                        <button 
+                          onClick={() => handleRateConversation('ok')} 
+                          className="flex flex-col items-center justify-center w-20 h-20 bg-yellow-100 text-yellow-600 rounded-lg hover:bg-yellow-200 transition-colors p-2"
+                        >
+                          <span className="text-3xl mb-1">😐</span>
+                          <span className="text-sm font-medium">OK</span>
+                        </button>
+                        <button 
+                          onClick={() => handleRateConversation('good')} 
+                          className="flex flex-col items-center justify-center w-20 h-20 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition-colors p-2"
+                        >
+                          <span className="text-3xl mb-1">👍</span>
+                          <span className="text-sm font-medium">Good</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                  {conversationRating && (
+                    <div className="flex flex-col items-center justify-center text-center">
+                      <span className="text-lg font-medium text-gray-800 mb-2">Thank you for your feedback!</span>
+                      <span className={`text-base font-semibold ${
+                        conversationRating === 'bad' ? 'text-red-600' :
+                        conversationRating === 'ok' ? 'text-yellow-600' :
+                        'text-green-600'
+                      }`}>
+                        {conversationRating === 'bad' ? 'Bad 👎' : 
+                         conversationRating === 'ok' ? 'OK 😐' : 
+                         'Good 👍'}
+                      </span>
+                    </div>
+                  )}
                 </div>
               )}
               <div ref={messagesEndRef} />
