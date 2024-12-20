@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Send, Paperclip, X, Archive, MessageSquare, MessageSquarePlus, ChevronLeft, RefreshCw, ThumbsUp, ThumbsDown, Minus } from 'lucide-react';
+import { Send, Paperclip, X, Archive, MessageSquare, MessageSquarePlus, ChevronLeft, RefreshCw } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { format } from 'date-fns';
 import { useConversationStore } from '../lib/store/conversationStore';
@@ -27,7 +27,6 @@ interface Conversation {
   created_at: string;
   status: 'active' | 'archived';
   last_message_at: string;
-  rating?: 'bad' | 'ok' | 'good';
 }
 
 export default function ChatbotWidget({ domainId }: { domainId: string }) {
@@ -563,8 +562,8 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       const { error } = await supabase
         .from('conversations')
         .update({ rating })
-        .eq('id', conversationId)
-        .headers({ 'x-session-id': sessionId });
+        .headers({ 'x-session-id': sessionId })
+        .eq('id', conversationId);
 
       if (error) throw error;
 
@@ -713,45 +712,11 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                 </div>
               ))}
               {isArchived && (
-                <div className="flex flex-col items-center gap-3 my-4">
+                <div className="flex justify-center">
                   <div className="bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600">
                     <Archive className="h-4 w-4" />
                     <span className="text-sm">This conversation has been archived</span>
                   </div>
-                  
-                  {!conversations.find(c => c.id === conversationId)?.rating && (
-                    <div className="flex flex-col items-center gap-2">
-                      <p className="text-sm text-gray-600">How was this conversation?</p>
-                      <div className="flex gap-3">
-                        <button
-                          onClick={() => handleRateConversation('bad')}
-                          className="flex items-center gap-1 px-4 py-2 rounded-lg bg-red-100 text-red-600 hover:bg-red-200 transition-colors"
-                        >
-                          <ThumbsDown className="h-4 w-4" />
-                          <span>Bad</span>
-                        </button>
-                        <button
-                          onClick={() => handleRateConversation('ok')}
-                          className="flex items-center gap-1 px-4 py-2 rounded-lg bg-yellow-100 text-yellow-600 hover:bg-yellow-200 transition-colors"
-                        >
-                          <Minus className="h-4 w-4" />
-                          <span>OK</span>
-                        </button>
-                        <button
-                          onClick={() => handleRateConversation('good')}
-                          className="flex items-center gap-1 px-4 py-2 rounded-lg bg-green-100 text-green-600 hover:bg-green-200 transition-colors"
-                        >
-                          <ThumbsUp className="h-4 w-4" />
-                          <span>Good</span>
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                  {conversations.find(c => c.id === conversationId)?.rating && (
-                    <div className="text-sm text-gray-600">
-                      Thank you for your feedback!
-                    </div>
-                  )}
                 </div>
               )}
               <div ref={messagesEndRef} />
