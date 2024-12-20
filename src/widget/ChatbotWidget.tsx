@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Send, Paperclip, X, Archive, MessageSquare, MessageSquarePlus, ChevronLeft, RefreshCw } from 'lucide-react';
+import { Send, Paperclip, X, Archive, MessageSquare, MessageSquarePlus, ChevronLeft, RefreshCw, ThumbsDown, Minus, ThumbsUp } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { format } from 'date-fns';
 import { useConversationStore } from '../lib/store/conversationStore';
@@ -722,46 +722,44 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                 </div>
               ))}
               {isArchived && (
-                <div className="flex justify-center flex-col items-center w-full p-4">
-                  <div className="bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600 mb-4">
+                <div className="flex flex-col items-center gap-3 my-4">
+                  <div className="bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600">
                     <Archive className="h-4 w-4" />
                     <span className="text-sm">This conversation has been archived</span>
                   </div>
+                  
                   {!conversationRating && (
-                    <div className="flex flex-col items-center justify-center w-full">
-                      <div className="text-center mb-4">
-                        <h4 className="text-lg font-semibold text-gray-800 mb-2">How was this conversation?</h4>
-                        <p className="text-sm text-gray-600">Help us improve by sharing your experience</p>
-                      </div>
-                      <div className="flex gap-4">
-                        <button 
-                          onClick={() => handleRateConversation('bad')} 
-                          className="flex flex-col items-center justify-center w-20 h-20 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors p-2"
+                    <div className="flex flex-col items-center gap-2">
+                      <p className="text-sm text-gray-600">How was this conversation?</p>
+                      <div className="flex gap-3">
+                        <button
+                          onClick={() => handleRateConversation('bad')}
+                          className="flex items-center gap-1 px-4 py-2 rounded-lg bg-red-100 text-red-600 hover:bg-red-200 transition-colors"
                         >
-                          <span className="text-3xl mb-1">👎</span>
-                          <span className="text-sm font-medium">Bad</span>
+                          <ThumbsDown className="h-4 w-4" />
+                          <span>Bad</span>
                         </button>
-                        <button 
-                          onClick={() => handleRateConversation('ok')} 
-                          className="flex flex-col items-center justify-center w-20 h-20 bg-yellow-100 text-yellow-600 rounded-lg hover:bg-yellow-200 transition-colors p-2"
+                        <button
+                          onClick={() => handleRateConversation('ok')}
+                          className="flex items-center gap-1 px-4 py-2 rounded-lg bg-yellow-100 text-yellow-600 hover:bg-yellow-200 transition-colors"
                         >
-                          <span className="text-3xl mb-1">😐</span>
-                          <span className="text-sm font-medium">OK</span>
+                          <Minus className="h-4 w-4" />
+                          <span>OK</span>
                         </button>
-                        <button 
-                          onClick={() => handleRateConversation('good')} 
-                          className="flex flex-col items-center justify-center w-20 h-20 bg-green-100 text-green-600 rounded-lg hover:bg-green-200 transition-colors p-2"
+                        <button
+                          onClick={() => handleRateConversation('good')}
+                          className="flex items-center gap-1 px-4 py-2 rounded-lg bg-green-100 text-green-600 hover:bg-green-200 transition-colors"
                         >
-                          <span className="text-3xl mb-1">👍</span>
-                          <span className="text-sm font-medium">Good</span>
+                          <ThumbsUp className="h-4 w-4" />
+                          <span>Good</span>
                         </button>
                       </div>
                     </div>
                   )}
                   {conversationRating && (
-                    <div className="flex flex-col items-center justify-center text-center">
-                      <span className="text-lg font-medium text-gray-800 mb-2">Thank you for your feedback!</span>
-                      <span className={`text-base font-semibold ${
+                    <div className="flex flex-col items-center gap-2 text-center">
+                      <span className="text-sm text-gray-600">You rated this conversation:</span>
+                      <span className={`font-medium ${
                         conversationRating === 'bad' ? 'text-red-600' :
                         conversationRating === 'ok' ? 'text-yellow-600' :
                         'text-green-600'
