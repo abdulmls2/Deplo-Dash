@@ -126,10 +126,10 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   }, [sessionId, conversationId]);
 
   useEffect(() => {
-    if (isExpanded) {
+    if (isExpanded && (messages.length > 0 || isArchived)) {
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [messages, isExpanded]);
+  }, [messages, isExpanded, isArchived]);
 
   // Load conversation history
   const loadConversationHistory = async () => {

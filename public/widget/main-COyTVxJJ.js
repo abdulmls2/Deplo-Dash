@@ -2593,7 +2593,7 @@ class ji {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-DC5KkTvW.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-BdmfjHQt.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this._endPointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7755,8 +7755,8 @@ function Gc({ domainId: s }) {
     };
   }, [T, h]), me(() => {
     var v;
-    e && ((v = x.current) == null || v.scrollIntoView({ behavior: "smooth" }));
-  }, [i, e]);
+    e && (i.length > 0 || k) && ((v = x.current) == null || v.scrollIntoView({ behavior: "smooth" }));
+  }, [i, e, k]);
   const H = async () => {
     if (T)
       try {
@@ -8182,4 +8182,4 @@ Jc();
 export {
   Sn as g
 };
-//# sourceMappingURL=main-rVrn18-Q.js.map
+//# sourceMappingURL=main-COyTVxJJ.js.map
