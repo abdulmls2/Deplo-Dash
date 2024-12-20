@@ -173,6 +173,8 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       setConversationId(conversation.id);
       setIsArchived(conversation.status === 'archived');
       
+      console.log('Selected conversation:', conversation);
+      
       const { data: messages } = await supabase
         .from('messages')
         .select('*')
@@ -552,32 +554,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
         console.error('Error refreshing chat:', error);
         setError('Failed to refresh chat');
       }
-    }
-  };
-
-  const handleRateConversation = async (rating: 'bad' | 'ok' | 'good') => {
-    if (!conversationId || !sessionId) return;
-
-    try {
-      const { error } = await supabase
-        .from('conversations')
-        .update({ rating })
-        .headers({ 'x-session-id': sessionId })
-        .eq('id', conversationId);
-
-      if (error) throw error;
-
-      // Update local state
-      setConversations(prev => 
-        prev.map(conv => 
-          conv.id === conversationId 
-            ? { ...conv, rating } 
-            : conv
-        )
-      );
-    } catch (error) {
-      console.error('Error rating conversation:', error);
-      setError('Failed to rate conversation');
     }
   };
 
