@@ -47,6 +47,15 @@ export default function ConversationList({ onSelectConversation, selectedId }: C
     }
   }, [currentDomain, setCurrentDomainId]);
 
+  const formatWaitingTime = (requestedAt: string) => {
+    const waitTime = Date.now() - new Date(requestedAt).getTime();
+    const minutes = Math.floor(waitTime / 60000);
+    
+    if (minutes < 1) return 'Just now';
+    if (minutes === 1) return '1 minute';
+    return `${minutes} minutes`;
+  };
+
   if (!currentDomain) {
     return (
       <div className="flex-1 flex items-center justify-center text-gray-500">
@@ -116,6 +125,20 @@ export default function ConversationList({ onSelectConversation, selectedId }: C
               
               {!conversation.is_read && (
                 <span className="inline-block w-2 h-2 bg-orange-500 rounded-full mt-1"></span>
+              )}
+              
+              {conversation.requested_live_at && (
+                <div className="mt-2 flex items-center gap-2">
+                  <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                    conversation.status === 'archived' 
+                      ? 'bg-blue-100 text-black-800' 
+                      : 'bg-red-100 text-red-800'
+                  }`}>
+                    {conversation.status === 'archived' 
+                      ? 'Requested Live Chat' 
+                      : `Waiting for agent • ${formatWaitingTime(conversation.requested_live_at)}`}
+                  </span>
+                </div>
               )}
             </div>
           </button>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Send, Paperclip, X, Archive, MessageSquare, MessageSquarePlus, ChevronLeft, RefreshCw, ThumbsDown, Minus, ThumbsUp } from 'lucide-react';
+import { Send, Paperclip, X, Archive, MessageSquare, MessageSquarePlus, ChevronLeft, RefreshCw, ThumbsDown, Minus, ThumbsUp, UserRound, Hourglass } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { format } from 'date-fns';
 import { useConversationStore } from '../lib/store/conversationStore';
@@ -45,6 +45,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const [isArchived, setIsArchived] = useState(false);
   const notificationSound = useRef<HTMLAudioElement | null>(null);
   const { sendMessage: chatbotSendMessage } = useChatbotStore();
+  const [isRequestingLiveChat, setIsRequestingLiveChat] = useState(false);
 
   // Add this helper function at the top of the component
   const isMessageDuplicate = (newMsg: Message, existingMessages: Message[]) => {
@@ -160,6 +161,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     setConversationId(null);
     setIsArchived(false);
     setConversationRating(null);  // Reset conversation rating
+    setIsRequestingLiveChat(false); // Reset live chat request state
     setView('chat');
   };
 
@@ -174,9 +176,8 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     try {
       setConversationId(conversation.id);
       setIsArchived(conversation.status === 'archived');
-      
-      // Always reset the conversation rating when loading a new conversation
       setConversationRating(null);
+      setIsRequestingLiveChat(false); // Reset live chat request state
       
       const { data: messages } = await supabase
         .from('messages')
@@ -190,7 +191,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
         messages.forEach(msg => processedMessageIds.add(msg.id));
       }
       
-      // Only set the rating after loading messages, to ensure it's for this specific conversation
       if (conversation.status === 'archived') {
         setConversationRating(conversation.rating || null);
       }
@@ -591,6 +591,38 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     }
   };
 
+  const handleRequestLiveChat = async () => {
+    if (!conversationId) return;
+    
+    try {
+      // Update conversation with live chat request
+      const { error } = await supabase
+        .from('conversations')
+        .update({ 
+          requested_live_at: new Date().toISOString()
+        })
+        .eq('id', conversationId);
+
+      if (error) throw error;
+
+      setIsRequestingLiveChat(true);
+      
+      // Add system message about live chat request
+      const systemMessage = {
+        id: `temp-${Date.now()}`,
+        content: "I'll connect you with a live agent. Please wait a moment while I transfer your chat.",
+        sender_type: 'bot',
+        created_at: new Date().toISOString(),
+      };
+
+      setMessages(prev => [...prev, systemMessage]);
+
+    } catch (error) {
+      console.error('Error requesting live chat:', error);
+      setError('Failed to request live chat. Please try again.');
+    }
+  };
+
   return (
     <div className="fixed bottom-6 right-6 flex flex-col items-end z-[9999]">
       {isExpanded && (
@@ -609,6 +641,25 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             </div>
             {view === 'chat' && (
               <div className="flex items-center gap-2">
+                {!isRequestingLiveChat ? (
+                  <button
+                    onClick={handleRequestLiveChat}
+                    className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm hover:bg-white/30"
+                    style={{ color: config.headerTextColor }}
+                    title="Request live agent"
+                    disabled={!conversationId || isArchived}
+                  >
+                    <UserRound className="h-4 w-4" />
+                  </button>
+                ) : (
+                  <div
+                    className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
+                    style={{ color: config.headerTextColor }}
+                    title="Waiting for agent"
+                  >
+                    <Hourglass className="h-4 w-4" />
+                  </div>
+                )}
                 <button
                   onClick={handleRefreshChat}
                   className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"

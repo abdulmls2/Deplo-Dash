@@ -1,3 +1,9 @@
+import React from 'react';
+import { create } from 'zustand';
+import { supabase } from '../supabase';
+import { Database } from '../database.types';
+import { toast } from 'react-hot-toast';
+import { UserRound } from 'lucide-react';
 import { create } from 'zustand';
 import { supabase } from '../supabase';
 import { Database } from '../database.types';
@@ -72,6 +78,67 @@ export const useConversationStore = create<ConversationStore>((set, get) => ({
             }));
           }
         )
+        .on(
+          'postgres_changes',
+          {
+            event: 'UPDATE',
+            schema: 'public',
+            table: 'conversations',
+            filter: `domain_id=eq.${domainId}`,
+          },
+          async (payload) => {
+            const updatedConversation = payload.new as Conversation;
+            const { activeFilter } = get();
+
+            set((state) => {
+              // Find the index of the existing conversation
+              const existingIndex = state.conversations.findIndex(
+                conv => conv.id === updatedConversation.id
+              );
+
+              // If conversation exists, update it
+              if (existingIndex !== -1) {
+                const updatedConversations = [...state.conversations];
+                
+                // If current filter is 'active' and conversation is no longer active
+                if (
+                  activeFilter === 'active' && 
+                  (updatedConversation.requested_live_at !== null || 
+                   updatedConversation.status !== 'active')
+                ) {
+                  // Remove the conversation from the list
+                  updatedConversations.splice(existingIndex, 1);
+                } else {
+                  // Otherwise, update the conversation
+                  updatedConversations[existingIndex] = updatedConversation;
+                }
+
+                return { conversations: updatedConversations };
+              }
+
+              // If conversation doesn't exist, add it based on current filter
+              if (
+                activeFilter === 'urgent' && 
+                updatedConversation.requested_live_at !== null
+              ) {
+                return { 
+                  conversations: [updatedConversation, ...state.conversations] 
+                };
+              } else if (
+                activeFilter === 'active' && 
+                updatedConversation.requested_live_at === null &&
+                updatedConversation.status === 'active'
+              ) {
+                return { 
+                  conversations: [updatedConversation, ...state.conversations] 
+                };
+              }
+
+              // If it doesn't match current filter, don't add
+              return { conversations: state.conversations };
+            });
+          }
+        )
         .subscribe();
 
       // Clean up subscription when domain changes
@@ -119,10 +186,10 @@ export const useConversationStore = create<ConversationStore>((set, get) => ({
       // Apply filter based on activeFilter
       switch (activeFilter) {
         case 'active':
-          query = query.eq('status', 'active').eq('is_starred', false);
+          query = query.eq('status', 'active').is('requested_live_at', null);
           break;
         case 'urgent':
-          query = query.eq('status', 'active').eq('is_starred', true);
+          query = query.not('requested_live_at', 'is', null).eq('status', 'active');
           break;
         case 'closed':
           query = query.eq('status', 'archived');
