@@ -207,11 +207,16 @@ export default function Conversations() {
                   {currentConversation?.title || 'New Conversation'}
                 </h1>
                 <div className="flex items-center gap-3">
-                  <ConversationDetails
-                    createdAt={currentConversation?.created_at || new Date().toISOString()}
-                    updatedAt={currentConversation?.updated_at || new Date().toISOString()}
-                    messages={messages}
-                  />
+                  {currentConversation && (
+                    <div className="flex items-center space-x-2">
+                      <ConversationDetails
+                        createdAt={currentConversation.created_at}
+                        updatedAt={currentConversation.last_message_at}
+                        messages={messages}
+                        rating={currentConversation.rating}
+                      />
+                    </div>
+                  )}
                   <div className="relative inline-flex items-center gap-1 p-1 bg-gray-200 rounded-lg" title={currentConversation?.live_mode ? 'Switch to bot mode' : 'Switch to live mode'}>
                     <button
                       onClick={() => selectedConversationId && toggleLiveMode(selectedConversationId)}

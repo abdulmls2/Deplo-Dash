@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Info } from 'lucide-react';
+import { Info, ThumbsUp, ThumbsDown, Minus } from 'lucide-react';
 import { format } from 'date-fns';
 import { useClickOutside } from '../../hooks/useClickOutside';
 
@@ -7,9 +7,15 @@ interface ConversationDetailsProps {
   createdAt: string;
   updatedAt: string;
   messages: Array<{ sender_type: 'user' | 'bot' }>;
+  rating?: 'good' | 'ok' | 'bad' | null;
 }
 
-export default function ConversationDetails({ createdAt, updatedAt, messages }: ConversationDetailsProps) {
+export default function ConversationDetails({ 
+  createdAt, 
+  updatedAt, 
+  messages, 
+  rating 
+}: ConversationDetailsProps) {
   const [showPopover, setShowPopover] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
 
@@ -17,6 +23,32 @@ export default function ConversationDetails({ createdAt, updatedAt, messages }: 
 
   const userMessages = messages.filter(m => m.sender_type === 'user').length;
   const botMessages = messages.filter(m => m.sender_type === 'bot').length;
+
+  const renderRatingIcon = () => {
+    switch(rating) {
+      case 'good':
+        return <ThumbsUp className="h-5 w-5 text-green-500" />;
+      case 'ok':
+        return <Minus className="h-5 w-5 text-yellow-500" />;
+      case 'bad':
+        return <ThumbsDown className="h-5 w-5 text-red-500" />;
+      default:
+        return null;
+    }
+  };
+
+  const getRatingText = () => {
+    switch(rating) {
+      case 'good':
+        return 'Good';
+      case 'ok':
+        return 'Ok';
+      case 'bad':
+        return 'Bad';
+      default:
+        return 'No Rating';
+    }
+  };
 
   return (
     <div className="relative" ref={popoverRef}>
@@ -56,6 +88,13 @@ export default function ConversationDetails({ createdAt, updatedAt, messages }: 
               <div>
                 <p className="text-sm text-gray-600">Bot Messages</p>
                 <p className="text-sm font-medium">{botMessages}</p>
+              </div>
+            </div>
+            <div>
+              <p className="text-sm text-gray-600">User Rating</p>
+              <div className="flex items-center space-x-2">
+                {renderRatingIcon()}
+                <p className="text-sm font-medium">{getRatingText()}</p>
               </div>
             </div>
           </div>
