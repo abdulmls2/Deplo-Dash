@@ -40,6 +40,7 @@ interface ConversationStore {
   activeFilter: 'active' | 'all' | 'urgent' | 'closed';
   setActiveFilter: (filter: 'active' | 'all' | 'urgent' | 'closed') => void;
   toggleLiveMode: (conversationId: string) => Promise<void>;
+  markConversationAsRead: (conversationId: string) => Promise<void>;
 }
 
 export const useConversationStore = create<ConversationStore>((set, get) => ({
@@ -536,5 +537,33 @@ export const useConversationStore = create<ConversationStore>((set, get) => ({
   setActiveFilter: (filter: 'active' | 'all' | 'urgent' | 'closed') => {
     set({ activeFilter: filter });
     get().fetchConversations();
+  },
+
+  markConversationAsRead: async (conversationId: string) => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error('User not authenticated');
+
+      const { error } = await supabase
+        .from('conversations')
+        .update({ is_read: true })
+        .eq('id', conversationId);
+
+      if (error) throw error;
+
+      // Optimistically update the local store
+      set((state) => ({
+        conversations: state.conversations.map(conv => 
+          conv.id === conversationId ? { ...conv, is_read: true } : conv
+        ),
+        // If this is the current conversation, update it too
+        currentConversation: state.currentConversation?.id === conversationId 
+          ? { ...state.currentConversation, is_read: true } 
+          : state.currentConversation
+      }));
+    } catch (error) {
+      console.error('Error marking conversation as read:', error);
+      toast.error('Failed to mark conversation as read');
+    }
   },
 }));

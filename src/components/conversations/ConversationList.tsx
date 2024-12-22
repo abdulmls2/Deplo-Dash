@@ -11,7 +11,13 @@ interface ConversationListProps {
 }
 
 export default function ConversationList({ onSelectConversation, selectedId }: ConversationListProps) {
-  const { conversations, fetchConversations, isLoading, setCurrentDomainId } = useConversationStore();
+  const { 
+    conversations, 
+    fetchConversations, 
+    isLoading, 
+    setCurrentDomainId,
+    markConversationAsRead 
+  } = useConversationStore();
   const { currentDomain } = useDomain();
   const [latestMessages, setLatestMessages] = useState<{[key: string]: string}>({});
 
@@ -82,10 +88,17 @@ export default function ConversationList({ onSelectConversation, selectedId }: C
         conversations.map((conversation) => (
           <button
             key={conversation.id}
-            onClick={() => onSelectConversation(conversation.id)}
+            onClick={() => {
+              // Mark as read only for live chat conversations that are unread
+              if (conversation.requested_live_at && !conversation.is_read) {
+                markConversationAsRead(conversation.id);
+              }
+              // Then select the conversation
+              onSelectConversation(conversation.id);
+            }}
             className={`w-full flex items-start gap-3 p-4 hover:bg-gray-50 border-b border-gray-200 text-left transition-colors ${
               selectedId === conversation.id ? 'bg-gray-50' : ''
-            }`}
+            } ${conversation.requested_live_at && !conversation.is_read ? 'bg-blue-50 border-l-4 border-l-blue-500' : ''}`}
           >
             <div className="rounded-full bg-gray-100 p-2">
               <User className="h-5 w-5 text-gray-600" />
@@ -124,7 +137,7 @@ export default function ConversationList({ onSelectConversation, selectedId }: C
               )}
               
               {!conversation.is_read && (
-                <span className="inline-block w-2 h-2 bg-orange-500 rounded-full mt-1"></span>
+                <div className="absolute top-0 right-0 w-3 h-3 bg-blue-500 rounded-full animate-pulse border-2 border-white shadow-md"></div>
               )}
               
               {conversation.requested_live_at && (
