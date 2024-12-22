@@ -20,6 +20,7 @@ export default function ConversationList({ onSelectConversation, selectedId }: C
   } = useConversationStore();
   const { currentDomain } = useDomain();
   const [latestMessages, setLatestMessages] = useState<{[key: string]: string}>({});
+  const [currentTime, setCurrentTime] = useState(Date.now());
 
   useEffect(() => {
     const fetchLatestMessages = async () => {
@@ -53,13 +54,27 @@ export default function ConversationList({ onSelectConversation, selectedId }: C
     }
   }, [currentDomain, setCurrentDomainId]);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(Date.now());
+    }, 60000); // Update every minute instead of every second
+
+    return () => clearInterval(timer);
+  }, []);
+
   const formatWaitingTime = (requestedAt: string) => {
-    const waitTime = Date.now() - new Date(requestedAt).getTime();
+    const waitTime = currentTime - new Date(requestedAt).getTime();
     const minutes = Math.floor(waitTime / 60000);
     
-    if (minutes < 1) return 'Just now';
-    if (minutes === 1) return '1 minute';
-    return `${minutes} minutes`;
+    if (minutes < 1) return 'just now';
+    if (minutes === 1) return '1 min';
+    return `${minutes} min`;
+  };
+
+  const formatDistanceToNowWithJustNow = (date: Date) => {
+    const distanceToNow = formatDistanceToNow(date, { addSuffix: true });
+    if (distanceToNow === 'a few seconds ago') return 'just now';
+    return distanceToNow;
   };
 
   if (!currentDomain) {
@@ -110,7 +125,7 @@ export default function ConversationList({ onSelectConversation, selectedId }: C
                 </span>
                 {conversation.last_message_at && (
                   <span className="text-sm text-gray-500">
-                    {formatDistanceToNow(new Date(conversation.last_message_at), { addSuffix: true })}
+                    {formatDistanceToNowWithJustNow(new Date(conversation.last_message_at))}
                   </span>
                 )}
               </div>
