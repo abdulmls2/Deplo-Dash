@@ -117,12 +117,18 @@ export default function Domain() {
     };
   }, []);
 
-  const integrationCode = `<script>
+  const integrationCode = `
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<link href="https://deplo-dash.vercel.app/widget/style.css" rel="stylesheet">
+  <script>
   window.CHATBOT_CONFIG = {
     domainId: "${currentDomain?.id || ''}",
   };
 </script>
-<script src="http://localhost:5173/chatbot-widget.umd.js"></script>`;
+<script src="https://deplo-dash.vercel.app/widget/chatbot-widget.umd.js"></script>
+
+`;
 
   const handleCopyCode = async () => {
     try {

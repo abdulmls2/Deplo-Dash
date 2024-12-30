@@ -6,12 +6,13 @@ import Dashboard from './pages/Dashboard';
 import Calendar from './components/Calendar';
 import Conversations from './pages/Conversations';
 import Domain from './pages/Domain';
+import AdminUsers from './pages/AdminUsers';
 import Settings from './pages/Settings';
 import Auth from './pages/Auth';
 import { DomainProvider } from './context/DomainContext';
 import { Toaster } from 'react-hot-toast';
 
-const validPages = ['dashboard', 'calendar', 'conversations', 'domain', 'integrations', 'settings', 'email', 'leads'];
+const validPages = ['dashboard', 'calendar', 'conversations', 'domain', 'integrations', 'settings', 'email', 'leads', 'admin-users'];
 
 export default function App() {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
@@ -64,7 +65,8 @@ export default function App() {
             {currentPage === 'conversations' && <Conversations />}
             {currentPage === 'domain' && <Domain />}
             {currentPage === 'settings' && <Settings />}
-            {!['dashboard', 'calendar', 'conversations', 'domain', 'settings'].includes(currentPage) && (
+            {currentPage === 'admin-users' && <AdminUsers />}
+            {!['dashboard', 'calendar', 'conversations', 'domain', 'settings', 'admin-users'].includes(currentPage) && (
               <div className="p-6">
                 <h2 className="text-2xl font-semibold">
                   {currentPage.charAt(0).toUpperCase() + currentPage.slice(1)}

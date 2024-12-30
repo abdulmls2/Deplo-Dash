@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import {
   LayoutDashboard,
   MessageSquare,
+  Users,
   Puzzle,
   Settings,
   Calendar,
   Mail,
   Globe,
-  Users,
+  UserCog,
   ChevronLeft,
   ChevronRight,
   GripVertical
@@ -33,6 +34,7 @@ const iconComponents = {
   settings: Settings,
   calendar: Calendar,
   email: Mail,
+  'admin-users': UserCog,
   leads: Users,
   domain: Globe,
 };
@@ -45,6 +47,7 @@ const defaultMenuItems: MenuItem[] = [
   { icon: Calendar, label: 'Calendar', id: 'calendar' },
   { icon: Mail, label: 'Email Marketing', id: 'email' },
   { icon: Users, label: 'Leads', id: 'leads' },
+  { icon: UserCog, label: 'Admin Users', id: 'admin-users' },
   { icon: Globe, label: 'Domain', id: 'domain' },
 ];
 
@@ -55,10 +58,14 @@ export default function Sidebar({ isOpen, toggleSidebar, currentPage, onPageChan
     if (savedOrder) {
       try {
         const savedIds = JSON.parse(savedOrder) as string[];
-        const orderedItems = savedIds.map(id => ({
-          ...defaultMenuItems.find(item => item.id === id)!,
-          icon: iconComponents[id as keyof typeof iconComponents]
-        }));
+        const orderedItems = savedIds.map(id => {
+          const defaultItem = defaultMenuItems.find(item => item.id === id);
+          if (!defaultItem) return null;
+          return {
+            ...defaultItem,
+            icon: iconComponents[id as keyof typeof iconComponents] || defaultItem.icon
+          };
+        }).filter((item): item is MenuItem => item !== null);
         if (orderedItems.length === defaultMenuItems.length) {
           return orderedItems;
         }
