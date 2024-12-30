@@ -69,7 +69,7 @@ export default async function handler(
     console.log('Making OpenAI API request with message:', message);
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4o-mini",
       messages: [
         { role: "system", content: SYSTEM_PROMPT },
         { role: "user", content: message }
