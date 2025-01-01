@@ -61,9 +61,9 @@ export const useConversationStore = create<ConversationStore>((set, get) => ({
       get().fetchConversations();
       get().fetchTags();
       
-      // Set up real-time subscription for new conversations
+      // Set up real-time subscription for conversations
       const channel = supabase
-        .channel('new-conversations')
+        .channel('conversations-changes')
         .on(
           'postgres_changes',
           {
@@ -101,13 +101,17 @@ export const useConversationStore = create<ConversationStore>((set, get) => ({
               if (existingIndex !== -1) {
                 const updatedConversations = [...state.conversations];
                 
-                // If current filter is 'active' and conversation is no longer active
+                // Handle auto-archived conversations and other status changes
                 if (
-                  activeFilter === 'active' && 
+                  (activeFilter === 'active' && 
                   (updatedConversation.requested_live_at !== null || 
-                   updatedConversation.status !== 'active')
+                   updatedConversation.status !== 'active')) ||
+                  (activeFilter === 'urgent' && 
+                   updatedConversation.requested_live_at === null) ||
+                  (activeFilter === 'closed' && 
+                   updatedConversation.status !== 'archived')
                 ) {
-                  // Remove the conversation from the list
+                  // Remove the conversation from the list if it no longer matches the filter
                   updatedConversations.splice(existingIndex, 1);
                 } else {
                   // Otherwise, update the conversation
@@ -119,16 +123,14 @@ export const useConversationStore = create<ConversationStore>((set, get) => ({
 
               // If conversation doesn't exist, add it based on current filter
               if (
-                activeFilter === 'urgent' && 
-                updatedConversation.requested_live_at !== null
-              ) {
-                return { 
-                  conversations: [updatedConversation, ...state.conversations] 
-                };
-              } else if (
-                activeFilter === 'active' && 
-                updatedConversation.requested_live_at === null &&
-                updatedConversation.status === 'active'
+                (activeFilter === 'urgent' && 
+                 updatedConversation.requested_live_at !== null) ||
+                (activeFilter === 'active' && 
+                 updatedConversation.requested_live_at === null &&
+                 updatedConversation.status === 'active') ||
+                (activeFilter === 'closed' && 
+                 updatedConversation.status === 'archived') ||
+                activeFilter === 'all'
               ) {
                 return { 
                   conversations: [updatedConversation, ...state.conversations] 
