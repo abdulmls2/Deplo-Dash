@@ -70,21 +70,15 @@ export default function DomainSelector() {
     );
   }
 
-  if (!currentDomain || domains.length === 0) {
-    return (
-      <div className="px-4 py-2 text-sm text-gray-500 bg-gray-50 rounded-lg">
-        No domains available
-      </div>
-    );
-  }
-
   return (
     <div className="relative inline-block" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 px-4 py-2 text-sm bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200"
       >
-        <span className="font-medium">{currentDomain.name}</span>
+        <span className="font-medium">
+          {currentDomain?.name || 'Create Domain'}
+        </span>
         <ChevronDown className={`h-4 w-4 text-gray-500 transition-transform duration-200 ${
           isOpen ? 'transform rotate-180' : ''
         }`} />
@@ -132,23 +126,26 @@ export default function DomainSelector() {
               </button>
             )}
 
-            <div className="my-1 border-t border-gray-100" />
-
-            {domains.map((domain) => (
-              <button
-                key={domain.id}
-                onClick={() => {
-                  setCurrentDomain(domain);
-                  setIsOpen(false);
-                }}
-                className={`w-full text-left px-4 py-2 text-sm flex items-center gap-2 hover:bg-gray-50 ${
-                  currentDomain.id === domain.id ? 'bg-orange-50 text-orange-600' : 'text-gray-700'
-                }`}
-              >
-                {domain.icon && <span>{domain.icon}</span>}
-                {domain.name}
-              </button>
-            ))}
+            {domains.length > 0 && (
+              <>
+                <div className="my-1 border-t border-gray-100" />
+                {domains.map((domain) => (
+                  <button
+                    key={domain.id}
+                    onClick={() => {
+                      setCurrentDomain(domain);
+                      setIsOpen(false);
+                    }}
+                    className={`w-full text-left px-4 py-2 text-sm flex items-center gap-2 hover:bg-gray-50 ${
+                      currentDomain?.id === domain.id ? 'bg-orange-50 text-orange-600' : 'text-gray-700'
+                    }`}
+                  >
+                    {domain.icon && <span>{domain.icon}</span>}
+                    {domain.name}
+                  </button>
+                ))}
+              </>
+            )}
           </div>
         </div>
       )}
