@@ -228,9 +228,11 @@ export default function Domain() {
           domain_id: currentDomain.id,
           chatbot_name: chatbotName,
           greeting_message: greetingMessage,
-          color: color,
-          header_text_color: headerTextColor,
-          primary_color: primaryColor
+          primary_color: color,
+          header_text_color: headerTextColor
+        }, {
+          onConflict: 'domain_id',
+          ignoreDuplicates: false
         });
 
       if (settingsError) throw settingsError;
