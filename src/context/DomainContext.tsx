@@ -19,7 +19,7 @@ const DomainContext = createContext<DomainContextType | undefined>(undefined);
 
 export function DomainProvider({ children }: { children: React.ReactNode }) {
   const [domains, setDomains] = useState<Domain[]>([]);
-  const [currentDomain, setCurrentDomain] = useState<Domain | null>(null);
+  const [currentDomain, _setCurrentDomain] = useState<Domain | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export function DomainProvider({ children }: { children: React.ReactNode }) {
           const savedDomain = savedDomainId 
             ? domains.find(d => d.id === savedDomainId)
             : domains[0];
-          setCurrentDomain(savedDomain || domains[0]);
+          _setCurrentDomain(savedDomain || domains[0]);
         }
       } catch (error) {
         console.error('Error fetching domains:', error);
@@ -73,7 +73,7 @@ export function DomainProvider({ children }: { children: React.ReactNode }) {
 
       if (error) throw error;
 
-      setCurrentDomain(prev => prev ? { ...prev, name } : null);
+      _setCurrentDomain(prev => prev ? { ...prev, name } : null);
       setDomains(prev => 
         prev.map(domain => 
           domain.id === currentDomain.id 
@@ -86,10 +86,23 @@ export function DomainProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const setCurrentDomain = (domain: Domain) => {
+    // Update the current domain
+    _setCurrentDomain(domain);
+    
+    // If this is a new domain, add it to the domains list if it's not already there
+    setDomains(prev => {
+      if (!prev.find(d => d.id === domain.id)) {
+        return [...prev, domain];
+      }
+      return prev;
+    });
+  };
+
   return (
     <DomainContext.Provider value={{ 
       currentDomain, 
-      setCurrentDomain, 
+      setCurrentDomain,
       updateDomainName,
       domains,
       isLoading
