@@ -1,6 +1,7 @@
 // Vercel Serverless Function for OpenAI Chat API
 import { OpenAI } from 'openai';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { supabase } from '../lib/supabase';
 
 // Initialize OpenAI client
 const openai = new OpenAI({
@@ -9,33 +10,13 @@ const openai = new OpenAI({
 
 const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
-// Enable CORS middleware with more specific configuration
+// Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
-  // List of allowed origins
-  const allowedOrigins = [
-    'https://www.leadnchat.com',
-    'https://leadnchat.com',
-    'http://localhost:3000',
-    'https://deplo-dash.vercel.app'
-  ];
-  
-  const origin = req.headers.origin;
-  
-  // Check if the origin is allowed
-  if (origin && allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  } else {
-    // Allow all origins as fallback
-    res.setHeader('Access-Control-Allow-Origin', '*');
-  }
-
-  // Required for preflight
   res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept');
-  res.setHeader('Access-Control-Max-Age', '86400'); // 24 hours cache for preflight
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
 
-  // Handle preflight
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return true;
@@ -53,74 +34,63 @@ export default async function handler(
 
     console.log('API Request received:', {
       method: req.method,
-      headers: req.headers,
       body: req.body,
-      env: {
-        hasApiKey: !!process.env.OPENAI_API_KEY,
-        nodeEnv: process.env.NODE_ENV
-      }
     });
 
-    if (req.method !== 'POST') {
-      console.log('Method not allowed:', req.method);
-      return res.status(405).json({ error: 'Method not allowed' });
+    const { message, conversationId } = req.body;
+
+    // Get domain_id from conversation
+    const { data: conversationData, error: conversationError } = await supabase
+      .from('conversations')
+      .select('domain_id')
+      .eq('id', conversationId)
+      .single();
+
+    console.log('Conversation data:', {
+      conversationId,
+      conversationData,
+      error: conversationError
+    });
+
+    if (conversationError) {
+      console.error('Conversation error:', conversationError);
+      return res.status(404).json({ error: 'Conversation not found' });
     }
 
-    // Validate API key
-    if (!process.env.OPENAI_API_KEY) {
-      console.error('OpenAI API key is not set');
-      return res.status(500).json({ 
-        error: 'OpenAI API key is not configured',
-        env: process.env.NODE_ENV === 'development' ? {
-          hasApiKey: !!process.env.OPENAI_API_KEY,
-          nodeEnv: process.env.NODE_ENV
-        } : undefined
-      });
+    // Get prompt from domain_settings
+    const { data: domainSettings, error: settingsError } = await supabase
+      .from('domain_settings')
+      .select('prompt')
+      .eq('domain_id', conversationData.domain_id)
+      .single();
+
+    console.log('Domain settings:', {
+      domainId: conversationData.domain_id,
+      settings: domainSettings,
+      error: settingsError
+    });
+
+    if (settingsError) {
+      console.error('Settings error:', settingsError);
+      return res.status(404).json({ error: 'Domain settings not found' });
     }
 
-    const { message } = req.body;
-
-    // Validate request body
-    if (!message) {
-      console.error('Missing message in request body');
-      return res.status(400).json({ error: 'Message is required' });
-    }
-
-    console.log('Making OpenAI API request with message:', message);
+    console.log('Using prompt:', domainSettings.prompt);
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: SYSTEM_PROMPT },
+        { role: "system", content: domainSettings.prompt },
         { role: "user", content: message }
       ],
     });
 
     const response = completion.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
-    console.log('OpenAI API response:', response);
+    console.log('OpenAI response:', response);
     
     return res.status(200).json({ response });
   } catch (error: any) {
     console.error('Error in API handler:', error);
-    console.error('Error details:', {
-      name: error.name,
-      message: error.message,
-      stack: error.stack,
-      env: {
-        hasApiKey: !!process.env.OPENAI_API_KEY,
-        nodeEnv: process.env.NODE_ENV
-      }
-    });
-    
-    return res.status(500).json({ 
-      error: 'Internal server error',
-      details: process.env.NODE_ENV === 'development' ? {
-        message: error.message,
-        env: {
-          hasApiKey: !!process.env.OPENAI_API_KEY,
-          nodeEnv: process.env.NODE_ENV
-        }
-      } : undefined
-    });
+    return res.status(500).json({ error: 'Internal server error' });
   }
 }
