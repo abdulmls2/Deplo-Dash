@@ -1,8 +1,8 @@
 // Function to generate bot response using the API endpoint
 export const generateBotResponse = async (message: string, conversationId: string, domainId: string): Promise<string> => {
   try {
-    // Always use the absolute URL for the API endpoint
-    const API_URL = 'https://deplo-dash.vercel.app/api/chat';
+    // Use relative URL for the API endpoint
+    const API_URL = '/api/chat';
     
     const response = await fetch(API_URL, {
       method: 'POST',
