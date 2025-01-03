@@ -4,13 +4,11 @@ import { toast } from 'react-hot-toast';
 import { useDomain } from '../context/DomainContext';
 import { supabase } from '../lib/supabase';
 import type { FAQ } from '../types/faq';
-import type { TrainingData } from '../types/trainingData';
 import ChatbotPreview from '../components/ChatbotPreview';
 import DomainHeader from '../components/domain/DomainHeader';
 import IntegrationCode from '../components/domain/IntegrationCode';
 import ChatbotSettings from '../components/domain/ChatbotSettings';
 import FAQSection from '../components/domain/FAQSection';
-import TrainingSection from '../components/domain/TrainingSection';
 
 interface DomainSettings {
   chatbot_name: string;
@@ -29,10 +27,6 @@ export default function Domain() {
   const [greetingMessage, setGreetingMessage] = useState('👋 Hi there! How can I help you today?');
   const [domainName, setDomainName] = useState(currentDomain?.name || '');
   const [isEditing, setIsEditing] = useState(false);
-
-  const [trainingData, setTrainingData] = useState<TrainingData[]>([]);
-  const [newTrainingData, setNewTrainingData] = useState('');
-  const [trainingSearchQuery, setTrainingSearchQuery] = useState('');
 
   const [qaList, setQaList] = useState<FAQ[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -246,72 +240,6 @@ export default function Domain() {
     }
   };
 
-  const handleAddTrainingData = async () => {
-    if (!newTrainingData.trim() || !currentDomain?.id) {
-      toast.error('Training data cannot be empty');
-      return;
-    }
-
-    try {
-      const { data, error } = await supabase
-        .from('training_data')
-        .insert({
-          content: newTrainingData.trim(),
-          domain_id: currentDomain.id
-        })
-        .select()
-        .single();
-
-      if (error) throw error;
-
-      setTrainingData([...trainingData, data]);
-      setNewTrainingData('');
-      toast.success('Training data added successfully');
-    } catch (error) {
-      console.error('Error adding training data:', error);
-      toast.error('Failed to add training data');
-    }
-  };
-
-  const handleDeleteTrainingData = async (id: number | string) => {
-    try {
-      const { error } = await supabase
-        .from('training_data')
-        .delete()
-        .eq('id', id);
-
-      if (error) throw error;
-
-      setTrainingData(trainingData.filter(item => item.id !== id));
-      toast.success('Training data removed successfully');
-    } catch (error) {
-      console.error('Error deleting training data:', error);
-      toast.error('Failed to delete training data');
-    }
-  };
-
-  useEffect(() => {
-    const fetchTrainingData = async () => {
-      if (!currentDomain?.id) return;
-
-      try {
-        const { data, error } = await supabase
-          .from('training_data')
-          .select('*')
-          .eq('domain_id', currentDomain.id);
-
-        if (error) throw error;
-
-        setTrainingData(data || []);
-      } catch (error) {
-        console.error('Error fetching training data:', error);
-        toast.error('Failed to load training data');
-      }
-    };
-
-    fetchTrainingData();
-  }, [currentDomain?.id]);
-
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <div className="mb-8">
@@ -376,20 +304,6 @@ export default function Domain() {
             setNewAnswer={setNewAnswer}
             handleAddQA={handleAddQA}
             handleDeleteQA={handleDeleteQA}
-          />
-        </section>
-
-        {/* Bot Training Section */}
-        <section>
-          <h2 className="text-xl font-semibold mb-4">Bot Training</h2>
-          <TrainingSection
-            trainingData={trainingData}
-            trainingSearchQuery={trainingSearchQuery}
-            setTrainingSearchQuery={setTrainingSearchQuery}
-            newTrainingData={newTrainingData}
-            setNewTrainingData={setNewTrainingData}
-            handleAddTrainingData={handleAddTrainingData}
-            handleDeleteTrainingData={handleDeleteTrainingData}
           />
         </section>
 

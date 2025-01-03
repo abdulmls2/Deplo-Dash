@@ -11,7 +11,8 @@ import {
   UserCog,
   ChevronLeft,
   ChevronRight,
-  GripVertical
+  GripVertical,
+  Database
 } from 'lucide-react';
 
 interface MenuItem {
@@ -37,11 +38,13 @@ const iconComponents = {
   'admin-users': UserCog,
   leads: Users,
   domain: Globe,
+  'agent-data': Database,
 };
 
 const defaultMenuItems: MenuItem[] = [
   { icon: LayoutDashboard, label: 'Dashboard', id: 'dashboard' },
   { icon: MessageSquare, label: 'Conversations', id: 'conversations' },
+  { icon: Database, label: 'Agent Data', id: 'agent-data' },
   { icon: Puzzle, label: 'Integrations', id: 'integrations' },
   { icon: Settings, label: 'Settings', id: 'settings' },
   { icon: Calendar, label: 'Calendar', id: 'calendar' },
