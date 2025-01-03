@@ -1,14 +1,12 @@
 // Vercel Serverless Function for OpenAI Chat API
 import { OpenAI } from 'openai';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { supabase } from '../lib/supabase';
+import { supabase } from '../src/lib/supabase';
 
 // Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
-
-const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
