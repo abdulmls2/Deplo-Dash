@@ -1,13 +1,18 @@
 // Vercel Serverless Function for OpenAI Chat API
 import { OpenAI } from 'openai';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { createClient } from '@supabase/supabase-js';
 
 // Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
 
-const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
+// Initialize Supabase client
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+);
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
@@ -58,7 +63,7 @@ export default async function handler(
       });
     }
 
-    const { message } = req.body;
+    const { message, conversationId } = req.body;
 
     // Validate request body
     if (!message) {
@@ -66,12 +71,33 @@ export default async function handler(
       return res.status(400).json({ error: 'Message is required' });
     }
 
+    // Fetch the prompt from domain_settings
+    const { data: conversationData } = await supabase
+      .from('conversations')
+      .select('domain_id')
+      .eq('id', conversationId)
+      .single();
+
+    if (!conversationData) {
+      throw new Error('Conversation not found');
+    }
+
+    const { data: domainSettings } = await supabase
+      .from('domain_settings')
+      .select('prompt')
+      .eq('domain_id', conversationData.domain_id)
+      .single();
+
+    if (!domainSettings) {
+      throw new Error('Domain settings not found');
+    }
+
     console.log('Making OpenAI API request with message:', message);
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: SYSTEM_PROMPT },
+        { role: "system", content: domainSettings.prompt },
         { role: "user", content: message }
       ],
     });
