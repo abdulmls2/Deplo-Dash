@@ -7,8 +7,6 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
 
-const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
-
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
   res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -58,7 +56,7 @@ export default async function handler(
       });
     }
 
-    const { message } = req.body;
+    const { message, prompt } = req.body;
 
     // Validate request body
     if (!message) {
@@ -66,12 +64,17 @@ export default async function handler(
       return res.status(400).json({ error: 'Message is required' });
     }
 
+    if (!prompt) {
+      console.error('Missing prompt in request body');
+      return res.status(400).json({ error: 'Prompt is required' });
+    }
+
     console.log('Making OpenAI API request with message:', message);
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: SYSTEM_PROMPT },
+        { role: "system", content: prompt },
         { role: "user", content: message }
       ],
     });
