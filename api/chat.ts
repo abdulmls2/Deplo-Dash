@@ -57,6 +57,7 @@ export default async function handler(
     }
 
     const { message, prompt } = req.body;
+    console.log('Request body:', { message, prompt });
 
     // Validate request body
     if (!message) {
@@ -66,10 +67,13 @@ export default async function handler(
 
     if (!prompt) {
       console.error('Missing prompt in request body');
-      return res.status(400).json({ error: 'Prompt is required' });
+      return res.status(400).json({ 
+        error: 'Prompt is required',
+        requestBody: process.env.NODE_ENV === 'development' ? req.body : undefined
+      });
     }
 
-    console.log('Making OpenAI API request with message:', message);
+    console.log('Making OpenAI API request with:', { message, prompt });
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
