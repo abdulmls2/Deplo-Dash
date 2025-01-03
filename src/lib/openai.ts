@@ -1,29 +1,12 @@
+// Define the system prompt
+const SYSTEM_PROMPT = `
+You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
+
 // Function to generate bot response using the API endpoint
-export const generateBotResponse = async (message: string, conversationId: string, prompt: string): Promise<string> => {
+export const generateBotResponse = async (message: string, conversationId: string): Promise<string> => {
   try {
-    if (!prompt || typeof prompt !== 'string' || prompt.trim() === '') {
-      console.error('Invalid prompt:', { prompt, type: typeof prompt });
-      throw new Error('Prompt is required for bot response and must be a non-empty string');
-    }
-
-    if (!message || typeof message !== 'string' || message.trim() === '') {
-      console.error('Invalid message:', { message, type: typeof message });
-      throw new Error('Message is required and must be a non-empty string');
-    }
-
     // Always use the absolute URL for the API endpoint
     const API_URL = 'https://deplo-dash.vercel.app/api/chat';
-    
-    const requestBody = {
-      message: message.trim(),
-      prompt: prompt.trim()
-    };
-    
-    console.log('Sending request to API with:', {
-      url: API_URL,
-      body: requestBody,
-      conversationId // logged for debugging but not sent
-    });
     
     const response = await fetch(API_URL, {
       method: 'POST',
@@ -31,7 +14,10 @@ export const generateBotResponse = async (message: string, conversationId: strin
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify({
+        message,
+        conversationId
+      })
     });
 
     if (!response.ok) {
@@ -46,7 +32,6 @@ export const generateBotResponse = async (message: string, conversationId: strin
     }
 
     const data = await response.json();
-    console.log('API response data:', data);
     return data.response || 'Sorry, I could not generate a response.';
   } catch (error) {
     console.error('Error generating response:', error);

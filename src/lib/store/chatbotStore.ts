@@ -34,10 +34,10 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
 
       if (messageError) throw messageError;
 
-      // Check if live mode is enabled and get domain_id
+      // Check if live mode is enabled
       const { data: conversationData, error: conversationError } = await supabase
         .from('conversations')
-        .select('live_mode, domain_id')
+        .select('live_mode')
         .eq('id', conversationId)
         .single();
 
@@ -47,33 +47,7 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
       if (!conversationData.live_mode) {
         console.log('Live mode disabled, generating OpenAI response');
         try {
-          console.log('Conversation data:', conversationData);
-          
-          // Fetch the prompt from domain_settings
-          const { data: domainSettings, error: settingsError } = await supabase
-            .from('domain_settings')
-            .select('*')  // Changed from just 'prompt' to see all fields
-            .eq('domain_id', conversationData.domain_id)
-            .single();
-
-          if (settingsError) {
-            console.error('Error fetching domain settings:', settingsError);
-            throw settingsError;
-          }
-
-          console.log('Full domain settings:', domainSettings);
-          if (!domainSettings) {
-            console.error('No domain settings found');
-            throw new Error('No domain settings found');
-          }
-
-          if (!domainSettings.prompt) {
-            console.error('No prompt found in domain settings');
-            throw new Error('No prompt found in domain settings');
-          }
-
-          console.log('Using prompt:', domainSettings.prompt);
-          const botResponse = await generateBotResponse(content, conversationId, domainSettings.prompt);
+          const botResponse = await generateBotResponse(content, conversationId);
           console.log('Got OpenAI response:', botResponse);
           
           // Send bot response
