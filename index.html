@@ -5,9 +5,18 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React + TS</title>
+    <link href="https://deplo-dash.vercel.app/widget/style.css" rel="stylesheet">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      window.CHATBOT_CONFIG = {
+        domainId: "21de8dab-4455-435e-abab-5f058a82b956",
+      };
+    </script>
+    <script src="https://deplo-dash.vercel.app/widget/chatbot-widget.umd.js"></script>
   </body>
 </html>
