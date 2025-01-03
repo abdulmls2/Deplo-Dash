@@ -1,6 +1,7 @@
 // Vercel Serverless Function for OpenAI Chat API
 import { OpenAI } from 'openai';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { Database } from '../types/supabase';
 
 // Initialize OpenAI client
 const openai = new OpenAI({
@@ -58,20 +59,25 @@ export default async function handler(
       });
     }
 
-    const { message } = req.body;
+    const { message, conversationId } = req.body;
 
-    // Validate request body
-    if (!message) {
-      console.error('Missing message in request body');
-      return res.status(400).json({ error: 'Message is required' });
-    }
+    // Fetch the custom prompt from domain_settings
+    const { data: settings, error: settingsError } = await supabase
+      .from('domain_settings')
+      .select('prompt')
+      .eq('domain_id', domainId)
+      .single();
+
+    if (settingsError) throw settingsError;
+
+    const systemPrompt = settings?.prompt || SYSTEM_PROMPT; // Fallback to default if not found
 
     console.log('Making OpenAI API request with message:', message);
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gpt-4-turbo-preview",
       messages: [
-        { role: "system", content: SYSTEM_PROMPT },
+        { role: "system", content: systemPrompt },
         { role: "user", content: message }
       ],
     });
