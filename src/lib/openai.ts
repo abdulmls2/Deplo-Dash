@@ -1,8 +1,12 @@
+// Define the system prompt
+const SYSTEM_PROMPT = `
+You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
+
 // Function to generate bot response using the API endpoint
-export const generateBotResponse = async (message: string, conversationId: string, domainId: string): Promise<string> => {
+export const generateBotResponse = async (message: string, conversationId: string): Promise<string> => {
   try {
-    // Use relative URL for the API endpoint
-    const API_URL = '/api/chat';
+    // Always use the absolute URL for the API endpoint
+    const API_URL = 'https://deplo-dash.vercel.app/api/chat';
     
     const response = await fetch(API_URL, {
       method: 'POST',
@@ -12,8 +16,7 @@ export const generateBotResponse = async (message: string, conversationId: strin
       },
       body: JSON.stringify({
         message,
-        conversationId,
-        domainId
+        conversationId
       })
     });
 
