@@ -1,13 +1,18 @@
 // Vercel Serverless Function for OpenAI Chat API
 import { OpenAI } from 'openai';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { createClient } from '@supabase/supabase-js';
 
 // Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
 
-const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
+// Initialize Supabase client
+const supabase = createClient(
+  process.env.SUPABASE_URL || '',
+  process.env.SUPABASE_ANON_KEY || ''
+);
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
@@ -58,20 +63,34 @@ export default async function handler(
       });
     }
 
-    const { message } = req.body;
+    const { message, domainId } = req.body;
 
     // Validate request body
-    if (!message) {
-      console.error('Missing message in request body');
-      return res.status(400).json({ error: 'Message is required' });
+    if (!message || !domainId) {
+      console.error('Missing required fields in request body');
+      return res.status(400).json({ error: 'Message and domainId are required' });
     }
+
+    // Fetch custom prompt from domain_settings
+    const { data: domainSettings, error: settingsError } = await supabase
+      .from('domain_settings')
+      .select('prompt')
+      .eq('domain_id', domainId)
+      .single();
+
+    if (settingsError) {
+      console.error('Error fetching domain settings:', settingsError);
+      return res.status(500).json({ error: 'Failed to fetch domain settings' });
+    }
+
+    const systemPrompt = domainSettings?.prompt || 'You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries.';
 
     console.log('Making OpenAI API request with message:', message);
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: SYSTEM_PROMPT },
+        { role: "system", content: systemPrompt },
         { role: "user", content: message }
       ],
     });
