@@ -7,10 +7,8 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
 
-const SYSTEM_PROMPT = `Speak like a pirate. Use phrases like 'Ahoy,' 'Arrr,' and 'matey.' Replace 'you' with 'ye,' 'my' with 'me,' and use nautical terms and pirate slang wherever possible. Keep it playful and fun!
-
-Example output:
-"Ahoy, matey! What be bringin' ye to these waters today?"`;
+// Default system prompt as fallback
+const DEFAULT_SYSTEM_PROMPT = `You are a helpful AI assistant. Please provide clear and concise responses.`;
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
@@ -61,7 +59,7 @@ export default async function handler(
       });
     }
 
-    const { message } = req.body;
+    const { message, systemPrompt } = req.body;
 
     // Validate request body
     if (!message) {
@@ -69,12 +67,10 @@ export default async function handler(
       return res.status(400).json({ error: 'Message is required' });
     }
 
-    console.log('Making OpenAI API request with message:', message);
-
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gpt-4-mini",
       messages: [
-        { role: "system", content: SYSTEM_PROMPT },
+        { role: "system", content: systemPrompt || DEFAULT_SYSTEM_PROMPT },
         { role: "user", content: message }
       ],
     });
