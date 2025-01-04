@@ -1,31 +1,20 @@
 // Vercel Serverless Function for OpenAI Chat API
 import { OpenAI } from 'openai';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { createClient } from '@supabase/supabase-js';
-
-// Initialize Supabase client using VITE_ prefixed environment variables
-const supabase = createClient(
-  process.env.VITE_SUPABASE_URL || '',
-  process.env.VITE_SUPABASE_ANON_KEY || ''
-);
 
 // Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
 
-// Default system prompt as a fallback
-const DEFAULT_SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
+const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
+  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
 
   if (req.method === 'OPTIONS') {
     res.status(200).end();
@@ -48,10 +37,8 @@ export default async function handler(
       body: req.body,
       env: {
         hasApiKey: !!process.env.OPENAI_API_KEY,
-        nodeEnv: process.env.NODE_ENV,
-        supabaseUrlSet: !!process.env.VITE_SUPABASE_URL,
-        supabaseAnonKeySet: !!process.env.VITE_SUPABASE_ANON_KEY,
-      },
+        nodeEnv: process.env.NODE_ENV
+      }
     });
 
     if (req.method !== 'POST') {
@@ -62,19 +49,16 @@ export default async function handler(
     // Validate API key
     if (!process.env.OPENAI_API_KEY) {
       console.error('OpenAI API key is not set');
-      return res.status(500).json({
+      return res.status(500).json({ 
         error: 'OpenAI API key is not configured',
-        env:
-          process.env.NODE_ENV === 'development'
-            ? {
-                hasApiKey: !!process.env.OPENAI_API_KEY,
-                nodeEnv: process.env.NODE_ENV,
-              }
-            : undefined,
+        env: process.env.NODE_ENV === 'development' ? {
+          hasApiKey: !!process.env.OPENAI_API_KEY,
+          nodeEnv: process.env.NODE_ENV
+        } : undefined
       });
     }
 
-    const { message, conversationId } = req.body;
+    const { message } = req.body;
 
     // Validate request body
     if (!message) {
@@ -82,43 +66,19 @@ export default async function handler(
       return res.status(400).json({ error: 'Message is required' });
     }
 
-    if (!conversationId) {
-      console.error('Missing conversationId in request body');
-      return res.status(400).json({ error: 'conversationId is required' });
-    }
-
-    console.log('Conversation ID received:', conversationId);
-
-    // Fetch domain-specific prompt from Supabase
-    const { data: domainSettings, error: domainError } = await supabase
-      .from('domain_settings')
-      .select('prompt')
-      .eq('conversation_id', conversationId)
-      .single();
-
-    if (domainError) {
-      console.error('Error fetching domain settings:', domainError);
-      // Fallback to default prompt if domain-specific prompt is not found
-    } else {
-      console.log('Domain settings fetched:', domainSettings);
-    }
-
-    const SYSTEM_PROMPT = domainSettings?.prompt || DEFAULT_SYSTEM_PROMPT;
-    console.log('Using system prompt:', SYSTEM_PROMPT);
+    console.log('Making OpenAI API request with message:', message);
 
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: "gpt-4o-mini",
       messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
-        { role: 'user', content: message },
+        { role: "system", content: SYSTEM_PROMPT },
+        { role: "user", content: message }
       ],
     });
 
-    const response =
-      completion.choices[0]?.message?.content ||
-      'Sorry, I could not generate a response.';
+    const response = completion.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
     console.log('OpenAI API response:', response);
-
+    
     return res.status(200).json({ response });
   } catch (error: any) {
     console.error('Error in API handler:', error);
@@ -128,24 +88,19 @@ export default async function handler(
       stack: error.stack,
       env: {
         hasApiKey: !!process.env.OPENAI_API_KEY,
-        nodeEnv: process.env.NODE_ENV,
-        supabaseUrlSet: !!process.env.VITE_SUPABASE_URL,
-        supabaseAnonKeySet: !!process.env.VITE_SUPABASE_ANON_KEY,
-      },
+        nodeEnv: process.env.NODE_ENV
+      }
     });
-
-    return res.status(500).json({
+    
+    return res.status(500).json({ 
       error: 'Internal server error',
-      details:
-        process.env.NODE_ENV === 'development'
-          ? {
-              message: error.message,
-              env: {
-                hasApiKey: !!process.env.OPENAI_API_KEY,
-                nodeEnv: process.env.NODE_ENV,
-              },
-            }
-          : undefined,
+      details: process.env.NODE_ENV === 'development' ? {
+        message: error.message,
+        env: {
+          hasApiKey: !!process.env.OPENAI_API_KEY,
+          nodeEnv: process.env.NODE_ENV
+        }
+      } : undefined
     });
   }
 }

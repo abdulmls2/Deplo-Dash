@@ -10,15 +10,11 @@ interface ChatbotStore {
   isLoading: boolean;
   error: string | null;
   sendMessage: (content: string, conversationId: string) => Promise<void>;
-  conversationId: string;
-  setConversationId: (id: string) => void;
 }
 
 export const useChatbotStore = create<ChatbotStore>((set, get) => ({
   isLoading: false,
   error: null,
-  conversationId: '',
-  setConversationId: (id: string) => set({ conversationId: id }),
 
   sendMessage: async (content: string, conversationId: string) => {
     set({ isLoading: true, error: null });
@@ -29,7 +25,7 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
         conversation_id: conversationId,
         content,
         sender_type: 'user',
-        user_id: null,
+        user_id: null
       };
 
       const { error: messageError } = await supabase
@@ -53,13 +49,13 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
         try {
           const botResponse = await generateBotResponse(content, conversationId);
           console.log('Got OpenAI response:', botResponse);
-
+          
           // Send bot response
           const botMessageData = {
             conversation_id: conversationId,
             content: botResponse,
             sender_type: 'bot',
-            user_id: null,
+            user_id: null
           };
 
           const { error: botError } = await supabase
