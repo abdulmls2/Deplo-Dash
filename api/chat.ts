@@ -1,21 +1,16 @@
 // Vercel Serverless Function for OpenAI Chat API
 import { OpenAI } from 'openai';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { createClient } from '@supabase/supabase-js';
 
 // Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
 
-// Initialize Supabase client
-const supabase = createClient(
-  process.env.VITE_SUPABASE_URL || '',
-  process.env.VITE_SUPABASE_ANON_KEY || ''
-);
+const SYSTEM_PROMPT = `Speak like a pirate. Use phrases like 'Ahoy,' 'Arrr,' and 'matey.' Replace 'you' with 'ye,' 'my' with 'me,' and use nautical terms and pirate slang wherever possible. Keep it playful and fun!
 
-// Default system prompt as fallback
-const DEFAULT_SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
+Example output:
+"Ahoy, matey! What be bringin' ye to these waters today?"`;
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
@@ -66,47 +61,20 @@ export default async function handler(
       });
     }
 
-    const { message, conversationId } = req.body;
+    const { message } = req.body;
 
     // Validate request body
-    if (!message || !conversationId) {
-      console.error('Missing required fields in request body');
-      return res.status(400).json({ error: 'Message and conversationId are required' });
+    if (!message) {
+      console.error('Missing message in request body');
+      return res.status(400).json({ error: 'Message is required' });
     }
-
-    // Fetch domain_id from conversation
-    const { data: conversationData, error: conversationError } = await supabase
-      .from('conversations')
-      .select('domain_id')
-      .eq('id', conversationId)
-      .single();
-
-    if (conversationError) {
-      console.error('Error fetching conversation:', conversationError);
-      throw conversationError;
-    }
-
-    // Fetch custom prompt from domain_settings
-    const { data: domainSettings, error: settingsError } = await supabase
-      .from('domain_settings')
-      .select('prompt')
-      .eq('domain_id', conversationData.domain_id)
-      .single();
-
-    if (settingsError) {
-      console.error('Error fetching domain settings:', settingsError);
-      throw settingsError;
-    }
-
-    const systemPrompt = domainSettings?.prompt || DEFAULT_SYSTEM_PROMPT;
-    console.log('Using system prompt:', systemPrompt);
 
     console.log('Making OpenAI API request with message:', message);
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4-1106-preview",
+      model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: systemPrompt },
+        { role: "system", content: SYSTEM_PROMPT },
         { role: "user", content: message }
       ],
     });
