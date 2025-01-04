@@ -16,8 +16,6 @@ interface ChatbotSettingsProps {
   setShowHeaderColorPicker: (show: boolean) => void;
   colorPickerRef: React.RefObject<HTMLDivElement>;
   headerColorPickerRef: React.RefObject<HTMLDivElement>;
-  prompt: string;
-  setPrompt: (prompt: string) => void;
 }
 
 export default function ChatbotSettings({
@@ -34,9 +32,7 @@ export default function ChatbotSettings({
   showHeaderColorPicker,
   setShowHeaderColorPicker,
   colorPickerRef,
-  headerColorPickerRef,
-  prompt,
-  setPrompt
+  headerColorPickerRef
 }: ChatbotSettingsProps) {
   return (
     <div className="space-y-6">
@@ -70,23 +66,6 @@ export default function ChatbotSettings({
           />
           <p className="mt-2 text-sm text-gray-600">
             This message will be shown when a visitor first opens the chat. You can use emojis! 😊
-          </p>
-        </div>
-      </div>
-
-      {/* Chatbot Prompt */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-semibold mb-4">Chatbot Personality</h3>
-        <div className="max-w-md">
-          <textarea
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            rows={6}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"
-            placeholder="Enter instructions for how your chatbot should behave and respond"
-          />
-          <p className="mt-2 text-sm text-gray-600">
-            This is the system prompt that defines your chatbot's personality and behavior. Be specific about how you want it to respond to users.
           </p>
         </div>
       </div>

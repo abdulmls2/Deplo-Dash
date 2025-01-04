@@ -16,7 +16,6 @@ interface DomainSettings {
   color: string;
   header_text_color: string;
   primary_color: string;
-  prompt: string;
 }
 
 export default function Domain() {
@@ -36,7 +35,6 @@ export default function Domain() {
   const [headerTextColor, setHeaderTextColor] = useState('#000000');
   const [showHeaderColorPicker, setShowHeaderColorPicker] = useState(false);
   const [primaryColor, setPrimaryColor] = useState('#FF6B00');
-  const [prompt, setPrompt] = useState('');
 
   const colorPickerRef = useRef<HTMLDivElement>(null);
   const headerColorPickerRef = useRef<HTMLDivElement>(null);
@@ -87,7 +85,6 @@ export default function Domain() {
           setColor(settings.primary_color || '#FF6B00');
           setHeaderTextColor(settings.header_text_color || '#000000');
           setPrimaryColor(settings.primary_color || '#FF6B00');
-          setPrompt(settings.prompt || '');
         }
       } catch (error) {
         console.error('Error fetching settings:', error);
@@ -226,8 +223,7 @@ export default function Domain() {
           chatbot_name: chatbotName,
           greeting_message: greetingMessage,
           primary_color: color,
-          header_text_color: headerTextColor,
-          prompt: prompt
+          header_text_color: headerTextColor
         }, {
           onConflict: 'domain_id',
           ignoreDuplicates: false
@@ -292,8 +288,6 @@ export default function Domain() {
             setShowHeaderColorPicker={setShowHeaderColorPicker}
             colorPickerRef={colorPickerRef}
             headerColorPickerRef={headerColorPickerRef}
-            prompt={prompt}
-            setPrompt={setPrompt}
           />
         </section>
 
