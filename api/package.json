@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "dependencies": {
     "@vercel/node": "^3.0.0",
-    "openai": "^4.76.3",
-    "@supabase/supabase-js": "^2.47.10"
+    "openai": "^4.76.3"
   }
 }
