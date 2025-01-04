@@ -1,19 +1,12 @@
 // Vercel Serverless Function for OpenAI Chat API
 import { OpenAI } from 'openai';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { createClient } from '@supabase/supabase-js';
-
-// Initialize Supabase client
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+import { supabase } from '../lib/supabase';
 
 // Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
-
-const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
@@ -64,7 +57,7 @@ export default async function handler(
       });
     }
 
-    const { message } = req.body;
+    const { message, conversationId } = req.body;
 
     // Validate request body
     if (!message) {
@@ -72,8 +65,25 @@ export default async function handler(
       return res.status(400).json({ error: 'Message is required' });
     }
 
+    if (!conversationId) {
+      console.error('Missing conversationId in request body');
+      return res.status(400).json({ error: 'Conversation ID is required' });
+    }
+
+    // Fetch the domain settings based on conversationId
+    const { data: domainSettingsData, error: domainError } = await supabase
+      .from('domain_settings')
+      .select('prompt')
+      .eq('conversation_id', conversationId)
+      .single();
+
+    if (domainError) {
+      console.error('Error fetching domain settings:', domainError);
+      return res.status(500).json({ error: 'Error fetching domain settings' });
+    }
+
     // Use a default prompt if none is found in the database
-    const systemPrompt = domainSettings?.prompt || "You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.";
+    const systemPrompt = domainSettingsData?.prompt || "You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.";
 
     console.log('Making OpenAI API request with message:', message);
 
