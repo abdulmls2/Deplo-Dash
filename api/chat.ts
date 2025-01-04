@@ -111,6 +111,8 @@ export default async function handler(
       return res.status(400).json({ error: 'Message and conversationId are required' });
     }
 
+    console.log('Fetching conversation with ID:', conversationId);
+
     // Fetch the conversation to get the domain_id
     const { data: conversationData, error: conversationError } = await supabase
       .from('conversations')
@@ -119,9 +121,34 @@ export default async function handler(
       .single();
 
     if (conversationError) {
-      console.error('Error fetching conversation:', conversationError);
-      return res.status(500).json({ error: 'Failed to fetch conversation' });
+      console.error('Error fetching conversation:', {
+        error: conversationError,
+        conversationId,
+        errorMessage: conversationError.message,
+        errorDetails: conversationError.details,
+        errorHint: conversationError.hint,
+        errorCode: conversationError.code
+      });
+      return res.status(500).json({ 
+        error: 'Failed to fetch conversation',
+        details: process.env.NODE_ENV === 'development' ? {
+          message: conversationError.message,
+          details: conversationError.details,
+          hint: conversationError.hint,
+          code: conversationError.code
+        } : undefined
+      });
     }
+
+    if (!conversationData) {
+      console.error('Conversation not found:', conversationId);
+      return res.status(404).json({ error: 'Conversation not found' });
+    }
+
+    console.log('Found conversation:', {
+      conversationId,
+      domainId: conversationData.domain_id
+    });
 
     // Fetch the custom prompt from domain_settings
     const { data: domainSettings, error: domainError } = await supabase
@@ -131,7 +158,11 @@ export default async function handler(
       .single();
 
     if (domainError) {
-      console.error('Error fetching domain settings:', domainError);
+      console.error('Error fetching domain settings:', {
+        error: domainError,
+        domainId: conversationData.domain_id,
+        errorMessage: domainError.message
+      });
       // Continue with default prompt if there's an error
     }
 
