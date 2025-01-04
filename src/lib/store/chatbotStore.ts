@@ -29,7 +29,7 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
         conversation_id: conversationId,
         content,
         sender_type: 'user',
-        user_id: null
+        user_id: null,
       };
 
       const { error: messageError } = await supabase
@@ -53,13 +53,13 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
         try {
           const botResponse = await generateBotResponse(content, conversationId);
           console.log('Got OpenAI response:', botResponse);
-          
+
           // Send bot response
           const botMessageData = {
             conversation_id: conversationId,
             content: botResponse,
             sender_type: 'bot',
-            user_id: null
+            user_id: null,
           };
 
           const { error: botError } = await supabase
