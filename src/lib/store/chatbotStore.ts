@@ -10,11 +10,15 @@ interface ChatbotStore {
   isLoading: boolean;
   error: string | null;
   sendMessage: (content: string, conversationId: string) => Promise<void>;
+  conversationId: string;
+  setConversationId: (id: string) => void;
 }
 
 export const useChatbotStore = create<ChatbotStore>((set, get) => ({
   isLoading: false,
   error: null,
+  conversationId: '',
+  setConversationId: (id: string) => set({ conversationId: id }),
 
   sendMessage: async (content: string, conversationId: string) => {
     set({ isLoading: true, error: null });

@@ -1,13 +1,21 @@
 // Vercel Serverless Function for OpenAI Chat API
 import { OpenAI } from 'openai';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { createClient } from '@supabase/supabase-js';
+
+// Initialize Supabase client
+const supabase = createClient(
+  process.env.VITE_SUPABASE_URL || '',
+  process.env.VITE_SUPABASE_ANON_KEY || ''
+);
 
 // Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
 
-const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
+// Default system prompt as a fallback
+const DEFAULT_SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
@@ -58,7 +66,7 @@ export default async function handler(
       });
     }
 
-    const { message } = req.body;
+    const { message, conversationId } = req.body;
 
     // Validate request body
     if (!message) {
@@ -66,7 +74,26 @@ export default async function handler(
       return res.status(400).json({ error: 'Message is required' });
     }
 
+    if (!conversationId) {
+      console.error('Missing conversationId in request body');
+      return res.status(400).json({ error: 'conversationId is required' });
+    }
+
     console.log('Making OpenAI API request with message:', message);
+
+    // Fetch domain-specific prompt from Supabase
+    const { data: domainSettings, error: domainError } = await supabase
+      .from('domain_settings')
+      .select('prompt')
+      .eq('conversation_id', conversationId)
+      .single();
+
+    if (domainError) {
+      console.error('Error fetching domain settings:', domainError);
+      // Fallback to default prompt if domain-specific prompt is not found
+    }
+
+    const SYSTEM_PROMPT = domainSettings?.prompt || DEFAULT_SYSTEM_PROMPT;
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
