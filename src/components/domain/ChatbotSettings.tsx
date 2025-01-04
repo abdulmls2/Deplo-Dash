@@ -16,6 +16,8 @@ interface ChatbotSettingsProps {
   setShowHeaderColorPicker: (show: boolean) => void;
   colorPickerRef: React.RefObject<HTMLDivElement>;
   headerColorPickerRef: React.RefObject<HTMLDivElement>;
+  systemPrompt: string;
+  setSystemPrompt: (prompt: string) => void;
 }
 
 export default function ChatbotSettings({
@@ -32,7 +34,9 @@ export default function ChatbotSettings({
   showHeaderColorPicker,
   setShowHeaderColorPicker,
   colorPickerRef,
-  headerColorPickerRef
+  headerColorPickerRef,
+  systemPrompt,
+  setSystemPrompt
 }: ChatbotSettingsProps) {
   return (
     <div className="space-y-6">
@@ -49,6 +53,23 @@ export default function ChatbotSettings({
           />
           <p className="mt-2 text-sm text-gray-600">
             This name will be displayed to your website visitors
+          </p>
+        </div>
+      </div>
+
+      {/* System Prompt */}
+      <div className="bg-white rounded-lg shadow p-6">
+        <h3 className="text-lg font-semibold mb-4">AI System Prompt</h3>
+        <div className="max-w-md">
+          <textarea
+            value={systemPrompt}
+            onChange={(e) => setSystemPrompt(e.target.value)}
+            rows={6}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+            placeholder="Enter the system prompt for the AI"
+          />
+          <p className="mt-2 text-sm text-gray-600">
+            This is the prompt that defines how your AI assistant behaves. Be specific about its role, tone, and any domain-specific knowledge it should have.
           </p>
         </div>
       </div>

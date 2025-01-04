@@ -16,28 +16,31 @@ interface DomainSettings {
   color: string;
   header_text_color: string;
   primary_color: string;
+  system_prompt: string;
 }
 
 export default function Domain() {
   const { currentDomain, updateDomainName } = useDomain();
-  const [chatbotName, setChatbotName] = useState('Friendly Assistant');
-  const [color, setColor] = useState('#FF6B00');
-  const [showColorPicker, setShowColorPicker] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const [greetingMessage, setGreetingMessage] = useState('👋 Hi there! How can I help you today?');
-  const [domainName, setDomainName] = useState(currentDomain?.name || '');
   const [isEditing, setIsEditing] = useState(false);
+  const [domainName, setDomainName] = useState('');
+  const [chatbotName, setChatbotName] = useState('Friendly Assistant');
+  const [greetingMessage, setGreetingMessage] = useState('👋 Hi there! How can I help you today?');
+  const [color, setColor] = useState('#FF6B00');
+  const [headerTextColor, setHeaderTextColor] = useState('#000000');
+  const [primaryColor, setPrimaryColor] = useState('#FF6B00');
+  const [systemPrompt, setSystemPrompt] = useState(
+    'You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don\'t know something, be honest about it.'
+  );
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  const [showHeaderColorPicker, setShowHeaderColorPicker] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const colorPickerRef = useRef<HTMLDivElement>(null);
+  const headerColorPickerRef = useRef<HTMLDivElement>(null);
 
   const [qaList, setQaList] = useState<FAQ[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [newQuestion, setNewQuestion] = useState('');
   const [newAnswer, setNewAnswer] = useState('');
-  const [headerTextColor, setHeaderTextColor] = useState('#000000');
-  const [showHeaderColorPicker, setShowHeaderColorPicker] = useState(false);
-  const [primaryColor, setPrimaryColor] = useState('#FF6B00');
-
-  const colorPickerRef = useRef<HTMLDivElement>(null);
-  const headerColorPickerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setDomainName(currentDomain?.name || '');
@@ -85,6 +88,7 @@ export default function Domain() {
           setColor(settings.primary_color || '#FF6B00');
           setHeaderTextColor(settings.header_text_color || '#000000');
           setPrimaryColor(settings.primary_color || '#FF6B00');
+          setSystemPrompt(settings.system_prompt || 'You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don\'t know something, be honest about it.');
         }
       } catch (error) {
         console.error('Error fetching settings:', error);
@@ -240,6 +244,29 @@ export default function Domain() {
     }
   };
 
+  const handleSaveSettings = async () => {
+    if (!currentDomain?.id) return;
+
+    try {
+      const { error } = await supabase
+        .from('domain_settings')
+        .upsert({
+          domain_id: currentDomain.id,
+          chatbot_name: chatbotName,
+          greeting_message: greetingMessage,
+          primary_color: color,
+          header_text_color: headerTextColor,
+          system_prompt: systemPrompt
+        });
+
+      if (error) throw error;
+      toast.success('Settings saved successfully');
+    } catch (error) {
+      console.error('Error saving settings:', error);
+      toast.error('Failed to save settings');
+    }
+  };
+
   return (
     <div className="p-6 max-w-4xl mx-auto">
       <div className="mb-8">
@@ -288,7 +315,18 @@ export default function Domain() {
             setShowHeaderColorPicker={setShowHeaderColorPicker}
             colorPickerRef={colorPickerRef}
             headerColorPickerRef={headerColorPickerRef}
+            systemPrompt={systemPrompt}
+            setSystemPrompt={setSystemPrompt}
           />
+          <div className="mt-6">
+            <button
+              onClick={handleSaveSettings}
+              className="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 transition-colors flex items-center gap-2"
+            >
+              <Save className="h-4 w-4" />
+              Save Settings
+            </button>
+          </div>
         </section>
 
         {/* Help Desk Section */}
