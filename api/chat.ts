@@ -9,6 +9,9 @@ const openai = new OpenAI({
 });
 
 // Initialize Supabase client
+console.log('Initializing Supabase client with URL:', process.env.VITE_SUPABASE_URL ? 'URL exists' : 'URL missing');
+console.log('Supabase anon key status:', process.env.VITE_SUPABASE_ANON_KEY ? 'Key exists' : 'Key missing');
+
 const supabase = createClient(
   process.env.VITE_SUPABASE_URL || '',
   process.env.VITE_SUPABASE_ANON_KEY || ''
@@ -20,6 +23,8 @@ const DEFAULT_SYSTEM_PROMPT = `You are a helpful customer support assistant. You
 // Function to get custom prompt for a domain
 async function getCustomPrompt(conversationId: string): Promise<string> {
   try {
+    console.log('Fetching custom prompt for conversationId:', conversationId);
+    
     // First, get the domain_id from the conversation
     const { data: conversationData, error: conversationError } = await supabase
       .from('conversations')
@@ -27,12 +32,19 @@ async function getCustomPrompt(conversationId: string): Promise<string> {
       .eq('id', conversationId)
       .single();
 
-    if (conversationError) throw conversationError;
+    console.log('Conversation query result:', { conversationData, conversationError });
+
+    if (conversationError) {
+      console.error('Error fetching conversation:', conversationError);
+      throw conversationError;
+    }
 
     if (!conversationData?.domain_id) {
       console.log('No domain_id found for conversation, using default prompt');
       return DEFAULT_SYSTEM_PROMPT;
     }
+
+    console.log('Found domain_id:', conversationData.domain_id);
 
     // Then, get the custom prompt from domain_settings
     const { data: settingsData, error: settingsError } = await supabase
@@ -41,9 +53,20 @@ async function getCustomPrompt(conversationId: string): Promise<string> {
       .eq('domain_id', conversationData.domain_id)
       .single();
 
-    if (settingsError) throw settingsError;
+    console.log('Domain settings query result:', { settingsData, settingsError });
 
-    return settingsData?.prompt || DEFAULT_SYSTEM_PROMPT;
+    if (settingsError) {
+      console.error('Error fetching domain settings:', settingsError);
+      throw settingsError;
+    }
+
+    if (!settingsData?.prompt) {
+      console.log('No custom prompt found in domain_settings, using default prompt');
+      return DEFAULT_SYSTEM_PROMPT;
+    }
+
+    console.log('Using custom prompt from domain_settings:', settingsData.prompt);
+    return settingsData.prompt;
   } catch (error) {
     console.error('Error fetching custom prompt:', error);
     return DEFAULT_SYSTEM_PROMPT;
@@ -95,7 +118,7 @@ export default async function handler(
     const systemPrompt = await getCustomPrompt(conversationId);
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gpt-4-mini",
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: message }
