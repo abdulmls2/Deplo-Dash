@@ -41,9 +41,16 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
         .eq('id', conversationId)
         .single();
 
-      if (conversationError) throw conversationError;
+      if (conversationError) {
+        console.error('Error fetching conversation:', conversationError);
+        throw conversationError;
+      }
 
-      console.log('Conversation data:', conversationData); // Debug log
+      console.log('Conversation data:', {
+        id: conversationId,
+        ...conversationData,
+        domain_id_type: typeof conversationData?.domain_id
+      }); // Debug log
 
       if (!conversationData?.domain_id) {
         console.error('No domain_id found for conversation:', conversationId);
@@ -52,7 +59,10 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
 
       // Only generate OpenAI response if live mode is disabled
       if (!conversationData.live_mode) {
-        console.log('Live mode disabled, generating OpenAI response with domain_id:', conversationData.domain_id);
+        console.log('Live mode disabled, generating OpenAI response with domain_id:', {
+          domain_id: conversationData.domain_id,
+          type: typeof conversationData.domain_id
+        });
         try {
           const botResponse = await generateBotResponse(content, conversationId, conversationData.domain_id);
           console.log('Got OpenAI response:', botResponse);
