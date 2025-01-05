@@ -63,6 +63,9 @@ export default async function handler(
       });
     }
 
+    // Log the domainId for debugging
+    console.log('Domain ID:', req.body.domainId);
+
     // Fetch the system prompt from Supabase
     const { data: domainSettings, error: domainError } = await supabase
       .from('domain_settings')
@@ -70,9 +73,14 @@ export default async function handler(
       .eq('domain_id', req.body.domainId) // Assuming domainId is passed in the request body
       .single();
 
-    if (domainError || !domainSettings) {
+    if (domainError) {
       console.error('Error fetching domain settings:', domainError);
-      return res.status(500).json({ error: 'Failed to fetch domain settings' });
+      return res.status(500).json({ error: 'Failed to fetch domain settings', details: domainError.message });
+    }
+
+    if (!domainSettings) {
+      console.error('No domain settings found for domain ID:', req.body.domainId);
+      return res.status(404).json({ error: 'Domain settings not found' });
     }
 
     const SYSTEM_PROMPT = domainSettings.prompt || `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
