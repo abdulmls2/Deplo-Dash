@@ -1,13 +1,12 @@
 // Vercel Serverless Function for OpenAI Chat API
 import { OpenAI } from 'openai';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { fetchPrompt } from '../src/lib/openai';
 
 // Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
-
-const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
@@ -68,18 +67,20 @@ export default async function handler(
 
     console.log('Making OpenAI API request with message:', message);
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: SYSTEM_PROMPT },
-        { role: "user", content: message }
-      ],
-    });
+    async function handleChatRequest(req, res) {
+      try {
+        const prompt = await fetchPrompt();
+        const response = await openai.createChatCompletion({
+          model: 'gpt-3.5-turbo',
+          messages: [{ role: 'user', content: prompt }],
+        });
+        res.status(200).json(response.data);
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    }
 
-    const response = completion.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
-    console.log('OpenAI API response:', response);
-    
-    return res.status(200).json({ response });
+    return handleChatRequest(req, res);
   } catch (error: any) {
     console.error('Error in API handler:', error);
     console.error('Error details:', {

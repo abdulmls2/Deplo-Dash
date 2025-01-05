@@ -3,18 +3,27 @@ import { supabase } from '../supabase';
 import { Database } from '../database.types';
 import { toast } from 'react-hot-toast';
 import { generateBotResponse } from '../openai';
+import { fetchPrompt } from '../lib/openai';
 
 type Message = Database['public']['Tables']['messages']['Row'];
 
 interface ChatbotStore {
   isLoading: boolean;
   error: string | null;
+  prompt: string | null;
   sendMessage: (content: string, conversationId: string) => Promise<void>;
+  initializeChatbot: () => Promise<void>;
 }
 
 export const useChatbotStore = create<ChatbotStore>((set, get) => ({
   isLoading: false,
   error: null,
+  prompt: null,
+
+  async initializeChatbot() {
+    const prompt = await fetchPrompt();
+    set({ prompt });
+  },
 
   sendMessage: async (content: string, conversationId: string) => {
     set({ isLoading: true, error: null });

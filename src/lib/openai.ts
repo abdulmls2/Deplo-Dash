@@ -37,3 +37,20 @@ export const generateBotResponse = async (message: string, conversationId: strin
 
 // Keep track of conversation history (in memory)
 export const conversationHistory = new Map<string, { role: "user" | "assistant" | "system", content: string }[]>();
+
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+async function fetchPrompt() {
+    const { data, error } = await supabase
+        .from('domain_settings')
+        .select('prompt')
+        .single();
+    if (error) throw new Error('Error fetching prompt: ' + error.message);
+    return data.prompt;
+}
+
+export { fetchPrompt };
