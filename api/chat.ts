@@ -70,7 +70,7 @@ export default async function handler(
     console.log('Making OpenAI API request with message:', message);
 
     // Get system prompt from request body or use default
-    const systemPrompt = req.body.systemPrompt || DEFAULT_SYSTEM_PROMPT;
+    const systemPrompt = req.body.systemPrompt;
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
