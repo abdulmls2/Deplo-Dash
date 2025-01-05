@@ -1,6 +1,7 @@
-// src/lib/openai.ts
+// Function to generate bot response using the API endpoint
 export const generateBotResponse = async (message: string, conversationId: string): Promise<string> => {
   try {
+    // Always use the absolute URL for the API endpoint
     const API_URL = 'https://deplo-dash.vercel.app/api/chat';
     
     const response = await fetch(API_URL, {
@@ -11,7 +12,7 @@ export const generateBotResponse = async (message: string, conversationId: strin
       },
       body: JSON.stringify({
         message,
-        conversationId  // Include conversationId in the request
+        conversationId
       })
     });
 
