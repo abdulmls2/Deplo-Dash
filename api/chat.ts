@@ -7,8 +7,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
 
-// Default system prompt as fallback
-const DEFAULT_SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
+const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
@@ -32,7 +31,7 @@ export default async function handler(
     // Handle CORS
     if (await cors(req, res)) return;
 
-    console.log('🔔 [API] Request received:', {
+    console.log('API Request received:', {
       method: req.method,
       headers: req.headers,
       body: req.body,
@@ -43,13 +42,13 @@ export default async function handler(
     });
 
     if (req.method !== 'POST') {
-      console.log('❌ [API] Method not allowed:', req.method);
+      console.log('Method not allowed:', req.method);
       return res.status(405).json({ error: 'Method not allowed' });
     }
 
     // Validate API key
     if (!process.env.OPENAI_API_KEY) {
-      console.error('❌ [API] OpenAI API key is not set');
+      console.error('OpenAI API key is not set');
       return res.status(500).json({ 
         error: 'OpenAI API key is not configured',
         env: process.env.NODE_ENV === 'development' ? {
@@ -59,27 +58,20 @@ export default async function handler(
       });
     }
 
-    const { message, systemPrompt } = req.body;
+    const { message } = req.body;
 
     // Validate request body
     if (!message) {
-      console.error('[API] Missing message in request body');
+      console.error('Missing message in request body');
       return res.status(400).json({ error: 'Message is required' });
     }
 
-    console.log('[API] Request details:', { 
-      hasMessage: !!message,
-      hasSystemPrompt: !!systemPrompt,
-      usingDefaultPrompt: !systemPrompt
-    });
-
-    const actualPrompt = systemPrompt || DEFAULT_SYSTEM_PROMPT;
-    console.log('[API] Using prompt:', actualPrompt.substring(0, 50) + '...');
+    console.log('Making OpenAI API request with message:', message);
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: actualPrompt },
+        { role: "system", content: SYSTEM_PROMPT },
         { role: "user", content: message }
       ],
     });
