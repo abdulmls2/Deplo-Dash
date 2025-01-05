@@ -1,13 +1,18 @@
 // Vercel Serverless Function for OpenAI Chat API
 import { OpenAI } from 'openai';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { createClient } from '@supabase/supabase-js';
 
 // Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
 
-const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
+// Initialize Supabase client
+const supabase = createClient(
+  process.env.VITE_SUPABASE_URL || '',
+  process.env.VITE_SUPABASE_ANON_KEY || ''
+);
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
@@ -57,6 +62,20 @@ export default async function handler(
         } : undefined
       });
     }
+
+    // Fetch the system prompt from Supabase
+    const { data: domainSettings, error: domainError } = await supabase
+      .from('domain_settings')
+      .select('prompt')
+      .eq('domain_id', req.body.domainId) // Assuming domainId is passed in the request body
+      .single();
+
+    if (domainError || !domainSettings) {
+      console.error('Error fetching domain settings:', domainError);
+      return res.status(500).json({ error: 'Failed to fetch domain settings' });
+    }
+
+    const SYSTEM_PROMPT = domainSettings.prompt || `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
     const { message } = req.body;
 

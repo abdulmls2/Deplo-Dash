@@ -3,6 +3,7 @@ import { supabase } from '../supabase';
 import { Database } from '../database.types';
 import { toast } from 'react-hot-toast';
 import { generateBotResponse } from '../openai';
+import { useDomain } from '../context/DomainContext';
 
 type Message = Database['public']['Tables']['messages']['Row'];
 
@@ -17,6 +18,13 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
   error: null,
 
   sendMessage: async (content: string, conversationId: string) => {
+    const { currentDomain } = useDomain();
+    const domainId = currentDomain?.id;
+    if (!domainId) {
+      console.error('Domain ID is not available');
+      toast.error('Domain ID is not available');
+      return;
+    }
     set({ isLoading: true, error: null });
     try {
       // Always send as user message with null user_id to indicate it's from the widget
@@ -47,7 +55,7 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
       if (!conversationData.live_mode) {
         console.log('Live mode disabled, generating OpenAI response');
         try {
-          const botResponse = await generateBotResponse(content, conversationId);
+          const botResponse = await generateBotResponse(content, conversationId, domainId);
           console.log('Got OpenAI response:', botResponse);
           
           // Send bot response
