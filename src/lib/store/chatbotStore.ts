@@ -34,40 +34,20 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
 
       if (messageError) throw messageError;
 
-      // Check if live mode is enabled and get domain_id
+      // Check if live mode is enabled
       const { data: conversationData, error: conversationError } = await supabase
         .from('conversations')
-        .select('live_mode, domain_id')
+        .select('live_mode')
         .eq('id', conversationId)
         .single();
 
-      if (conversationError) {
-        console.error('Error fetching conversation:', conversationError);
-        throw conversationError;
-      }
-
-      console.log('Conversation data:', {
-        id: conversationId,
-        ...conversationData,
-        domain_id_type: typeof conversationData?.domain_id,
-        domain_id_value: conversationData?.domain_id
-      }); // Debug log
-
-      if (!conversationData?.domain_id) {
-        console.error('No domain_id found for conversation:', conversationId);
-        throw new Error('No domain_id found for conversation');
-      }
+      if (conversationError) throw conversationError;
 
       // Only generate OpenAI response if live mode is disabled
       if (!conversationData.live_mode) {
-        const domainId = conversationData.domain_id.toString(); // Ensure it's a string
-        console.log('Live mode disabled, generating OpenAI response with domain_id:', {
-          domain_id: domainId,
-          type: typeof domainId,
-          original_value: conversationData.domain_id
-        });
+        console.log('Live mode disabled, generating OpenAI response');
         try {
-          const botResponse = await generateBotResponse(content, conversationId, domainId);
+          const botResponse = await generateBotResponse(content, conversationId);
           console.log('Got OpenAI response:', botResponse);
           
           // Send bot response
