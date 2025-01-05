@@ -11,16 +11,16 @@ export const generateBotResponse = async (message: string, conversationId: strin
       .single();
 
     if (conversationError) {
-      console.error('Error fetching conversation:', conversationError);
+      console.error('[Server] Error fetching conversation:', conversationError);
       throw conversationError;
     }
 
     if (!conversationData || !conversationData.domain_id) {
-      console.error('No domain_id found for conversation:', conversationId);
+      console.error('[Server] No domain_id found for conversation:', conversationId);
       throw new Error('No domain_id found for conversation');
     }
 
-    console.log('Found domain_id:', conversationData.domain_id);
+    console.log('[Server] Found domain_id:', conversationData.domain_id);
 
     // Then fetch the domain settings using the domain_id
     const { data: domainSettings, error: domainError } = await supabase
@@ -29,17 +29,22 @@ export const generateBotResponse = async (message: string, conversationId: strin
       .eq('domain_id', conversationData.domain_id)
       .single();
 
-    console.log('Domain settings fetch result:', { domainSettings, domainError });
+    console.log('[Server] Domain settings fetch result:', {
+      hasSettings: !!domainSettings,
+      hasPrompt: !!domainSettings?.prompt,
+      error: !!domainError,
+      domain_id: conversationData.domain_id
+    });
 
     if (domainError) {
-      console.error('Error fetching domain settings:', domainError);
+      console.error('[Server] Error fetching domain settings:', domainError);
       throw domainError;
     }
 
     if (!domainSettings || !domainSettings.prompt) {
-      console.warn('No prompt found for domain:', conversationData.domain_id);
+      console.warn('[Server] No prompt found for domain:', conversationData.domain_id);
     } else {
-      console.log('Found domain prompt:', domainSettings.prompt);
+      console.log('[Server] Found domain prompt for domain:', conversationData.domain_id);
     }
 
     const API_URL = 'https://deplo-dash.vercel.app/api/chat';
@@ -50,7 +55,7 @@ export const generateBotResponse = async (message: string, conversationId: strin
       systemPrompt: domainSettings?.prompt
     };
     
-    console.log('Sending request to API with body:', requestBody);
+    console.log('[Server] Sending request to API with systemPrompt:', !!requestBody.systemPrompt);
 
     const response = await fetch(API_URL, {
       method: 'POST',
@@ -62,20 +67,20 @@ export const generateBotResponse = async (message: string, conversationId: strin
     });
 
     if (!response.ok) {
-      console.error('API Response:', {
+      console.error('[Server] API Response Error:', {
         status: response.status,
-        statusText: response.statusText,
-        headers: Object.fromEntries(response.headers.entries())
+        statusText: response.statusText
       });
       const errorText = await response.text();
-      console.error('Error response body:', errorText);
+      console.error('[Server] Error response body:', errorText);
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
+    console.log('[Server] Received API response');
     return data.response || 'Sorry, I could not generate a response.';
   } catch (error) {
-    console.error('Error generating response:', error);
+    console.error('[Server] Error generating response:', error);
     throw error;
   }
 };

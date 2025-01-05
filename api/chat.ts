@@ -32,7 +32,7 @@ export default async function handler(
     // Handle CORS
     if (await cors(req, res)) return;
 
-    console.log('API Request received:', {
+    console.log('🔔 [API] Request received:', {
       method: req.method,
       headers: req.headers,
       body: req.body,
@@ -43,13 +43,13 @@ export default async function handler(
     });
 
     if (req.method !== 'POST') {
-      console.log('Method not allowed:', req.method);
+      console.log('❌ [API] Method not allowed:', req.method);
       return res.status(405).json({ error: 'Method not allowed' });
     }
 
     // Validate API key
     if (!process.env.OPENAI_API_KEY) {
-      console.error('OpenAI API key is not set');
+      console.error('❌ [API] OpenAI API key is not set');
       return res.status(500).json({ 
         error: 'OpenAI API key is not configured',
         env: process.env.NODE_ENV === 'development' ? {
@@ -63,19 +63,23 @@ export default async function handler(
 
     // Validate request body
     if (!message) {
-      console.error('Missing message in request body');
+      console.error('[API] Missing message in request body');
       return res.status(400).json({ error: 'Message is required' });
     }
 
-    console.log('Making OpenAI API request with:', { 
-      message, 
-      systemPrompt: systemPrompt || DEFAULT_SYSTEM_PROMPT 
+    console.log('[API] Request details:', { 
+      hasMessage: !!message,
+      hasSystemPrompt: !!systemPrompt,
+      usingDefaultPrompt: !systemPrompt
     });
+
+    const actualPrompt = systemPrompt || DEFAULT_SYSTEM_PROMPT;
+    console.log('[API] Using prompt:', actualPrompt.substring(0, 50) + '...');
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: systemPrompt || DEFAULT_SYSTEM_PROMPT },
+        { role: "system", content: actualPrompt },
         { role: "user", content: message }
       ],
     });
