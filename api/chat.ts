@@ -1,5 +1,7 @@
+// api\chat.ts
 // Vercel Serverless Function for OpenAI Chat API
 import { OpenAI } from 'openai';
+import { createClient } from '@supabase/supabase-js';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 // Initialize OpenAI client
@@ -7,7 +9,11 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
 
-const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
+// Initialize Supabase client
+const supabase = createClient(
+  process.env.VITE_SUPABASE_URL || '',
+  process.env.VITE_SUPABASE_ANON_KEY || ''
+);
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
@@ -66,19 +72,38 @@ export default async function handler(
       return res.status(400).json({ error: 'Message is required' });
     }
 
+    // Determine the domain from the request headers
+    const domain = req.headers.host || 'default-domain';
+
+    // Fetch the custom system prompt from Supabase
+    const { data: domainSettings, error: domainSettingsError } = await supabase
+      .from('domain_settings')
+      .select('prompt')
+      .eq('domain', domain)
+      .single();
+
+    let systemPrompt: string;
+
+    if (domainSettingsError || !domainSettings) {
+      console.warn('Using default system prompt for domain:', domain);
+      systemPrompt = 'You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don\'t know something, be honest about it.';
+    } else {
+      systemPrompt = domainSettings.prompt || 'Default system prompt if empty.';
+    }
+
     console.log('Making OpenAI API request with message:', message);
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: SYSTEM_PROMPT },
+        { role: "system", content: systemPrompt },
         { role: "user", content: message }
       ],
     });
 
     const response = completion.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
     console.log('OpenAI API response:', response);
-    
+
     return res.status(200).json({ response });
   } catch (error: any) {
     console.error('Error in API handler:', error);
@@ -91,7 +116,7 @@ export default async function handler(
         nodeEnv: process.env.NODE_ENV
       }
     });
-    
+
     return res.status(500).json({ 
       error: 'Internal server error',
       details: process.env.NODE_ENV === 'development' ? {
