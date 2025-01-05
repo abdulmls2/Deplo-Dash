@@ -65,8 +65,8 @@ export default async function handler(
       });
     }
 
-    const { message, domainId } = req.body;
-    console.log('Extracted from request body:', { message, domainId }); // Debug log
+    const { message, conversationId, domainId } = req.body;
+    console.log('Extracted from request body:', { message, conversationId, domainId }); // Debug log
 
     // Validate request body
     if (!message) {
@@ -76,7 +76,7 @@ export default async function handler(
 
     if (!domainId) {
       console.error('Missing domainId in request body');
-      return res.status(400).json({ error: 'Domain ID is required' });
+      return res.status(400).json({ error: 'Domain ID is required', receivedBody: req.body });
     }
 
     // Fetch system prompt from domain_settings

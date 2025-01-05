@@ -4,10 +4,14 @@ export const generateBotResponse = async (message: string, conversationId: strin
     // Always use the absolute URL for the API endpoint
     const API_URL = 'https://deplo-dash.vercel.app/api/chat';
     
+    if (!domainId) {
+      throw new Error('domainId is required');
+    }
+
     const payload = {
       message,
       conversationId,
-      domainId
+      domainId: domainId.toString() // Ensure domainId is a string
     };
     console.log('Sending request to API with payload:', payload);
     

@@ -49,7 +49,8 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
       console.log('Conversation data:', {
         id: conversationId,
         ...conversationData,
-        domain_id_type: typeof conversationData?.domain_id
+        domain_id_type: typeof conversationData?.domain_id,
+        domain_id_value: conversationData?.domain_id
       }); // Debug log
 
       if (!conversationData?.domain_id) {
@@ -59,12 +60,14 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
 
       // Only generate OpenAI response if live mode is disabled
       if (!conversationData.live_mode) {
+        const domainId = conversationData.domain_id.toString(); // Ensure it's a string
         console.log('Live mode disabled, generating OpenAI response with domain_id:', {
-          domain_id: conversationData.domain_id,
-          type: typeof conversationData.domain_id
+          domain_id: domainId,
+          type: typeof domainId,
+          original_value: conversationData.domain_id
         });
         try {
-          const botResponse = await generateBotResponse(content, conversationId, conversationData.domain_id);
+          const botResponse = await generateBotResponse(content, conversationId, domainId);
           console.log('Got OpenAI response:', botResponse);
           
           // Send bot response
