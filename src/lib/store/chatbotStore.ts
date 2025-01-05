@@ -1,3 +1,4 @@
+//src\lib\store\chatbotStore.ts
 import { create } from 'zustand';
 import { supabase } from '../supabase';
 import { Database } from '../database.types';
