@@ -59,7 +59,7 @@ export default async function handler(
       });
     }
 
-    const { message } = req.body;
+    const { message, systemPrompt } = req.body;
 
     // Validate request body
     if (!message) {
@@ -67,15 +67,15 @@ export default async function handler(
       return res.status(400).json({ error: 'Message is required' });
     }
 
-    console.log('Making OpenAI API request with message:', message);
-
-    // Get system prompt from request body or use default
-    const systemPrompt = req.body.systemPrompt;
+    console.log('Making OpenAI API request with:', { 
+      message, 
+      systemPrompt: systemPrompt || DEFAULT_SYSTEM_PROMPT 
+    });
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: systemPrompt },
+        { role: "system", content: systemPrompt || DEFAULT_SYSTEM_PROMPT },
         { role: "user", content: message }
       ],
     });
