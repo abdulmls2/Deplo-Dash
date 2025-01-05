@@ -42,7 +42,9 @@ export default async function handler(
       body: req.body,
       env: {
         hasApiKey: !!process.env.OPENAI_API_KEY,
-        nodeEnv: process.env.NODE_ENV
+        nodeEnv: process.env.NODE_ENV,
+        hasSupabaseUrl: !!process.env.VITE_SUPABASE_URL,
+        hasSupabaseKey: !!process.env.VITE_SUPABASE_ANON_KEY
       }
     });
 
@@ -64,6 +66,7 @@ export default async function handler(
     }
 
     const { message, domainId } = req.body;
+    console.log('Extracted from request body:', { message, domainId }); // Debug log
 
     // Validate request body
     if (!message) {
@@ -96,7 +99,7 @@ export default async function handler(
     console.log('Making OpenAI API request with message:', message);
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gpt-4",
       messages: [
         { role: "system", content: domainSettings.prompt },
         { role: "user", content: message }
