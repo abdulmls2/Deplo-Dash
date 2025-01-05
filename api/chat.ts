@@ -99,7 +99,7 @@ export default async function handler(
     console.log('Making OpenAI API request with message:', message);
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4",
+      model: "gpt-4o-mini",
       messages: [
         { role: "system", content: domainSettings.prompt },
         { role: "user", content: message }
