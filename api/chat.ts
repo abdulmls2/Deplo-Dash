@@ -1,5 +1,4 @@
-// api\chat.ts
-// Vercel Serverless Function for OpenAI Chat API
+// api/chat.ts
 import { OpenAI } from 'openai';
 import { createClient } from '@supabase/supabase-js';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
@@ -64,32 +63,43 @@ export default async function handler(
       });
     }
 
-    const { message } = req.body;
+    const { message, conversationId } = req.body;
 
     // Validate request body
-    if (!message) {
-      console.error('Missing message in request body');
-      return res.status(400).json({ error: 'Message is required' });
+    if (!message || !conversationId) {
+      console.error('Missing message or conversationId in request body');
+      return res.status(400).json({ error: 'Message and conversationId are required' });
     }
 
-    // Determine the domain from the request headers
-    const domain = req.headers.host || 'default-domain';
+    // Fetch domain_id from conversations
+    const { data: conversationData, error: conversationError } = await supabase
+      .from('conversations')
+      .select('domain_id')
+      .eq('id', conversationId)
+      .single();
 
-    // Fetch the custom system prompt from Supabase
+    if (conversationError || !conversationData) {
+      console.error('Error fetching conversation data:', conversationError);
+      return res.status(500).json({ error: 'Failed to fetch conversation data' });
+    }
+
+    // Fetch system prompt from domain_settings
     const { data: domainSettings, error: domainSettingsError } = await supabase
       .from('domain_settings')
       .select('prompt')
-      .eq('domain', domain)
+      .eq('domain_id', conversationData.domain_id)
       .single();
 
-    let systemPrompt: string;
-
-    if (domainSettingsError || !domainSettings) {
-      console.warn('Using default system prompt for domain:', domain);
-      systemPrompt = 'You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don\'t know something, be honest about it.';
-    } else {
-      systemPrompt = domainSettings.prompt || 'Default system prompt if empty.';
+    if (domainSettingsError) {
+      console.error('Error fetching domain settings:', domainSettingsError);
     }
+
+    let systemPrompt = 'Default system prompt if no custom prompt is found.';
+    if (domainSettings && domainSettings.prompt) {
+      systemPrompt = domainSettings.prompt;
+    }
+
+    console.log('Using system prompt:', systemPrompt);
 
     console.log('Making OpenAI API request with message:', message);
 
