@@ -1,7 +1,41 @@
+import { supabase } from './supabase';
+
 // Function to generate bot response using the API endpoint
 export const generateBotResponse = async (message: string, conversationId: string): Promise<string> => {
   try {
-    // Always use the absolute URL for the API endpoint
+    // First fetch the conversation to get domain_id
+    const { data: conversationData, error: conversationError } = await supabase
+      .from('conversations')
+      .select('domain_id')
+      .eq('id', conversationId)
+      .single();
+
+    if (conversationError) {
+      console.error('Error fetching conversation:', conversationError);
+      throw conversationError;
+    }
+
+    if (!conversationData || !conversationData.domain_id) {
+      console.error('No domain_id found for conversation:', conversationId);
+      throw new Error('No domain_id found for conversation');
+    }
+
+    // Then fetch the domain settings using the domain_id
+    const { data: domainSettings, error: domainError } = await supabase
+      .from('domain_settings')
+      .select('prompt')
+      .eq('domain_id', conversationData.domain_id)
+      .single();
+
+    if (domainError) {
+      console.error('Error fetching domain settings:', domainError);
+      throw domainError;
+    }
+
+    if (!domainSettings || !domainSettings.prompt) {
+      console.warn('No prompt found for domain:', conversationData.domain_id);
+    }
+
     const API_URL = 'https://deplo-dash.vercel.app/api/chat';
     
     const response = await fetch(API_URL, {
@@ -12,7 +46,8 @@ export const generateBotResponse = async (message: string, conversationId: strin
       },
       body: JSON.stringify({
         message,
-        conversationId
+        conversationId,
+        systemPrompt: domainSettings?.prompt // Use optional chaining in case prompt is not found
       })
     });
 

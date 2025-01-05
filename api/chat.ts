@@ -7,7 +7,8 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
 
-const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
+// Default system prompt as fallback
+const DEFAULT_SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
@@ -68,10 +69,13 @@ export default async function handler(
 
     console.log('Making OpenAI API request with message:', message);
 
+    // Get system prompt from request body or use default
+    const systemPrompt = req.body.systemPrompt || DEFAULT_SYSTEM_PROMPT;
+
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: SYSTEM_PROMPT },
+        { role: "system", content: systemPrompt },
         { role: "user", content: message }
       ],
     });
