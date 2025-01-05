@@ -1,6 +1,5 @@
-// api/chat.ts
+// Vercel Serverless Function for OpenAI Chat API
 import { OpenAI } from 'openai';
-import { createClient } from '@supabase/supabase-js';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 // Initialize OpenAI client
@@ -8,11 +7,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
 
-// Initialize Supabase client
-const supabase = createClient(
-  process.env.VITE_SUPABASE_URL || '',
-  process.env.VITE_SUPABASE_ANON_KEY || ''
-);
+const SYSTEM_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
@@ -63,57 +58,27 @@ export default async function handler(
       });
     }
 
-    const { message, conversationId } = req.body;
+    const { message } = req.body;
 
     // Validate request body
-    if (!message || !conversationId) {
-      console.error('Missing message or conversationId in request body');
-      return res.status(400).json({ error: 'Message and conversationId are required' });
+    if (!message) {
+      console.error('Missing message in request body');
+      return res.status(400).json({ error: 'Message is required' });
     }
-
-    // Fetch domain_id from conversations
-    const { data: conversationData, error: conversationError } = await supabase
-      .from('conversations')
-      .select('domain_id')
-      .eq('id', conversationId)
-      .single();
-
-    if (conversationError || !conversationData) {
-      console.error('Error fetching conversation data:', conversationError);
-      return res.status(500).json({ error: 'Failed to fetch conversation data' });
-    }
-
-    // Fetch system prompt from domain_settings
-    const { data: domainSettings, error: domainSettingsError } = await supabase
-      .from('domain_settings')
-      .select('prompt')
-      .eq('domain_id', conversationData.domain_id)
-      .single();
-
-    if (domainSettingsError) {
-      console.error('Error fetching domain settings:', domainSettingsError);
-    }
-
-    let systemPrompt = 'Default system prompt if no custom prompt is found.';
-    if (domainSettings && domainSettings.prompt) {
-      systemPrompt = domainSettings.prompt;
-    }
-
-    console.log('Using system prompt:', systemPrompt);
 
     console.log('Making OpenAI API request with message:', message);
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: systemPrompt },
+        { role: "system", content: SYSTEM_PROMPT },
         { role: "user", content: message }
       ],
     });
 
     const response = completion.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
     console.log('OpenAI API response:', response);
-
+    
     return res.status(200).json({ response });
   } catch (error: any) {
     console.error('Error in API handler:', error);
@@ -126,7 +91,7 @@ export default async function handler(
         nodeEnv: process.env.NODE_ENV
       }
     });
-
+    
     return res.status(500).json({ 
       error: 'Internal server error',
       details: process.env.NODE_ENV === 'development' ? {
