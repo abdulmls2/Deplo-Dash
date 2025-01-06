@@ -1,49 +1,19 @@
 // Function to generate bot response using the API endpoint
-export const generateBotResponse = async (
-  message: string, 
-  conversationId: string,
-  domainId: string,
-  chatbotName: string
-): Promise<string> => {
+export const generateBotResponse = async (message: string, conversationId: string): Promise<string> => {
   try {
-    // Validate required parameters
-    if (!message || !chatbotName || !domainId) {
-      console.error('Missing required parameters:', {
-        hasMessage: !!message,
-        hasChatbotName: !!chatbotName,
-        hasDomainId: !!domainId,
-        message,
-        chatbotName,
-        domainId
-      });
-      throw new Error('Missing required parameters for bot response');
-    }
-
     // Always use the absolute URL for the API endpoint
     const API_URL = 'https://deplo-dash.vercel.app/api/chat';
     
-    const requestBody = {
-      message,
-      conversationId,
-      chatbotName,
-      domainId,
-      debug: {
-        timestamp: new Date().toISOString(),
-        hasMessage: !!message,
-        hasChatbotName: !!chatbotName,
-        hasDomainId: !!domainId
-      }
-    };
-
-    console.log('Sending request to API:', requestBody);
-
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify({
+        message,
+        conversationId
+      })
     });
 
     if (!response.ok) {

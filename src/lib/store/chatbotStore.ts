@@ -34,76 +34,20 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
 
       if (messageError) throw messageError;
 
-      // Get conversation data and domain settings
+      // Check if live mode is enabled
       const { data: conversationData, error: conversationError } = await supabase
         .from('conversations')
-        .select('domain_id, live_mode')
+        .select('live_mode')
         .eq('id', conversationId)
         .single();
 
       if (conversationError) throw conversationError;
 
-      if (!conversationData.domain_id) {
-        console.error('No domain_id found in conversation:', conversationData);
-        throw new Error('No domain_id found in conversation');
-      }
-
-      console.log('Conversation data:', {
-        conversationId,
-        domainId: conversationData.domain_id,
-        liveMode: conversationData.live_mode
-      });
-
-      const { data: domainSettings, error: settingsError } = await supabase
-        .from('domain_settings')
-        .select('chatbot_name')
-        .eq('domain_id', conversationData.domain_id)
-        .single();
-
-      if (settingsError) {
-        console.error('Error fetching domain settings:', {
-          error: settingsError,
-          domainId: conversationData.domain_id
-        });
-        throw settingsError;
-      }
-
-      if (!domainSettings || !domainSettings.chatbot_name) {
-        console.error('No chatbot name found in domain settings:', {
-          domainId: conversationData.domain_id,
-          domainSettings
-        });
-        throw new Error('Chatbot name not configured for this domain');
-      }
-
-      console.log('Domain settings:', {
-        domainId: conversationData.domain_id,
-        chatbotName: domainSettings.chatbot_name
-      });
-
       // Only generate OpenAI response if live mode is disabled
       if (!conversationData.live_mode) {
-        console.log('Live mode disabled, generating OpenAI response with:', {
-          content,
-          conversationId,
-          domainId: conversationData.domain_id,
-          chatbotName: domainSettings.chatbot_name
-        });
+        console.log('Live mode disabled, generating OpenAI response');
         try {
-          if (!domainSettings?.chatbot_name) {
-            console.error('Chatbot name is missing from domain settings:', {
-              domainId: conversationData.domain_id,
-              domainSettings
-            });
-            throw new Error('Chatbot name not configured');
-          }
-
-          const botResponse = await generateBotResponse(
-            content, 
-            conversationId, 
-            conversationData.domain_id, 
-            domainSettings.chatbot_name
-          );
+          const botResponse = await generateBotResponse(content, conversationId);
           console.log('Got OpenAI response:', botResponse);
           
           // Send bot response
