@@ -12,7 +12,6 @@ export const generateBotResponse = async (
     
     const requestBody = {
       message,
-      conversationId,
       domainId
     };
 
@@ -29,10 +28,7 @@ export const generateBotResponse = async (
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify({
-        message,
-        domainId
-      })
+      body: JSON.stringify(requestBody)
     });
 
     if (!response.ok) {
