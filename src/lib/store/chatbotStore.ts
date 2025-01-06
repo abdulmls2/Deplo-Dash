@@ -64,7 +64,20 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
           chatbotName: domainSettings?.chatbot_name
         });
         try {
-          const botResponse = await generateBotResponse(content, conversationId, conversationData.domain_id, domainSettings?.chatbot_name || '');
+          if (!domainSettings?.chatbot_name) {
+            console.error('Chatbot name is missing from domain settings:', {
+              domainId: conversationData.domain_id,
+              domainSettings
+            });
+            throw new Error('Chatbot name not configured');
+          }
+
+          const botResponse = await generateBotResponse(
+            content, 
+            conversationId, 
+            conversationData.domain_id, 
+            domainSettings.chatbot_name
+          );
           console.log('Got OpenAI response:', botResponse);
           
           // Send bot response
