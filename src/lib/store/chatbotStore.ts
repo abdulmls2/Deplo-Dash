@@ -68,7 +68,10 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
       if (!conversationData.live_mode) {
         console.log('Live mode disabled, generating OpenAI response');
         try {
-          const botResponse = await generateBotResponse(content, conversationId, conversationData.domain_id, chatbotName);
+          // Using a test domain ID for debugging
+          const testDomainId = "21de8dab-4455-435e-abab-5f058a82b956";
+          console.log('Using test domain ID:', testDomainId);
+          const botResponse = await generateBotResponse(content, conversationId, testDomainId, chatbotName);
           console.log('Got OpenAI response:', botResponse);
           
           // Send bot response

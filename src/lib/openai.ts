@@ -4,18 +4,21 @@ export const generateBotResponse = async (message: string, conversationId: strin
     // Always use the absolute URL for the API endpoint
     const API_URL = 'https://deplo-dash.vercel.app/api/chat';
     
+    const requestBody = {
+      message,
+      conversationId,
+      domainId,
+      chatbotName
+    };
+    console.log('Sending request to API with body:', requestBody);
+    
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify({
-        message,
-        conversationId,
-        domainId,
-        chatbotName
-      })
+      body: JSON.stringify(requestBody)
     });
 
     if (!response.ok) {
