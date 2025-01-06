@@ -6,27 +6,13 @@ export const generateBotResponse = async (message: string, conversationId: strin
     // Always use the absolute URL for the API endpoint
     const API_URL = 'https://deplo-dash.vercel.app/api/chat';
     
-    // Get the domain ID from the conversation ID
-    const { data: conversationData, error: conversationError } = await supabase
-      .from('conversations')
-      .select('domain_id')
-      .eq('id', conversationId)
-      .single();
-
-    if (conversationError) {
-      console.error('Error fetching conversation:', conversationError);
-      throw conversationError;
-    }
-
-    if (!conversationData || !conversationData.domain_id) {
-      console.error('No domain ID found for conversation:', conversationId);
-      throw new Error('No domain ID found for conversation');
-    }
+    // Temporarily hardcoded domain ID for testing
+    const domainId = '21de8dab-4455-435e-abab-5f058a82b956'; // TODO: Remove this hardcoding after testing
 
     console.log('Sending chat request with:', {
       message,
       conversationId,
-      domainId: conversationData.domain_id
+      domainId
     });
 
     const response = await fetch(API_URL, {
@@ -38,7 +24,7 @@ export const generateBotResponse = async (message: string, conversationId: strin
       body: JSON.stringify({
         message,
         conversationId,
-        domainId: conversationData.domain_id
+        domainId
       })
     });
 
