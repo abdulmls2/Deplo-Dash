@@ -9,11 +9,13 @@ export const generateBotResponse = async (message: string, conversationId: strin
     // Temporarily hardcoded domain ID for testing
     const domainId = '21de8dab-4455-435e-abab-5f058a82b956'; // TODO: Remove this hardcoding after testing
 
-    console.log('Sending chat request with:', {
+    const requestBody = {
       message,
       conversationId,
       domainId
-    });
+    };
+
+    console.log('Sending chat request with body:', JSON.stringify(requestBody));
 
     const response = await fetch(API_URL, {
       method: 'POST',
@@ -21,11 +23,7 @@ export const generateBotResponse = async (message: string, conversationId: strin
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify({
-        message,
-        conversationId,
-        domainId
-      })
+      body: JSON.stringify(requestBody)
     });
 
     if (!response.ok) {

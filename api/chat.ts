@@ -78,6 +78,7 @@ export default async function handler(
       method: req.method,
       headers: req.headers,
       body: req.body,
+      rawBody: JSON.stringify(req.body),
       env: {
         hasApiKey: !!process.env.OPENAI_API_KEY,
         nodeEnv: process.env.NODE_ENV
