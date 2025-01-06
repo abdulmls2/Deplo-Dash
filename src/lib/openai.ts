@@ -16,7 +16,12 @@ export const generateBotResponse = async (
       domainId
     };
 
-    console.log('Sending chat request with body:', JSON.stringify(requestBody));
+    console.log('Sending chat request with:', {
+      url: API_URL,
+      method: 'POST',
+      body: requestBody,
+      domainId: domainId
+    });
 
     const response = await fetch(API_URL, {
       method: 'POST',
@@ -24,7 +29,10 @@ export const generateBotResponse = async (
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify({
+        message,
+        domainId
+      })
     });
 
     if (!response.ok) {

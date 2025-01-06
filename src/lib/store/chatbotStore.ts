@@ -41,11 +41,21 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
         .eq('id', conversationId)
         .single();
 
-      if (conversationError) throw conversationError;
+      if (conversationError) {
+        console.error('Error fetching conversation:', conversationError);
+        throw conversationError;
+      }
+
+      console.log('Conversation data:', conversationData);
+
+      if (!conversationData || !conversationData.domain_id) {
+        console.error('Missing domain_id in conversation:', conversationId);
+        throw new Error('No domain ID found for conversation');
+      }
 
       // Only generate OpenAI response if live mode is disabled
       if (!conversationData.live_mode) {
-        console.log('Live mode disabled, generating OpenAI response');
+        console.log('Live mode disabled, generating OpenAI response with domain ID:', conversationData.domain_id);
         try {
           const botResponse = await generateBotResponse(content, conversationId, conversationData.domain_id);
           console.log('Got OpenAI response:', botResponse);
