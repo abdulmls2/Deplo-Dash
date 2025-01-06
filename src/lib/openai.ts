@@ -1,9 +1,20 @@
 // Function to generate bot response using the API endpoint
+import { supabase } from './supabase';
+
 export const generateBotResponse = async (message: string, conversationId: string): Promise<string> => {
   try {
     // Always use the absolute URL for the API endpoint
     const API_URL = 'https://deplo-dash.vercel.app/api/chat';
     
+    // Get the domain ID from the conversation ID
+    const { data: conversationData, error: conversationError } = await supabase
+      .from('conversations')
+      .select('domain_id')
+      .eq('id', conversationId)
+      .single();
+
+    if (conversationError) throw conversationError;
+
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
@@ -12,7 +23,8 @@ export const generateBotResponse = async (message: string, conversationId: strin
       },
       body: JSON.stringify({
         message,
-        conversationId
+        conversationId,
+        domainId: conversationData.domain_id
       })
     });
 
