@@ -29,6 +29,8 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
   sendMessage: async (content: string, conversationId: string) => {
     set({ isLoading: true, error: null });
     try {
+      console.log('Starting message send with conversationId:', conversationId);
+      
       // Get domain_id and settings from conversation
       const { data: conversationData, error: conversationError } = await supabase
         .from('conversations')
@@ -44,13 +46,28 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
         .eq('id', conversationId)
         .single();
 
-      if (conversationError) throw conversationError;
+      console.log('Fetched conversation data:', {
+        conversationId,
+        domainId: conversationData?.domain_id,
+        liveMode: conversationData?.live_mode,
+        domains: conversationData?.domains
+      });
+
+      if (conversationError) {
+        console.error('Error fetching conversation:', conversationError);
+        throw conversationError;
+      }
 
       const typedConversationData = conversationData as unknown as ConversationWithSettings;
       const chatbotName = typedConversationData.domains?.domain_settings?.[0]?.chatbot_name || 'AI Assistant';
 
       // Always send as user message with null user_id to indicate it's from the widget
-      console.log('Sending user message from widget:', content);
+      console.log('Sending user message from widget:', {
+        content,
+        conversationId,
+        domainId: conversationData.domain_id
+      });
+      
       const messageData = {
         conversation_id: conversationId,
         content,
@@ -66,12 +83,20 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
 
       // Only generate OpenAI response if live mode is disabled
       if (!conversationData.live_mode) {
-        console.log('Live mode disabled, generating OpenAI response');
+        console.log('Live mode disabled, generating OpenAI response with:', {
+          content,
+          conversationId,
+          domainId: conversationData.domain_id,
+          chatbotName
+        });
+        
         try {
-          // Using a test domain ID for debugging
-          const testDomainId = "21de8dab-4455-435e-abab-5f058a82b956";
-          console.log('Using test domain ID:', testDomainId);
-          const botResponse = await generateBotResponse(content, conversationId, testDomainId, chatbotName);
+          const botResponse = await generateBotResponse(
+            content, 
+            conversationId, 
+            conversationData.domain_id, 
+            chatbotName
+          );
           console.log('Got OpenAI response:', botResponse);
           
           // Send bot response

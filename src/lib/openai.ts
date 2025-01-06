@@ -10,7 +10,7 @@ export const generateBotResponse = async (message: string, conversationId: strin
       domainId,
       chatbotName
     };
-    console.log('Sending request to API with body:', requestBody);
+    console.log('Sending request to API with body:', JSON.stringify(requestBody, null, 2));
     
     const response = await fetch(API_URL, {
       method: 'POST',
@@ -25,7 +25,8 @@ export const generateBotResponse = async (message: string, conversationId: strin
       console.error('API Response:', {
         status: response.status,
         statusText: response.statusText,
-        headers: Object.fromEntries(response.headers.entries())
+        headers: Object.fromEntries(response.headers.entries()),
+        requestBody // Log the request body that was sent
       });
       const errorText = await response.text();
       console.error('Error response body:', errorText);
@@ -33,6 +34,7 @@ export const generateBotResponse = async (message: string, conversationId: strin
     }
 
     const data = await response.json();
+    console.log('API response data:', data);
     return data.response || 'Sorry, I could not generate a response.';
   } catch (error) {
     console.error('Error generating response:', error);
