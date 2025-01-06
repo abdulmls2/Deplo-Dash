@@ -58,7 +58,7 @@ export default async function handler(
       });
     }
 
-    const { message } = req.body;
+    const { message, chatbotName } = req.body;
 
     // Validate request body
     if (!message) {
@@ -66,12 +66,19 @@ export default async function handler(
       return res.status(400).json({ error: 'Message is required' });
     }
 
+    if (!chatbotName) {
+      console.error('Missing chatbot name in request body');
+      return res.status(400).json({ error: 'Chatbot name is required' });
+    }
+
     console.log('Making OpenAI API request with message:', message);
+
+    const systemPrompt = `You are a helpful customer support assistant, your name is "${chatbotName}". Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: SYSTEM_PROMPT },
+        { role: "system", content: systemPrompt },
         { role: "user", content: message }
       ],
     });
