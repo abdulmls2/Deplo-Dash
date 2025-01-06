@@ -39,11 +39,13 @@ const getSystemPrompt = async (domainId: string) => {
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
+  // Set CORS headers
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
-  res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST,PUT,DELETE');
+  res.setHeader('Access-Control-Allow-Headers', '*');
 
+  // Handle preflight requests
   if (req.method === 'OPTIONS') {
     res.status(200).end();
     return true;
@@ -59,6 +61,19 @@ export default async function handler(
     // Handle CORS
     if (await cors(req, res)) return;
 
+    // Return a friendly message for GET requests
+    if (req.method === 'GET') {
+      return res.status(200).json({ 
+        message: 'Chat API endpoint is working. Please use POST method to send messages.',
+        status: 'online' 
+      });
+    }
+
+    if (req.method !== 'POST') {
+      console.log('Method not allowed:', req.method);
+      return res.status(405).json({ error: 'Method not allowed. Only POST requests are accepted for chat messages.' });
+    }
+
     console.log('API Request received:', {
       method: req.method,
       headers: req.headers,
@@ -68,11 +83,6 @@ export default async function handler(
         nodeEnv: process.env.NODE_ENV
       }
     });
-
-    if (req.method !== 'POST') {
-      console.log('Method not allowed:', req.method);
-      return res.status(405).json({ error: 'Method not allowed' });
-    }
 
     // Validate API key
     if (!process.env.OPENAI_API_KEY) {
