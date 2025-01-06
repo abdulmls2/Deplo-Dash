@@ -13,7 +13,21 @@ export const generateBotResponse = async (message: string, conversationId: strin
       .eq('id', conversationId)
       .single();
 
-    if (conversationError) throw conversationError;
+    if (conversationError) {
+      console.error('Error fetching conversation:', conversationError);
+      throw conversationError;
+    }
+
+    if (!conversationData || !conversationData.domain_id) {
+      console.error('No domain ID found for conversation:', conversationId);
+      throw new Error('No domain ID found for conversation');
+    }
+
+    console.log('Sending chat request with:', {
+      message,
+      conversationId,
+      domainId: conversationData.domain_id
+    });
 
     const response = await fetch(API_URL, {
       method: 'POST',
