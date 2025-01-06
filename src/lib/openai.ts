@@ -1,34 +1,19 @@
 // Function to generate bot response using the API endpoint
-import { supabase } from './supabase';
-
-export const generateBotResponse = async (
-  message: string, 
-  conversationId: string,
-  domainId: string
-): Promise<string> => {
+export const generateBotResponse = async (message: string, conversationId: string): Promise<string> => {
   try {
     // Always use the absolute URL for the API endpoint
     const API_URL = 'https://deplo-dash.vercel.app/api/chat';
     
-    const requestBody = {
-      message,
-      domainId
-    };
-
-    console.log('Sending chat request with:', {
-      url: API_URL,
-      method: 'POST',
-      body: requestBody,
-      domainId: domainId
-    });
-
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify({
+        message,
+        conversationId
+      })
     });
 
     if (!response.ok) {
