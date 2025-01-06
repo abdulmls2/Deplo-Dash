@@ -35,7 +35,7 @@ export default async function handler(
       method: req.method,
       headers: req.headers,
       body: req.body,
-      debug: req.body.debug || 'no debug info',
+      debug: req.body?.debug || 'no debug info',
       env: {
         hasApiKey: !!process.env.OPENAI_API_KEY,
         nodeEnv: process.env.NODE_ENV

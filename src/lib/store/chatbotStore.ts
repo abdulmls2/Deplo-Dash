@@ -43,7 +43,16 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
 
       if (conversationError) throw conversationError;
 
-      console.log('Conversation data:', conversationData);
+      if (!conversationData.domain_id) {
+        console.error('No domain_id found in conversation:', conversationData);
+        throw new Error('No domain_id found in conversation');
+      }
+
+      console.log('Conversation data:', {
+        conversationId,
+        domainId: conversationData.domain_id,
+        liveMode: conversationData.live_mode
+      });
 
       const { data: domainSettings, error: settingsError } = await supabase
         .from('domain_settings')
@@ -51,9 +60,26 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
         .eq('domain_id', conversationData.domain_id)
         .single();
 
-      if (settingsError) throw settingsError;
+      if (settingsError) {
+        console.error('Error fetching domain settings:', {
+          error: settingsError,
+          domainId: conversationData.domain_id
+        });
+        throw settingsError;
+      }
 
-      console.log('Domain settings:', domainSettings);
+      if (!domainSettings || !domainSettings.chatbot_name) {
+        console.error('No chatbot name found in domain settings:', {
+          domainId: conversationData.domain_id,
+          domainSettings
+        });
+        throw new Error('Chatbot name not configured for this domain');
+      }
+
+      console.log('Domain settings:', {
+        domainId: conversationData.domain_id,
+        chatbotName: domainSettings.chatbot_name
+      });
 
       // Only generate OpenAI response if live mode is disabled
       if (!conversationData.live_mode) {
@@ -61,7 +87,7 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
           content,
           conversationId,
           domainId: conversationData.domain_id,
-          chatbotName: domainSettings?.chatbot_name
+          chatbotName: domainSettings.chatbot_name
         });
         try {
           if (!domainSettings?.chatbot_name) {
