@@ -35,6 +35,7 @@ export default async function handler(
       method: req.method,
       headers: req.headers,
       body: req.body,
+      debug: req.body.debug || 'no debug info',
       env: {
         hasApiKey: !!process.env.OPENAI_API_KEY,
         nodeEnv: process.env.NODE_ENV
@@ -42,13 +43,16 @@ export default async function handler(
     });
 
     if (req.method !== 'POST') {
-      console.log('Method not allowed:', req.method);
+      console.error('Method not allowed:', {
+        method: req.method,
+        allowedMethod: 'POST'
+      });
       return res.status(405).json({ error: 'Method not allowed' });
     }
 
     // Validate API key
     if (!process.env.OPENAI_API_KEY) {
-      console.error('OpenAI API key is not set');
+      console.error('Configuration error: OpenAI API key is not set');
       return res.status(500).json({ 
         error: 'OpenAI API key is not configured',
         env: process.env.NODE_ENV === 'development' ? {
@@ -58,20 +62,44 @@ export default async function handler(
       });
     }
 
-    const { message, chatbotName } = req.body;
+    const { message, chatbotName, debug } = req.body;
+
+    console.error('Request validation:', {
+      timestamp: new Date().toISOString(),
+      receivedBody: {
+        message: message || 'missing',
+        chatbotName: chatbotName || 'missing',
+        debug: debug || 'no debug info'
+      },
+      bodyKeys: Object.keys(req.body),
+      rawBody: req.body
+    });
 
     // Validate request body
     if (!message) {
-      console.error('Missing message in request body');
+      console.error('Validation failed: Missing message', {
+        bodyKeys: Object.keys(req.body),
+        receivedMessage: message
+      });
       return res.status(400).json({ error: 'Message is required' });
     }
 
     if (!chatbotName) {
-      console.error('Missing chatbot name in request body');
+      console.error('Validation failed: Missing chatbot name', {
+        bodyKeys: Object.keys(req.body),
+        receivedChatbotName: chatbotName,
+        fullBody: req.body,
+        debug: debug || 'no debug info'
+      });
       return res.status(400).json({ error: 'Chatbot name is required' });
     }
 
-    console.log('Making OpenAI API request with message:', message);
+    console.log('Preparing OpenAI request:', {
+      timestamp: new Date().toISOString(),
+      message,
+      chatbotName,
+      debug
+    });
 
     const systemPrompt = `You are a helpful customer support assistant, your name is "${chatbotName}". Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
