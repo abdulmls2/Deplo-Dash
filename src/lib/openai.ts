@@ -24,13 +24,14 @@ export const generateBotResponse = async (
     
     const requestBody = {
       message,
-      chatbotName,  // Ensure chatbotName is included in the request
+      conversationId,
+      chatbotName,
+      domainId,
       debug: {
         timestamp: new Date().toISOString(),
         hasMessage: !!message,
         hasChatbotName: !!chatbotName,
-        hasDomainId: !!domainId,
-        domainId
+        hasDomainId: !!domainId
       }
     };
 
