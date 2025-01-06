@@ -6,6 +6,16 @@ import { generateBotResponse } from '../openai';
 
 type Message = Database['public']['Tables']['messages']['Row'];
 
+interface ConversationWithSettings {
+  domain_id: string;
+  live_mode: boolean;
+  domains: {
+    domain_settings: Array<{
+      chatbot_name: string | null;
+    }>;
+  } | null;
+}
+
 interface ChatbotStore {
   isLoading: boolean;
   error: string | null;
@@ -19,6 +29,26 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
   sendMessage: async (content: string, conversationId: string) => {
     set({ isLoading: true, error: null });
     try {
+      // Get domain_id and settings from conversation
+      const { data: conversationData, error: conversationError } = await supabase
+        .from('conversations')
+        .select(`
+          domain_id,
+          live_mode,
+          domains:domain_id (
+            domain_settings (
+              chatbot_name
+            )
+          )
+        `)
+        .eq('id', conversationId)
+        .single();
+
+      if (conversationError) throw conversationError;
+
+      const typedConversationData = conversationData as unknown as ConversationWithSettings;
+      const chatbotName = typedConversationData.domains?.domain_settings?.[0]?.chatbot_name || 'AI Assistant';
+
       // Always send as user message with null user_id to indicate it's from the widget
       console.log('Sending user message from widget:', content);
       const messageData = {
@@ -34,20 +64,11 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
 
       if (messageError) throw messageError;
 
-      // Check if live mode is enabled
-      const { data: conversationData, error: conversationError } = await supabase
-        .from('conversations')
-        .select('live_mode')
-        .eq('id', conversationId)
-        .single();
-
-      if (conversationError) throw conversationError;
-
       // Only generate OpenAI response if live mode is disabled
       if (!conversationData.live_mode) {
         console.log('Live mode disabled, generating OpenAI response');
         try {
-          const botResponse = await generateBotResponse(content, conversationId);
+          const botResponse = await generateBotResponse(content, conversationId, conversationData.domain_id, chatbotName);
           console.log('Got OpenAI response:', botResponse);
           
           // Send bot response
