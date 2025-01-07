@@ -1,24 +1,8 @@
 // Function to generate bot response using the API endpoint
-export const generateBotResponse = async (
-  message: string, 
-  conversationId: string,
-  domainSettings: { domain_id: string; chatbot_name: string }
-): Promise<string> => {
+export const generateBotResponse = async (message: string, conversationId: string): Promise<string> => {
   try {
     // Always use the absolute URL for the API endpoint
     const API_URL = 'https://deplo-dash.vercel.app/api/chat';
-    
-    const requestBody = {
-      message,
-      conversationId,
-      domain_id: domainSettings.domain_id,
-      chatbot_name: domainSettings.chatbot_name
-    };
-    
-    console.log('Sending request to API:', {
-      url: API_URL,
-      body: requestBody
-    });
     
     const response = await fetch(API_URL, {
       method: 'POST',
@@ -26,7 +10,10 @@ export const generateBotResponse = async (
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify({
+        message,
+        conversationId
+      })
     });
 
     if (!response.ok) {
@@ -41,7 +28,6 @@ export const generateBotResponse = async (
     }
 
     const data = await response.json();
-    console.log('API Response data:', data);
     return data.response || 'Sorry, I could not generate a response.';
   } catch (error) {
     console.error('Error generating response:', error);
