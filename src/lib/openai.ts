@@ -12,7 +12,7 @@ export const generateBotResponse = async (message: string, conversationId: strin
     const requestBody = {
       message,
       conversationId,
-      chatbot_name: chatbotName
+      chatbotName
     };
     
     console.log('Debug - Request construction:', {

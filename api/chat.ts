@@ -59,8 +59,7 @@ export default async function handler(
       });
     }
 
-    const { message } = req.body;
-    const chatbotName = req.body.chatbot_name || 'Assistant';
+    const { message, chatbotName = 'Assistant' } = req.body;
 
     // Validate request body
     if (!message) {
@@ -72,7 +71,7 @@ export default async function handler(
       message,
       chatbotName,
       fullBody: req.body,
-      hasName: 'chatbot_name' in req.body
+      hasName: 'chatbotName' in req.body
     });
 
     const completion = await openai.chat.completions.create({
