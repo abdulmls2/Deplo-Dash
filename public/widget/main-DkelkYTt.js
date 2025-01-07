@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-uRncuwKY.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-eukTL3dm.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7713,7 +7713,7 @@ const Jc = async (s, e, t) => {
       body: JSON.stringify({
         message: s,
         conversationId: e,
-        chatbotName: t
+        customPrompt: t
       })
     });
     if (!n.ok) {
@@ -7735,39 +7735,39 @@ const Jc = async (s, e, t) => {
   sendMessage: async (t, r) => {
     s({ isLoading: !0, error: null });
     try {
-      const { data: n } = await q.from("conversations").select("domain_id").eq("id", r).single(), { data: i } = await q.from("domain_settings").select("chatbot_name").eq("domain_id", n == null ? void 0 : n.domain_id).single(), a = i == null ? void 0 : i.chatbot_name;
+      const { data: n } = await q.from("conversations").select("domain_id").eq("id", r).single(), { data: i } = await q.from("domain_settings").select("chatbot_name, prompt").eq("domain_id", n == null ? void 0 : n.domain_id).single(), a = i == null ? void 0 : i.chatbot_name, o = i == null ? void 0 : i.prompt;
       if (!a)
         throw console.error("No chatbot name found in domain settings, cannot proceed with OpenAI request"), new Error("Chatbot configuration is incomplete");
       console.log(`Sending user message from ${a}:`, t);
-      const o = {
+      const c = {
         conversation_id: r,
         content: t,
         sender_type: "user",
         user_id: null
-      }, { error: c } = await q.from("messages").insert(o);
-      if (c) throw c;
-      const { data: u, error: l } = await q.from("conversations").select("live_mode").eq("id", r).single();
-      if (l) throw l;
-      if (u.live_mode)
+      }, { error: u } = await q.from("messages").insert(c);
+      if (u) throw u;
+      const { data: l, error: h } = await q.from("conversations").select("live_mode").eq("id", r).single();
+      if (h) throw h;
+      if (l.live_mode)
         console.log("Live mode enabled, skipping OpenAI response");
       else {
         console.log(`Live mode disabled for ${a}, generating OpenAI response`);
         try {
-          const f = await Jc(t, r, a);
-          console.log(`Got OpenAI response for ${a}:`, f);
-          const p = {
+          const p = await Jc(t, r, o);
+          console.log(`Got OpenAI response for ${a}:`, p);
+          const _ = {
             conversation_id: r,
-            content: f,
+            content: p,
             sender_type: "bot",
             user_id: null
-          }, { error: _ } = await q.from("messages").insert(p);
-          if (_) throw _;
-        } catch (f) {
-          console.error("Error generating bot response:", f), ae.error("Failed to generate bot response");
+          }, { error: v } = await q.from("messages").insert(_);
+          if (v) throw v;
+        } catch (p) {
+          console.error("Error generating bot response:", p), ae.error("Failed to generate bot response");
         }
       }
-      const { error: h } = await q.from("conversations").update({ last_message_at: (/* @__PURE__ */ new Date()).toISOString() }).eq("id", r);
-      if (h) throw h;
+      const { error: f } = await q.from("conversations").update({ last_message_at: (/* @__PURE__ */ new Date()).toISOString() }).eq("id", r);
+      if (f) throw f;
     } catch (n) {
       console.error("Error sending message:", n), s({ error: n.message }), ae.error("Failed to send message");
     } finally {
@@ -8291,4 +8291,4 @@ Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-CaPSb3pe.js.map
+//# sourceMappingURL=main-DkelkYTt.js.map

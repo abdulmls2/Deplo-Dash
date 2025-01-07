@@ -7,8 +7,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
 
-const getSystemPrompt = (chatbotName: string) => 
-  `You are a helpful customer support assistant named "${chatbotName}". Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
+const DEFAULT_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
@@ -59,7 +58,7 @@ export default async function handler(
       });
     }
 
-    const { message, chatbotName } = req.body;
+    const { message, chatbotName, customPrompt } = req.body;
 
     // Validate request body
     if (!message) {
@@ -67,18 +66,17 @@ export default async function handler(
       return res.status(400).json({ error: 'Message is required' });
     }
 
-    if (!chatbotName) {
-      console.error('Missing chatbotName in request body');
-      return res.status(400).json({ error: 'Chatbot name is required' });
-    }
-
     console.log('Making OpenAI API request with message:', message);
-    console.log('Using chatbot name:', chatbotName);
+    if (customPrompt) {
+      console.log('Using custom prompt from domain settings');
+    } else {
+      console.log('Using default prompt');
+    }
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: getSystemPrompt(chatbotName) },
+        { role: "system", content: customPrompt || DEFAULT_PROMPT },
         { role: "user", content: message }
       ],
     });
