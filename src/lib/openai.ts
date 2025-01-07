@@ -4,16 +4,21 @@ export const generateBotResponse = async (message: string, conversationId: strin
     // Always use the absolute URL for the API endpoint
     const API_URL = 'https://deplo-dash.vercel.app/api/chat';
     
+    // Ensure all fields are present
+    if (!chatbotName) {
+      console.warn('ChatbotName is missing or empty');
+    }
+
     const requestBody = {
       message,
       conversationId,
-      chatbotName: chatbotName
+      chatbotName // Keep it simple, no reassignment needed
     };
     
-    console.log('Debug - Full request details:', {
-      url: API_URL,
-      body: requestBody,
-      chatbotName: chatbotName
+    console.log('Debug - Request construction:', {
+      originalParams: { message, conversationId, chatbotName },
+      constructedBody: requestBody,
+      stringifiedBody: JSON.stringify(requestBody)
     });
     
     const response = await fetch(API_URL, {

@@ -495,11 +495,14 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   useEffect(() => {
     const fetchConfig = async () => {
       try {
+        console.log('Fetching config for domain:', domainId);
         const { data } = await supabase
           .from('domain_settings')
           .select('*')
           .eq('domain_id', domainId)
           .single();
+
+        console.log('Fetched domain settings:', data);
 
         if (data) {
           setConfig({
