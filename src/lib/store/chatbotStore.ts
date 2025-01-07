@@ -68,6 +68,12 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
             }
           }
 
+          console.log('Using chatbot name:', chatbotName);
+          
+          if (!chatbotName) {
+            throw new Error('Chatbot name is required');
+          }
+
           const botResponse = await generateBotResponse(content, conversationId, chatbotName);
           
           // Send bot response

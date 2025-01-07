@@ -36,7 +36,8 @@ export default async function handler(
     console.log('API Request received:', {
       method: req.method,
       headers: req.headers,
-      body: req.body,
+      rawBody: req.body,
+      parsedBody: typeof req.body === 'string' ? JSON.parse(req.body) : req.body,
       env: {
         hasApiKey: !!process.env.OPENAI_API_KEY,
         nodeEnv: process.env.NODE_ENV
