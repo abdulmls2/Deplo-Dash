@@ -268,12 +268,12 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           
           if (payload.eventType === 'INSERT') {
             const newMessage = payload.new as Message;
-            console.log(`New message for ${config.chatbotName}:`, newMessage);
-            
+            console.log('New message:', newMessage);
+
             setMessages(prevMessages => {
               // Use the enhanced duplicate detection
               if (isMessageDuplicate(newMessage, prevMessages)) {
-                console.log(`Message already exists for ${config.chatbotName}, skipping`);
+                console.log('Message already exists, skipping');
                 return prevMessages;
               }
 
@@ -292,7 +292,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                 playNotificationSound();
               }
 
-              console.log(`Adding new message to state for ${config.chatbotName}`);
+              console.log('Adding new message to state');
               return [...updatedMessages, newMessage];
             });
           }
