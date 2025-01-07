@@ -9,20 +9,16 @@ export const generateBotResponse = async (message: string, conversationId: strin
       throw new Error(`Missing required parameters: ${!message ? 'message' : ''} ${!chatbotName ? 'chatbotName' : ''}`);
     }
     
-    const requestBody = JSON.stringify({
-      message: message,
-      chatbotName: chatbotName
-    });
-    
-    console.log('Sending request with data:', requestBody);
-    
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: requestBody
+      body: JSON.stringify({
+        message,
+        chatbotName
+      })
     });
 
     if (!response.ok) {
