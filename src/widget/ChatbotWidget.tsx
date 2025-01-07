@@ -441,6 +441,8 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       setIsLoading(true);
       setError(null);
 
+      console.log('Sending message with config:', config);
+
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         await supabase.auth.signInAnonymously();

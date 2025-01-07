@@ -11,6 +11,7 @@ export const generateBotResponse = async (message: string, conversationId: strin
     };
     
     console.log('Sending request with body:', requestBody);
+    console.log('Stringified request body:', JSON.stringify(requestBody));
     
     const response = await fetch(API_URL, {
       method: 'POST',
