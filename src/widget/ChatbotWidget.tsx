@@ -441,7 +441,11 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       setIsLoading(true);
       setError(null);
 
-      console.log('Sending message with config:', config);
+      console.log('Debug - Widget Config:', {
+        config,
+        chatbotName: config.chatbotName,
+        hasName: !!config.chatbotName
+      });
 
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {

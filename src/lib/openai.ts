@@ -7,11 +7,14 @@ export const generateBotResponse = async (message: string, conversationId: strin
     const requestBody = {
       message,
       conversationId,
-      chatbotName
+      chatbotName: chatbotName
     };
     
-    console.log('Sending request with body:', requestBody);
-    console.log('Stringified request body:', JSON.stringify(requestBody));
+    console.log('Debug - Full request details:', {
+      url: API_URL,
+      body: requestBody,
+      chatbotName: chatbotName
+    });
     
     const response = await fetch(API_URL, {
       method: 'POST',
