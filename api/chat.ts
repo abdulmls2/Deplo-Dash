@@ -1,13 +1,17 @@
-// Vercel Serverless Function for OpenAI Chat API
 import { OpenAI } from 'openai';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { createClient } from '@supabase/supabase-js';
+
+// Initialize Supabase client
+const supabase = createClient(
+  process.env.SUPABASE_URL || '',
+  process.env.SUPABASE_ANON_KEY || ''
+);
 
 // Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
-
-const SYSTEM_PROMPT = `You are a helpful customer support assistant, your name is "". Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
@@ -58,18 +62,46 @@ export default async function handler(
       });
     }
 
-    const { message } = req.body;
+    const { message, conversationId } = req.body;
 
     // Validate request body
-    if (!message) {
-      console.error('Missing message in request body');
-      return res.status(400).json({ error: 'Message is required' });
+    if (!message || !conversationId) {
+      console.error('Missing message or conversationId in request body');
+      return res.status(400).json({ error: 'Message and conversationId are required' });
     }
+
+    // Fetch domain_id from conversations table
+    const { data: conversation, error: conversationError } = await supabase
+      .from('conversations')
+      .select('domain_id')
+      .eq('id', conversationId)
+      .single();
+
+    if (conversationError || !conversation?.domain_id) {
+      console.error('Error fetching conversation or domain_id is missing:', conversationError);
+      return res.status(500).json({ error: 'Failed to fetch conversation data' });
+    }
+
+    // Fetch chatbot_name from domain_settings table
+    const { data: domainSettings, error: domainSettingsError } = await supabase
+      .from('domain_settings')
+      .select('chatbot_name')
+      .eq('domain_id', conversation.domain_id)
+      .single();
+
+    let chatbotName = 'Friendly Assistant'; // Default name
+
+    if (domainSettings && domainSettings.chatbot_name) {
+      chatbotName = domainSettings.chatbot_name;
+    }
+
+    // Construct SYSTEM_PROMPT with chatbot_name
+    const SYSTEM_PROMPT = `You are a helpful customer support assistant, your name is "${chatbotName}". Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
     console.log('Making OpenAI API request with message:', message);
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gpt-4", // Use the correct model name
       messages: [
         { role: "system", content: SYSTEM_PROMPT },
         { role: "user", content: message }
