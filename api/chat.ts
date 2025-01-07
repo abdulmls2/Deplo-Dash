@@ -70,16 +70,34 @@ export default async function handler(
       return res.status(400).json({ error: 'Message and conversationId are required' });
     }
 
-    // Fetch domain_id from conversations table
+    console.log('Received conversationId (messageId):', conversationId);
+
+    // Step 1: Fetch conversation_id from the messages table
+    const { data: messageData, error: messageError } = await supabase
+      .from('messages')
+      .select('conversation_id')
+      .eq('id', conversationId)
+      .single();
+
+    if (messageError || !messageData) {
+      console.error('Error fetching message:', messageError);
+      return res.status(404).json({ error: 'Message not found' });
+    }
+
+    const conversation_id = messageData.conversation_id;
+
+    console.log('Fetched conversation_id:', conversation_id);
+
+    // Step 2: Fetch domain_id from the conversations table
     const { data: conversation, error: conversationError } = await supabase
       .from('conversations')
       .select('domain_id')
-      .eq('id', conversationId)
+      .eq('id', conversation_id)
       .single();
 
     if (conversationError || !conversation) {
       console.error('Error fetching conversation:', conversationError);
-      return res.status(500).json({ error: 'Failed to fetch conversation data' });
+      return res.status(404).json({ error: 'Conversation not found' });
     }
 
     let domainId = conversation.domain_id;
@@ -88,7 +106,7 @@ export default async function handler(
     let chatbotName = 'Friendly Assistant'; // Default name
 
     if (domainId) {
-      // Fetch chatbot_name from domain_settings table
+      // Step 3: Fetch chatbot_name from domain_settings table
       const { data: domainSettings, error: domainSettingsError } = await supabase
         .from('domain_settings')
         .select('chatbot_name')
