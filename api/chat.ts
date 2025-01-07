@@ -4,8 +4,8 @@ import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase client
 const supabase = createClient(
-  process.env.VITE_SUPABASE_URL || '',
-  process.env.VITE_SUPABASE_ANON_KEY || ''
+  process.env.SUPABASE_URL || '',
+  process.env.SUPABASE_ANON_KEY || ''
 );
 
 // Initialize OpenAI client
@@ -77,22 +77,31 @@ export default async function handler(
       .eq('id', conversationId)
       .single();
 
-    if (conversationError || !conversation?.domain_id) {
-      console.error('Error fetching conversation or domain_id is missing:', conversationError);
+    if (conversationError || !conversation) {
+      console.error('Error fetching conversation:', conversationError);
       return res.status(500).json({ error: 'Failed to fetch conversation data' });
     }
 
-    // Fetch chatbot_name from domain_settings table
-    const { data: domainSettings, error: domainSettingsError } = await supabase
-      .from('domain_settings')
-      .select('chatbot_name')
-      .eq('domain_id', conversation.domain_id)
-      .single();
+    let domainId = conversation.domain_id;
 
+    // If domain_id is null, use a default chatbot_name
     let chatbotName = 'Friendly Assistant'; // Default name
 
-    if (domainSettings && domainSettings.chatbot_name) {
-      chatbotName = domainSettings.chatbot_name;
+    if (domainId) {
+      // Fetch chatbot_name from domain_settings table
+      const { data: domainSettings, error: domainSettingsError } = await supabase
+        .from('domain_settings')
+        .select('chatbot_name')
+        .eq('domain_id', domainId)
+        .single();
+
+      if (domainSettings && domainSettings.chatbot_name) {
+        chatbotName = domainSettings.chatbot_name;
+      } else {
+        console.warn('Failed to fetch chatbot_name, using default.');
+      }
+    } else {
+      console.warn('Conversation does not have a domain_id, using default chatbot name.');
     }
 
     // Construct SYSTEM_PROMPT with chatbot_name
@@ -101,7 +110,7 @@ export default async function handler(
     console.log('Making OpenAI API request with message:', message);
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4", // Use the correct model name
+      model: "gpt-4",
       messages: [
         { role: "system", content: SYSTEM_PROMPT },
         { role: "user", content: message }
