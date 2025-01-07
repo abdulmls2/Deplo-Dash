@@ -11,7 +11,8 @@ export const generateBotResponse = async (
     const requestBody = {
       message,
       conversationId,
-      domainSettings
+      domain_id: domainSettings.domain_id,
+      chatbot_name: domainSettings.chatbot_name
     };
     
     console.log('Sending request to API:', {

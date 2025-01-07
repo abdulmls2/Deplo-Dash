@@ -7,8 +7,8 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
 
-const getSystemPrompt = (domainSettings: { domain_id: string; chatbot_name: string }) => {
-  return `You are a helpful customer support assistant for ${domainSettings.chatbot_name}. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
+const getSystemPrompt = (chatbotName: string) => {
+  return `You are a helpful customer support assistant for ${chatbotName}. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 };
 
 // Enable CORS middleware
@@ -60,7 +60,7 @@ export default async function handler(
       });
     }
 
-    const { message, domainSettings } = req.body;
+    const { message, domain_id, chatbot_name } = req.body;
 
     // Validate request body
     if (!message) {
@@ -68,7 +68,7 @@ export default async function handler(
       return res.status(400).json({ error: 'Message is required' });
     }
 
-    if (!domainSettings?.domain_id || !domainSettings?.chatbot_name) {
+    if (!domain_id || !chatbot_name) {
       console.error('Missing domain settings in request body');
       return res.status(400).json({ error: 'Domain settings are required' });
     }
@@ -78,7 +78,7 @@ export default async function handler(
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: getSystemPrompt(domainSettings) },
+        { role: "system", content: getSystemPrompt(chatbot_name) },
         { role: "user", content: message }
       ],
     });
