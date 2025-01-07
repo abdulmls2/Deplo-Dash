@@ -41,15 +41,25 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
                 .eq('id', conversationId)
                 .single();
 
+
             if (conversationError) {
-               console.error('Error fetching conversation data:', conversationError);
-                 toast.error('Failed to fetch conversation data');
-               set({isLoading:false})
-              return;
+                console.error('Error fetching conversation data:', conversationError);
+                toast.error('Failed to fetch conversation data');
+                set({ isLoading: false });
+                return;
             }
+            
+           if (!conversationData || !conversationData.domain_id) {
+               console.error('Error: domain_id missing after fetch')
+                toast.error('Failed to fetch domain data');
+               set({isLoading:false});
+              return;
+           }
+
 
             console.log('Fetched conversation data:', conversationData);
-             console.log("Domain ID being passed to generateBotResponse:", conversationData.domain_id);
+            console.log("Domain ID being passed to generateBotResponse:", conversationData.domain_id);
+
             // Only generate OpenAI response if live mode is disabled
             if (conversationData && !conversationData.live_mode) {
                 console.log('Live mode disabled, generating OpenAI response');
