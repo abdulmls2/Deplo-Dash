@@ -63,10 +63,11 @@ export default async function handler(
     }
 
       const { message, domainId } = req.body;
+    console.log("req.body from api/chat.ts", req.body)
 
     // Validate request body
     if (!message || !domainId) {
-        console.error('Missing message or domainId in request body');
+      console.error('Missing message or domainId in request body');
       return res.status(400).json({ error: 'Message and domainId are required' });
     }
 
