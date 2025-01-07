@@ -468,8 +468,8 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
         return [...prevMessages, tempMessage];
       });
 
-      // Send message through chatbot store which will handle OpenAI integration
-      await chatbotSendMessage(content, currentConversationId);
+      // Send to chatbotStore for processing
+      await chatbotSendMessage(content, currentConversationId, config.chatbotName);
 
       setMessage('');
     } catch (error) {
