@@ -7,9 +7,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
 
-// System prompt will be generated dynamically
-const getSystemPrompt = (chatbotName: string) => 
-  `You are a helpful customer support assistant, your name is "${chatbotName}". Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
+const SYSTEM_PROMPT = `You are a helpful customer support assistant, your name is "". Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
@@ -36,8 +34,7 @@ export default async function handler(
     console.log('API Request received:', {
       method: req.method,
       headers: req.headers,
-      rawBody: req.body,
-      parsedBody: typeof req.body === 'string' ? JSON.parse(req.body) : req.body,
+      body: req.body,
       env: {
         hasApiKey: !!process.env.OPENAI_API_KEY,
         nodeEnv: process.env.NODE_ENV
@@ -61,28 +58,20 @@ export default async function handler(
       });
     }
 
-    const { message, chatbotName, conversationId } = req.body;
+    const { message } = req.body;
 
     // Validate request body
-    if (!message || !chatbotName) {
-      console.error('Missing required fields in request body:', { 
-        hasMessage: !!message, 
-        hasChatbotName: !!chatbotName,
-        body: req.body 
-      });
-      return res.status(400).json({ error: 'Message and chatbotName are required' });
+    if (!message) {
+      console.error('Missing message in request body');
+      return res.status(400).json({ error: 'Message is required' });
     }
 
-    console.log('Making OpenAI API request:', { 
-      message, 
-      chatbotName,
-      conversationId 
-    });
+    console.log('Making OpenAI API request with message:', message);
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: getSystemPrompt(chatbotName) },
+        { role: "system", content: SYSTEM_PROMPT },
         { role: "user", content: message }
       ],
     });
