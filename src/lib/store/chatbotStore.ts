@@ -9,14 +9,14 @@ type Message = Database['public']['Tables']['messages']['Row'];
 interface ChatbotStore {
   isLoading: boolean;
   error: string | null;
-  sendMessage: (content: string, conversationId: string, chatbotName: string) => Promise<void>;
+  sendMessage: (content: string, conversationId: string) => Promise<void>;
 }
 
 export const useChatbotStore = create<ChatbotStore>((set, get) => ({
   isLoading: false,
   error: null,
 
-  sendMessage: async (content: string, conversationId: string, chatbotName: string) => {
+  sendMessage: async (content: string, conversationId: string) => {
     set({ isLoading: true, error: null });
     try {
       // Always send as user message with null user_id to indicate it's from the widget
@@ -46,14 +46,8 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
       // Only generate OpenAI response if live mode is disabled
       if (!conversationData.live_mode) {
         console.log('Live mode disabled, generating OpenAI response');
-        console.log('Debug - ChatbotStore:', {
-          content,
-          conversationId,
-          chatbotName,
-          hasName: !!chatbotName
-        });
         try {
-          const botResponse = await generateBotResponse(content, conversationId, chatbotName);
+          const botResponse = await generateBotResponse(content, conversationId);
           console.log('Got OpenAI response:', botResponse);
           
           // Send bot response

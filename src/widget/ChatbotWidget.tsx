@@ -441,12 +441,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       setIsLoading(true);
       setError(null);
 
-      console.log('Debug - Widget Config:', {
-        config,
-        chatbotName: config.chatbotName,
-        hasName: !!config.chatbotName
-      });
-
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         await supabase.auth.signInAnonymously();
@@ -474,8 +468,8 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
         return [...prevMessages, tempMessage];
       });
 
-      // Send to chatbotStore for processing
-      await chatbotSendMessage(content, currentConversationId, config.chatbotName);
+      // Send message through chatbot store which will handle OpenAI integration
+      await chatbotSendMessage(content, currentConversationId);
 
       setMessage('');
     } catch (error) {
@@ -495,14 +489,11 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   useEffect(() => {
     const fetchConfig = async () => {
       try {
-        console.log('Fetching config for domain:', domainId);
         const { data } = await supabase
           .from('domain_settings')
           .select('*')
           .eq('domain_id', domainId)
           .single();
-
-        console.log('Fetched domain settings:', data);
 
         if (data) {
           setConfig({
