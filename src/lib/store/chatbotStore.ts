@@ -6,14 +6,6 @@ import { generateBotResponse } from '../openai';
 
 type Message = Database['public']['Tables']['messages']['Row'];
 
-// Define the type for the nested query response
-type ConversationWithSettings = {
-  live_mode: boolean;
-  domain_settings: {
-    chatbot_name: string;
-  };
-}
-
 interface ChatbotStore {
   isLoading: boolean;
   error: string | null;
@@ -42,36 +34,20 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
 
       if (messageError) throw messageError;
 
-      // Get both live_mode and chatbot_name in a single query
+      // Check if live mode is enabled
       const { data: conversationData, error: conversationError } = await supabase
-        .from('messages')
-        .select(`
-          conversations!inner (
-            live_mode,
-            domain_settings!inner (
-              chatbot_name
-            )
-          )
-        `)
-        .eq('conversation_id', conversationId)
+        .from('conversations')
+        .select('live_mode')
+        .eq('id', conversationId)
         .single();
 
       if (conversationError) throw conversationError;
 
-      console.log('Query response:', conversationData);
-
-      const chatbotName = conversationData?.conversations?.domain_settings?.chatbot_name || "Friendly Assistant";
-      const live_mode = conversationData?.conversations?.live_mode;
-
-      console.log('Extracted data:', { chatbotName, live_mode });
-
       // Only generate OpenAI response if live mode is disabled
-      if (!live_mode) {
+      if (!conversationData.live_mode) {
         console.log('Live mode disabled, generating OpenAI response');
         try {
-          console.log('Using chatbot name:', chatbotName);
-
-          const botResponse = await generateBotResponse(content, conversationId, chatbotName);
+          const botResponse = await generateBotResponse(content, conversationId);
           console.log('Got OpenAI response:', botResponse);
           
           // Send bot response
