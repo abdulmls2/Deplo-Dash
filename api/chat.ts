@@ -60,15 +60,23 @@ export default async function handler(
       });
     }
 
-    const { message, chatbotName } = req.body;
+    const { message, chatbotName, conversationId } = req.body;
 
     // Validate request body
     if (!message || !chatbotName) {
-      console.error('Missing required fields in request body');
+      console.error('Missing required fields in request body:', { 
+        hasMessage: !!message, 
+        hasChatbotName: !!chatbotName,
+        body: req.body 
+      });
       return res.status(400).json({ error: 'Message and chatbotName are required' });
     }
 
-    console.log('Making OpenAI API request with message:', message);
+    console.log('Making OpenAI API request:', { 
+      message, 
+      chatbotName,
+      conversationId 
+    });
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
