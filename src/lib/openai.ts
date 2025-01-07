@@ -8,17 +8,24 @@ export const generateBotResponse = async (
     // Always use the absolute URL for the API endpoint
     const API_URL = 'https://deplo-dash.vercel.app/api/chat';
     
+    const requestBody = {
+      message,
+      conversationId,
+      domainSettings
+    };
+    
+    console.log('Sending request to API:', {
+      url: API_URL,
+      body: requestBody
+    });
+    
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify({
-        message,
-        conversationId,
-        domainSettings
-      })
+      body: JSON.stringify(requestBody)
     });
 
     if (!response.ok) {
@@ -33,6 +40,7 @@ export const generateBotResponse = async (
     }
 
     const data = await response.json();
+    console.log('API Response data:', data);
     return data.response || 'Sorry, I could not generate a response.';
   } catch (error) {
     console.error('Error generating response:', error);

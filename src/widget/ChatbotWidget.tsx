@@ -438,6 +438,12 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
 
   const sendMessage = async (content: string) => {
     try {
+      if (!config.chatbotName) {
+        console.error('Chatbot configuration not loaded');
+        setError('Configuration not loaded. Please try again.');
+        return;
+      }
+
       setIsLoading(true);
       setError(null);
 
@@ -469,6 +475,11 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       });
 
       // Send message through chatbot store which will handle OpenAI integration
+      console.log('Sending message with domain settings:', {
+        domain_id: domainId,
+        chatbot_name: config.chatbotName
+      });
+      
       await chatbotSendMessage(content, currentConversationId, {
         domain_id: domainId,
         chatbot_name: config.chatbotName
