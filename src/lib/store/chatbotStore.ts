@@ -42,25 +42,35 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
 
       if (messageError) throw messageError;
 
-      // Get live_mode and chatbot_name in a single query
+      // Get both live_mode and chatbot_name in a single query
       const { data: conversationData, error: conversationError } = await supabase
-        .from('conversations')
+        .from('messages')
         .select(`
-          live_mode,
-          domain_settings!inner (
-            chatbot_name
+          conversations!inner (
+            live_mode,
+            domain_settings!inner (
+              chatbot_name
+            )
           )
         `)
-        .eq('id', conversationId)
-        .single() as { data: ConversationWithSettings | null, error: any };
+        .eq('conversation_id', conversationId)
+        .single();
 
       if (conversationError) throw conversationError;
 
+      console.log('Query response:', conversationData);
+
+      const chatbotName = conversationData?.conversations?.domain_settings?.chatbot_name || "Friendly Assistant";
+      const live_mode = conversationData?.conversations?.live_mode;
+
+      console.log('Extracted data:', { chatbotName, live_mode });
+
       // Only generate OpenAI response if live mode is disabled
-      if (!conversationData?.live_mode) {
+      if (!live_mode) {
         console.log('Live mode disabled, generating OpenAI response');
         try {
-          const chatbotName = conversationData?.domain_settings?.chatbot_name || "Friendly Assistant";
+          console.log('Using chatbot name:', chatbotName);
+
           const botResponse = await generateBotResponse(content, conversationId, chatbotName);
           console.log('Got OpenAI response:', botResponse);
           
