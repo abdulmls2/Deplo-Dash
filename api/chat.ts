@@ -1,13 +1,17 @@
 // Vercel Serverless Function for OpenAI Chat API
 import { OpenAI } from 'openai';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { createClient } from '@supabase/supabase-js';
+
+// Initialize Supabase client
+const supabaseUrl = process.env.VITE_SUPABASE_URL || '';
+const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || '';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
-
-const SYSTEM_PROMPT = `You are a helpful customer support assistant, your name is "". Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
@@ -58,13 +62,29 @@ export default async function handler(
       });
     }
 
-    const { message } = req.body;
+      const { message, domainId } = req.body;
 
     // Validate request body
-    if (!message) {
-      console.error('Missing message in request body');
-      return res.status(400).json({ error: 'Message is required' });
+    if (!message || !domainId) {
+        console.error('Missing message or domainId in request body');
+      return res.status(400).json({ error: 'Message and domainId are required' });
     }
+
+    // Fetch chatbot name from domain_settings
+    const { data: domainSettings, error: domainError } = await supabase
+        .from('domain_settings')
+        .select('chatbot_name')
+        .eq('domain_id', domainId)
+        .single();
+
+      if (domainError) {
+          console.error('Error fetching domain settings:', domainError);
+          return res.status(500).json({ error: 'Failed to fetch domain settings' });
+      }
+
+      const chatbotName = domainSettings?.chatbot_name || 'Friendly Assistant';
+    
+     const SYSTEM_PROMPT = `You are a helpful customer support assistant, your name is ${chatbotName}. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
     console.log('Making OpenAI API request with message:', message);
 
@@ -78,10 +98,10 @@ export default async function handler(
 
     const response = completion.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
     console.log('OpenAI API response:', response);
-    
+
     return res.status(200).json({ response });
   } catch (error: any) {
-    console.error('Error in API handler:', error);
+     console.error('Error in API handler:', error);
     console.error('Error details:', {
       name: error.name,
       message: error.message,
@@ -91,7 +111,7 @@ export default async function handler(
         nodeEnv: process.env.NODE_ENV
       }
     });
-    
+
     return res.status(500).json({ 
       error: 'Internal server error',
       details: process.env.NODE_ENV === 'development' ? {
