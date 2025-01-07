@@ -46,6 +46,7 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
       // Only generate OpenAI response if live mode is disabled
       if (!conversationData.live_mode) {
         console.log('Live mode disabled, generating OpenAI response');
+        console.log('Using chatbot name:', chatbotName);
         try {
           const botResponse = await generateBotResponse(content, conversationId, chatbotName);
           console.log('Got OpenAI response:', botResponse);

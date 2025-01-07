@@ -67,7 +67,11 @@ export default async function handler(
       return res.status(400).json({ error: 'Message is required' });
     }
 
-    console.log('Making OpenAI API request with message:', message);
+    console.log('Making OpenAI API request with:', {
+      message,
+      chatbotName,
+      fullBody: req.body
+    });
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
