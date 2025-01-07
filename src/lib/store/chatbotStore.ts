@@ -19,8 +19,24 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
   sendMessage: async (content: string, conversationId: string) => {
     set({ isLoading: true, error: null });
     try {
+      // Get the conversation's domain_id first
+      const { data: conversation } = await supabase
+        .from('conversations')
+        .select('domain_id')
+        .eq('id', conversationId)
+        .single();
+
+      // Then get the domain settings
+      const { data: domainSettings } = await supabase
+        .from('domain_settings')
+        .select('chatbot_name')
+        .eq('domain_id', conversation?.domain_id)
+        .single();
+
+      const chatbotName = domainSettings?.chatbot_name || 'Chatbot';
+
       // Always send as user message with null user_id to indicate it's from the widget
-      console.log('Sending user message from widget:', content);
+      console.log(`Sending user message from ${chatbotName} widget:`, content);
       const messageData = {
         conversation_id: conversationId,
         content,
@@ -45,10 +61,10 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
 
       // Only generate OpenAI response if live mode is disabled
       if (!conversationData.live_mode) {
-        console.log('Live mode disabled, generating OpenAI response');
+        console.log(`Live mode disabled for ${chatbotName}, generating OpenAI response`);
         try {
           const botResponse = await generateBotResponse(content, conversationId);
-          console.log('Got OpenAI response:', botResponse);
+          console.log(`Got OpenAI response for ${chatbotName}:`, botResponse);
           
           // Send bot response
           const botMessageData = {
