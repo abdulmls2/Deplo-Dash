@@ -18,6 +18,7 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
 
   sendMessage: async (content: string, conversationId: string) => {
     set({ isLoading: true, error: null });
+    console.log('DEBUG: Starting sendMessage with latest code');
     try {
       // Get the conversation's domain_id first
       const { data: conversation, error: convError } = await supabase
