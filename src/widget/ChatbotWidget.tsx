@@ -456,7 +456,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       const tempMessage: Message = {
         id: `temp-${Date.now()}`,
         content: content,
-        sender_type: 'user',
+        sender_type: 'user' as const,
         created_at: new Date().toISOString(),
       };
 
@@ -469,7 +469,10 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       });
 
       // Send message through chatbot store which will handle OpenAI integration
-      await chatbotSendMessage(content, currentConversationId);
+      await chatbotSendMessage(content, currentConversationId, {
+        domain_id: domainId,
+        chatbot_name: config.chatbotName
+      });
 
       setMessage('');
     } catch (error) {
