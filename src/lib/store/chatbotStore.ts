@@ -54,7 +54,20 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
             .eq('domain_id', conversationData.domain_id)
             .single();
 
-          if (settingsError) throw settingsError;
+          if (settingsError) {
+            console.error('Error fetching domain settings:', settingsError);
+            throw settingsError;
+          }
+
+          console.log('Domain settings fetched:', {
+            domainId: conversationData.domain_id,
+            settings: domainSettings
+          });
+
+          if (!domainSettings?.chatbot_name) {
+            console.error('No chatbot name found in domain settings');
+            throw new Error('Chatbot name not found');
+          }
 
           const botResponse = await generateBotResponse(content, conversationId, domainSettings.chatbot_name);
           console.log('Got OpenAI response:', botResponse);
