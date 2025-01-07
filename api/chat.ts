@@ -59,7 +59,8 @@ export default async function handler(
       });
     }
 
-    const { message, chatbotName = 'Assistant' } = req.body;
+    const { message } = req.body;
+    const chatbotName = req.body.chatbotName || 'Jimmy';
 
     // Validate request body
     if (!message) {
@@ -70,7 +71,8 @@ export default async function handler(
     console.log('Making OpenAI API request with:', {
       message,
       chatbotName,
-      fullBody: req.body
+      fullBody: req.body,
+      hasName: 'chatbotName' in req.body
     });
 
     const completion = await openai.chat.completions.create({
