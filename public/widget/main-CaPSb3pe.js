@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-ClziSZXA.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-uRncuwKY.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7702,9 +7702,9 @@ Ft`
     pointer-events: auto;
   }
 `;
-const Jc = async (s, e) => {
+const Jc = async (s, e, t) => {
   try {
-    const r = await fetch("https://deplo-dash.vercel.app/api/chat", {
+    const n = await fetch("https://deplo-dash.vercel.app/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -7712,21 +7712,22 @@ const Jc = async (s, e) => {
       },
       body: JSON.stringify({
         message: s,
-        conversationId: e
+        conversationId: e,
+        chatbotName: t
       })
     });
-    if (!r.ok) {
+    if (!n.ok) {
       console.error("API Response:", {
-        status: r.status,
-        statusText: r.statusText,
-        headers: Object.fromEntries(r.headers.entries())
+        status: n.status,
+        statusText: n.statusText,
+        headers: Object.fromEntries(n.headers.entries())
       });
-      const i = await r.text();
-      throw console.error("Error response body:", i), new Error(`HTTP error! status: ${r.status}`);
+      const a = await n.text();
+      throw console.error("Error response body:", a), new Error(`HTTP error! status: ${n.status}`);
     }
-    return (await r.json()).response || "Sorry, I could not generate a response.";
-  } catch (t) {
-    throw console.error("Error generating response:", t), t;
+    return (await n.json()).response || "Sorry, I could not generate a response.";
+  } catch (r) {
+    throw console.error("Error generating response:", r), r;
   }
 }, Gc = dc((s, e) => ({
   isLoading: !1,
@@ -7734,7 +7735,9 @@ const Jc = async (s, e) => {
   sendMessage: async (t, r) => {
     s({ isLoading: !0, error: null });
     try {
-      const { data: n } = await q.from("conversations").select("domain_id").eq("id", r).single(), { data: i } = await q.from("domain_settings").select("chatbot_name").eq("domain_id", n == null ? void 0 : n.domain_id).single(), a = (i == null ? void 0 : i.chatbot_name) || "Chatbot";
+      const { data: n } = await q.from("conversations").select("domain_id").eq("id", r).single(), { data: i } = await q.from("domain_settings").select("chatbot_name").eq("domain_id", n == null ? void 0 : n.domain_id).single(), a = i == null ? void 0 : i.chatbot_name;
+      if (!a)
+        throw console.error("No chatbot name found in domain settings, cannot proceed with OpenAI request"), new Error("Chatbot configuration is incomplete");
       console.log(`Sending user message from ${a}:`, t);
       const o = {
         conversation_id: r,
@@ -7750,7 +7753,7 @@ const Jc = async (s, e) => {
       else {
         console.log(`Live mode disabled for ${a}, generating OpenAI response`);
         try {
-          const f = await Jc(t, r);
+          const f = await Jc(t, r, a);
           console.log(`Got OpenAI response for ${a}:`, f);
           const p = {
             conversation_id: r,
@@ -8288,4 +8291,4 @@ Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-BbHOwc3x.js.map
+//# sourceMappingURL=main-CaPSb3pe.js.map

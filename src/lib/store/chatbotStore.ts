@@ -33,7 +33,11 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
         .eq('domain_id', conversation?.domain_id)
         .single();
 
-      const chatbotName = domainSettings?.chatbot_name || 'Chatbot';
+      const chatbotName = domainSettings?.chatbot_name;
+      if (!chatbotName) {
+        console.error('No chatbot name found in domain settings, cannot proceed with OpenAI request');
+        throw new Error('Chatbot configuration is incomplete');
+      }
 
       // Always send as user message with null user_id to indicate it's from the widget
       console.log(`Sending user message from ${chatbotName}:`, content);
@@ -63,7 +67,7 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
       if (!conversationData.live_mode) {
         console.log(`Live mode disabled for ${chatbotName}, generating OpenAI response`);
         try {
-          const botResponse = await generateBotResponse(content, conversationId);
+          const botResponse = await generateBotResponse(content, conversationId, chatbotName);
           console.log(`Got OpenAI response for ${chatbotName}:`, botResponse);
           
           // Send bot response
