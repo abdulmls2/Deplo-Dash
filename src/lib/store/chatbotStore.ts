@@ -43,34 +43,32 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
 
       if (conversationError) throw conversationError;
 
+      console.log('Conversation data:', {
+        conversationId,
+        conversationData,
+        hasLiveMode: !!conversationData?.live_mode,
+        hasDomainId: !!conversationData?.domain_id
+      });
+
       // Only generate OpenAI response if live mode is disabled
       if (!conversationData.live_mode) {
-        console.log('Live mode disabled, generating OpenAI response');
         try {
-          // Get chatbot name from domain settings
-          const { data: domainSettings, error: settingsError } = await supabase
-            .from('domain_settings')
-            .select('chatbot_name')
-            .eq('domain_id', conversationData.domain_id)
-            .single();
+          let chatbotName = "Friendly Assistant"; // Default name
 
-          if (settingsError) {
-            console.error('Error fetching domain settings:', settingsError);
-            throw settingsError;
+          if (conversationData.domain_id) {
+            // Get chatbot name from domain settings
+            const { data: domainSettings, error: settingsError } = await supabase
+              .from('domain_settings')
+              .select('chatbot_name')
+              .eq('domain_id', conversationData.domain_id)
+              .single();
+
+            if (!settingsError && domainSettings?.chatbot_name) {
+              chatbotName = domainSettings.chatbot_name;
+            }
           }
 
-          console.log('Domain settings fetched:', {
-            domainId: conversationData.domain_id,
-            settings: domainSettings
-          });
-
-          if (!domainSettings?.chatbot_name) {
-            console.error('No chatbot name found in domain settings');
-            throw new Error('Chatbot name not found');
-          }
-
-          const botResponse = await generateBotResponse(content, conversationId, domainSettings.chatbot_name);
-          console.log('Got OpenAI response:', botResponse);
+          const botResponse = await generateBotResponse(content, conversationId, chatbotName);
           
           // Send bot response
           const botMessageData = {
