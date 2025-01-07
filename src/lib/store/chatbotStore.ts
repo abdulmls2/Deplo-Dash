@@ -20,20 +20,37 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
     set({ isLoading: true, error: null });
     try {
       // Get the conversation's domain_id first
-      const { data: conversation } = await supabase
+      const { data: conversation, error: convError } = await supabase
         .from('conversations')
         .select('domain_id')
         .eq('id', conversationId)
         .single();
 
-      // Then get the domain settings
-      const { data: domainSettings } = await supabase
-        .from('domain_settings')
-        .select('chatbot_name')
-        .eq('domain_id', conversation?.domain_id)
-        .single();
+      if (convError) {
+        console.error('Error fetching conversation:', convError);
+      }
 
-      const chatbotName = domainSettings?.chatbot_name || 'Chatbot';
+      let chatbotName = 'Chatbot';
+      if (conversation?.domain_id) {
+        console.log('Found domain_id:', conversation.domain_id);
+        // Then get the domain settings
+        const { data: domainSettings, error: settingsError } = await supabase
+          .from('domain_settings')
+          .select('chatbot_name')
+          .eq('domain_id', conversation.domain_id)
+          .single();
+
+        if (settingsError) {
+          console.error('Error fetching domain settings:', settingsError);
+        } else if (!domainSettings) {
+          console.log('No domain settings found for domain_id:', conversation.domain_id);
+        } else {
+          chatbotName = domainSettings.chatbot_name || 'Chatbot';
+          console.log('Successfully loaded chatbot name:', chatbotName);
+        }
+      } else {
+        console.log('No domain_id found for conversation:', conversationId);
+      }
 
       // Always send as user message with null user_id to indicate it's from the widget
       console.log(`Sending user message from ${chatbotName} widget:`, content);

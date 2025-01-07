@@ -268,9 +268,8 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           
           if (payload.eventType === 'INSERT') {
             const newMessage = payload.new as Message;
-            console.log(`Received real-time event for ${config.chatbotName}:`, payload);
             console.log(`New message for ${config.chatbotName}:`, newMessage);
-
+            
             setMessages(prevMessages => {
               // Use the enhanced duplicate detection
               if (isMessageDuplicate(newMessage, prevMessages)) {
