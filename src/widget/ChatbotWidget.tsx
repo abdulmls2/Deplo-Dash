@@ -471,9 +471,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       // Send message through chatbot store which will handle OpenAI integration
       await chatbotSendMessage(content, currentConversationId);
 
-      // Log chatbot name after sending message
-      console.log('Message sent by:', config.chatbotName);
-
       setMessage('');
     } catch (error) {
       console.error('Error sending message:', error);
