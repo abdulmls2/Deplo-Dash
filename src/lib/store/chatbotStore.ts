@@ -33,8 +33,15 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
         .eq('domain_id', conversation?.domain_id)
         .single();
 
+      // Fetch training data for the domain
+      const { data: trainingData } = await supabase
+        .from('training_data')
+        .select('content')
+        .eq('domain_id', conversation?.domain_id);
+
       const chatbotName = domainSettings?.chatbot_name;
       const prompt = domainSettings?.prompt;
+      const trainingContent = trainingData?.map(item => item.content).join('\n');
       
       if (!chatbotName) {
         console.error('No chatbot name found in domain settings, cannot proceed with OpenAI request');
@@ -69,7 +76,7 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
       if (!conversationData.live_mode) {
         console.log(`Live mode disabled for ${chatbotName}, generating OpenAI response`);
         try {
-          const botResponse = await generateBotResponse(content, conversationId, prompt);
+          const botResponse = await generateBotResponse(content, conversationId, prompt, trainingContent);
           console.log(`Got OpenAI response for ${chatbotName}:`, botResponse);
           
           // Send bot response
