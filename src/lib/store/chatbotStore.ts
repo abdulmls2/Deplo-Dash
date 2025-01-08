@@ -41,15 +41,8 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
         throw new Error('Chatbot configuration is incomplete');
       }
 
-      // Get training data content
-      const { data: trainingData } = await supabase
-        .from('training_data')
-        .select('content')
-        .eq('domain_id', conversation?.domain_id);
-
       // Always send as user message with null user_id to indicate it's from the widget
-      console.log(`Sending user message from ${chatbotName}. Training data:`, trainingData?.map(td => td.content), 'Message content:', content);
-
+      console.log(`Sending user message from ${chatbotName}:`, content);
       const messageData = {
         conversation_id: conversationId,
         content,
