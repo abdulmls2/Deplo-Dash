@@ -9,6 +9,8 @@ export const generateBotResponse = async (
     // Always use the absolute URL for the API endpoint
     const API_URL = 'https://deplo-dash.vercel.app/api/chat';
     
+    console.log('Sending to API with training content:', trainingContent); // Debug log
+    
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
@@ -19,7 +21,7 @@ export const generateBotResponse = async (
         message,
         conversationId,
         customPrompt: prompt,
-        trainingContent
+        trainingContent: trainingContent || ''
       })
     });
 

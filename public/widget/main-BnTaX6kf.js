@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-BlP5CQzs.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-BwVjvW0q.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7704,7 +7704,9 @@ Ft`
 `;
 const Jc = async (s, e, t, r) => {
   try {
-    const i = await fetch("https://deplo-dash.vercel.app/api/chat", {
+    const n = "https://deplo-dash.vercel.app/api/chat";
+    console.log("Sending to API with training content:", r);
+    const i = await fetch(n, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -7714,7 +7716,7 @@ const Jc = async (s, e, t, r) => {
         message: s,
         conversationId: e,
         customPrompt: t,
-        trainingContent: r
+        trainingContent: r || ""
       })
     });
     if (!i.ok) {
@@ -8295,4 +8297,4 @@ Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-DsFCrZJP.js.map
+//# sourceMappingURL=main-BnTaX6kf.js.map
