@@ -63,7 +63,7 @@ function En() {
    * LICENSE file in the root directory of this source tree.
    */
   return s.NODE_ENV !== "production" && function() {
-    var e = Ue, t = Symbol.for("react.element"), r = Symbol.for("react.portal"), n = Symbol.for("react.fragment"), i = Symbol.for("react.strict_mode"), a = Symbol.for("react.profiler"), o = Symbol.for("react.provider"), c = Symbol.for("react.context"), u = Symbol.for("react.forward_ref"), l = Symbol.for("react.suspense"), h = Symbol.for("react.suspense_list"), f = Symbol.for("react.memo"), p = Symbol.for("react.lazy"), _ = Symbol.for("react.offscreen"), v = Symbol.iterator, S = "@@iterator";
+    var e = Ue, t = Symbol.for("react.element"), r = Symbol.for("react.portal"), n = Symbol.for("react.fragment"), i = Symbol.for("react.strict_mode"), a = Symbol.for("react.profiler"), o = Symbol.for("react.provider"), c = Symbol.for("react.context"), u = Symbol.for("react.forward_ref"), l = Symbol.for("react.suspense"), h = Symbol.for("react.suspense_list"), f = Symbol.for("react.memo"), p = Symbol.for("react.lazy"), y = Symbol.for("react.offscreen"), v = Symbol.iterator, S = "@@iterator";
     function C(d) {
       if (d === null || typeof d != "object")
         return null;
@@ -91,7 +91,7 @@ function En() {
     var k = !1, D = !1, I = !1, H = !1, ne = !1, B;
     B = Symbol.for("react.module.reference");
     function de(d) {
-      return !!(typeof d == "string" || typeof d == "function" || d === n || d === a || ne || d === i || d === l || d === h || H || d === _ || k || D || I || typeof d == "object" && d !== null && (d.$$typeof === p || d.$$typeof === f || d.$$typeof === o || d.$$typeof === c || d.$$typeof === u || // This needs to include all possible module reference object
+      return !!(typeof d == "string" || typeof d == "function" || d === n || d === a || ne || d === i || d === l || d === h || H || d === y || k || D || I || typeof d == "object" && d !== null && (d.$$typeof === p || d.$$typeof === f || d.$$typeof === o || d.$$typeof === c || d.$$typeof === u || // This needs to include all possible module reference object
       // types supported by any Flight configuration anywhere since
       // we don't know which Flight build this will end up being used
       // with.
@@ -230,8 +230,8 @@ function En() {
     }
     var b = !1, T;
     {
-      var U = typeof WeakMap == "function" ? WeakMap : Map;
-      T = new U();
+      var F = typeof WeakMap == "function" ? WeakMap : Map;
+      T = new F();
     }
     function K(d, g) {
       if (!d || b)
@@ -656,7 +656,7 @@ React keys must be passed directly to JSX without using spread:
 }
 var xn = {};
 xn.NODE_ENV === "production" ? ir.exports = kn() : ir.exports = En();
-var y = ir.exports, ar, On = {}, St = wn;
+var _ = ir.exports, ar, On = {}, St = wn;
 if (On.NODE_ENV === "production")
   ar = St.createRoot, St.hydrateRoot;
 else {
@@ -933,8 +933,8 @@ class Vn {
           // 3. default Content-Type header
           headers: Object.assign(Object.assign(Object.assign({}, o), this.headers), n),
           body: u
-        }).catch((_) => {
-          throw new Fn(_);
+        }).catch((y) => {
+          throw new Fn(y);
         }), h = l.headers.get("x-relay-error");
         if (h && h === "true")
           throw new qn(l);
@@ -1928,10 +1928,10 @@ class Cs {
     }, this.timerCalc(this.tries + 1));
   }
 }
-var F;
+var q;
 (function(s) {
   s.abstime = "abstime", s.bool = "bool", s.date = "date", s.daterange = "daterange", s.float4 = "float4", s.float8 = "float8", s.int2 = "int2", s.int4 = "int4", s.int4range = "int4range", s.int8 = "int8", s.int8range = "int8range", s.json = "json", s.jsonb = "jsonb", s.money = "money", s.numeric = "numeric", s.oid = "oid", s.reltime = "reltime", s.text = "text", s.time = "time", s.timestamp = "timestamp", s.timestamptz = "timestamptz", s.timetz = "timetz", s.tsrange = "tsrange", s.tstzrange = "tstzrange";
-})(F || (F = {}));
+})(q || (q = {}));
 const Wr = (s, e, t = {}) => {
   var r;
   const n = (r = t.skipTypes) !== null && r !== void 0 ? r : [];
@@ -1945,34 +1945,34 @@ const Wr = (s, e, t = {}) => {
     return Ei(e, t);
   }
   switch (s) {
-    case F.bool:
+    case q.bool:
       return bi(e);
-    case F.float4:
-    case F.float8:
-    case F.int2:
-    case F.int4:
-    case F.int8:
-    case F.numeric:
-    case F.oid:
+    case q.float4:
+    case q.float8:
+    case q.int2:
+    case q.int4:
+    case q.int8:
+    case q.numeric:
+    case q.oid:
       return Si(e);
-    case F.json:
-    case F.jsonb:
+    case q.json:
+    case q.jsonb:
       return ki(e);
-    case F.timestamp:
+    case q.timestamp:
       return xi(e);
-    case F.abstime:
-    case F.date:
-    case F.daterange:
-    case F.int4range:
-    case F.int8range:
-    case F.money:
-    case F.reltime:
-    case F.text:
-    case F.time:
-    case F.timestamptz:
-    case F.timetz:
-    case F.tsrange:
-    case F.tstzrange:
+    case q.abstime:
+    case q.date:
+    case q.daterange:
+    case q.int4range:
+    case q.int8range:
+    case q.money:
+    case q.reltime:
+    case q.text:
+    case q.time:
+    case q.timestamptz:
+    case q.timetz:
+    case q.tsrange:
+    case q.tstzrange:
       return lr(e);
     default:
       return lr(e);
@@ -2149,8 +2149,8 @@ class dt {
     }), this.map(a, (u, l) => {
       const h = i[u];
       if (h) {
-        const f = l.map((S) => S.presence_ref), p = h.map((S) => S.presence_ref), _ = l.filter((S) => p.indexOf(S.presence_ref) < 0), v = h.filter((S) => f.indexOf(S.presence_ref) < 0);
-        _.length > 0 && (o[u] = _), v.length > 0 && (c[u] = v);
+        const f = l.map((S) => S.presence_ref), p = h.map((S) => S.presence_ref), y = l.filter((S) => p.indexOf(S.presence_ref) < 0), v = h.filter((S) => f.indexOf(S.presence_ref) < 0);
+        y.length > 0 && (o[u] = y), v.length > 0 && (c[u] = v);
       } else
         o[u] = l;
     }), this.syncDiff(i, { joins: o, leaves: c }, r, n);
@@ -2292,17 +2292,17 @@ class br {
           e == null || e(ye.SUBSCRIBED);
           return;
         } else {
-          const f = this.bindings.postgres_changes, p = (h = f == null ? void 0 : f.length) !== null && h !== void 0 ? h : 0, _ = [];
+          const f = this.bindings.postgres_changes, p = (h = f == null ? void 0 : f.length) !== null && h !== void 0 ? h : 0, y = [];
           for (let v = 0; v < p; v++) {
             const S = f[v], { filter: { event: C, schema: j, table: P, filter: x } } = S, k = l && l[v];
             if (k && k.event === C && k.schema === j && k.table === P && k.filter === x)
-              _.push(Object.assign(Object.assign({}, S), { id: k.id }));
+              y.push(Object.assign(Object.assign({}, S), { id: k.id }));
             else {
               this.unsubscribe(), e == null || e(ye.CHANNEL_ERROR, new Error("mismatch between server and client bindings for postgres changes"));
               return;
             }
           }
-          this.bindings.postgres_changes = _, e && e(ye.SUBSCRIBED);
+          this.bindings.postgres_changes = y, e && e(ye.SUBSCRIBED);
           return;
         }
       }).receive("error", (l) => {
@@ -2444,13 +2444,13 @@ class br {
     if (t && !f)
       throw "channel onMessage callbacks must return the payload, modified or unmodified";
     ["insert", "update", "delete"].includes(a) ? (n = this.bindings.postgres_changes) === null || n === void 0 || n.filter((p) => {
-      var _, v, S;
-      return ((_ = p.filter) === null || _ === void 0 ? void 0 : _.event) === "*" || ((S = (v = p.filter) === null || v === void 0 ? void 0 : v.event) === null || S === void 0 ? void 0 : S.toLocaleLowerCase()) === a;
+      var y, v, S;
+      return ((y = p.filter) === null || y === void 0 ? void 0 : y.event) === "*" || ((S = (v = p.filter) === null || v === void 0 ? void 0 : v.event) === null || S === void 0 ? void 0 : S.toLocaleLowerCase()) === a;
     }).map((p) => p.callback(f, r)) : (i = this.bindings[a]) === null || i === void 0 || i.filter((p) => {
-      var _, v, S, C, j, P;
+      var y, v, S, C, j, P;
       if (["broadcast", "presence", "postgres_changes"].includes(a))
         if ("id" in p) {
-          const x = p.id, k = (_ = p.filter) === null || _ === void 0 ? void 0 : _.event;
+          const x = p.id, k = (y = p.filter) === null || y === void 0 ? void 0 : y.event;
           return x && ((v = t.ids) === null || v === void 0 ? void 0 : v.includes(x)) && (k === "*" || (k == null ? void 0 : k.toLocaleLowerCase()) === ((S = t.data) === null || S === void 0 ? void 0 : S.type.toLocaleLowerCase()));
         } else {
           const x = (j = (C = p == null ? void 0 : p.filter) === null || C === void 0 ? void 0 : C.event) === null || j === void 0 ? void 0 : j.toLocaleLowerCase();
@@ -2460,7 +2460,7 @@ class br {
         return p.type.toLocaleLowerCase() === a;
     }).map((p) => {
       if (typeof f == "object" && "ids" in f) {
-        const _ = f.data, { schema: v, table: S, commit_timestamp: C, type: j, errors: P } = _;
+        const y = f.data, { schema: v, table: S, commit_timestamp: C, type: j, errors: P } = y;
         f = Object.assign(Object.assign({}, {
           schema: v,
           table: S,
@@ -2469,7 +2469,7 @@ class br {
           new: {},
           old: {},
           errors: P
-        }), this._getPayloadRecords(_));
+        }), this._getPayloadRecords(y));
       }
       p.callback(f, r);
     });
@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-eukTL3dm.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-DW3M_AXD.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -4167,8 +4167,8 @@ class $a {
       if (l.error)
         throw l.error;
       const h = await l.json(), f = (a = l.headers.get("x-total-count")) !== null && a !== void 0 ? a : 0, p = (c = (o = l.headers.get("link")) === null || o === void 0 ? void 0 : o.split(",")) !== null && c !== void 0 ? c : [];
-      return p.length > 0 && (p.forEach((_) => {
-        const v = parseInt(_.split(";")[0].split("=")[1].substring(0, 1)), S = JSON.parse(_.split(";")[1].split("=")[1]);
+      return p.length > 0 && (p.forEach((y) => {
+        const v = parseInt(y.split(";")[0].split("=")[1].substring(0, 1)), S = JSON.parse(y.split(";")[1].split("=")[1]);
         u[`${S}Page`] = v;
       }), u.total = parseInt(f)), { data: Object.assign(Object.assign({}, h), u), error: null };
     } catch (u) {
@@ -4479,8 +4479,8 @@ class ft {
       let i;
       if ("email" in e) {
         const { email: l, password: h, options: f } = e;
-        let p = null, _ = null;
-        this.flowType === "pkce" && ([p, _] = await Je(this.storage, this.storageKey)), i = await A(this.fetch, "POST", `${this.url}/signup`, {
+        let p = null, y = null;
+        this.flowType === "pkce" && ([p, y] = await Je(this.storage, this.storageKey)), i = await A(this.fetch, "POST", `${this.url}/signup`, {
           headers: this.headers,
           redirectTo: f == null ? void 0 : f.emailRedirectTo,
           body: {
@@ -4489,7 +4489,7 @@ class ft {
             data: (t = f == null ? void 0 : f.data) !== null && t !== void 0 ? t : {},
             gotrue_meta_security: { captcha_token: f == null ? void 0 : f.captchaToken },
             code_challenge: p,
-            code_challenge_method: _
+            code_challenge_method: y
           },
           xform: xe
         });
@@ -5089,8 +5089,8 @@ class ft {
       c && (f = parseInt(c));
       const p = f - l;
       p * 1e3 <= ot && console.warn(`@supabase/gotrue-js: Session as retrieved from URL expires in ${p}s, should have been closer to ${h}s`);
-      const _ = f - h;
-      l - _ >= 120 ? console.warn("@supabase/gotrue-js: Session as retrieved from URL was issued over 120s ago, URL could be stale", _, f, l) : l - _ < 0 && console.warn("@supabase/gotrue-js: Session as retrieved from URL was issued in the future? Check the device clock for skew", _, f, l);
+      const y = f - h;
+      l - y >= 120 ? console.warn("@supabase/gotrue-js: Session as retrieved from URL was issued over 120s ago, URL could be stale", y, f, l) : l - y < 0 && console.warn("@supabase/gotrue-js: Session as retrieved from URL was issued in the future? Check the device clock for skew", y, f, l);
       const { data: v, error: S } = await this._getUser(i);
       if (S)
         throw S;
@@ -5902,7 +5902,7 @@ class Wa {
     (e === "TOKEN_REFRESHED" || e === "SIGNED_IN") && this.changedAccessToken !== r ? this.changedAccessToken = r : e === "SIGNED_OUT" && (this.realtime.setAuth(), t == "STORAGE" && this.auth.signOut(), this.changedAccessToken = void 0);
   }
 }
-const Ba = (s, e, t) => new Wa(s, e, t), Va = "https://zozodfjzxzlwzkhmfhwh.supabase.co", za = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpvem9kZmp6eHpsd3praG1maHdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIwNDM3MjMsImV4cCI6MjA0NzYxOTcyM30.ywmi4WD1fZN3hRu-krtGmY1-IYSJSODh1tKK4Ytt18Q", q = Ba(Va, za);
+const Ba = (s, e, t) => new Wa(s, e, t), Va = "https://zozodfjzxzlwzkhmfhwh.supabase.co", za = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpvem9kZmp6eHpsd3praG1maHdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIwNDM3MjMsImV4cCI6MjA0NzYxOTcyM30.ywmi4WD1fZN3hRu-krtGmY1-IYSJSODh1tKK4Ytt18Q", U = Ba(Va, za);
 function ue(s) {
   const e = Object.prototype.toString.call(s);
   return s instanceof Date || typeof s == "object" && e === "[object Date]" ? new s.constructor(+s) : typeof s == "number" || e === "[object Number]" || typeof s == "string" || e === "[object String]" ? new Date(s) : /* @__PURE__ */ new Date(NaN);
@@ -7062,26 +7062,26 @@ function Tt(s, e, t) {
   const r = Ut(), n = r.locale ?? Ao, i = r.firstWeekContainsDate ?? ((h = (l = r.locale) == null ? void 0 : l.options) == null ? void 0 : h.firstWeekContainsDate) ?? 1, a = r.weekStartsOn ?? ((p = (f = r.locale) == null ? void 0 : f.options) == null ? void 0 : p.weekStartsOn) ?? 0, o = ue(s);
   if (!Qa(o))
     throw new RangeError("Invalid time value");
-  let c = e.match(Yo).map((_) => {
-    const v = _[0];
+  let c = e.match(Yo).map((y) => {
+    const v = y[0];
     if (v === "p" || v === "P") {
       const S = Mo[v];
-      return S(_, n.formatLong);
+      return S(y, n.formatLong);
     }
-    return _;
-  }).join("").match(Ho).map((_) => {
-    if (_ === "''")
+    return y;
+  }).join("").match(Ho).map((y) => {
+    if (y === "''")
       return { isToken: !1, value: "'" };
-    const v = _[0];
+    const v = y[0];
     if (v === "'")
-      return { isToken: !1, value: Qo(_) };
+      return { isToken: !1, value: Qo(y) };
     if (ns[v])
-      return { isToken: !0, value: _ };
+      return { isToken: !0, value: y };
     if (v.match(Ko))
       throw new RangeError(
         "Format string contains an unescaped latin alphabet character `" + v + "`"
       );
-    return { isToken: !1, value: _ };
+    return { isToken: !1, value: y };
   });
   n.localize.preprocessor && (c = n.localize.preprocessor(o, c));
   const u = {
@@ -7089,9 +7089,9 @@ function Tt(s, e, t) {
     weekStartsOn: a,
     locale: n
   };
-  return c.map((_) => {
-    if (!_.isToken) return _.value;
-    const v = _.value;
+  return c.map((y) => {
+    if (!y.isToken) return y.value;
+    const v = y.value;
     (Bo(v) || Wo(v)) && Vo(v, e, String(s));
     const S = ns[v[0]];
     return S(o, v, n.localize, u);
@@ -7107,7 +7107,7 @@ const Xo = { BASE_URL: "./", DEV: !1, MODE: "production", PROD: !0, SSR: !1, VIT
     const f = typeof l == "function" ? l(e) : l;
     if (!Object.is(f, e)) {
       const p = e;
-      e = h ?? (typeof f != "object" || f === null) ? f : Object.assign({}, e, f), t.forEach((_) => _(e, p));
+      e = h ?? (typeof f != "object" || f === null) ? f : Object.assign({}, e, f), t.forEach((y) => y(e, p));
     }
   }, n = () => e, c = { setState: r, getState: n, getInitialState: () => u, subscribe: (l) => (t.add(l), () => t.delete(l)), destroy: () => {
     (Xo ? "production" : void 0) !== "production" && console.warn(
@@ -7136,7 +7136,7 @@ function ec() {
   }
   var t = typeof Object.is == "function" ? Object.is : e, r = s.useState, n = s.useEffect, i = s.useLayoutEffect, a = s.useDebugValue;
   function o(h, f) {
-    var p = f(), _ = r({ inst: { value: p, getSnapshot: f } }), v = _[0].inst, S = _[1];
+    var p = f(), y = r({ inst: { value: p, getSnapshot: f } }), v = y[0].inst, S = y[1];
     return i(function() {
       v.value = p, v.getSnapshot = f, c(v) && S({ inst: v });
     }, [h, p, f]), n(function() {
@@ -7213,22 +7213,22 @@ function tc() {
         }
       }), B = ne[0].inst, de = ne[1];
       return u(function() {
-        B.value = I, B.getSnapshot = k, _(B) && de({
+        B.value = I, B.getSnapshot = k, y(B) && de({
           inst: B
         });
       }, [x, I, k]), c(function() {
-        _(B) && de({
+        y(B) && de({
           inst: B
         });
         var Re = function() {
-          _(B) && de({
+          y(B) && de({
             inst: B
           });
         };
         return x(Re);
       }, [x]), l(I), I;
     }
-    function _(x) {
+    function y(x) {
       var k = x.getSnapshot, D = x.value;
       try {
         var I = k();
@@ -7270,12 +7270,12 @@ function rc() {
   }
   var r = typeof Object.is == "function" ? Object.is : t, n = e.useSyncExternalStore, i = s.useRef, a = s.useEffect, o = s.useMemo, c = s.useDebugValue;
   return er.useSyncExternalStoreWithSelector = function(u, l, h, f, p) {
-    var _ = i(null);
-    if (_.current === null) {
+    var y = i(null);
+    if (y.current === null) {
       var v = { hasValue: !1, value: null };
-      _.current = v;
-    } else v = _.current;
-    _ = o(function() {
+      y.current = v;
+    } else v = y.current;
+    y = o(function() {
       function C(D) {
         if (!j) {
           if (j = !0, P = D, D = f(D), p !== void 0 && v.hasValue) {
@@ -7295,7 +7295,7 @@ function rc() {
         return C(k());
       }];
     }, [l, h, f, p]);
-    var S = n(u, _[0], _[1]);
+    var S = n(u, y[0], y[1]);
     return a(function() {
       v.hasValue = !0, v.value = S;
     }, [S]), c(S), S;
@@ -7322,7 +7322,7 @@ function sc() {
       return h === f && (h !== 0 || 1 / h === 1 / f) || h !== h && f !== f;
     }
     var n = typeof Object.is == "function" ? Object.is : r, i = t.useSyncExternalStore, a = e.useRef, o = e.useEffect, c = e.useMemo, u = e.useDebugValue;
-    function l(h, f, p, _, v) {
+    function l(h, f, p, y, v) {
       var S = a(null), C;
       S.current === null ? (C = {
         hasValue: !1,
@@ -7332,7 +7332,7 @@ function sc() {
         var D = !1, I, H, ne = function(he) {
           if (!D) {
             D = !0, I = he;
-            var Y = _(he);
+            var Y = y(he);
             if (v !== void 0 && C.hasValue) {
               var te = C.value;
               if (v(te, Y))
@@ -7343,7 +7343,7 @@ function sc() {
           var fe = I, we = H;
           if (n(fe, he))
             return we;
-          var be = _(he);
+          var be = y(he);
           return v !== void 0 && v(we, be) ? we : (I = he, H = be, be);
         }, B = p === void 0 ? null : p, de = function() {
           return ne(f());
@@ -7351,7 +7351,7 @@ function sc() {
           return ne(B());
         };
         return [de, Re];
-      }, [f, p, _, v]), P = j[0], x = j[1], k = i(h, P, x);
+      }, [f, p, y, v]), P = j[0], x = j[1], k = i(h, P, x);
       return o(function() {
         C.hasValue = !0, C.value = k;
       }, [k]), u(k), k;
@@ -7735,39 +7735,40 @@ const Jc = async (s, e, t) => {
   sendMessage: async (t, r) => {
     s({ isLoading: !0, error: null });
     try {
-      const { data: n } = await q.from("conversations").select("domain_id").eq("id", r).single(), { data: i } = await q.from("domain_settings").select("chatbot_name, prompt").eq("domain_id", n == null ? void 0 : n.domain_id).single(), a = i == null ? void 0 : i.chatbot_name, o = i == null ? void 0 : i.prompt;
+      const { data: n } = await U.from("conversations").select("domain_id").eq("id", r).single(), { data: i } = await U.from("domain_settings").select("chatbot_name, prompt").eq("domain_id", n == null ? void 0 : n.domain_id).single(), a = i == null ? void 0 : i.chatbot_name, o = i == null ? void 0 : i.prompt;
       if (!a)
         throw console.error("No chatbot name found in domain settings, cannot proceed with OpenAI request"), new Error("Chatbot configuration is incomplete");
-      console.log(`Sending user message from ${a}:`, t);
-      const c = {
+      const { data: c } = await U.from("training_data").select("content").eq("domain_id", n == null ? void 0 : n.domain_id);
+      console.log(`Sending user message from ${a}. Training data:`, c == null ? void 0 : c.map((y) => y.content), "Message content:", t);
+      const u = {
         conversation_id: r,
         content: t,
         sender_type: "user",
         user_id: null
-      }, { error: u } = await q.from("messages").insert(c);
-      if (u) throw u;
-      const { data: l, error: h } = await q.from("conversations").select("live_mode").eq("id", r).single();
-      if (h) throw h;
-      if (l.live_mode)
+      }, { error: l } = await U.from("messages").insert(u);
+      if (l) throw l;
+      const { data: h, error: f } = await U.from("conversations").select("live_mode").eq("id", r).single();
+      if (f) throw f;
+      if (h.live_mode)
         console.log("Live mode enabled, skipping OpenAI response");
       else {
         console.log(`Live mode disabled for ${a}, generating OpenAI response`);
         try {
-          const p = await Jc(t, r, o);
-          console.log(`Got OpenAI response for ${a}:`, p);
-          const _ = {
+          const y = await Jc(t, r, o);
+          console.log(`Got OpenAI response for ${a}:`, y);
+          const v = {
             conversation_id: r,
-            content: p,
+            content: y,
             sender_type: "bot",
             user_id: null
-          }, { error: v } = await q.from("messages").insert(_);
-          if (v) throw v;
-        } catch (p) {
-          console.error("Error generating bot response:", p), ae.error("Failed to generate bot response");
+          }, { error: S } = await U.from("messages").insert(v);
+          if (S) throw S;
+        } catch (y) {
+          console.error("Error generating bot response:", y), ae.error("Failed to generate bot response");
         }
       }
-      const { error: f } = await q.from("conversations").update({ last_message_at: (/* @__PURE__ */ new Date()).toISOString() }).eq("id", r);
-      if (f) throw f;
+      const { error: p } = await U.from("conversations").update({ last_message_at: (/* @__PURE__ */ new Date()).toISOString() }).eq("id", r);
+      if (p) throw p;
     } catch (n) {
       console.error("Error sending message:", n), s({ error: n.message }), ae.error("Failed to send message");
     } finally {
@@ -7776,7 +7777,7 @@ const Jc = async (s, e, t) => {
   }
 })), ys = "chatbot_session_id", Kc = 180;
 function Qc({ domainId: s }) {
-  const [e, t] = X(!1), [r, n] = X(""), [i, a] = X([]), [o, c] = X([]), [u, l] = X("history"), [h, f] = X(null), [p, _] = X(!1), [v] = X(/* @__PURE__ */ new Set()), [S, C] = X(null), [j, P] = X(null), x = Mr(null), [k, D] = X(!1), I = Mr(null), { sendMessage: H } = Gc(), [ne, B] = X(!1), de = (m, b) => b.some(
+  const [e, t] = X(!1), [r, n] = X(""), [i, a] = X([]), [o, c] = X([]), [u, l] = X("history"), [h, f] = X(null), [p, y] = X(!1), [v] = X(/* @__PURE__ */ new Set()), [S, C] = X(null), [j, P] = X(null), x = Mr(null), [k, D] = X(!1), I = Mr(null), { sendMessage: H } = Gc(), [ne, B] = X(!1), de = (m, b) => b.some(
     (T) => (
       // Check for exact ID match
       T.id === m.id || // Check for temp ID being replaced by real ID
@@ -7786,7 +7787,7 @@ function Qc({ domainId: s }) {
   );
   me(() => {
     if (!j) return;
-    const m = q.channel("new-conversations").on(
+    const m = U.channel("new-conversations").on(
       "postgres_changes",
       {
         event: "INSERT",
@@ -7797,7 +7798,7 @@ function Qc({ domainId: s }) {
       (b) => {
         if (b.eventType === "INSERT") {
           const T = b.new;
-          c((U) => [T, ...U]);
+          c((F) => [T, ...F]);
         }
       }
     ).subscribe();
@@ -7806,7 +7807,7 @@ function Qc({ domainId: s }) {
     };
   }, [j]), me(() => {
     if (!j) return;
-    const m = q.channel("conversations-updates").on(
+    const m = U.channel("conversations-updates").on(
       "postgres_changes",
       {
         event: "*",
@@ -7817,7 +7818,7 @@ function Qc({ domainId: s }) {
       (b) => {
         b.eventType === "UPDATE" && (c(
           (T) => T.map(
-            (U) => U.id === b.new.id ? { ...U, ...b.new } : U
+            (F) => F.id === b.new.id ? { ...F, ...b.new } : F
           )
         ), b.new.id === h && D(b.new.status === "archived"));
       }
@@ -7832,7 +7833,7 @@ function Qc({ domainId: s }) {
   const Re = async () => {
     if (j)
       try {
-        const { data: m, error: b } = await q.from("conversations").select("*").eq("session_id", j).order("last_message_at", { ascending: !1 });
+        const { data: m, error: b } = await U.from("conversations").select("*").eq("session_id", j).order("last_message_at", { ascending: !1 });
         if (b) throw b;
         c(m || []);
       } catch (m) {
@@ -7849,7 +7850,7 @@ function Qc({ domainId: s }) {
   }, te = async (m) => {
     try {
       f(m.id), D(m.status === "archived"), Ve(null), B(!1);
-      const { data: b } = await q.from("messages").select("*").eq("conversation_id", m.id).order("created_at", { ascending: !0 });
+      const { data: b } = await U.from("messages").select("*").eq("conversation_id", m.id).order("created_at", { ascending: !0 });
       b && (a(b), v.clear(), b.forEach((T) => v.add(T.id))), m.status === "archived" && Ve(m.rating || null), l("chat");
     } catch (b) {
       console.error("Error loading conversation:", b);
@@ -7857,7 +7858,7 @@ function Qc({ domainId: s }) {
   };
   me(() => {
     if (!h) return;
-    const m = q.channel(`conversation-status:${h}`).on(
+    const m = U.channel(`conversation-status:${h}`).on(
       "postgres_changes",
       {
         event: "UPDATE",
@@ -7886,7 +7887,7 @@ function Qc({ domainId: s }) {
       return;
     }
     console.log("Setting up subscription for conversation:", h);
-    const m = q.channel(`messages-${h}`).on(
+    const m = U.channel(`messages-${h}`).on(
       "postgres_changes",
       {
         event: "*",
@@ -7897,10 +7898,10 @@ function Qc({ domainId: s }) {
       (b) => {
         if (console.log("Received real-time event:", b), b.eventType === "INSERT") {
           const T = b.new;
-          console.log("New message:", T), a((U) => {
-            if (de(T, U))
-              return console.log("Message already exists, skipping"), U;
-            const K = U.filter(
+          console.log("New message:", T), a((F) => {
+            if (de(T, F))
+              return console.log("Message already exists, skipping"), F;
+            const K = F.filter(
               (ce) => !(ce.id.startsWith("temp-") && ce.content === T.content && ce.sender_type === T.sender_type)
             );
             return v.add(T.id), T.sender_type === "bot" && fe(), console.log("Adding new message to state"), [...K, T];
@@ -7921,19 +7922,19 @@ function Qc({ domainId: s }) {
   }, []);
   const we = async (m) => {
     try {
-      const { data: b, error: T } = await q.from("conversations").select("*").eq("session_id", m).eq("status", "active").order("last_message_at", { ascending: !1 }).limit(1);
+      const { data: b, error: T } = await U.from("conversations").select("*").eq("session_id", m).eq("status", "active").order("last_message_at", { ascending: !1 }).limit(1);
       if (T) throw T;
       if (!b || b.length === 0) {
         console.log("No active conversations found for this session");
         return;
       }
-      const U = b[0], K = /* @__PURE__ */ new Date();
-      if (K.setDate(K.getDate() - Kc), new Date(U.last_message_at) < K) {
-        await q.from("conversations").update({ status: "archived" }).eq("id", U.id);
+      const F = b[0], K = /* @__PURE__ */ new Date();
+      if (K.setDate(K.getDate() - Kc), new Date(F.last_message_at) < K) {
+        await U.from("conversations").update({ status: "archived" }).eq("id", F.id);
         return;
       }
-      f(U.id);
-      const { data: ce } = await q.from("messages").select("*").eq("conversation_id", U.id).order("created_at", { ascending: !0 });
+      f(F.id);
+      const { data: ce } = await U.from("messages").select("*").eq("conversation_id", F.id).order("created_at", { ascending: !0 });
       if (ce) {
         const Wt = ce.filter((Ae) => v.has(Ae.id) ? !1 : (v.add(Ae.id), !0));
         a(Wt);
@@ -7943,14 +7944,14 @@ function Qc({ domainId: s }) {
     }
   }, be = async () => {
     try {
-      const { data: { user: m } } = await q.auth.getUser();
+      const { data: { user: m } } = await U.auth.getUser();
       if (!m) {
-        await q.auth.signInAnonymously();
-        const { data: { user: U } } = await q.auth.getUser();
-        if (!U) throw new Error("Failed to create anonymous session");
-        const { data: K, error: ce } = await q.from("conversations").insert({
+        await U.auth.signInAnonymously();
+        const { data: { user: F } } = await U.auth.getUser();
+        if (!F) throw new Error("Failed to create anonymous session");
+        const { data: K, error: ce } = await U.from("conversations").insert({
           domain_id: s,
-          user_id: U.id,
+          user_id: F.id,
           session_id: j,
           last_message_at: (/* @__PURE__ */ new Date()).toISOString(),
           status: "active"
@@ -7958,7 +7959,7 @@ function Qc({ domainId: s }) {
         if (ce) throw ce;
         return K.id;
       }
-      const { data: b, error: T } = await q.from("conversations").insert({
+      const { data: b, error: T } = await U.from("conversations").insert({
         domain_id: s,
         user_id: m.id,
         session_id: j,
@@ -7972,22 +7973,22 @@ function Qc({ domainId: s }) {
     }
   }, yt = async (m) => {
     try {
-      _(!0), C(null);
-      const { data: { user: b } } = await q.auth.getUser();
-      b || await q.auth.signInAnonymously();
+      y(!0), C(null);
+      const { data: { user: b } } = await U.auth.getUser();
+      b || await U.auth.signInAnonymously();
       const T = h || await be();
       h || f(T);
-      const U = {
+      const F = {
         id: `temp-${Date.now()}`,
         content: m,
         sender_type: "user",
         created_at: (/* @__PURE__ */ new Date()).toISOString()
       };
-      a((K) => de(U, K) ? K : [...K, U]), await H(m, T), n("");
+      a((K) => de(F, K) ? K : [...K, F]), await H(m, T), n("");
     } catch (b) {
       console.error("Error sending message:", b), C("Failed to send message. Please try again.");
     } finally {
-      _(!1);
+      y(!1);
     }
   }, _t = async (m) => {
     m.preventDefault(), !(!r.trim() || p) && await yt(r.trim());
@@ -7995,7 +7996,7 @@ function Qc({ domainId: s }) {
   me(() => {
     s && (async () => {
       try {
-        const { data: b } = await q.from("domain_settings").select("*").eq("domain_id", s).single();
+        const { data: b } = await U.from("domain_settings").select("*").eq("domain_id", s).single();
         We(b ? {
           chatbotName: b.chatbot_name,
           greetingMessage: b.greeting_message || "Hello! How can I help you today?",
@@ -8028,7 +8029,7 @@ function Qc({ domainId: s }) {
     if (h)
       try {
         a([]), v.clear();
-        const { data: m } = await q.from("messages").select("*").eq("conversation_id", h).order("created_at", { ascending: !0 });
+        const { data: m } = await U.from("messages").select("*").eq("conversation_id", h).order("created_at", { ascending: !0 });
         m && (a(m), m.forEach((b) => v.add(b.id)));
       } catch (m) {
         console.error("Error refreshing chat:", m), C("Failed to refresh chat");
@@ -8036,11 +8037,11 @@ function Qc({ domainId: s }) {
   }, [Se, Ve] = X(null), Ce = async (m) => {
     if (h)
       try {
-        const { error: b } = await q.from("conversations").update({ rating: m }).eq("id", h);
+        const { error: b } = await U.from("conversations").update({ rating: m }).eq("id", h);
         if (b) throw b;
         Ve(m), c(
           (T) => T.map(
-            (U) => U.id === h ? { ...U, rating: m } : U
+            (F) => F.id === h ? { ...F, rating: m } : F
           )
         );
       } catch (b) {
@@ -8049,7 +8050,7 @@ function Qc({ domainId: s }) {
   }, tt = async () => {
     if (h)
       try {
-        const { error: m } = await q.from("conversations").update({
+        const { error: m } = await U.from("conversations").update({
           requested_live_at: (/* @__PURE__ */ new Date()).toISOString()
         }).eq("id", h);
         if (m) throw m;
@@ -8065,30 +8066,30 @@ function Qc({ domainId: s }) {
         console.error("Error requesting live chat:", m), C("Failed to request live chat. Please try again.");
       }
   };
-  return /* @__PURE__ */ y.jsxs("div", { className: "fixed bottom-6 right-6 flex flex-col items-end z-[9999]", children: [
-    e && /* @__PURE__ */ y.jsxs("div", { className: "mb-4 w-[380px] bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden", children: [
-      /* @__PURE__ */ y.jsxs("div", { className: "p-4 border-b flex items-center gap-3", style: { backgroundColor: J.color }, children: [
-        /* @__PURE__ */ y.jsxs("div", { className: "relative flex-shrink-0", children: [
-          /* @__PURE__ */ y.jsx("div", { className: "w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center", children: /* @__PURE__ */ y.jsx("span", { className: "text-lg", children: "🤖" }) }),
-          /* @__PURE__ */ y.jsx("div", { className: "absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white", style: Be })
+  return /* @__PURE__ */ _.jsxs("div", { className: "fixed bottom-6 right-6 flex flex-col items-end z-[9999]", children: [
+    e && /* @__PURE__ */ _.jsxs("div", { className: "mb-4 w-[380px] bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden", children: [
+      /* @__PURE__ */ _.jsxs("div", { className: "p-4 border-b flex items-center gap-3", style: { backgroundColor: J.color }, children: [
+        /* @__PURE__ */ _.jsxs("div", { className: "relative flex-shrink-0", children: [
+          /* @__PURE__ */ _.jsx("div", { className: "w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center", children: /* @__PURE__ */ _.jsx("span", { className: "text-lg", children: "🤖" }) }),
+          /* @__PURE__ */ _.jsx("div", { className: "absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white", style: Be })
         ] }),
-        /* @__PURE__ */ y.jsxs("div", { className: "flex-1", children: [
-          /* @__PURE__ */ y.jsx("h3", { className: "font-medium", style: { color: J.headerTextColor }, children: J.chatbotName }),
-          /* @__PURE__ */ y.jsxs("p", { className: "text-sm", style: { color: J.headerTextColor }, children: [
+        /* @__PURE__ */ _.jsxs("div", { className: "flex-1", children: [
+          /* @__PURE__ */ _.jsx("h3", { className: "font-medium", style: { color: J.headerTextColor }, children: J.chatbotName }),
+          /* @__PURE__ */ _.jsxs("p", { className: "text-sm", style: { color: J.headerTextColor }, children: [
             "from ",
             J.chatbotName
           ] })
         ] }),
-        u === "chat" && /* @__PURE__ */ y.jsxs("div", { className: "flex items-center gap-2", children: [
-          ne ? /* @__PURE__ */ y.jsx(
+        u === "chat" && /* @__PURE__ */ _.jsxs("div", { className: "flex items-center gap-2", children: [
+          ne ? /* @__PURE__ */ _.jsx(
             "div",
             {
               className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
               style: { color: J.headerTextColor },
               title: "Waiting for agent",
-              children: /* @__PURE__ */ y.jsx(Rn, { className: "h-4 w-4" })
+              children: /* @__PURE__ */ _.jsx(Rn, { className: "h-4 w-4" })
             }
-          ) : /* @__PURE__ */ y.jsx(
+          ) : /* @__PURE__ */ _.jsx(
             "button",
             {
               onClick: tt,
@@ -8096,56 +8097,56 @@ function Qc({ domainId: s }) {
               style: { color: J.headerTextColor },
               title: "Request live agent",
               disabled: !h || k,
-              children: /* @__PURE__ */ y.jsx(Mn, { className: "h-4 w-4" })
+              children: /* @__PURE__ */ _.jsx(Mn, { className: "h-4 w-4" })
             }
           ),
-          /* @__PURE__ */ y.jsx(
+          /* @__PURE__ */ _.jsx(
             "button",
             {
               onClick: wt,
               className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
               style: { color: J.headerTextColor },
               title: "Refresh chat",
-              children: /* @__PURE__ */ y.jsx(In, { className: "h-4 w-4" })
+              children: /* @__PURE__ */ _.jsx(In, { className: "h-4 w-4" })
             }
           ),
-          /* @__PURE__ */ y.jsx(
+          /* @__PURE__ */ _.jsx(
             "button",
             {
               onClick: Y,
               className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
               style: { color: J.headerTextColor },
-              children: /* @__PURE__ */ y.jsx(An, { className: "h-4 w-4" })
+              children: /* @__PURE__ */ _.jsx(An, { className: "h-4 w-4" })
             }
           )
         ] })
       ] }),
-      /* @__PURE__ */ y.jsx("div", { className: "h-[400px] overflow-y-auto p-4 bg-gray-50 relative", children: u === "history" ? /* @__PURE__ */ y.jsxs("div", { className: "space-y-4 h-full", children: [
-        /* @__PURE__ */ y.jsxs("div", { className: "flex justify-between items-center mb-4", children: [
-          /* @__PURE__ */ y.jsx("h3", { className: "font-medium text-gray-900", children: "Conversation History" }),
-          /* @__PURE__ */ y.jsxs(
+      /* @__PURE__ */ _.jsx("div", { className: "h-[400px] overflow-y-auto p-4 bg-gray-50 relative", children: u === "history" ? /* @__PURE__ */ _.jsxs("div", { className: "space-y-4 h-full", children: [
+        /* @__PURE__ */ _.jsxs("div", { className: "flex justify-between items-center mb-4", children: [
+          /* @__PURE__ */ _.jsx("h3", { className: "font-medium text-gray-900", children: "Conversation History" }),
+          /* @__PURE__ */ _.jsxs(
             "button",
             {
               onClick: he,
               className: "flex items-center gap-2 px-3 py-1.5 bg-orange-500 text-white text-sm rounded-lg hover:bg-orange-600",
               children: [
-                /* @__PURE__ */ y.jsx(Cn, { className: "h-4 w-4" }),
+                /* @__PURE__ */ _.jsx(Cn, { className: "h-4 w-4" }),
                 "Start New Chat"
               ]
             }
           )
         ] }),
-        o.map((m) => /* @__PURE__ */ y.jsxs(
+        o.map((m) => /* @__PURE__ */ _.jsxs(
           "button",
           {
             onClick: () => te(m),
             className: "w-full text-left p-4 rounded-lg hover:bg-gray-100 transition-colors border border-gray-200",
             children: [
-              /* @__PURE__ */ y.jsxs("div", { className: "flex justify-between items-center mb-1", children: [
-                /* @__PURE__ */ y.jsx("span", { className: "text-sm font-medium text-gray-900", children: Tt(new Date(m.created_at), "PPP") }),
-                /* @__PURE__ */ y.jsx("span", { className: `text-xs px-2 py-1 rounded-full ${m.status === "archived" ? "bg-gray-100 text-gray-600" : "bg-green-100 text-green-600"}`, children: m.status === "archived" ? "Archived" : "Active" })
+              /* @__PURE__ */ _.jsxs("div", { className: "flex justify-between items-center mb-1", children: [
+                /* @__PURE__ */ _.jsx("span", { className: "text-sm font-medium text-gray-900", children: Tt(new Date(m.created_at), "PPP") }),
+                /* @__PURE__ */ _.jsx("span", { className: `text-xs px-2 py-1 rounded-full ${m.status === "archived" ? "bg-gray-100 text-gray-600" : "bg-green-100 text-green-600"}`, children: m.status === "archived" ? "Archived" : "Active" })
               ] }),
-              /* @__PURE__ */ y.jsxs("p", { className: "text-sm text-gray-600", children: [
+              /* @__PURE__ */ _.jsxs("p", { className: "text-sm text-gray-600", children: [
                 "Last message: ",
                 Tt(new Date(m.last_message_at), "p")
               ] })
@@ -8153,89 +8154,89 @@ function Qc({ domainId: s }) {
           },
           m.id
         )),
-        o.length === 0 && /* @__PURE__ */ y.jsx("div", { className: "flex flex-col items-center justify-center h-full text-center", children: /* @__PURE__ */ y.jsx("p", { className: "mb-4", children: "No previous conversations found" }) })
-      ] }) : /* @__PURE__ */ y.jsxs("div", { className: "space-y-4", children: [
-        u === "chat" && /* @__PURE__ */ y.jsxs("div", { className: "flex gap-2", children: [
-          /* @__PURE__ */ y.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
-          /* @__PURE__ */ y.jsxs("div", { className: "bg-white p-3 rounded-lg shadow-sm max-w-[80%]", children: [
-            /* @__PURE__ */ y.jsx("p", { className: "text-sm", children: J.greetingMessage }),
-            /* @__PURE__ */ y.jsx("span", { className: "text-xs text-gray-500 mt-1 block", children: Tt(/* @__PURE__ */ new Date(), "h:mm a") })
+        o.length === 0 && /* @__PURE__ */ _.jsx("div", { className: "flex flex-col items-center justify-center h-full text-center", children: /* @__PURE__ */ _.jsx("p", { className: "mb-4", children: "No previous conversations found" }) })
+      ] }) : /* @__PURE__ */ _.jsxs("div", { className: "space-y-4", children: [
+        u === "chat" && /* @__PURE__ */ _.jsxs("div", { className: "flex gap-2", children: [
+          /* @__PURE__ */ _.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
+          /* @__PURE__ */ _.jsxs("div", { className: "bg-white p-3 rounded-lg shadow-sm max-w-[80%]", children: [
+            /* @__PURE__ */ _.jsx("p", { className: "text-sm", children: J.greetingMessage }),
+            /* @__PURE__ */ _.jsx("span", { className: "text-xs text-gray-500 mt-1 block", children: Tt(/* @__PURE__ */ new Date(), "h:mm a") })
           ] })
         ] }),
-        i.map((m) => /* @__PURE__ */ y.jsxs(
+        i.map((m) => /* @__PURE__ */ _.jsxs(
           "div",
           {
             className: `flex gap-2 ${m.sender_type === "user" ? "justify-end" : ""}`,
             children: [
-              m.sender_type === "bot" && /* @__PURE__ */ y.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
-              /* @__PURE__ */ y.jsxs(
+              m.sender_type === "bot" && /* @__PURE__ */ _.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
+              /* @__PURE__ */ _.jsxs(
                 "div",
                 {
                   className: `p-3 rounded-lg max-w-[80%] ${m.sender_type === "user" ? "bg-orange-500 text-white ml-auto" : "bg-white shadow-sm"}`,
                   children: [
-                    /* @__PURE__ */ y.jsx("p", { className: "text-sm", children: m.content }),
-                    /* @__PURE__ */ y.jsx("span", { className: `text-xs mt-1 block ${m.sender_type === "user" ? "text-orange-100" : "text-gray-500"}`, children: Tt(new Date(m.created_at), "h:mm a") })
+                    /* @__PURE__ */ _.jsx("p", { className: "text-sm", children: m.content }),
+                    /* @__PURE__ */ _.jsx("span", { className: `text-xs mt-1 block ${m.sender_type === "user" ? "text-orange-100" : "text-gray-500"}`, children: Tt(new Date(m.created_at), "h:mm a") })
                   ]
                 }
               ),
-              m.sender_type === "user" && /* @__PURE__ */ y.jsx("div", { className: "w-8 h-8 rounded-full bg-orange-100 flex-shrink-0 flex items-center justify-center", children: "👤" })
+              m.sender_type === "user" && /* @__PURE__ */ _.jsx("div", { className: "w-8 h-8 rounded-full bg-orange-100 flex-shrink-0 flex items-center justify-center", children: "👤" })
             ]
           },
           m.id
         )),
-        k && /* @__PURE__ */ y.jsxs("div", { className: "flex flex-col items-center gap-3 my-4", children: [
-          /* @__PURE__ */ y.jsxs("div", { className: "bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600", children: [
-            /* @__PURE__ */ y.jsx(Pn, { className: "h-4 w-4" }),
-            /* @__PURE__ */ y.jsx("span", { className: "text-sm", children: "This conversation has been archived" })
+        k && /* @__PURE__ */ _.jsxs("div", { className: "flex flex-col items-center gap-3 my-4", children: [
+          /* @__PURE__ */ _.jsxs("div", { className: "bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600", children: [
+            /* @__PURE__ */ _.jsx(Pn, { className: "h-4 w-4" }),
+            /* @__PURE__ */ _.jsx("span", { className: "text-sm", children: "This conversation has been archived" })
           ] }),
-          !Se && /* @__PURE__ */ y.jsxs("div", { className: "flex flex-col items-center gap-2", children: [
-            /* @__PURE__ */ y.jsx("p", { className: "text-sm text-gray-600", children: "How was this conversation?" }),
-            /* @__PURE__ */ y.jsxs("div", { className: "flex gap-3", children: [
-              /* @__PURE__ */ y.jsxs(
+          !Se && /* @__PURE__ */ _.jsxs("div", { className: "flex flex-col items-center gap-2", children: [
+            /* @__PURE__ */ _.jsx("p", { className: "text-sm text-gray-600", children: "How was this conversation?" }),
+            /* @__PURE__ */ _.jsxs("div", { className: "flex gap-3", children: [
+              /* @__PURE__ */ _.jsxs(
                 "button",
                 {
                   onClick: () => Ce("bad"),
                   className: "flex items-center gap-1 px-4 py-2 rounded-lg bg-red-100 text-red-600 hover:bg-red-200 transition-colors",
                   children: [
-                    /* @__PURE__ */ y.jsx(Ln, { className: "h-4 w-4" }),
-                    /* @__PURE__ */ y.jsx("span", { children: "Bad" })
+                    /* @__PURE__ */ _.jsx(Ln, { className: "h-4 w-4" }),
+                    /* @__PURE__ */ _.jsx("span", { children: "Bad" })
                   ]
                 }
               ),
-              /* @__PURE__ */ y.jsxs(
+              /* @__PURE__ */ _.jsxs(
                 "button",
                 {
                   onClick: () => Ce("ok"),
                   className: "flex items-center gap-1 px-4 py-2 rounded-lg bg-yellow-100 text-yellow-600 hover:bg-yellow-200 transition-colors",
                   children: [
-                    /* @__PURE__ */ y.jsx($n, { className: "h-4 w-4" }),
-                    /* @__PURE__ */ y.jsx("span", { children: "OK" })
+                    /* @__PURE__ */ _.jsx($n, { className: "h-4 w-4" }),
+                    /* @__PURE__ */ _.jsx("span", { children: "OK" })
                   ]
                 }
               ),
-              /* @__PURE__ */ y.jsxs(
+              /* @__PURE__ */ _.jsxs(
                 "button",
                 {
                   onClick: () => Ce("good"),
                   className: "flex items-center gap-1 px-4 py-2 rounded-lg bg-green-100 text-green-600 hover:bg-green-200 transition-colors",
                   children: [
-                    /* @__PURE__ */ y.jsx(Nn, { className: "h-4 w-4" }),
-                    /* @__PURE__ */ y.jsx("span", { children: "Good" })
+                    /* @__PURE__ */ _.jsx(Nn, { className: "h-4 w-4" }),
+                    /* @__PURE__ */ _.jsx("span", { children: "Good" })
                   ]
                 }
               )
             ] })
           ] }),
-          Se && /* @__PURE__ */ y.jsxs("div", { className: "flex flex-col items-center gap-2 text-center", children: [
-            /* @__PURE__ */ y.jsx("span", { className: "text-sm text-gray-600", children: "You rated this conversation:" }),
-            /* @__PURE__ */ y.jsx("span", { className: `font-medium ${Se === "bad" ? "text-red-600" : Se === "ok" ? "text-yellow-600" : "text-green-600"}`, children: Se === "bad" ? "Bad 👎" : Se === "ok" ? "OK 😐" : "Good 👍" })
+          Se && /* @__PURE__ */ _.jsxs("div", { className: "flex flex-col items-center gap-2 text-center", children: [
+            /* @__PURE__ */ _.jsx("span", { className: "text-sm text-gray-600", children: "You rated this conversation:" }),
+            /* @__PURE__ */ _.jsx("span", { className: `font-medium ${Se === "bad" ? "text-red-600" : Se === "ok" ? "text-yellow-600" : "text-green-600"}`, children: Se === "bad" ? "Bad 👎" : Se === "ok" ? "OK 😐" : "Good 👍" })
           ] })
         ] }),
-        /* @__PURE__ */ y.jsx("div", { ref: x })
+        /* @__PURE__ */ _.jsx("div", { ref: x })
       ] }) }),
-      u === "chat" && /* @__PURE__ */ y.jsxs("form", { onSubmit: _t, className: "p-4 border-t bg-white", children: [
-        /* @__PURE__ */ y.jsxs("div", { className: "flex gap-2", children: [
-          /* @__PURE__ */ y.jsx("div", { className: "flex-1 relative", children: /* @__PURE__ */ y.jsx(
+      u === "chat" && /* @__PURE__ */ _.jsxs("form", { onSubmit: _t, className: "p-4 border-t bg-white", children: [
+        /* @__PURE__ */ _.jsxs("div", { className: "flex gap-2", children: [
+          /* @__PURE__ */ _.jsx("div", { className: "flex-1 relative", children: /* @__PURE__ */ _.jsx(
             "input",
             {
               type: "text",
@@ -8247,18 +8248,18 @@ function Qc({ domainId: s }) {
               disabled: p || k
             }
           ) }),
-          /* @__PURE__ */ y.jsx(
+          /* @__PURE__ */ _.jsx(
             "button",
             {
               type: "submit",
               disabled: !r.trim() || p || k,
               className: "p-2 rounded-full text-white flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed",
               style: Be,
-              children: p ? /* @__PURE__ */ y.jsx("div", { className: "h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" }) : /* @__PURE__ */ y.jsx(Dn, { className: "h-5 w-5" })
+              children: p ? /* @__PURE__ */ _.jsx("div", { className: "h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" }) : /* @__PURE__ */ _.jsx(Dn, { className: "h-5 w-5" })
             }
           )
         ] }),
-        /* @__PURE__ */ y.jsx("div", { className: "text-center mt-2", children: /* @__PURE__ */ y.jsx(
+        /* @__PURE__ */ _.jsx("div", { className: "text-center mt-2", children: /* @__PURE__ */ _.jsx(
           "a",
           {
             href: "https://dashboard.ai",
@@ -8270,7 +8271,7 @@ function Qc({ domainId: s }) {
         ) })
       ] })
     ] }),
-    /* @__PURE__ */ y.jsx(
+    /* @__PURE__ */ _.jsx(
       "button",
       {
         className: "w-14 h-14 rounded-full text-white flex items-center justify-center shadow-lg",
@@ -8285,10 +8286,10 @@ function Xc() {
   const s = document.createElement("div");
   s.id = "chatbot-widget-root", document.body.appendChild(s);
   const e = window.CHATBOT_CONFIG || {};
-  ar(s).render(/* @__PURE__ */ y.jsx(Qc, { domainId: e.domainId }));
+  ar(s).render(/* @__PURE__ */ _.jsx(Qc, { domainId: e.domainId }));
 }
 Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-DkelkYTt.js.map
+//# sourceMappingURL=main-CpHVvzdJ.js.map
