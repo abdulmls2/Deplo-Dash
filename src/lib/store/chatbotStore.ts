@@ -85,7 +85,7 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
       if (!conversationData.live_mode) {
         console.log(`Live mode disabled for ${chatbotName}, generating OpenAI response`);
         try {
-          const botResponse = await generateBotResponse(content, conversationId, prompt);
+          const botResponse = await generateBotResponse(content, conversationId, prompt, trainingContents);
           console.log(`Got OpenAI response for ${chatbotName}:`, botResponse);
           
           // Send bot response

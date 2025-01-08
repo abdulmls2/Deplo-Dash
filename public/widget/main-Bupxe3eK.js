@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-QdpeDLRI.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-BlJIiXxF.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7702,9 +7702,9 @@ Ft`
     pointer-events: auto;
   }
 `;
-const Jc = async (s, e, t) => {
+const Jc = async (s, e, t, r) => {
   try {
-    const n = await fetch("https://deplo-dash.vercel.app/api/chat", {
+    const i = await fetch("https://deplo-dash.vercel.app/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -7713,21 +7713,22 @@ const Jc = async (s, e, t) => {
       body: JSON.stringify({
         message: s,
         conversationId: e,
-        customPrompt: t
+        customPrompt: t,
+        trainingData: r
       })
     });
-    if (!n.ok) {
+    if (!i.ok) {
       console.error("API Response:", {
-        status: n.status,
-        statusText: n.statusText,
-        headers: Object.fromEntries(n.headers.entries())
+        status: i.status,
+        statusText: i.statusText,
+        headers: Object.fromEntries(i.headers.entries())
       });
-      const a = await n.text();
-      throw console.error("Error response body:", a), new Error(`HTTP error! status: ${n.status}`);
+      const o = await i.text();
+      throw console.error("Error response body:", o), new Error(`HTTP error! status: ${i.status}`);
     }
-    return (await n.json()).response || "Sorry, I could not generate a response.";
-  } catch (r) {
-    throw console.error("Error generating response:", r), r;
+    return (await i.json()).response || "Sorry, I could not generate a response.";
+  } catch (n) {
+    throw console.error("Error generating response:", n), n;
   }
 }, Gc = dc((s, e) => ({
   isLoading: !1,
@@ -7759,7 +7760,7 @@ const Jc = async (s, e, t) => {
       else {
         console.log(`Live mode disabled for ${a}, generating OpenAI response`);
         try {
-          const S = await Jc(t, r, o);
+          const S = await Jc(t, r, o, l);
           console.log(`Got OpenAI response for ${a}:`, S);
           const P = {
             conversation_id: r,
@@ -8297,4 +8298,4 @@ Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-BThLINo-.js.map
+//# sourceMappingURL=main-Bupxe3eK.js.map

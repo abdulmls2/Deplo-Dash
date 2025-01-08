@@ -2,7 +2,8 @@
 export const generateBotResponse = async (
   message: string, 
   conversationId: string,
-  prompt?: string
+  prompt?: string,
+  trainingData?: string[]
 ): Promise<string> => {
   try {
     // Always use the absolute URL for the API endpoint
@@ -17,7 +18,8 @@ export const generateBotResponse = async (
       body: JSON.stringify({
         message,
         conversationId,
-        customPrompt: prompt
+        customPrompt: prompt,
+        trainingData
       })
     });
 
