@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-BdgjYgd4.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-DjYScPNk.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7736,12 +7736,12 @@ const Jc = async (s, e, t, r) => {
   sendMessage: async (t, r) => {
     s({ isLoading: !0, error: null });
     try {
-      const { data: n } = await U.from("conversations").select("domain_id").eq("id", r).single(), { data: i } = await U.from("domain_settings").select("chatbot_name, prompt").eq("domain_id", n == null ? void 0 : n.domain_id).single(), { data: a } = await U.from("training_data").select("content").eq("domain_id", n == null ? void 0 : n.domain_id), o = i == null ? void 0 : i.chatbot_name, c = i == null ? void 0 : i.prompt, u = a == null ? void 0 : a.map((m) => m.content).join(`
+      const { data: n } = await U.from("conversations").select("domain_id").eq("id", r).single(), { data: i } = await U.from("domain_settings").select("chatbot_name, prompt").eq("domain_id", n == null ? void 0 : n.domain_id).single(), { data: a } = await U.from("training_data").select("content").eq("domain_id", n == null ? void 0 : n.domain_id), o = i == null ? void 0 : i.chatbot_name, c = i == null ? void 0 : i.prompt, u = a && a.length > 0 ? a.map((m) => m.content).join(`
 
-`);
+`) : void 0;
       if (!o)
         throw console.error("No chatbot name found in domain settings, cannot proceed with OpenAI request"), new Error("Chatbot configuration is incomplete");
-      console.log(`Sending user message from ${o}:`, t);
+      a && a.length > 0 ? console.log(`Found ${a.length} training data entries`) : console.log("No training data found for domain"), console.log(`Sending user message from ${o}:`, t);
       const l = {
         conversation_id: r,
         content: t,
@@ -8294,4 +8294,4 @@ Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-CAIMJmfg.js.map
+//# sourceMappingURL=main-BEVPf0lz.js.map
