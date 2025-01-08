@@ -41,7 +41,10 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
 
       const chatbotName = domainSettings?.chatbot_name;
       const prompt = domainSettings?.prompt;
-      const trainingContent = trainingData?.map(item => item.content).join('\n');
+      const trainingContent = trainingData
+        ?.map(item => item.content?.trim())
+        .filter(Boolean)
+        .join('\n');
       
       if (!chatbotName) {
         console.error('No chatbot name found in domain settings, cannot proceed with OpenAI request');

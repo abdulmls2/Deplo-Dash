@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-DPn4vKEX.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-tpczdO_r.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7736,7 +7736,10 @@ const Jc = async (s, e, t, r) => {
   sendMessage: async (t, r) => {
     s({ isLoading: !0, error: null });
     try {
-      const { data: n } = await U.from("conversations").select("domain_id").eq("id", r).single(), { data: i } = await U.from("domain_settings").select("chatbot_name, prompt").eq("domain_id", n == null ? void 0 : n.domain_id).single(), { data: a } = await U.from("training_data").select("content").eq("domain_id", n == null ? void 0 : n.domain_id), o = i == null ? void 0 : i.chatbot_name, c = i == null ? void 0 : i.prompt, u = a == null ? void 0 : a.map((m) => m.content).join(`
+      const { data: n } = await U.from("conversations").select("domain_id").eq("id", r).single(), { data: i } = await U.from("domain_settings").select("chatbot_name, prompt").eq("domain_id", n == null ? void 0 : n.domain_id).single(), { data: a } = await U.from("training_data").select("content").eq("domain_id", n == null ? void 0 : n.domain_id), o = i == null ? void 0 : i.chatbot_name, c = i == null ? void 0 : i.prompt, u = a == null ? void 0 : a.map((m) => {
+        var S;
+        return (S = m.content) == null ? void 0 : S.trim();
+      }).filter(Boolean).join(`
 `);
       if (!o)
         throw console.error("No chatbot name found in domain settings, cannot proceed with OpenAI request"), new Error("Chatbot configuration is incomplete");
@@ -8293,4 +8296,4 @@ Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-mTY-GWEp.js.map
+//# sourceMappingURL=main-DleM8dNE.js.map

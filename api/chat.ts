@@ -73,8 +73,8 @@ export default async function handler(
       console.log('Using default prompt');
     }
 
-    // Combine custom prompt with training content if available
-    const systemPrompt = req.body.trainingContent 
+    // Combine custom prompt with training content if available and not empty
+    const systemPrompt = req.body.trainingContent && req.body.trainingContent.trim() 
       ? `${customPrompt || DEFAULT_PROMPT}\n\nAdditional context:\n${req.body.trainingContent}`
       : customPrompt || DEFAULT_PROMPT;
 
