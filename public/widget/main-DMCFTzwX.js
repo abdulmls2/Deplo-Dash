@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-rspOncCh.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-BEQyCAMI.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7741,8 +7741,14 @@ const Jc = async (s, e, t, r) => {
       const { data: n } = await U.from("conversations").select("domain_id").eq("id", r).single();
       if (!(n != null && n.domain_id))
         throw new Error("Conversation not found or missing domain_id");
-      const { data: i } = await U.from("domain_settings").select("chatbot_name, prompt").eq("domain_id", n.domain_id).single(), { data: a, error: o } = await U.from("training_data").select("content").eq("domain_id", n.domain_id).single();
-      console.log("Training data response:", { data: a, error: o });
+      const { data: i } = await U.from("domain_settings").select("chatbot_name, prompt").eq("domain_id", n.domain_id).single();
+      console.log("Fetching training data for domain:", n.domain_id);
+      const { data: a, error: o } = await U.from("training_data").select("content").eq("domain_id", n.domain_id).maybeSingle();
+      console.log("Training data response:", {
+        data: a,
+        error: o,
+        domainId: n.domain_id
+      });
       const c = i == null ? void 0 : i.chatbot_name, u = i == null ? void 0 : i.prompt, l = a == null ? void 0 : a.content;
       if (console.log("Parsed values:", {
         chatbotName: c,
@@ -8304,4 +8310,4 @@ Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-CKtJeRtt.js.map
+//# sourceMappingURL=main-DMCFTzwX.js.map

@@ -38,13 +38,18 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
         .single();
 
       // Get training data content from the same domain
+      console.log('Fetching training data for domain:', conversation.domain_id);
       const { data: trainingData, error: trainingError } = await supabase
         .from('training_data')
         .select('content')
         .eq('domain_id', conversation.domain_id)
-        .single();
+        .maybeSingle();
 
-      console.log('Training data response:', { data: trainingData, error: trainingError });
+      console.log('Training data response:', { 
+        data: trainingData, 
+        error: trainingError,
+        domainId: conversation.domain_id 
+      });
 
       const chatbotName = domainSettings?.chatbot_name;
       const prompt = domainSettings?.prompt;
