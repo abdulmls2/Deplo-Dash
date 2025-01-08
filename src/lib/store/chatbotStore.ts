@@ -26,37 +26,19 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
         .eq('id', conversationId)
         .single();
 
-      // Get chatbot name and training data in two separate queries
+      // Get chatbot name from domain settings
       const { data: domainSettings } = await supabase
         .from('domain_settings')
         .select('chatbot_name, prompt')
         .eq('domain_id', conversation?.domain_id)
         .single();
 
-      const { data: trainingData } = await supabase
-        .from('training_data')
-        .select('content')
-        .eq('domain_id', conversation?.domain_id);
-
-      console.log('Domain settings:', domainSettings);
-      console.log('Training data:', trainingData);
-
       const chatbotName = domainSettings?.chatbot_name;
       const prompt = domainSettings?.prompt;
-      const trainingContent = trainingData && trainingData.length > 0
-        ? trainingData.map(item => item.content).join('\n\n')
-        : undefined;
       
       if (!chatbotName) {
         console.error('No chatbot name found in domain settings, cannot proceed with OpenAI request');
         throw new Error('Chatbot configuration is incomplete');
-      }
-
-      // Log training data status
-      if (trainingData && trainingData.length > 0) {
-        console.log(`Found ${trainingData.length} training data entries:`, trainingContent);
-      } else {
-        console.log('No training data found for domain');
       }
 
       // Always send as user message with null user_id to indicate it's from the widget
@@ -87,7 +69,7 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
       if (!conversationData.live_mode) {
         console.log(`Live mode disabled for ${chatbotName}, generating OpenAI response`);
         try {
-          const botResponse = await generateBotResponse(content, conversationId, prompt, trainingContent);
+          const botResponse = await generateBotResponse(content, conversationId, prompt);
           console.log(`Got OpenAI response for ${chatbotName}:`, botResponse);
           
           // Send bot response
