@@ -34,19 +34,21 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
       const { data: domainSettings } = await supabase
         .from('domain_settings')
         .select('chatbot_name, prompt')
-        .eq('domain_id', conversation?.domain_id)
+        .eq('domain_id', conversation.domain_id)
         .single();
 
       // Get training data content from the same domain
       const { data: trainingData } = await supabase
         .from('training_data')
         .select('content')
-        .eq('domain_id', conversation?.domain_id)
-        .maybeSingle();
+        .eq('domain_id', conversation.domain_id)
+        .single();
 
       const chatbotName = domainSettings?.chatbot_name;
       const prompt = domainSettings?.prompt;
-      const trainingContent = trainingData?.content || '';
+      const trainingContent = trainingData?.content;
+      
+      console.log('Training content fetched:', trainingContent);
       
       if (!chatbotName) {
         console.error('No chatbot name found in domain settings, cannot proceed with OpenAI request');
