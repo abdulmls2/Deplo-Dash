@@ -34,10 +34,17 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
         .single();
 
       // Get training data for this domain
-      const { data: trainingData } = await supabase
+      const { data: trainingData, error: trainingError } = await supabase
         .from('training_data')
         .select('content')
         .eq('domain_id', conversation?.domain_id);
+
+      if (trainingError) {
+        console.error('Error fetching training data:', trainingError);
+      }
+
+      console.log('Domain ID:', conversation?.domain_id);
+      console.log('Training data result:', trainingData);
 
       const chatbotName = domainSettings?.chatbot_name;
       const prompt = domainSettings?.prompt;
@@ -52,7 +59,7 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
 
       // Log training data status
       if (trainingData && trainingData.length > 0) {
-        console.log(`Found ${trainingData.length} training data entries`);
+        console.log(`Found ${trainingData.length} training data entries:`, trainingContent);
       } else {
         console.log('No training data found for domain');
       }
