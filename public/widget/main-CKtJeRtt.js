@@ -64,13 +64,13 @@ function En() {
    */
   return s.NODE_ENV !== "production" && function() {
     var e = Ue, t = Symbol.for("react.element"), r = Symbol.for("react.portal"), n = Symbol.for("react.fragment"), i = Symbol.for("react.strict_mode"), a = Symbol.for("react.profiler"), o = Symbol.for("react.provider"), c = Symbol.for("react.context"), u = Symbol.for("react.forward_ref"), l = Symbol.for("react.suspense"), h = Symbol.for("react.suspense_list"), f = Symbol.for("react.memo"), p = Symbol.for("react.lazy"), _ = Symbol.for("react.offscreen"), v = Symbol.iterator, S = "@@iterator";
-    function j(d) {
+    function P(d) {
       if (d === null || typeof d != "object")
         return null;
       var g = v && d[v] || d[S];
       return typeof g == "function" ? g : null;
     }
-    var P = e.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+    var O = e.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
     function R(d) {
       {
         for (var g = arguments.length, w = new Array(g > 1 ? g - 1 : 0), E = 1; E < g; E++)
@@ -80,7 +80,7 @@ function En() {
     }
     function x(d, g, w) {
       {
-        var E = P.ReactDebugCurrentFrame, L = E.getStackAddendum();
+        var E = O.ReactDebugCurrentFrame, L = E.getStackAddendum();
         L !== "" && (g += "%s", w = w.concat([L]));
         var M = w.map(function($) {
           return String($);
@@ -214,7 +214,7 @@ function En() {
         fe < 0 && R("disabledDepth fell below zero. This is a bug in React. Please file an issue.");
       }
     }
-    var Ce = P.ReactCurrentDispatcher, tt;
+    var Ce = O.ReactCurrentDispatcher, tt;
     function m(d, g, w) {
       {
         if (tt === void 0)
@@ -228,16 +228,16 @@ function En() {
 ` + tt + d;
       }
     }
-    var b = !1, T;
+    var b = !1, j;
     {
       var F = typeof WeakMap == "function" ? WeakMap : Map;
-      T = new F();
+      j = new F();
     }
     function K(d, g) {
       if (!d || b)
         return "";
       {
-        var w = T.get(d);
+        var w = j.get(d);
         if (w !== void 0)
           return w;
       }
@@ -292,7 +292,7 @@ function En() {
                   if (W--, V--, V < 0 || C[W] !== G[V]) {
                     var ie = `
 ` + C[W].replace(" at new ", " at ");
-                    return d.displayName && ie.includes("<anonymous>") && (ie = ie.replace("<anonymous>", d.displayName)), typeof d == "function" && T.set(d, ie), ie;
+                    return d.displayName && ie.includes("<anonymous>") && (ie = ie.replace("<anonymous>", d.displayName)), typeof d == "function" && j.set(d, ie), ie;
                   }
                 while (W >= 1 && V >= 0);
               break;
@@ -302,7 +302,7 @@ function En() {
         b = !1, Ce.current = M, Ve(), Error.prepareStackTrace = L;
       }
       var He = d ? d.displayName || d.name : "", $e = He ? m(He) : "";
-      return typeof d == "function" && T.set(d, $e), $e;
+      return typeof d == "function" && j.set(d, $e), $e;
     }
     function ce(d, g, w) {
       return K(d, !1);
@@ -340,7 +340,7 @@ function En() {
         }
       return "";
     }
-    var rt = Object.prototype.hasOwnProperty, Er = {}, xr = P.ReactDebugCurrentFrame;
+    var rt = Object.prototype.hasOwnProperty, Er = {}, xr = O.ReactDebugCurrentFrame;
     function bt(d) {
       if (d) {
         var g = d._owner, w = Ae(d.type, d._source, g ? g.type : null);
@@ -391,7 +391,7 @@ function En() {
       if (Zs(d))
         return R("The provided key is an unsupported type %s. This value must be coerced to a string before before using it here.", Xs(d)), Or(d);
     }
-    var st = P.ReactCurrentOwner, en = {
+    var st = O.ReactCurrentOwner, en = {
       key: !0,
       ref: !0,
       __self: !0,
@@ -489,7 +489,7 @@ function En() {
         return on(d, C, G, L, E, st.current, $);
       }
     }
-    var zt = P.ReactCurrentOwner, Rr = P.ReactDebugCurrentFrame;
+    var zt = O.ReactCurrentOwner, Rr = O.ReactDebugCurrentFrame;
     function ze(d) {
       if (d) {
         var g = d._owner, w = Ae(d.type, d._source, g ? g.type : null);
@@ -555,7 +555,7 @@ Check the top-level render call using <` + w + ">.");
         else if (Yt(d))
           d._store && (d._store.validated = !0);
         else if (d) {
-          var L = j(d);
+          var L = P(d);
           if (typeof L == "function" && L !== d.entries)
             for (var M = L.call(d), $; !($ = M.next()).done; )
               Yt($.value) && $r($.value, g);
@@ -1010,8 +1010,8 @@ let Zn = class {
       let u = null, l = null, h = null, f = i.status, p = i.statusText;
       if (i.ok) {
         if (this.method !== "HEAD") {
-          const j = await i.text();
-          j === "" || (this.headers.Accept === "text/csv" || this.headers.Accept && this.headers.Accept.includes("application/vnd.pgrst.plan+text") ? l = j : l = JSON.parse(j));
+          const P = await i.text();
+          P === "" || (this.headers.Accept === "text/csv" || this.headers.Accept && this.headers.Accept.includes("application/vnd.pgrst.plan+text") ? l = P : l = JSON.parse(P));
         }
         const v = (a = this.headers.Prefer) === null || a === void 0 ? void 0 : a.match(/count=(exact|planned|estimated)/), S = (o = i.headers.get("content-range")) === null || o === void 0 ? void 0 : o.split("/");
         v && S && S.length > 1 && (h = parseInt(S[1])), this.isMaybeSingle && this.method === "GET" && Array.isArray(l) && (l.length > 1 ? (u = {
@@ -2294,8 +2294,8 @@ class br {
         } else {
           const f = this.bindings.postgres_changes, p = (h = f == null ? void 0 : f.length) !== null && h !== void 0 ? h : 0, _ = [];
           for (let v = 0; v < p; v++) {
-            const S = f[v], { filter: { event: j, schema: P, table: R, filter: x } } = S, k = l && l[v];
-            if (k && k.event === j && k.schema === P && k.table === R && k.filter === x)
+            const S = f[v], { filter: { event: P, schema: O, table: R, filter: x } } = S, k = l && l[v];
+            if (k && k.event === P && k.schema === O && k.table === R && k.filter === x)
               _.push(Object.assign(Object.assign({}, S), { id: k.id }));
             else {
               this.unsubscribe(), e == null || e(ye.CHANNEL_ERROR, new Error("mismatch between server and client bindings for postgres changes"));
@@ -2447,25 +2447,25 @@ class br {
       var _, v, S;
       return ((_ = p.filter) === null || _ === void 0 ? void 0 : _.event) === "*" || ((S = (v = p.filter) === null || v === void 0 ? void 0 : v.event) === null || S === void 0 ? void 0 : S.toLocaleLowerCase()) === a;
     }).map((p) => p.callback(f, r)) : (i = this.bindings[a]) === null || i === void 0 || i.filter((p) => {
-      var _, v, S, j, P, R;
+      var _, v, S, P, O, R;
       if (["broadcast", "presence", "postgres_changes"].includes(a))
         if ("id" in p) {
           const x = p.id, k = (_ = p.filter) === null || _ === void 0 ? void 0 : _.event;
           return x && ((v = t.ids) === null || v === void 0 ? void 0 : v.includes(x)) && (k === "*" || (k == null ? void 0 : k.toLocaleLowerCase()) === ((S = t.data) === null || S === void 0 ? void 0 : S.type.toLocaleLowerCase()));
         } else {
-          const x = (P = (j = p == null ? void 0 : p.filter) === null || j === void 0 ? void 0 : j.event) === null || P === void 0 ? void 0 : P.toLocaleLowerCase();
+          const x = (O = (P = p == null ? void 0 : p.filter) === null || P === void 0 ? void 0 : P.event) === null || O === void 0 ? void 0 : O.toLocaleLowerCase();
           return x === "*" || x === ((R = t == null ? void 0 : t.event) === null || R === void 0 ? void 0 : R.toLocaleLowerCase());
         }
       else
         return p.type.toLocaleLowerCase() === a;
     }).map((p) => {
       if (typeof f == "object" && "ids" in f) {
-        const _ = f.data, { schema: v, table: S, commit_timestamp: j, type: P, errors: R } = _;
+        const _ = f.data, { schema: v, table: S, commit_timestamp: P, type: O, errors: R } = _;
         f = Object.assign(Object.assign({}, {
           schema: v,
           table: S,
-          commit_timestamp: j,
-          eventType: P,
+          commit_timestamp: P,
+          eventType: O,
           new: {},
           old: {},
           errors: R
@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-BwVjvW0q.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-rspOncCh.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -3863,7 +3863,7 @@ class kr extends Error {
     super(e), this.__isAuthError = !0, this.name = "AuthError", this.status = t, this.code = r;
   }
 }
-function O(s) {
+function T(s) {
   return typeof s == "object" && s !== null && "__isAuthError" in s;
 }
 class wa extends kr {
@@ -3872,7 +3872,7 @@ class wa extends kr {
   }
 }
 function ba(s) {
-  return O(s) && s.name === "AuthApiError";
+  return T(s) && s.name === "AuthApiError";
 }
 class Fs extends kr {
   constructor(e, t) {
@@ -3890,7 +3890,7 @@ class Ee extends qe {
   }
 }
 function Sa(s) {
-  return O(s) && s.name === "AuthSessionMissingError";
+  return T(s) && s.name === "AuthSessionMissingError";
 }
 class Qt extends qe {
   constructor() {
@@ -3916,7 +3916,7 @@ class Ot extends qe {
   }
 }
 function ka(s) {
-  return O(s) && s.name === "AuthImplicitGrantRedirectError";
+  return T(s) && s.name === "AuthImplicitGrantRedirectError";
 }
 class Gr extends qe {
   constructor(e, t = null) {
@@ -3937,7 +3937,7 @@ class fr extends qe {
   }
 }
 function Xt(s) {
-  return O(s) && s.name === "AuthRetryableFetchError";
+  return T(s) && s.name === "AuthRetryableFetchError";
 }
 class Kr extends qe {
   constructor(e, t, r) {
@@ -4076,7 +4076,7 @@ class $a {
         noResolveJson: !0
       }), { data: null, error: null };
     } catch (r) {
-      if (O(r))
+      if (T(r))
         return { data: null, error: r };
       throw r;
     }
@@ -4095,7 +4095,7 @@ class $a {
         xform: Te
       });
     } catch (r) {
-      if (O(r))
+      if (T(r))
         return { data: { user: null }, error: r };
       throw r;
     }
@@ -4117,7 +4117,7 @@ class $a {
         redirectTo: t == null ? void 0 : t.redirectTo
       });
     } catch (t) {
-      if (O(t))
+      if (T(t))
         return {
           data: {
             properties: null,
@@ -4141,7 +4141,7 @@ class $a {
         xform: Te
       });
     } catch (t) {
-      if (O(t))
+      if (T(t))
         return { data: { user: null }, error: t };
       throw t;
     }
@@ -4172,7 +4172,7 @@ class $a {
         u[`${S}Page`] = v;
       }), u.total = parseInt(f)), { data: Object.assign(Object.assign({}, h), u), error: null };
     } catch (u) {
-      if (O(u))
+      if (T(u))
         return { data: { users: [] }, error: u };
       throw u;
     }
@@ -4191,7 +4191,7 @@ class $a {
         xform: Te
       });
     } catch (t) {
-      if (O(t))
+      if (T(t))
         return { data: { user: null }, error: t };
       throw t;
     }
@@ -4211,7 +4211,7 @@ class $a {
         xform: Te
       });
     } catch (r) {
-      if (O(r))
+      if (T(r))
         return { data: { user: null }, error: r };
       throw r;
     }
@@ -4235,7 +4235,7 @@ class $a {
         xform: Te
       });
     } catch (r) {
-      if (O(r))
+      if (T(r))
         return { data: { user: null }, error: r };
       throw r;
     }
@@ -4248,7 +4248,7 @@ class $a {
       });
       return { data: t, error: r };
     } catch (t) {
-      if (O(t))
+      if (T(t))
         return { data: null, error: t };
       throw t;
     }
@@ -4259,7 +4259,7 @@ class $a {
         headers: this.headers
       }), error: null };
     } catch (t) {
-      if (O(t))
+      if (T(t))
         return { data: null, error: t };
       throw t;
     }
@@ -4430,7 +4430,7 @@ class ft {
       }
       return await this._recoverAndRefresh(), { error: null };
     } catch (t) {
-      return O(t) ? { error: t } : {
+      return T(t) ? { error: t } : {
         error: new Fs("Unexpected error during initialization", t)
       };
     } finally {
@@ -4458,7 +4458,7 @@ class ft {
       const c = a.session, u = a.user;
       return a.session && (await this._saveSession(a.session), await this._notifyAllSubscribers("SIGNED_IN", c)), { data: { user: u, session: c }, error: null };
     } catch (i) {
-      if (O(i))
+      if (T(i))
         return { data: { user: null, session: null }, error: i };
       throw i;
     }
@@ -4514,7 +4514,7 @@ class ft {
       const c = a.session, u = a.user;
       return a.session && (await this._saveSession(a.session), await this._notifyAllSubscribers("SIGNED_IN", c)), { data: { user: u, session: c }, error: null };
     } catch (i) {
-      if (O(i))
+      if (T(i))
         return { data: { user: null, session: null }, error: i };
       throw i;
     }
@@ -4560,7 +4560,7 @@ class ft {
         error: n
       });
     } catch (t) {
-      if (O(t))
+      if (T(t))
         return { data: { user: null, session: null }, error: t };
       throw t;
     }
@@ -4602,7 +4602,7 @@ class ft {
         error: new Qt()
       } : (i.session && (await this._saveSession(i.session), await this._notifyAllSubscribers("SIGNED_IN", i.session)), { data: Object.assign(Object.assign({}, i), { redirectType: n ?? null }), error: a });
     } catch (i) {
-      if (O(i))
+      if (T(i))
         return { data: { user: null, session: null, redirectType: null }, error: i };
       throw i;
     }
@@ -4629,7 +4629,7 @@ class ft {
         error: new Qt()
       } : (c.session && (await this._saveSession(c.session), await this._notifyAllSubscribers("SIGNED_IN", c.session)), { data: c, error: u });
     } catch (t) {
-      if (O(t))
+      if (T(t))
         return { data: { user: null, session: null }, error: t };
       throw t;
     }
@@ -4687,7 +4687,7 @@ class ft {
       }
       throw new xt("You must provide either an email or phone number.");
     } catch (o) {
-      if (O(o))
+      if (T(o))
         return { data: { user: null, session: null }, error: o };
       throw o;
     }
@@ -4713,7 +4713,7 @@ class ft {
       const c = a.session, u = a.user;
       return c != null && c.access_token && (await this._saveSession(c), await this._notifyAllSubscribers(e.type == "recovery" ? "PASSWORD_RECOVERY" : "SIGNED_IN", c)), { data: { user: u, session: c }, error: null };
     } catch (n) {
-      if (O(n))
+      if (T(n))
         return { data: { user: null, session: null }, error: n };
       throw n;
     }
@@ -4742,7 +4742,7 @@ class ft {
         xform: ja
       });
     } catch (i) {
-      if (O(i))
+      if (T(i))
         return { data: null, error: i };
       throw i;
     }
@@ -4769,7 +4769,7 @@ class ft {
         return { data: { user: null, session: null }, error: n };
       });
     } catch (e) {
-      if (O(e))
+      if (T(e))
         return { data: { user: null, session: null }, error: e };
       throw e;
     }
@@ -4804,7 +4804,7 @@ class ft {
       }
       throw new xt("You must provide either an email or phone number and a type");
     } catch (t) {
-      if (O(t))
+      if (T(t))
         return { data: { user: null, session: null }, error: t };
       throw t;
     }
@@ -4932,7 +4932,7 @@ class ft {
         });
       });
     } catch (t) {
-      if (O(t))
+      if (T(t))
         return Sa(t) && (await this._removeSession(), await Et(this.storage, `${this.storageKey}-code-verifier`)), { data: { user: null }, error: t };
       throw t;
     }
@@ -4966,7 +4966,7 @@ class ft {
         return a.user = u.user, await this._saveSession(a), await this._notifyAllSubscribers("USER_UPDATED", a), { data: { user: a.user }, error: null };
       });
     } catch (r) {
-      if (O(r))
+      if (T(r))
         return { data: { user: null }, error: r };
       throw r;
     }
@@ -5014,7 +5014,7 @@ class ft {
       }
       return { data: { user: i.user, session: i }, error: null };
     } catch (t) {
-      if (O(t))
+      if (T(t))
         return { data: { session: null, user: null }, error: t };
       throw t;
     }
@@ -5044,7 +5044,7 @@ class ft {
         return i ? { data: { user: null, session: null }, error: i } : n ? { data: { user: n.user, session: n }, error: null } : { data: { user: null, session: null }, error: null };
       });
     } catch (t) {
-      if (O(t))
+      if (T(t))
         return { data: { user: null, session: null }, error: t };
       throw t;
     }
@@ -5075,11 +5075,11 @@ class ft {
       if (t === "pkce") {
         if (this._debug("#_initialize()", "begin", "is PKCE flow", !0), !e.code)
           throw new Gr("No code detected.");
-        const { data: P, error: R } = await this._exchangeCodeForSession(e.code);
+        const { data: O, error: R } = await this._exchangeCodeForSession(e.code);
         if (R)
           throw R;
         const x = new URL(window.location.href);
-        return x.searchParams.delete("code"), window.history.replaceState(window.history.state, "", x.toString()), { data: { session: P.session, redirectType: null }, error: null };
+        return x.searchParams.delete("code"), window.history.replaceState(window.history.state, "", x.toString()), { data: { session: O.session, redirectType: null }, error: null };
       }
       const { provider_token: r, provider_refresh_token: n, access_token: i, refresh_token: a, expires_in: o, expires_at: c, token_type: u } = e;
       if (!i || !o || !a || !u)
@@ -5094,7 +5094,7 @@ class ft {
       const { data: v, error: S } = await this._getUser(i);
       if (S)
         throw S;
-      const j = {
+      const P = {
         provider_token: r,
         provider_refresh_token: n,
         access_token: i,
@@ -5104,9 +5104,9 @@ class ft {
         token_type: u,
         user: v.user
       };
-      return window.location.hash = "", this._debug("#_getSessionFromURL()", "clearing window.location.hash"), { data: { session: j, redirectType: e.type }, error: null };
+      return window.location.hash = "", this._debug("#_getSessionFromURL()", "clearing window.location.hash"), { data: { session: P, redirectType: e.type }, error: null };
     } catch (r) {
-      if (O(r))
+      if (T(r))
         return { data: { session: null, redirectType: null }, error: r };
       throw r;
     }
@@ -5206,7 +5206,7 @@ class ft {
         redirectTo: t.redirectTo
       });
     } catch (i) {
-      if (O(i))
+      if (T(i))
         return { data: null, error: i };
       throw i;
     }
@@ -5222,7 +5222,7 @@ class ft {
         throw r;
       return { data: { identities: (e = t.user.identities) !== null && e !== void 0 ? e : [] }, error: null };
     } catch (t) {
-      if (O(t))
+      if (T(t))
         return { data: null, error: t };
       throw t;
     }
@@ -5254,7 +5254,7 @@ class ft {
         throw n;
       return ge() && !(!((t = e.options) === null || t === void 0) && t.skipBrowserRedirect) && window.location.assign(r == null ? void 0 : r.url), { data: { provider: e.provider, url: r == null ? void 0 : r.url }, error: null };
     } catch (r) {
-      if (O(r))
+      if (T(r))
         return { data: { provider: e.provider, url: null }, error: r };
       throw r;
     }
@@ -5275,7 +5275,7 @@ class ft {
         });
       });
     } catch (t) {
-      if (O(t))
+      if (T(t))
         return { data: null, error: t };
       throw t;
     }
@@ -5299,7 +5299,7 @@ class ft {
         Date.now() + a - r < ot;
       });
     } catch (r) {
-      if (this._debug(t, "error", r), O(r))
+      if (this._debug(t, "error", r), T(r))
         return { data: { session: null, user: null }, error: r };
       throw r;
     } finally {
@@ -5365,7 +5365,7 @@ class ft {
       const o = { session: i.session, error: null };
       return this.refreshingDeferred.resolve(o), o;
     } catch (i) {
-      if (this._debug(n, "error", i), O(i)) {
+      if (this._debug(n, "error", i), T(i)) {
         const a = { session: null, error: i };
         return Xt(i) || await this._removeSession(), (t = this.refreshingDeferred) === null || t === void 0 || t.resolve(a), a;
       }
@@ -5569,7 +5569,7 @@ class ft {
         });
       });
     } catch (t) {
-      if (O(t))
+      if (T(t))
         return { data: null, error: t };
       throw t;
     }
@@ -5589,7 +5589,7 @@ class ft {
         return u ? { data: null, error: u } : (e.factorType === "totp" && (!((n = c == null ? void 0 : c.totp) === null || n === void 0) && n.qr_code) && (c.totp.qr_code = `data:image/svg+xml;utf-8,${c.totp.qr_code}`), { data: c, error: null });
       });
     } catch (t) {
-      if (O(t))
+      if (T(t))
         return { data: null, error: t };
       throw t;
     }
@@ -5613,7 +5613,7 @@ class ft {
           return o ? { data: null, error: o } : (await this._saveSession(Object.assign({ expires_at: Math.round(Date.now() / 1e3) + a.expires_in }, a)), await this._notifyAllSubscribers("MFA_CHALLENGE_VERIFIED", a), { data: a, error: o });
         });
       } catch (t) {
-        if (O(t))
+        if (T(t))
           return { data: null, error: t };
         throw t;
       }
@@ -5635,7 +5635,7 @@ class ft {
           });
         });
       } catch (t) {
-        if (O(t))
+        if (T(t))
           return { data: null, error: t };
         throw t;
       }
@@ -7240,7 +7240,7 @@ function tc() {
     function v(x, k, D) {
       return k();
     }
-    var S = typeof window < "u" && typeof window.document < "u" && typeof window.document.createElement < "u", j = !S, P = j ? v : p, R = e.useSyncExternalStore !== void 0 ? e.useSyncExternalStore : P;
+    var S = typeof window < "u" && typeof window.document < "u" && typeof window.document.createElement < "u", P = !S, O = P ? v : p, R = e.useSyncExternalStore !== void 0 ? e.useSyncExternalStore : O;
     rr.useSyncExternalStore = R, typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ < "u" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop == "function" && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
   }(), rr;
 }
@@ -7276,9 +7276,9 @@ function rc() {
       _.current = v;
     } else v = _.current;
     _ = o(function() {
-      function j(D) {
-        if (!P) {
-          if (P = !0, R = D, D = f(D), p !== void 0 && v.hasValue) {
+      function P(D) {
+        if (!O) {
+          if (O = !0, R = D, D = f(D), p !== void 0 && v.hasValue) {
             var I = v.value;
             if (p(I, D)) return x = I;
           }
@@ -7288,11 +7288,11 @@ function rc() {
         var H = f(D);
         return p !== void 0 && p(I, H) ? I : (R = D, x = H);
       }
-      var P = !1, R, x, k = h === void 0 ? null : h;
+      var O = !1, R, x, k = h === void 0 ? null : h;
       return [function() {
-        return j(l());
+        return P(l());
       }, k === null ? void 0 : function() {
-        return j(k());
+        return P(k());
       }];
     }, [l, h, f, p]);
     var S = n(u, _[0], _[1]);
@@ -7323,18 +7323,18 @@ function sc() {
     }
     var n = typeof Object.is == "function" ? Object.is : r, i = t.useSyncExternalStore, a = e.useRef, o = e.useEffect, c = e.useMemo, u = e.useDebugValue;
     function l(h, f, p, _, v) {
-      var S = a(null), j;
-      S.current === null ? (j = {
+      var S = a(null), P;
+      S.current === null ? (P = {
         hasValue: !1,
         value: null
-      }, S.current = j) : j = S.current;
-      var P = c(function() {
+      }, S.current = P) : P = S.current;
+      var O = c(function() {
         var D = !1, I, H, ne = function(he) {
           if (!D) {
             D = !0, I = he;
             var Y = _(he);
-            if (v !== void 0 && j.hasValue) {
-              var te = j.value;
+            if (v !== void 0 && P.hasValue) {
+              var te = P.value;
               if (v(te, Y))
                 return H = te, te;
             }
@@ -7351,9 +7351,9 @@ function sc() {
           return ne(B());
         };
         return [de, Re];
-      }, [f, p, _, v]), R = P[0], x = P[1], k = i(h, R, x);
+      }, [f, p, _, v]), R = O[0], x = O[1], k = i(h, R, x);
       return o(function() {
-        j.hasValue = !0, j.value = k;
+        P.hasValue = !0, P.value = k;
       }, [k]), u(k), k;
     }
     sr.useSyncExternalStoreWithSelector = l, typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ < "u" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop == "function" && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
@@ -7741,39 +7741,46 @@ const Jc = async (s, e, t, r) => {
       const { data: n } = await U.from("conversations").select("domain_id").eq("id", r).single();
       if (!(n != null && n.domain_id))
         throw new Error("Conversation not found or missing domain_id");
-      const { data: i } = await U.from("domain_settings").select("chatbot_name, prompt").eq("domain_id", n.domain_id).single(), { data: a } = await U.from("training_data").select("content").eq("domain_id", n.domain_id).single(), o = i == null ? void 0 : i.chatbot_name, c = i == null ? void 0 : i.prompt, u = a == null ? void 0 : a.content;
-      if (console.log("Training content fetched:", u), !o)
+      const { data: i } = await U.from("domain_settings").select("chatbot_name, prompt").eq("domain_id", n.domain_id).single(), { data: a, error: o } = await U.from("training_data").select("content").eq("domain_id", n.domain_id).single();
+      console.log("Training data response:", { data: a, error: o });
+      const c = i == null ? void 0 : i.chatbot_name, u = i == null ? void 0 : i.prompt, l = a == null ? void 0 : a.content;
+      if (console.log("Parsed values:", {
+        chatbotName: c,
+        prompt: u,
+        trainingContent: l,
+        domainId: n.domain_id
+      }), !c)
         throw console.error("No chatbot name found in domain settings, cannot proceed with OpenAI request"), new Error("Chatbot configuration is incomplete");
-      console.log(`Sending user message from ${o}:`, t);
-      const l = {
+      console.log(`Sending user message from ${c}:`, t);
+      const h = {
         conversation_id: r,
         content: t,
         sender_type: "user",
         user_id: null
-      }, { error: h } = await U.from("messages").insert(l);
-      if (h) throw h;
-      const { data: f, error: p } = await U.from("conversations").select("live_mode").eq("id", r).single();
-      if (p) throw p;
-      if (f.live_mode)
+      }, { error: f } = await U.from("messages").insert(h);
+      if (f) throw f;
+      const { data: p, error: _ } = await U.from("conversations").select("live_mode").eq("id", r).single();
+      if (_) throw _;
+      if (p.live_mode)
         console.log("Live mode enabled, skipping OpenAI response");
       else {
-        console.log(`Live mode disabled for ${o}, generating OpenAI response`);
+        console.log(`Live mode disabled for ${c}, generating OpenAI response`);
         try {
-          const v = await Jc(t, r, c, u);
-          console.log(`Got OpenAI response for ${o}:`, v);
-          const S = {
+          const S = await Jc(t, r, u, l);
+          console.log(`Got OpenAI response for ${c}:`, S);
+          const P = {
             conversation_id: r,
-            content: v,
+            content: S,
             sender_type: "bot",
             user_id: null
-          }, { error: j } = await U.from("messages").insert(S);
-          if (j) throw j;
-        } catch (v) {
-          console.error("Error generating bot response:", v), ae.error("Failed to generate bot response");
+          }, { error: O } = await U.from("messages").insert(P);
+          if (O) throw O;
+        } catch (S) {
+          console.error("Error generating bot response:", S), ae.error("Failed to generate bot response");
         }
       }
-      const { error: _ } = await U.from("conversations").update({ last_message_at: (/* @__PURE__ */ new Date()).toISOString() }).eq("id", r);
-      if (_) throw _;
+      const { error: v } = await U.from("conversations").update({ last_message_at: (/* @__PURE__ */ new Date()).toISOString() }).eq("id", r);
+      if (v) throw v;
     } catch (n) {
       console.error("Error sending message:", n), s({ error: n.message }), ae.error("Failed to send message");
     } finally {
@@ -7782,47 +7789,47 @@ const Jc = async (s, e, t, r) => {
   }
 })), ys = "chatbot_session_id", Kc = 180;
 function Qc({ domainId: s }) {
-  const [e, t] = X(!1), [r, n] = X(""), [i, a] = X([]), [o, c] = X([]), [u, l] = X("history"), [h, f] = X(null), [p, _] = X(!1), [v] = X(/* @__PURE__ */ new Set()), [S, j] = X(null), [P, R] = X(null), x = Mr(null), [k, D] = X(!1), I = Mr(null), { sendMessage: H } = Gc(), [ne, B] = X(!1), de = (m, b) => b.some(
-    (T) => (
+  const [e, t] = X(!1), [r, n] = X(""), [i, a] = X([]), [o, c] = X([]), [u, l] = X("history"), [h, f] = X(null), [p, _] = X(!1), [v] = X(/* @__PURE__ */ new Set()), [S, P] = X(null), [O, R] = X(null), x = Mr(null), [k, D] = X(!1), I = Mr(null), { sendMessage: H } = Gc(), [ne, B] = X(!1), de = (m, b) => b.some(
+    (j) => (
       // Check for exact ID match
-      T.id === m.id || // Check for temp ID being replaced by real ID
-      T.id.startsWith("temp-") && T.content === m.content && T.sender_type === m.sender_type || // Check for exact content match within a small time window (2 seconds)
-      T.content === m.content && T.sender_type === m.sender_type && Math.abs(new Date(T.created_at).getTime() - new Date(m.created_at).getTime()) < 2e3
+      j.id === m.id || // Check for temp ID being replaced by real ID
+      j.id.startsWith("temp-") && j.content === m.content && j.sender_type === m.sender_type || // Check for exact content match within a small time window (2 seconds)
+      j.content === m.content && j.sender_type === m.sender_type && Math.abs(new Date(j.created_at).getTime() - new Date(m.created_at).getTime()) < 2e3
     )
   );
   me(() => {
-    if (!P) return;
+    if (!O) return;
     const m = U.channel("new-conversations").on(
       "postgres_changes",
       {
         event: "INSERT",
         schema: "public",
         table: "conversations",
-        filter: `session_id=eq.${P}`
+        filter: `session_id=eq.${O}`
       },
       (b) => {
         if (b.eventType === "INSERT") {
-          const T = b.new;
-          c((F) => [T, ...F]);
+          const j = b.new;
+          c((F) => [j, ...F]);
         }
       }
     ).subscribe();
     return () => {
       m.unsubscribe();
     };
-  }, [P]), me(() => {
-    if (!P) return;
+  }, [O]), me(() => {
+    if (!O) return;
     const m = U.channel("conversations-updates").on(
       "postgres_changes",
       {
         event: "*",
         schema: "public",
         table: "conversations",
-        filter: `session_id=eq.${P}`
+        filter: `session_id=eq.${O}`
       },
       (b) => {
         b.eventType === "UPDATE" && (c(
-          (T) => T.map(
+          (j) => j.map(
             (F) => F.id === b.new.id ? { ...F, ...b.new } : F
           )
         ), b.new.id === h && D(b.new.status === "archived"));
@@ -7831,14 +7838,14 @@ function Qc({ domainId: s }) {
     return () => {
       m.unsubscribe();
     };
-  }, [P, h]), me(() => {
+  }, [O, h]), me(() => {
     var m;
     e && (i.length > 0 || k) && ((m = x.current) == null || m.scrollIntoView({ behavior: "smooth" }));
   }, [i, e, k]);
   const Re = async () => {
-    if (P)
+    if (O)
       try {
-        const { data: m, error: b } = await U.from("conversations").select("*").eq("session_id", P).order("last_message_at", { ascending: !1 });
+        const { data: m, error: b } = await U.from("conversations").select("*").eq("session_id", O).order("last_message_at", { ascending: !1 });
         if (b) throw b;
         c(m || []);
       } catch (m) {
@@ -7846,8 +7853,8 @@ function Qc({ domainId: s }) {
       }
   };
   me(() => {
-    P && Re();
-  }, [P]);
+    O && Re();
+  }, [O]);
   const he = async () => {
     a([]), f(null), D(!1), Ve(null), B(!1), l("chat");
   }, Y = () => {
@@ -7856,7 +7863,7 @@ function Qc({ domainId: s }) {
     try {
       f(m.id), D(m.status === "archived"), Ve(null), B(!1);
       const { data: b } = await U.from("messages").select("*").eq("conversation_id", m.id).order("created_at", { ascending: !0 });
-      b && (a(b), v.clear(), b.forEach((T) => v.add(T.id))), m.status === "archived" && Ve(m.rating || null), l("chat");
+      b && (a(b), v.clear(), b.forEach((j) => v.add(j.id))), m.status === "archived" && Ve(m.rating || null), l("chat");
     } catch (b) {
       console.error("Error loading conversation:", b);
     }
@@ -7902,14 +7909,14 @@ function Qc({ domainId: s }) {
       },
       (b) => {
         if (console.log("Received real-time event:", b), b.eventType === "INSERT") {
-          const T = b.new;
-          console.log("New message:", T), a((F) => {
-            if (de(T, F))
+          const j = b.new;
+          console.log("New message:", j), a((F) => {
+            if (de(j, F))
               return console.log("Message already exists, skipping"), F;
             const K = F.filter(
-              (ce) => !(ce.id.startsWith("temp-") && ce.content === T.content && ce.sender_type === T.sender_type)
+              (ce) => !(ce.id.startsWith("temp-") && ce.content === j.content && ce.sender_type === j.sender_type)
             );
-            return v.add(T.id), T.sender_type === "bot" && fe(), console.log("Adding new message to state"), [...K, T];
+            return v.add(j.id), j.sender_type === "bot" && fe(), console.log("Adding new message to state"), [...K, j];
           });
         }
       }
@@ -7927,8 +7934,8 @@ function Qc({ domainId: s }) {
   }, []);
   const we = async (m) => {
     try {
-      const { data: b, error: T } = await U.from("conversations").select("*").eq("session_id", m).eq("status", "active").order("last_message_at", { ascending: !1 }).limit(1);
-      if (T) throw T;
+      const { data: b, error: j } = await U.from("conversations").select("*").eq("session_id", m).eq("status", "active").order("last_message_at", { ascending: !1 }).limit(1);
+      if (j) throw j;
       if (!b || b.length === 0) {
         console.log("No active conversations found for this session");
         return;
@@ -7945,7 +7952,7 @@ function Qc({ domainId: s }) {
         a(Wt);
       }
     } catch (b) {
-      b instanceof Error && !b.message.includes("no rows returned") && (console.error("Error loading existing conversation:", b), j("Failed to load conversation history"));
+      b instanceof Error && !b.message.includes("no rows returned") && (console.error("Error loading existing conversation:", b), P("Failed to load conversation history"));
     }
   }, be = async () => {
     try {
@@ -7957,41 +7964,41 @@ function Qc({ domainId: s }) {
         const { data: K, error: ce } = await U.from("conversations").insert({
           domain_id: s,
           user_id: F.id,
-          session_id: P,
+          session_id: O,
           last_message_at: (/* @__PURE__ */ new Date()).toISOString(),
           status: "active"
         }).select().single();
         if (ce) throw ce;
         return K.id;
       }
-      const { data: b, error: T } = await U.from("conversations").insert({
+      const { data: b, error: j } = await U.from("conversations").insert({
         domain_id: s,
         user_id: m.id,
-        session_id: P,
+        session_id: O,
         last_message_at: (/* @__PURE__ */ new Date()).toISOString(),
         status: "active"
       }).select().single();
-      if (T) throw T;
+      if (j) throw j;
       return b.id;
     } catch (m) {
       throw console.error("Error creating conversation:", m), m;
     }
   }, yt = async (m) => {
     try {
-      _(!0), j(null);
+      _(!0), P(null);
       const { data: { user: b } } = await U.auth.getUser();
       b || await U.auth.signInAnonymously();
-      const T = h || await be();
-      h || f(T);
+      const j = h || await be();
+      h || f(j);
       const F = {
         id: `temp-${Date.now()}`,
         content: m,
         sender_type: "user",
         created_at: (/* @__PURE__ */ new Date()).toISOString()
       };
-      a((K) => de(F, K) ? K : [...K, F]), await H(m, T), n("");
+      a((K) => de(F, K) ? K : [...K, F]), await H(m, j), n("");
     } catch (b) {
-      console.error("Error sending message:", b), j("Failed to send message. Please try again.");
+      console.error("Error sending message:", b), P("Failed to send message. Please try again.");
     } finally {
       _(!1);
     }
@@ -8037,7 +8044,7 @@ function Qc({ domainId: s }) {
         const { data: m } = await U.from("messages").select("*").eq("conversation_id", h).order("created_at", { ascending: !0 });
         m && (a(m), m.forEach((b) => v.add(b.id)));
       } catch (m) {
-        console.error("Error refreshing chat:", m), j("Failed to refresh chat");
+        console.error("Error refreshing chat:", m), P("Failed to refresh chat");
       }
   }, [Se, Ve] = X(null), Ce = async (m) => {
     if (h)
@@ -8045,7 +8052,7 @@ function Qc({ domainId: s }) {
         const { error: b } = await U.from("conversations").update({ rating: m }).eq("id", h);
         if (b) throw b;
         Ve(m), c(
-          (T) => T.map(
+          (j) => j.map(
             (F) => F.id === h ? { ...F, rating: m } : F
           )
         );
@@ -8066,9 +8073,9 @@ function Qc({ domainId: s }) {
           sender_type: "bot",
           created_at: (/* @__PURE__ */ new Date()).toISOString()
         };
-        a((T) => [...T, b]);
+        a((j) => [...j, b]);
       } catch (m) {
-        console.error("Error requesting live chat:", m), j("Failed to request live chat. Please try again.");
+        console.error("Error requesting live chat:", m), P("Failed to request live chat. Please try again.");
       }
   };
   return /* @__PURE__ */ y.jsxs("div", { className: "fixed bottom-6 right-6 flex flex-col items-end z-[9999]", children: [
@@ -8297,4 +8304,4 @@ Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-BnTaX6kf.js.map
+//# sourceMappingURL=main-CKtJeRtt.js.map
