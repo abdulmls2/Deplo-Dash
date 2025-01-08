@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-IgEnREzi.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-DRg0D3Hx.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7739,9 +7739,13 @@ const Jc = async (s, e, t) => {
       if (!a)
         throw console.error("No chatbot name found in domain settings, cannot proceed with OpenAI request"), new Error("Chatbot configuration is incomplete");
       const { data: c, error: u } = await U.from("training_data").select("content").eq("domain_id", n == null ? void 0 : n.domain_id);
-      u && console.error("Error fetching training data:", u.message);
+      console.log("Training Data Response:", {
+        data: c,
+        error: u,
+        domainId: n == null ? void 0 : n.domain_id
+      }), u && console.error("Error fetching training data:", u.message);
       const l = (c == null ? void 0 : c.map((S) => S.content)) || [];
-      console.log(
+      console.log("Processed Training Contents:", l), console.log(
         `Sending user message from ${a}:`,
         t,
         "Training Data:",
@@ -8299,4 +8303,4 @@ Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-SGKR6mLt.js.map
+//# sourceMappingURL=main-DhI3g0Uh.js.map
