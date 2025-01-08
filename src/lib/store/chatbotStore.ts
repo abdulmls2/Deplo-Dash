@@ -41,11 +41,20 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
 
       const chatbotName = domainSettings?.chatbot_name;
       const prompt = domainSettings?.prompt;
-      const trainingContent = trainingData?.map(item => item.content).join('\n\n');
+      const trainingContent = trainingData && trainingData.length > 0 
+        ? trainingData.map(item => item.content).join('\n\n')
+        : undefined;
       
       if (!chatbotName) {
         console.error('No chatbot name found in domain settings, cannot proceed with OpenAI request');
         throw new Error('Chatbot configuration is incomplete');
+      }
+
+      // Log training data status
+      if (trainingData && trainingData.length > 0) {
+        console.log(`Found ${trainingData.length} training data entries`);
+      } else {
+        console.log('No training data found for domain');
       }
 
       // Always send as user message with null user_id to indicate it's from the widget
