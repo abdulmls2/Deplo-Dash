@@ -230,8 +230,8 @@ function En() {
     }
     var b = !1, T;
     {
-      var U = typeof WeakMap == "function" ? WeakMap : Map;
-      T = new U();
+      var F = typeof WeakMap == "function" ? WeakMap : Map;
+      T = new F();
     }
     function K(d, g) {
       if (!d || b)
@@ -1928,10 +1928,10 @@ class Cs {
     }, this.timerCalc(this.tries + 1));
   }
 }
-var F;
+var q;
 (function(s) {
   s.abstime = "abstime", s.bool = "bool", s.date = "date", s.daterange = "daterange", s.float4 = "float4", s.float8 = "float8", s.int2 = "int2", s.int4 = "int4", s.int4range = "int4range", s.int8 = "int8", s.int8range = "int8range", s.json = "json", s.jsonb = "jsonb", s.money = "money", s.numeric = "numeric", s.oid = "oid", s.reltime = "reltime", s.text = "text", s.time = "time", s.timestamp = "timestamp", s.timestamptz = "timestamptz", s.timetz = "timetz", s.tsrange = "tsrange", s.tstzrange = "tstzrange";
-})(F || (F = {}));
+})(q || (q = {}));
 const Wr = (s, e, t = {}) => {
   var r;
   const n = (r = t.skipTypes) !== null && r !== void 0 ? r : [];
@@ -1945,34 +1945,34 @@ const Wr = (s, e, t = {}) => {
     return Ei(e, t);
   }
   switch (s) {
-    case F.bool:
+    case q.bool:
       return bi(e);
-    case F.float4:
-    case F.float8:
-    case F.int2:
-    case F.int4:
-    case F.int8:
-    case F.numeric:
-    case F.oid:
+    case q.float4:
+    case q.float8:
+    case q.int2:
+    case q.int4:
+    case q.int8:
+    case q.numeric:
+    case q.oid:
       return Si(e);
-    case F.json:
-    case F.jsonb:
+    case q.json:
+    case q.jsonb:
       return ki(e);
-    case F.timestamp:
+    case q.timestamp:
       return xi(e);
-    case F.abstime:
-    case F.date:
-    case F.daterange:
-    case F.int4range:
-    case F.int8range:
-    case F.money:
-    case F.reltime:
-    case F.text:
-    case F.time:
-    case F.timestamptz:
-    case F.timetz:
-    case F.tsrange:
-    case F.tstzrange:
+    case q.abstime:
+    case q.date:
+    case q.daterange:
+    case q.int4range:
+    case q.int8range:
+    case q.money:
+    case q.reltime:
+    case q.text:
+    case q.time:
+    case q.timestamptz:
+    case q.timetz:
+    case q.tsrange:
+    case q.tstzrange:
       return lr(e);
     default:
       return lr(e);
@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-D8VWRa3u.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-CauMAkrU.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -5902,7 +5902,7 @@ class Wa {
     (e === "TOKEN_REFRESHED" || e === "SIGNED_IN") && this.changedAccessToken !== r ? this.changedAccessToken = r : e === "SIGNED_OUT" && (this.realtime.setAuth(), t == "STORAGE" && this.auth.signOut(), this.changedAccessToken = void 0);
   }
 }
-const Ba = (s, e, t) => new Wa(s, e, t), Va = "https://zozodfjzxzlwzkhmfhwh.supabase.co", za = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpvem9kZmp6eHpsd3praG1maHdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIwNDM3MjMsImV4cCI6MjA0NzYxOTcyM30.ywmi4WD1fZN3hRu-krtGmY1-IYSJSODh1tKK4Ytt18Q", q = Ba(Va, za);
+const Ba = (s, e, t) => new Wa(s, e, t), Va = "https://zozodfjzxzlwzkhmfhwh.supabase.co", za = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpvem9kZmp6eHpsd3praG1maHdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIwNDM3MjMsImV4cCI6MjA0NzYxOTcyM30.ywmi4WD1fZN3hRu-krtGmY1-IYSJSODh1tKK4Ytt18Q", U = Ba(Va, za);
 function ue(s) {
   const e = Object.prototype.toString.call(s);
   return s instanceof Date || typeof s == "object" && e === "[object Date]" ? new s.constructor(+s) : typeof s == "number" || e === "[object Number]" || typeof s == "string" || e === "[object String]" ? new Date(s) : /* @__PURE__ */ new Date(NaN);
@@ -7743,49 +7743,42 @@ const Jc = async (s, e, t, r) => {
   sendMessage: async (t, r) => {
     s({ isLoading: !0, error: null });
     try {
-      const { data: n } = await q.from("conversations").select("domain_id").eq("id", r).single(), { data: i } = await q.from("domain_settings").select(`
-          chatbot_name,
-          prompt,
-          domain_id,
-          training_data (
-            content
-          )
-        `).eq("domain_id", n == null ? void 0 : n.domain_id).single();
-      console.log("Domain settings with training data:", i);
-      const a = i == null ? void 0 : i.chatbot_name, o = i == null ? void 0 : i.prompt, c = (i == null ? void 0 : i.training_data) || [], u = c.length > 0 ? c.map((m) => m.content).join(`
+      const { data: n } = await U.from("conversations").select("domain_id").eq("id", r).single(), { data: i } = await U.from("domain_settings").select("chatbot_name, prompt").eq("domain_id", n == null ? void 0 : n.domain_id).single(), { data: a } = await U.from("training_data").select("content").eq("domain_id", n == null ? void 0 : n.domain_id);
+      console.log("Domain settings:", i), console.log("Training data:", a);
+      const o = i == null ? void 0 : i.chatbot_name, c = i == null ? void 0 : i.prompt, u = a && a.length > 0 ? a.map((m) => m.content).join(`
 
 `) : void 0;
-      if (!a)
+      if (!o)
         throw console.error("No chatbot name found in domain settings, cannot proceed with OpenAI request"), new Error("Chatbot configuration is incomplete");
-      c.length > 0 ? console.log(`Found ${c.length} training data entries:`, u) : console.log("No training data found for domain"), console.log(`Sending user message from ${a}:`, t);
+      a && a.length > 0 ? console.log(`Found ${a.length} training data entries:`, u) : console.log("No training data found for domain"), console.log(`Sending user message from ${o}:`, t);
       const l = {
         conversation_id: r,
         content: t,
         sender_type: "user",
         user_id: null
-      }, { error: h } = await q.from("messages").insert(l);
+      }, { error: h } = await U.from("messages").insert(l);
       if (h) throw h;
-      const { data: f, error: p } = await q.from("conversations").select("live_mode").eq("id", r).single();
+      const { data: f, error: p } = await U.from("conversations").select("live_mode").eq("id", r).single();
       if (p) throw p;
       if (f.live_mode)
         console.log("Live mode enabled, skipping OpenAI response");
       else {
-        console.log(`Live mode disabled for ${a}, generating OpenAI response`);
+        console.log(`Live mode disabled for ${o}, generating OpenAI response`);
         try {
-          const m = await Jc(t, r, o, u);
-          console.log(`Got OpenAI response for ${a}:`, m);
+          const m = await Jc(t, r, c, u);
+          console.log(`Got OpenAI response for ${o}:`, m);
           const S = {
             conversation_id: r,
             content: m,
             sender_type: "bot",
             user_id: null
-          }, { error: j } = await q.from("messages").insert(S);
+          }, { error: j } = await U.from("messages").insert(S);
           if (j) throw j;
         } catch (m) {
           console.error("Error generating bot response:", m), ae.error("Failed to generate bot response");
         }
       }
-      const { error: _ } = await q.from("conversations").update({ last_message_at: (/* @__PURE__ */ new Date()).toISOString() }).eq("id", r);
+      const { error: _ } = await U.from("conversations").update({ last_message_at: (/* @__PURE__ */ new Date()).toISOString() }).eq("id", r);
       if (_) throw _;
     } catch (n) {
       console.error("Error sending message:", n), s({ error: n.message }), ae.error("Failed to send message");
@@ -7805,7 +7798,7 @@ function Qc({ domainId: s }) {
   );
   me(() => {
     if (!P) return;
-    const v = q.channel("new-conversations").on(
+    const v = U.channel("new-conversations").on(
       "postgres_changes",
       {
         event: "INSERT",
@@ -7816,7 +7809,7 @@ function Qc({ domainId: s }) {
       (b) => {
         if (b.eventType === "INSERT") {
           const T = b.new;
-          c((U) => [T, ...U]);
+          c((F) => [T, ...F]);
         }
       }
     ).subscribe();
@@ -7825,7 +7818,7 @@ function Qc({ domainId: s }) {
     };
   }, [P]), me(() => {
     if (!P) return;
-    const v = q.channel("conversations-updates").on(
+    const v = U.channel("conversations-updates").on(
       "postgres_changes",
       {
         event: "*",
@@ -7836,7 +7829,7 @@ function Qc({ domainId: s }) {
       (b) => {
         b.eventType === "UPDATE" && (c(
           (T) => T.map(
-            (U) => U.id === b.new.id ? { ...U, ...b.new } : U
+            (F) => F.id === b.new.id ? { ...F, ...b.new } : F
           )
         ), b.new.id === h && D(b.new.status === "archived"));
       }
@@ -7851,7 +7844,7 @@ function Qc({ domainId: s }) {
   const Re = async () => {
     if (P)
       try {
-        const { data: v, error: b } = await q.from("conversations").select("*").eq("session_id", P).order("last_message_at", { ascending: !1 });
+        const { data: v, error: b } = await U.from("conversations").select("*").eq("session_id", P).order("last_message_at", { ascending: !1 });
         if (b) throw b;
         c(v || []);
       } catch (v) {
@@ -7868,7 +7861,7 @@ function Qc({ domainId: s }) {
   }, te = async (v) => {
     try {
       f(v.id), D(v.status === "archived"), Ve(null), B(!1);
-      const { data: b } = await q.from("messages").select("*").eq("conversation_id", v.id).order("created_at", { ascending: !0 });
+      const { data: b } = await U.from("messages").select("*").eq("conversation_id", v.id).order("created_at", { ascending: !0 });
       b && (a(b), m.clear(), b.forEach((T) => m.add(T.id))), v.status === "archived" && Ve(v.rating || null), l("chat");
     } catch (b) {
       console.error("Error loading conversation:", b);
@@ -7876,7 +7869,7 @@ function Qc({ domainId: s }) {
   };
   me(() => {
     if (!h) return;
-    const v = q.channel(`conversation-status:${h}`).on(
+    const v = U.channel(`conversation-status:${h}`).on(
       "postgres_changes",
       {
         event: "UPDATE",
@@ -7905,7 +7898,7 @@ function Qc({ domainId: s }) {
       return;
     }
     console.log("Setting up subscription for conversation:", h);
-    const v = q.channel(`messages-${h}`).on(
+    const v = U.channel(`messages-${h}`).on(
       "postgres_changes",
       {
         event: "*",
@@ -7916,10 +7909,10 @@ function Qc({ domainId: s }) {
       (b) => {
         if (console.log("Received real-time event:", b), b.eventType === "INSERT") {
           const T = b.new;
-          console.log("New message:", T), a((U) => {
-            if (de(T, U))
-              return console.log("Message already exists, skipping"), U;
-            const K = U.filter(
+          console.log("New message:", T), a((F) => {
+            if (de(T, F))
+              return console.log("Message already exists, skipping"), F;
+            const K = F.filter(
               (ce) => !(ce.id.startsWith("temp-") && ce.content === T.content && ce.sender_type === T.sender_type)
             );
             return m.add(T.id), T.sender_type === "bot" && fe(), console.log("Adding new message to state"), [...K, T];
@@ -7940,19 +7933,19 @@ function Qc({ domainId: s }) {
   }, []);
   const we = async (v) => {
     try {
-      const { data: b, error: T } = await q.from("conversations").select("*").eq("session_id", v).eq("status", "active").order("last_message_at", { ascending: !1 }).limit(1);
+      const { data: b, error: T } = await U.from("conversations").select("*").eq("session_id", v).eq("status", "active").order("last_message_at", { ascending: !1 }).limit(1);
       if (T) throw T;
       if (!b || b.length === 0) {
         console.log("No active conversations found for this session");
         return;
       }
-      const U = b[0], K = /* @__PURE__ */ new Date();
-      if (K.setDate(K.getDate() - Kc), new Date(U.last_message_at) < K) {
-        await q.from("conversations").update({ status: "archived" }).eq("id", U.id);
+      const F = b[0], K = /* @__PURE__ */ new Date();
+      if (K.setDate(K.getDate() - Kc), new Date(F.last_message_at) < K) {
+        await U.from("conversations").update({ status: "archived" }).eq("id", F.id);
         return;
       }
-      f(U.id);
-      const { data: ce } = await q.from("messages").select("*").eq("conversation_id", U.id).order("created_at", { ascending: !0 });
+      f(F.id);
+      const { data: ce } = await U.from("messages").select("*").eq("conversation_id", F.id).order("created_at", { ascending: !0 });
       if (ce) {
         const Wt = ce.filter((Ae) => m.has(Ae.id) ? !1 : (m.add(Ae.id), !0));
         a(Wt);
@@ -7962,14 +7955,14 @@ function Qc({ domainId: s }) {
     }
   }, be = async () => {
     try {
-      const { data: { user: v } } = await q.auth.getUser();
+      const { data: { user: v } } = await U.auth.getUser();
       if (!v) {
-        await q.auth.signInAnonymously();
-        const { data: { user: U } } = await q.auth.getUser();
-        if (!U) throw new Error("Failed to create anonymous session");
-        const { data: K, error: ce } = await q.from("conversations").insert({
+        await U.auth.signInAnonymously();
+        const { data: { user: F } } = await U.auth.getUser();
+        if (!F) throw new Error("Failed to create anonymous session");
+        const { data: K, error: ce } = await U.from("conversations").insert({
           domain_id: s,
-          user_id: U.id,
+          user_id: F.id,
           session_id: P,
           last_message_at: (/* @__PURE__ */ new Date()).toISOString(),
           status: "active"
@@ -7977,7 +7970,7 @@ function Qc({ domainId: s }) {
         if (ce) throw ce;
         return K.id;
       }
-      const { data: b, error: T } = await q.from("conversations").insert({
+      const { data: b, error: T } = await U.from("conversations").insert({
         domain_id: s,
         user_id: v.id,
         session_id: P,
@@ -7992,17 +7985,17 @@ function Qc({ domainId: s }) {
   }, yt = async (v) => {
     try {
       _(!0), j(null);
-      const { data: { user: b } } = await q.auth.getUser();
-      b || await q.auth.signInAnonymously();
+      const { data: { user: b } } = await U.auth.getUser();
+      b || await U.auth.signInAnonymously();
       const T = h || await be();
       h || f(T);
-      const U = {
+      const F = {
         id: `temp-${Date.now()}`,
         content: v,
         sender_type: "user",
         created_at: (/* @__PURE__ */ new Date()).toISOString()
       };
-      a((K) => de(U, K) ? K : [...K, U]), await H(v, T), n("");
+      a((K) => de(F, K) ? K : [...K, F]), await H(v, T), n("");
     } catch (b) {
       console.error("Error sending message:", b), j("Failed to send message. Please try again.");
     } finally {
@@ -8014,7 +8007,7 @@ function Qc({ domainId: s }) {
   me(() => {
     s && (async () => {
       try {
-        const { data: b } = await q.from("domain_settings").select("*").eq("domain_id", s).single();
+        const { data: b } = await U.from("domain_settings").select("*").eq("domain_id", s).single();
         We(b ? {
           chatbotName: b.chatbot_name,
           greetingMessage: b.greeting_message || "Hello! How can I help you today?",
@@ -8047,7 +8040,7 @@ function Qc({ domainId: s }) {
     if (h)
       try {
         a([]), m.clear();
-        const { data: v } = await q.from("messages").select("*").eq("conversation_id", h).order("created_at", { ascending: !0 });
+        const { data: v } = await U.from("messages").select("*").eq("conversation_id", h).order("created_at", { ascending: !0 });
         v && (a(v), v.forEach((b) => m.add(b.id)));
       } catch (v) {
         console.error("Error refreshing chat:", v), j("Failed to refresh chat");
@@ -8055,11 +8048,11 @@ function Qc({ domainId: s }) {
   }, [Se, Ve] = X(null), Ce = async (v) => {
     if (h)
       try {
-        const { error: b } = await q.from("conversations").update({ rating: v }).eq("id", h);
+        const { error: b } = await U.from("conversations").update({ rating: v }).eq("id", h);
         if (b) throw b;
         Ve(v), c(
           (T) => T.map(
-            (U) => U.id === h ? { ...U, rating: v } : U
+            (F) => F.id === h ? { ...F, rating: v } : F
           )
         );
       } catch (b) {
@@ -8068,7 +8061,7 @@ function Qc({ domainId: s }) {
   }, tt = async () => {
     if (h)
       try {
-        const { error: v } = await q.from("conversations").update({
+        const { error: v } = await U.from("conversations").update({
           requested_live_at: (/* @__PURE__ */ new Date()).toISOString()
         }).eq("id", h);
         if (v) throw v;
@@ -8310,4 +8303,4 @@ Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-2kDCPGNn.js.map
+//# sourceMappingURL=main-DusjxhWX.js.map

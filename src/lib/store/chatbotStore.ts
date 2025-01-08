@@ -26,26 +26,24 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
         .eq('id', conversationId)
         .single();
 
-      // Get chatbot name from domain settings
+      // Get chatbot name and training data in two separate queries
       const { data: domainSettings } = await supabase
         .from('domain_settings')
-        .select(`
-          chatbot_name,
-          prompt,
-          domain_id,
-          training_data (
-            content
-          )
-        `)
+        .select('chatbot_name, prompt')
         .eq('domain_id', conversation?.domain_id)
         .single();
 
-      console.log('Domain settings with training data:', domainSettings);
+      const { data: trainingData } = await supabase
+        .from('training_data')
+        .select('content')
+        .eq('domain_id', conversation?.domain_id);
+
+      console.log('Domain settings:', domainSettings);
+      console.log('Training data:', trainingData);
 
       const chatbotName = domainSettings?.chatbot_name;
       const prompt = domainSettings?.prompt;
-      const trainingData = domainSettings?.training_data || [];
-      const trainingContent = trainingData.length > 0
+      const trainingContent = trainingData && trainingData.length > 0
         ? trainingData.map(item => item.content).join('\n\n')
         : undefined;
       
@@ -55,7 +53,7 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
       }
 
       // Log training data status
-      if (trainingData.length > 0) {
+      if (trainingData && trainingData.length > 0) {
         console.log(`Found ${trainingData.length} training data entries:`, trainingContent);
       } else {
         console.log('No training data found for domain');
