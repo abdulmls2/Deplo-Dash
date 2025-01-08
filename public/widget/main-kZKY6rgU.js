@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-BEQyCAMI.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-CkCsJB0O.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7741,6 +7741,11 @@ const Jc = async (s, e, t, r) => {
       const { data: n } = await U.from("conversations").select("domain_id").eq("id", r).single();
       if (!(n != null && n.domain_id))
         throw new Error("Conversation not found or missing domain_id");
+      console.log("Conversation data:", {
+        conversationId: r,
+        domainId: n.domain_id,
+        domainIdType: typeof n.domain_id
+      });
       const { data: i } = await U.from("domain_settings").select("chatbot_name, prompt").eq("domain_id", n.domain_id).single();
       console.log("Fetching training data for domain:", n.domain_id);
       const { data: a, error: o } = await U.from("training_data").select("content").eq("domain_id", n.domain_id).maybeSingle();
@@ -8310,4 +8315,4 @@ Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-DMCFTzwX.js.map
+//# sourceMappingURL=main-kZKY6rgU.js.map

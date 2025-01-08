@@ -30,6 +30,12 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
         throw new Error('Conversation not found or missing domain_id');
       }
 
+      console.log('Conversation data:', {
+        conversationId,
+        domainId: conversation.domain_id,
+        domainIdType: typeof conversation.domain_id
+      });
+
       // Get chatbot name from domain settings
       const { data: domainSettings } = await supabase
         .from('domain_settings')
