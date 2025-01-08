@@ -48,14 +48,14 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
       const { data: trainingData, error: trainingError } = await supabase
         .from('training_data')
         .select('*')
-        .eq('domain_id', conversation.domain_id)
+        .match({ domain_id: conversation.domain_id })
         .maybeSingle();
 
       console.log('Training data response:', { 
         data: trainingData, 
         error: trainingError,
         domainId: conversation.domain_id,
-        query: 'SELECT * FROM training_data WHERE domain_id = ' + conversation.domain_id
+        query: `SELECT * FROM training_data WHERE domain_id = '${conversation.domain_id}'`
       });
 
       const chatbotName = domainSettings?.chatbot_name;

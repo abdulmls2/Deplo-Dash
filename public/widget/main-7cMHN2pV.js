@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-C7zAR8D5.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-DCZH94EB.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7748,12 +7748,12 @@ const Jc = async (s, e, t, r) => {
       });
       const { data: i } = await U.from("domain_settings").select("chatbot_name, prompt").eq("domain_id", n.domain_id).single();
       console.log("Fetching training data for domain:", n.domain_id);
-      const { data: a, error: o } = await U.from("training_data").select("*").eq("domain_id", n.domain_id).maybeSingle();
+      const { data: a, error: o } = await U.from("training_data").select("*").match({ domain_id: n.domain_id }).maybeSingle();
       console.log("Training data response:", {
         data: a,
         error: o,
         domainId: n.domain_id,
-        query: "SELECT * FROM training_data WHERE domain_id = " + n.domain_id
+        query: `SELECT * FROM training_data WHERE domain_id = '${n.domain_id}'`
       });
       const c = i == null ? void 0 : i.chatbot_name, u = i == null ? void 0 : i.prompt, l = a == null ? void 0 : a.content;
       if (console.log("Parsed values:", {
@@ -8316,4 +8316,4 @@ Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-B5it2yRR.js.map
+//# sourceMappingURL=main-7cMHN2pV.js.map
