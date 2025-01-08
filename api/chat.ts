@@ -9,6 +9,13 @@ const openai = new OpenAI({
 
 const DEFAULT_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.`;
 
+const getFullPrompt = (customPrompt?: string, trainingContent?: string) => {
+  const basePrompt = customPrompt || DEFAULT_PROMPT;
+  if (!trainingContent) return basePrompt;
+  
+  return `${basePrompt}\n\nHere is some additional context to help you answer questions:\n\n${trainingContent}`;
+};
+
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
   res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -58,7 +65,7 @@ export default async function handler(
       });
     }
 
-    const { message, chatbotName, customPrompt } = req.body;
+    const { message, customPrompt, trainingContent } = req.body;
 
     // Validate request body
     if (!message) {
@@ -72,11 +79,14 @@ export default async function handler(
     } else {
       console.log('Using default prompt');
     }
+    if (trainingContent) {
+      console.log('Including training data in prompt');
+    }
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: customPrompt || DEFAULT_PROMPT },
+        { role: "system", content: getFullPrompt(customPrompt, trainingContent) },
         { role: "user", content: message }
       ],
     });
