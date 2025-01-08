@@ -73,15 +73,10 @@ export default async function handler(
       console.log('Using default prompt');
     }
 
-    // Combine custom prompt with training content if available and not empty
-    const systemPrompt = req.body.trainingContent && req.body.trainingContent.trim() 
-      ? `${customPrompt || DEFAULT_PROMPT}\n\nAdditional context:\n${req.body.trainingContent}`
-      : customPrompt || DEFAULT_PROMPT;
-
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: systemPrompt },
+        { role: "system", content: customPrompt || DEFAULT_PROMPT },
         { role: "user", content: message }
       ],
     });
