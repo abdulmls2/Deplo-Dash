@@ -75,7 +75,7 @@ export default async function handler(
 
     // Combine prompt with training data if available
     const { trainingData } = req.body;
-    const systemPrompt = `${customPrompt}\n\nHere is some additional context to help you answer questions:\n\nTraining Data:\n${trainingData?.join('\n') || 'No training data'}`;
+    const systemPrompt = customPrompt && `${customPrompt}\n\nHere is some additional context to help you answer questions:\n\nTraining Data:\n${trainingData?.join('\n') || 'No training data'}`;
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
