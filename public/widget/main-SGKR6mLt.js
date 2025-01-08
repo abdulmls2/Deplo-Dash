@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-YOwLPtr8.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-IgEnREzi.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7738,10 +7738,15 @@ const Jc = async (s, e, t) => {
       const { data: n } = await U.from("conversations").select("domain_id").eq("id", r).single(), { data: i } = await U.from("domain_settings").select("chatbot_name, prompt").eq("domain_id", n == null ? void 0 : n.domain_id).single(), a = i == null ? void 0 : i.chatbot_name, o = i == null ? void 0 : i.prompt;
       if (!a)
         throw console.error("No chatbot name found in domain settings, cannot proceed with OpenAI request"), new Error("Chatbot configuration is incomplete");
-      const { data: c, error: u } = await U.from("training_data").select("content").eq("domain_id", n == null ? void 0 : n.domain_id).single();
-      u && console.error("No training data found:", u.message);
-      const l = c == null ? void 0 : c.content;
-      console.log(`Sending user message from ${a}:`, t, "Training Data:", l || "No training data");
+      const { data: c, error: u } = await U.from("training_data").select("content").eq("domain_id", n == null ? void 0 : n.domain_id);
+      u && console.error("Error fetching training data:", u.message);
+      const l = (c == null ? void 0 : c.map((S) => S.content)) || [];
+      console.log(
+        `Sending user message from ${a}:`,
+        t,
+        "Training Data:",
+        l.length > 0 ? l : "No training data"
+      );
       const h = {
         conversation_id: r,
         content: t,
@@ -8294,4 +8299,4 @@ Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-Dnq_d1MK.js.map
+//# sourceMappingURL=main-SGKR6mLt.js.map
