@@ -9,9 +9,9 @@ const openai = new OpenAI({
 
 const DEFAULT_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.
 
-If the user requests to speak with a live agent, human, or real person (examples: "can I speak to a human", "I want to talk to a real person", "connect me to an agent", etc.):
-- First time: Respond with "I understand you'd like to speak with an agent. I'm actually quite capable of helping with most questions. What specific issue can I assist you with?"
-- If they insist or ask again in the same conversation: Respond with "[LIVE_CHAT_REQUESTED]I'll connect you with a live agent. Please wait a moment while I transfer your chat."`;
+If the user requests to speak with a live agent, human, or real person (examples: "can I speak to a human", "I want to talk to a real person", "connect me to an agent", etc.), respond with exactly this message:
+
+"[LIVE_CHAT_REQUESTED]I'll connect you with a live agent. Please wait a moment while I transfer your chat."`;
 
 // Enable CORS middleware
 const cors = async (req: VercelRequest, res: VercelResponse) => {
@@ -80,7 +80,7 @@ export default async function handler(
     // Combine prompt with training data if available
     const { trainingData } = req.body;
     const systemPrompt = customPrompt 
-      ? `${customPrompt}\n\nIf the user requests to speak with a live agent, human, or real person (examples: "can I speak to a human", "I want to talk to a real person", "connect me to an agent", etc.):\n- First time: Respond with "I understand you'd like to speak with an agent. I'm actually quite capable of helping with most questions. What specific issue can I assist you with?"\n- If they insist or ask again in the same conversation: Respond with "[LIVE_CHAT_REQUESTED]I'll connect you with a live agent. Please wait a moment while I transfer your chat."\n\nHere is some additional context to help you answer questions:\n\nTraining Data:\n${trainingData?.join('\n') || 'No training data'}`
+      ? `${customPrompt}\n\nIf the user requests to speak with a live agent, human, or real person (examples: "can I speak to a human", "I want to talk to a real person", "connect me to an agent", etc.), respond with exactly this message:\n\n"[LIVE_CHAT_REQUESTED]I'll connect you with a live agent. Please wait a moment while I transfer your chat."\n\nHere is some additional context to help you answer questions:\n\nTraining Data:\n${trainingData?.join('\n') || 'No training data'}`
       : null;
 
     const completion = await openai.chat.completions.create({
