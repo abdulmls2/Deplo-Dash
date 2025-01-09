@@ -291,7 +291,7 @@ export default function Domain() {
           />
         </section>
 
-        {/* Help Desk Section */}
+        {/* Help Desk Section - Temporarily Hidden
         <section>
           <h2 className="text-xl font-semibold mb-4">Help Desk</h2>
           <FAQSection
@@ -306,6 +306,7 @@ export default function Domain() {
             handleDeleteQA={handleDeleteQA}
           />
         </section>
+        */}
 
         {/* Save Button */}
         <div className="flex justify-end pt-4">
