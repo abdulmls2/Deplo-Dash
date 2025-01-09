@@ -85,7 +85,7 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
       if (!conversationData.live_mode) {
         console.log(`Live mode disabled for ${chatbotName}, generating OpenAI response`);
         try {
-          const botResponse = await generateBotResponse(content, conversationId, prompt, trainingContents);
+          const { response: botResponse, isLiveChatRequested } = await generateBotResponse(content, conversationId, prompt, trainingContents);
           console.log(`Got OpenAI response for ${chatbotName}:`, botResponse);
           
           // Send bot response
@@ -101,6 +101,19 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
             .insert(botMessageData);
 
           if (botError) throw botError;
+
+          // If live chat was requested through conversation, update the conversation
+          if (isLiveChatRequested) {
+            const { error: updateError } = await supabase
+              .from('conversations')
+              .update({ 
+                requested_live_at: new Date().toISOString()
+              })
+              .eq('id', conversationId);
+
+            if (updateError) throw updateError;
+            set({ isLoading: false });
+          }
         } catch (error) {
           console.error('Error generating bot response:', error);
           toast.error('Failed to generate bot response');

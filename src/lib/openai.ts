@@ -4,7 +4,7 @@ export const generateBotResponse = async (
   conversationId: string,
   prompt?: string,
   trainingData?: string[]
-): Promise<string> => {
+): Promise<{ response: string; isLiveChatRequested: boolean }> => {
   try {
     // Always use the absolute URL for the API endpoint
     const API_URL = 'https://deplo-dash.vercel.app/api/chat';
@@ -35,7 +35,10 @@ export const generateBotResponse = async (
     }
 
     const data = await response.json();
-    return data.response || 'Sorry, I could not generate a response.';
+    return {
+      response: data.response || 'Sorry, I could not generate a response.',
+      isLiveChatRequested: data.isLiveChatRequested || false
+    };
   } catch (error) {
     console.error('Error generating response:', error);
     throw error;
