@@ -46,6 +46,8 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const notificationSound = useRef<HTMLAudioElement | null>(null);
   const { sendMessage: chatbotSendMessage } = useChatbotStore();
   const [isRequestingLiveChat, setIsRequestingLiveChat] = useState(false);
+  const [widgetHeight, setWidgetHeight] = useState(400);  // New state for height
+  const [widgetWidth, setWidgetWidth] = useState(380);   // New state for width
 
   // Add this helper function at the top of the component
   const isMessageDuplicate = (newMsg: Message, existingMessages: Message[]) => {
@@ -456,7 +458,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       const tempMessage: Message = {
         id: `temp-${Date.now()}`,
         content: content,
-        sender_type: 'user',
+        sender_type: 'user' as const,
         created_at: new Date().toISOString(),
       };
 
@@ -626,7 +628,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   return (
     <div className="fixed bottom-6 right-6 flex flex-col items-end z-[9999]">
       {isExpanded && (
-        <div className="mb-4 w-[380px] bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden">
+        <div className="mb-4 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden" style={{ width: `${widgetWidth}px` }}>
           {/* Header */}
           <div className="p-4 border-b flex items-center gap-3" style={{ backgroundColor: config.color }}>
             <div className="relative flex-shrink-0">
@@ -641,6 +643,41 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             </div>
             {view === 'chat' && (
               <div className="flex items-center gap-2">
+                {/* Size adjustment buttons */}
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => setWidgetHeight(h => h + 50)}
+                    className="flex items-center gap-1 px-2 py-1 bg-white/20 rounded-lg text-sm hover:bg-white/30"
+                    style={{ color: config.headerTextColor }}
+                    title="Increase height"
+                  >
+                    H+
+                  </button>
+                  <button
+                    onClick={() => setWidgetHeight(h => Math.max(200, h - 50))}
+                    className="flex items-center gap-1 px-2 py-1 bg-white/20 rounded-lg text-sm hover:bg-white/30"
+                    style={{ color: config.headerTextColor }}
+                    title="Decrease height"
+                  >
+                    H-
+                  </button>
+                  <button
+                    onClick={() => setWidgetWidth(w => w + 50)}
+                    className="flex items-center gap-1 px-2 py-1 bg-white/20 rounded-lg text-sm hover:bg-white/30"
+                    style={{ color: config.headerTextColor }}
+                    title="Increase width"
+                  >
+                    W+
+                  </button>
+                  <button
+                    onClick={() => setWidgetWidth(w => Math.max(300, w - 50))}
+                    className="flex items-center gap-1 px-2 py-1 bg-white/20 rounded-lg text-sm hover:bg-white/30"
+                    style={{ color: config.headerTextColor }}
+                    title="Decrease width"
+                  >
+                    W-
+                  </button>
+                </div>
                 {!isRequestingLiveChat ? (
                   <button
                     onClick={handleRequestLiveChat}
@@ -680,7 +717,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           </div>
 
           {/* Chat Area */}
-          <div className="h-[400px] overflow-y-auto p-4 bg-gray-50 relative">
+          <div className="overflow-y-auto p-4 bg-gray-50 relative" style={{ height: `${widgetHeight}px` }}>
             {view === 'history' ? (
               <div className="space-y-4 h-full">
                 <div className="flex justify-between items-center mb-4">
