@@ -13,6 +13,12 @@ interface ChatbotConfig {
   greetingMessage: string;
   color: string;
   headerTextColor: string;
+  // UI Dimensions
+  chatWidth: string;
+  chatHeight: string;
+  verticalPosition: 'top' | 'bottom';
+  verticalOffset: string;
+  toggleButtonSize: string;
 }
 
 interface Message {
@@ -46,18 +52,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const notificationSound = useRef<HTMLAudioElement | null>(null);
   const { sendMessage: chatbotSendMessage } = useChatbotStore();
   const [isRequestingLiveChat, setIsRequestingLiveChat] = useState(false);
-  const [widgetHeight, setWidgetHeight] = useState(380);  // New state for height
-  const [widgetWidth, setWidgetWidth] = useState(380);   // New state for width
-
-  // New state for vertical position and toggle button size
-  const [verticalPosition, setVerticalPosition] = useState(1);  // Changed to 1
-  const [toggleButtonSize, setToggleButtonSize] = useState(10);  // Changed to 8
-
-  // Log height and width whenever they change
-  useEffect(() => {
-    console.log('Widget Height:', widgetHeight);
-    console.log('Widget Width:', widgetWidth);
-  }, [widgetHeight, widgetWidth]);
 
   // Add this helper function at the top of the component
   const isMessageDuplicate = (newMsg: Message, existingMessages: Message[]) => {
@@ -512,7 +506,13 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             chatbotName: data.chatbot_name,
             greetingMessage: data.greeting_message || 'Hello! How can I help you today?',
             color: data.primary_color || '#FF6B00',
-            headerTextColor: data.header_text_color || '#000000'
+            headerTextColor: data.header_text_color || '#000000',
+            // Default UI dimensions
+            chatWidth: '380px',
+            chatHeight: '400px',
+            verticalPosition: 'bottom',
+            verticalOffset: '24px', // 6 in tailwind = 24px
+            toggleButtonSize: '40px', // 14 in tailwind = 56px
           });
         } else {
           // Use default config if no settings exist
@@ -520,7 +520,13 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             chatbotName: 'Friendly Assistant',
             greetingMessage: 'Hello! How can I help you today?',
             color: '#FF6B00',
-            headerTextColor: '#000000'
+            headerTextColor: '#000000',
+            // Default UI dimensions
+            chatWidth: '380px',
+            chatHeight: '400px',
+            verticalPosition: 'bottom',
+            verticalOffset: '24px', // 6 in tailwind = 24px
+            toggleButtonSize: '56px', // 14 in tailwind = 56px
           });
         }
       } catch (error) {
@@ -530,7 +536,13 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           chatbotName: 'Friendly Assistant',
           greetingMessage: 'Hello! How can I help you today?',
           color: '#FF6B00',
-          headerTextColor: '#000000'
+          headerTextColor: '#000000',
+          // Default UI dimensions
+          chatWidth: '380px',
+          chatHeight: '400px',
+          verticalPosition: 'bottom',
+          verticalOffset: '24px', // 6 in tailwind = 24px
+          toggleButtonSize: '56px', // 14 in tailwind = 56px
         });
       }
     };
@@ -544,7 +556,13 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     chatbotName: 'Chatbot',
     greetingMessage: 'Hello! How can I help you today?',
     color: '#FF6B00', 
-    headerTextColor: '#000000'
+    headerTextColor: '#000000',
+    // Default UI dimensions
+    chatWidth: '380px',
+    chatHeight: '400px',
+    verticalPosition: 'bottom',
+    verticalOffset: '24px', // 6 in tailwind = 24px
+    toggleButtonSize: '56px', // 14 in tailwind = 56px
   });
 
   const buttonStyle = {
@@ -620,7 +638,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       setIsRequestingLiveChat(true);
       
       // Add system message about live chat request
-      const systemMessage = {
+      const systemMessage: Message = {
         id: `temp-${Date.now()}`,
         content: "I'll connect you with a live agent. Please wait a moment while I transfer your chat.",
         sender_type: 'bot',
@@ -636,12 +654,9 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   };
 
   return (
-    <div 
-      className={`fixed right-6 flex flex-col items-end z-[9999]`} 
-      style={{ bottom: `${verticalPosition}rem` }}
-    >
+    <div className={`fixed ${config.verticalPosition}-[${config.verticalOffset}] right-6 flex flex-col items-end z-[9999]`}>
       {isExpanded && (
-        <div className="mb-4 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden" style={{ width: `380px` }}>
+        <div className="mb-4 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden" style={{ width: config.chatWidth }}>
           {/* Header */}
           <div className="p-4 border-b flex items-center gap-3" style={{ backgroundColor: config.color }}>
             <div className="relative flex-shrink-0">
@@ -694,8 +709,8 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             )}
           </div>
 
-          {/* Chat Area */}
-          <div className="overflow-y-auto p-4 bg-gray-50 relative" style={{ height: `${widgetHeight}px` }}>
+          {/* Chat Area with configurable height */}
+          <div className="overflow-y-auto p-4 bg-gray-50 relative" style={{ height: config.chatHeight }}>
             {view === 'history' ? (
               <div className="space-y-4 h-full">
                 <div className="flex justify-between items-center mb-4">
@@ -883,10 +898,14 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
         </div>
       )}
 
-      {/* Toggle Button */}
+      {/* Toggle Button with configurable size */}
       <button
-        className={`w-${toggleButtonSize} h-${toggleButtonSize} rounded-full text-white flex items-center justify-center shadow-lg`}
-        style={buttonStyle}
+        style={{
+          ...buttonStyle,
+          width: config.toggleButtonSize,
+          height: config.toggleButtonSize
+        }}
+        className="rounded-full text-white flex items-center justify-center shadow-lg"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         {isExpanded ? '×' : '💬'}
