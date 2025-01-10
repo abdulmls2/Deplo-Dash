@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-BabToHgQ.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-Dzp6CK6s.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -8025,7 +8025,7 @@ function Qc({ domainId: s }) {
           verticalPosition: "bottom",
           verticalOffset: "24px",
           // 6 in tailwind = 24px
-          toggleButtonSize: "40px"
+          toggleButtonSize: "56px"
           // 14 in tailwind = 56px
         } : {
           chatbotName: "Friendly Assistant",
@@ -8345,4 +8345,4 @@ Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-BN-C0fuG.js.map
+//# sourceMappingURL=main-ButegYRO.js.map
