@@ -49,6 +49,12 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const [widgetHeight, setWidgetHeight] = useState(400);  // New state for height
   const [widgetWidth, setWidgetWidth] = useState(380);   // New state for width
 
+  // Log height and width whenever they change
+  useEffect(() => {
+    console.log('Widget Height:', widgetHeight);
+    console.log('Widget Width:', widgetWidth);
+  }, [widgetHeight, widgetWidth]);
+
   // Add this helper function at the top of the component
   const isMessageDuplicate = (newMsg: Message, existingMessages: Message[]) => {
     return existingMessages.some(msg => 
@@ -643,11 +649,11 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             </div>
             {view === 'chat' && (
               <div className="flex items-center gap-2">
-                {/* Size adjustment buttons */}
-                <div className="flex items-center gap-1">
+                {/* Extremely compact size adjustment buttons */}
+                <div className="flex items-center gap-0.5">
                   <button
                     onClick={() => setWidgetHeight(h => h + 50)}
-                    className="flex items-center gap-1 px-2 py-1 bg-white/20 rounded-lg text-sm hover:bg-white/30"
+                    className="text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs"
                     style={{ color: config.headerTextColor }}
                     title="Increase height"
                   >
@@ -655,7 +661,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   </button>
                   <button
                     onClick={() => setWidgetHeight(h => Math.max(200, h - 50))}
-                    className="flex items-center gap-1 px-2 py-1 bg-white/20 rounded-lg text-sm hover:bg-white/30"
+                    className="text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs"
                     style={{ color: config.headerTextColor }}
                     title="Decrease height"
                   >
@@ -663,7 +669,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   </button>
                   <button
                     onClick={() => setWidgetWidth(w => w + 50)}
-                    className="flex items-center gap-1 px-2 py-1 bg-white/20 rounded-lg text-sm hover:bg-white/30"
+                    className="text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs"
                     style={{ color: config.headerTextColor }}
                     title="Increase width"
                   >
@@ -671,7 +677,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   </button>
                   <button
                     onClick={() => setWidgetWidth(w => Math.max(300, w - 50))}
-                    className="flex items-center gap-1 px-2 py-1 bg-white/20 rounded-lg text-sm hover:bg-white/30"
+                    className="text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs"
                     style={{ color: config.headerTextColor }}
                     title="Decrease width"
                   >
