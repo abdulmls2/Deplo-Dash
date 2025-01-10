@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-DtKB5EYI.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-DKv6teln.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -8091,12 +8091,10 @@ function Xc({ domainId: s }) {
           headerTextColor: b.header_text_color || "#000000",
           // Default layout settings
           chatWidth: "380px",
-          chatHeight: "400px",
+          chatHeight: "380px",
           verticalPosition: "bottom",
-          verticalOffset: "24px",
-          // 6 in tailwind = 24px
-          toggleButtonSize: "56px"
-          // 14 in tailwind = 56px
+          verticalOffset: "15px",
+          toggleButtonSize: "48px"
         } : {
           chatbotName: "Friendly Assistant",
           greetingMessage: "Hello! How can I help you today?",
@@ -8104,12 +8102,10 @@ function Xc({ domainId: s }) {
           headerTextColor: "#000000",
           // Default layout settings
           chatWidth: "380px",
-          chatHeight: "400px",
+          chatHeight: "380px",
           verticalPosition: "bottom",
-          verticalOffset: "24px",
-          // 6 in tailwind = 24px
-          toggleButtonSize: "56px"
-          // 14 in tailwind = 56px
+          verticalOffset: "15px",
+          toggleButtonSize: "48px"
         });
       } catch (b) {
         console.error("Error fetching chatbot config:", b), $e({
@@ -8121,10 +8117,8 @@ function Xc({ domainId: s }) {
           chatWidth: "380px",
           chatHeight: "380px",
           verticalPosition: "bottom",
-          verticalOffset: "24px",
-          // 6 in tailwind = 24px
-          toggleButtonSize: "40px"
-          // 14 in tailwind = 56px
+          verticalOffset: "15px",
+          toggleButtonSize: "48px"
         });
       }
     })();
@@ -8136,12 +8130,10 @@ function Xc({ domainId: s }) {
     headerTextColor: "#000000",
     // Default layout settings
     chatWidth: "380px",
-    chatHeight: "400px",
+    chatHeight: "380px",
     verticalPosition: "bottom",
-    verticalOffset: "24px",
-    // 6 in tailwind = 24px
-    toggleButtonSize: "56px"
-    // 14 in tailwind = 56px
+    verticalOffset: "15px",
+    toggleButtonSize: "48px"
   }), bt = {
     backgroundColor: W.color
   }, Bt = async () => {
@@ -8426,4 +8418,4 @@ Zc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-EzRZ62uq.js.map
+//# sourceMappingURL=main-DBc9UseS.js.map
