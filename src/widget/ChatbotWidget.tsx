@@ -539,10 +539,10 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           headerTextColor: '#000000',
           // Default layout settings
           chatWidth: '380px',
-          chatHeight: '400px',
+          chatHeight: '380px',
           verticalPosition: 'bottom',
           verticalOffset: '24px', // 6 in tailwind = 24px
-          toggleButtonSize: '56px', // 14 in tailwind = 56px
+          toggleButtonSize: '40px', // 14 in tailwind = 56px
         });
       }
     };

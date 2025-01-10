@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-CMjtqRfk.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-Dc9Surfq.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -8049,11 +8049,11 @@ function Qc({ domainId: s }) {
           headerTextColor: "#000000",
           // Default layout settings
           chatWidth: "380px",
-          chatHeight: "400px",
+          chatHeight: "380px",
           verticalPosition: "bottom",
           verticalOffset: "24px",
           // 6 in tailwind = 24px
-          toggleButtonSize: "56px"
+          toggleButtonSize: "40px"
           // 14 in tailwind = 56px
         });
       }
@@ -8345,4 +8345,4 @@ Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-CtzTUBUq.js.map
+//# sourceMappingURL=main-CELSk472.js.map
