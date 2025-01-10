@@ -46,14 +46,16 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const notificationSound = useRef<HTMLAudioElement | null>(null);
   const { sendMessage: chatbotSendMessage } = useChatbotStore();
   const [isRequestingLiveChat, setIsRequestingLiveChat] = useState(false);
-  const [widgetHeight, setWidgetHeight] = useState(400);  // New state for height
-  const [widgetWidth, setWidgetWidth] = useState(380);   // New state for width
+  
+  // Replace width and height with positioning
+  const [bottomPosition, setBottomPosition] = useState(6);
+  const [rightPosition, setRightPosition] = useState(6);
 
-  // Log height and width whenever they change
+  // Log position whenever they change
   useEffect(() => {
-    console.log('Widget Height:', widgetHeight);
-    console.log('Widget Width:', widgetWidth);
-  }, [widgetHeight, widgetWidth]);
+    console.log('Bottom Position:', bottomPosition);
+    console.log('Right Position:', rightPosition);
+  }, [bottomPosition, rightPosition]);
 
   // Add this helper function at the top of the component
   const isMessageDuplicate = (newMsg: Message, existingMessages: Message[]) => {
@@ -632,9 +634,15 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 flex flex-col items-end z-[9999]">
+    <div 
+      className="fixed flex flex-col items-end z-[9999]" 
+      style={{ 
+        bottom: `${bottomPosition}rem`, 
+        right: `${rightPosition}rem` 
+      }}
+    >
       {isExpanded && (
-        <div className="mb-4 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden" style={{ width: `${widgetWidth}px` }}>
+        <div className="mb-4 w-[380px] bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden">
           {/* Header */}
           <div className="p-4 border-b flex items-center gap-3" style={{ backgroundColor: config.color }}>
             <div className="relative flex-shrink-0">
@@ -649,39 +657,39 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             </div>
             {view === 'chat' && (
               <div className="flex items-center gap-2">
-                {/* Extremely compact size adjustment buttons */}
+                {/* Positioning adjustment buttons */}
                 <div className="flex items-center gap-0.5">
                   <button
-                    onClick={() => setWidgetHeight(h => h + 50)}
+                    onClick={() => setBottomPosition(b => b + 1)}
                     className="text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs"
                     style={{ color: config.headerTextColor }}
-                    title="Increase height"
+                    title="Move Up"
                   >
-                    H+
+                    ↑
                   </button>
                   <button
-                    onClick={() => setWidgetHeight(h => Math.max(200, h - 50))}
+                    onClick={() => setBottomPosition(b => Math.max(0, b - 1))}
                     className="text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs"
                     style={{ color: config.headerTextColor }}
-                    title="Decrease height"
+                    title="Move Down"
                   >
-                    H-
+                    ↓
                   </button>
                   <button
-                    onClick={() => setWidgetWidth(w => w + 50)}
+                    onClick={() => setRightPosition(r => r + 1)}
                     className="text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs"
                     style={{ color: config.headerTextColor }}
-                    title="Increase width"
+                    title="Move Left"
                   >
-                    W+
+                    ←
                   </button>
                   <button
-                    onClick={() => setWidgetWidth(w => Math.max(300, w - 50))}
+                    onClick={() => setRightPosition(r => Math.max(0, r - 1))}
                     className="text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs"
                     style={{ color: config.headerTextColor }}
-                    title="Decrease width"
+                    title="Move Right"
                   >
-                    W-
+                    →
                   </button>
                 </div>
                 {!isRequestingLiveChat ? (
@@ -911,9 +919,9 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
         </div>
       )}
 
-      {/* Toggle Button */}
+      {/* Toggle Button - Reduced size */}
       <button
-        className="w-14 h-14 rounded-full text-white flex items-center justify-center shadow-lg"
+        className="w-10 h-10 rounded-full text-white flex items-center justify-center shadow-lg"
         style={buttonStyle}
         onClick={() => setIsExpanded(!isExpanded)}
       >

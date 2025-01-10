@@ -281,17 +281,17 @@ function xn() {
         }
       } catch (Z) {
         if (Z && x && typeof Z.stack == "string") {
-          for (var R = Z.stack.split(`
+          for (var C = Z.stack.split(`
 `), Q = x.stack.split(`
-`), W = R.length - 1, H = Q.length - 1; W >= 1 && H >= 0 && R[W] !== Q[H]; )
+`), W = C.length - 1, H = Q.length - 1; W >= 1 && H >= 0 && C[W] !== Q[H]; )
             H--;
           for (; W >= 1 && H >= 0; W--, H--)
-            if (R[W] !== Q[H]) {
+            if (C[W] !== Q[H]) {
               if (W !== 1 || H !== 1)
                 do
-                  if (W--, H--, H < 0 || R[W] !== Q[H]) {
+                  if (W--, H--, H < 0 || C[W] !== Q[H]) {
                     var oe = `
-` + R[W].replace(" at new ", " at ");
+` + C[W].replace(" at new ", " at ");
                     return d.displayName && oe.includes("<anonymous>") && (oe = oe.replace("<anonymous>", d.displayName)), typeof d == "function" && Ee.set(d, oe), oe;
                   }
                 while (W >= 1 && H >= 0);
@@ -307,7 +307,7 @@ function xn() {
     function b(d, g, w) {
       return m(d, !1);
     }
-    function C(d) {
+    function R(d) {
       var g = d.prototype;
       return !!(g && g.isReactComponent);
     }
@@ -315,7 +315,7 @@ function xn() {
       if (d == null)
         return "";
       if (typeof d == "function")
-        return m(d, C(d));
+        return m(d, R(d));
       if (typeof d == "string")
         return de(d);
       switch (d) {
@@ -353,17 +353,17 @@ function xn() {
         var F = Function.call.bind(G);
         for (var $ in d)
           if (F(d, $)) {
-            var R = void 0;
+            var C = void 0;
             try {
               if (typeof d[$] != "function") {
                 var Q = Error((x || "React class") + ": " + w + " type `" + $ + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof d[$] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
                 throw Q.name = "Invariant Violation", Q;
               }
-              R = d[$](g, $, x, w, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
+              C = d[$](g, $, x, w, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
             } catch (W) {
-              R = W;
+              C = W;
             }
-            R && !(R instanceof Error) && (Ie(L), O("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", x || "React class", w, $, typeof R), Ie(null)), R instanceof Error && !(R.message in ae) && (ae[R.message] = !0, Ie(L), O("Failed %s type: %s", w, R.message), Ie(null));
+            C && !(C instanceof Error) && (Ie(L), O("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", x || "React class", w, $, typeof C), Ie(null)), C instanceof Error && !(C.message in ae) && (ae[C.message] = !0, Ie(L), O("Failed %s type: %s", w, C.message), Ie(null));
           }
       }
     }
@@ -443,7 +443,7 @@ function xn() {
       }
     }
     var on = function(d, g, w, x, L, F, $) {
-      var R = {
+      var C = {
         // This tag allows us to uniquely identify this as a React Element
         $$typeof: t,
         // Built-in properties that belong on the element
@@ -454,27 +454,27 @@ function xn() {
         // Record the component responsible for creating this element.
         _owner: F
       };
-      return R._store = {}, Object.defineProperty(R._store, "validated", {
+      return C._store = {}, Object.defineProperty(C._store, "validated", {
         configurable: !1,
         enumerable: !1,
         writable: !0,
         value: !1
-      }), Object.defineProperty(R, "_self", {
+      }), Object.defineProperty(C, "_self", {
         configurable: !1,
         enumerable: !1,
         writable: !1,
         value: x
-      }), Object.defineProperty(R, "_source", {
+      }), Object.defineProperty(C, "_source", {
         configurable: !1,
         enumerable: !1,
         writable: !1,
         value: L
-      }), Object.freeze && (Object.freeze(R.props), Object.freeze(R)), R;
+      }), Object.freeze && (Object.freeze(C.props), Object.freeze(C)), C;
     };
     function cn(d, g, w, x, L) {
       {
-        var F, $ = {}, R = null, Q = null;
-        w !== void 0 && (Tr(w), R = "" + w), rn(g) && (Tr(g.key), R = "" + g.key), tn(g) && (Q = g.ref, sn(g, L));
+        var F, $ = {}, C = null, Q = null;
+        w !== void 0 && (Tr(w), C = "" + w), rn(g) && (Tr(g.key), C = "" + g.key), tn(g) && (Q = g.ref, sn(g, L));
         for (F in g)
           G.call(g, F) && !en.hasOwnProperty(F) && ($[F] = g[F]);
         if (d && d.defaultProps) {
@@ -482,27 +482,27 @@ function xn() {
           for (F in W)
             $[F] === void 0 && ($[F] = W[F]);
         }
-        if (R || Q) {
+        if (C || Q) {
           var H = typeof d == "function" ? d.displayName || d.name || "Unknown" : d;
-          R && nn($, H), Q && an($, H);
+          C && nn($, H), Q && an($, H);
         }
-        return on(d, R, Q, L, x, st.current, $);
+        return on(d, C, Q, L, x, st.current, $);
       }
     }
-    var Yt = j.ReactCurrentOwner, Cr = j.ReactDebugCurrentFrame;
+    var Yt = j.ReactCurrentOwner, Rr = j.ReactDebugCurrentFrame;
     function He(d) {
       if (d) {
         var g = d._owner, w = N(d.type, d._source, g ? g.type : null);
-        Cr.setExtraStackFrame(w);
+        Rr.setExtraStackFrame(w);
       } else
-        Cr.setExtraStackFrame(null);
+        Rr.setExtraStackFrame(null);
     }
     var Jt;
     Jt = !1;
     function Gt(d) {
       return typeof d == "object" && d !== null && d.$$typeof === t;
     }
-    function Rr() {
+    function Cr() {
       {
         if (Yt.current) {
           var d = J(Yt.current.type);
@@ -520,7 +520,7 @@ Check the render method of \`` + d + "`.";
     var Ar = {};
     function un(d) {
       {
-        var g = Rr();
+        var g = Cr();
         if (!g) {
           var w = typeof d == "string" ? d : d.displayName || d.name;
           w && (g = `
@@ -604,12 +604,12 @@ Check the top-level render call using <` + w + ">.");
       {
         var $ = ue(d);
         if (!$) {
-          var R = "";
-          (d === void 0 || typeof d == "object" && d !== null && Object.keys(d).length === 0) && (R += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.");
+          var C = "";
+          (d === void 0 || typeof d == "object" && d !== null && Object.keys(d).length === 0) && (C += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.");
           var Q = ln();
-          Q ? R += Q : R += Rr();
+          Q ? C += Q : C += Cr();
           var W;
-          d === null ? W = "null" : Vt(d) ? W = "array" : d !== void 0 && d.$$typeof === t ? (W = "<" + (J(d.type) || "Unknown") + " />", R = " Did you accidentally export a JSX literal instead of a component?") : W = typeof d, O("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", W, R);
+          d === null ? W = "null" : Vt(d) ? W = "array" : d !== void 0 && d.$$typeof === t ? (W = "<" + (J(d.type) || "Unknown") + " />", C = " Did you accidentally export a JSX literal instead of a component?") : W = typeof d, O("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", W, C);
         }
         var H = cn(d, g, w, L, F);
         if (H == null)
@@ -740,7 +740,7 @@ const Pn = me("Archive", [
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Cn = me("Hourglass", [
+const Rn = me("Hourglass", [
   ["path", { d: "M5 22h14", key: "ehvnwv" }],
   ["path", { d: "M5 2h14", key: "pdyrp9" }],
   [
@@ -761,7 +761,7 @@ const Cn = me("Hourglass", [
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const Rn = me("MessageSquarePlus", [
+const Cn = me("MessageSquarePlus", [
   ["path", { d: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z", key: "1lielz" }],
   ["path", { d: "M12 7v6", key: "lw1j43" }],
   ["path", { d: "M9 10h6", key: "9gxzsh" }]
@@ -1871,7 +1871,7 @@ const {
   PostgrestTransformBuilder: cl,
   PostgrestBuilder: ll,
   PostgrestError: ul
-} = fi, pi = "2.11.2", mi = { "X-Client-Info": `realtime-js/${pi}` }, vi = "1.0.0", Cs = 1e4, yi = 1e3;
+} = fi, pi = "2.11.2", mi = { "X-Client-Info": `realtime-js/${pi}` }, vi = "1.0.0", Rs = 1e4, yi = 1e3;
 var Ke;
 (function(s) {
   s[s.connecting = 0] = "connecting", s[s.open = 1] = "open", s[s.closing = 2] = "closing", s[s.closed = 3] = "closed";
@@ -1914,7 +1914,7 @@ class _i {
     return { ref: null, topic: o, event: c, payload: u };
   }
 }
-class Rs {
+class Cs {
   constructor(e, t) {
     this.callback = e, this.timerCalc = t, this.timer = void 0, this.tries = 0, this.callback = e, this.timerCalc = t;
   }
@@ -2029,7 +2029,7 @@ class Qt {
    * @param payload The payload, for example `{user_id: 123}`
    * @param timeout The push timeout in milliseconds
    */
-  constructor(e, t, r = {}, n = Cs) {
+  constructor(e, t, r = {}, n = Rs) {
     this.channel = e, this.event = t, this.payload = r, this.timeout = n, this.sent = !1, this.timeoutTimer = void 0, this.ref = "", this.receivedResp = null, this.recHooks = [], this.refEvent = null;
   }
   resend(e) {
@@ -2260,7 +2260,7 @@ class kr {
       broadcast: { ack: !1, self: !1 },
       presence: { key: "" },
       private: !1
-    }, t.config), this.timeout = this.socket.timeout, this.joinPush = new Qt(this, he.join, this.params, this.timeout), this.rejoinTimer = new Rs(() => this._rejoinUntilConnected(), this.socket.reconnectAfterMs), this.joinPush.receive("ok", () => {
+    }, t.config), this.timeout = this.socket.timeout, this.joinPush = new Qt(this, he.join, this.params, this.timeout), this.rejoinTimer = new Cs(() => this._rejoinUntilConnected(), this.socket.reconnectAfterMs), this.joinPush.receive("ok", () => {
       this.state = re.joined, this.rejoinTimer.reset(), this.pushBuffer.forEach((n) => n.send()), this.pushBuffer = [];
     }), this._onClose(() => {
       this.rejoinTimer.reset(), this.socket.log("channel", `close ${this.topic} ${this._joinRef()}`), this.state = re.closed, this.socket._remove(this);
@@ -2588,7 +2588,7 @@ class Pi {
    */
   constructor(e, t) {
     var r;
-    this.accessTokenValue = null, this.apiKey = null, this.channels = [], this.endPoint = "", this.httpEndpoint = "", this.headers = mi, this.params = {}, this.timeout = Cs, this.heartbeatIntervalMs = 3e4, this.heartbeatTimer = void 0, this.pendingHeartbeatRef = null, this.ref = 0, this.logger = Oi, this.conn = null, this.sendBuffer = [], this.serializer = new _i(), this.stateChangeCallbacks = {
+    this.accessTokenValue = null, this.apiKey = null, this.channels = [], this.endPoint = "", this.httpEndpoint = "", this.headers = mi, this.params = {}, this.timeout = Rs, this.heartbeatIntervalMs = 3e4, this.heartbeatTimer = void 0, this.pendingHeartbeatRef = null, this.ref = 0, this.logger = Oi, this.conn = null, this.sendBuffer = [], this.serializer = new _i(), this.stateChangeCallbacks = {
       open: [],
       close: [],
       error: [],
@@ -2598,7 +2598,7 @@ class Pi {
       return i ? a = i : typeof fetch > "u" ? a = (...o) => Promise.resolve().then(() => Xe).then(({ default: c }) => c(...o)) : a = fetch, (...o) => a(...o);
     }, this.endPoint = `${e}/${ur.websocket}`, this.httpEndpoint = $s(e), t != null && t.transport ? this.transport = t.transport : this.transport = null, t != null && t.params && (this.params = t.params), t != null && t.headers && (this.headers = Object.assign(Object.assign({}, this.headers), t.headers)), t != null && t.timeout && (this.timeout = t.timeout), t != null && t.logger && (this.logger = t.logger), t != null && t.heartbeatIntervalMs && (this.heartbeatIntervalMs = t.heartbeatIntervalMs);
     const n = (r = t == null ? void 0 : t.params) === null || r === void 0 ? void 0 : r.apikey;
-    if (n && (this.accessTokenValue = n, this.apiKey = n), this.reconnectAfterMs = t != null && t.reconnectAfterMs ? t.reconnectAfterMs : (i) => [1e3, 2e3, 5e3, 1e4][i - 1] || 1e4, this.encode = t != null && t.encode ? t.encode : (i, a) => a(JSON.stringify(i)), this.decode = t != null && t.decode ? t.decode : this.serializer.decode.bind(this.serializer), this.reconnectTimer = new Rs(async () => {
+    if (n && (this.accessTokenValue = n, this.apiKey = n), this.reconnectAfterMs = t != null && t.reconnectAfterMs ? t.reconnectAfterMs : (i) => [1e3, 2e3, 5e3, 1e4][i - 1] || 1e4, this.encode = t != null && t.encode ? t.encode : (i, a) => a(JSON.stringify(i)), this.decode = t != null && t.decode ? t.decode : this.serializer.decode.bind(this.serializer), this.reconnectTimer = new Cs(async () => {
       this.disconnect(), this.connect();
     }, this.reconnectAfterMs), this.fetch = this._resolveFetch(t == null ? void 0 : t.fetch), t != null && t.worker) {
       if (typeof window < "u" && !window.Worker)
@@ -2622,11 +2622,11 @@ class Pi {
         this.conn = new WebSocket(this.endpointURL()), this.setupConnection();
         return;
       }
-      this.conn = new Ci(this.endpointURL(), void 0, {
+      this.conn = new Ri(this.endpointURL(), void 0, {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-Bs18rcMM.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-ApvCBKeN.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -2859,7 +2859,7 @@ class Pi {
     return t;
   }
 }
-class Ci {
+class Ri {
   constructor(e, t, r) {
     this.binaryType = "arraybuffer", this.onclose = () => {
     }, this.onerror = () => {
@@ -2877,7 +2877,7 @@ class xr extends Error {
 function z(s) {
   return typeof s == "object" && s !== null && "__isStorageError" in s;
 }
-class Ri extends xr {
+class Ci extends xr {
   constructor(e, t) {
     super(e), this.name = "StorageApiError", this.status = t;
   }
@@ -2967,7 +2967,7 @@ var We = function(s, e, t, r) {
 const Xt = (s) => s.msg || s.message || s.error_description || s.error || JSON.stringify(s), Ii = (s, e, t) => We(void 0, void 0, void 0, function* () {
   const r = yield $i();
   s instanceof r && !(t != null && t.noResolveJson) ? s.json().then((n) => {
-    e(new Ri(Xt(n), s.status || 500));
+    e(new Ci(Xt(n), s.status || 500));
   }).catch((n) => {
     e(new hr(Xt(n), n));
   }) : e(new hr(Xt(s), s));
@@ -4011,7 +4011,7 @@ async function Ta(s, e, t, r, n, i) {
 function je(s) {
   var e;
   let t = null;
-  Ra(s) && (t = Object.assign({}, s), s.expires_at || (t.expires_at = aa(s.expires_in)));
+  Ca(s) && (t = Object.assign({}, s), s.expires_at || (t.expires_at = aa(s.expires_in)));
   const r = (e = s.user) !== null && e !== void 0 ? e : s;
   return { data: { session: t, user: r }, error: null };
 }
@@ -4019,7 +4019,7 @@ function Xr(s) {
   const e = je(s);
   return !e.error && s.weak_password && typeof s.weak_password == "object" && Array.isArray(s.weak_password.reasons) && s.weak_password.reasons.length && s.weak_password.message && typeof s.weak_password.message == "string" && s.weak_password.reasons.reduce((t, r) => t && typeof r == "string", !0) && (e.data.weak_password = s.weak_password), e;
 }
-function Ce(s) {
+function Re(s) {
   var e;
   return { data: { user: (e = s.user) !== null && e !== void 0 ? e : s }, error: null };
 }
@@ -4042,10 +4042,10 @@ function Pa(s) {
     error: null
   };
 }
-function Ca(s) {
+function Ra(s) {
   return s;
 }
-function Ra(s) {
+function Ca(s) {
   return s.access_token && s.refresh_token && s.expires_in;
 }
 var Aa = function(s, e) {
@@ -4092,7 +4092,7 @@ class $a {
         body: { email: e, data: t.data },
         headers: this.headers,
         redirectTo: t.redirectTo,
-        xform: Ce
+        xform: Re
       });
     } catch (r) {
       if (T(r))
@@ -4138,7 +4138,7 @@ class $a {
       return await A(this.fetch, "POST", `${this.url}/admin/users`, {
         body: e,
         headers: this.headers,
-        xform: Ce
+        xform: Re
       });
     } catch (t) {
       if (T(t))
@@ -4162,7 +4162,7 @@ class $a {
           page: (r = (t = e == null ? void 0 : e.page) === null || t === void 0 ? void 0 : t.toString()) !== null && r !== void 0 ? r : "",
           per_page: (i = (n = e == null ? void 0 : e.perPage) === null || n === void 0 ? void 0 : n.toString()) !== null && i !== void 0 ? i : ""
         },
-        xform: Ca
+        xform: Ra
       });
       if (l.error)
         throw l.error;
@@ -4188,7 +4188,7 @@ class $a {
     try {
       return await A(this.fetch, "GET", `${this.url}/admin/users/${e}`, {
         headers: this.headers,
-        xform: Ce
+        xform: Re
       });
     } catch (t) {
       if (T(t))
@@ -4208,7 +4208,7 @@ class $a {
       return await A(this.fetch, "PUT", `${this.url}/admin/users/${e}`, {
         body: t,
         headers: this.headers,
-        xform: Ce
+        xform: Re
       });
     } catch (r) {
       if (T(r))
@@ -4232,7 +4232,7 @@ class $a {
         body: {
           should_soft_delete: t
         },
-        xform: Ce
+        xform: Re
       });
     } catch (r) {
       if (T(r))
@@ -4919,7 +4919,7 @@ class ft {
       return e ? await A(this.fetch, "GET", `${this.url}/user`, {
         headers: this.headers,
         jwt: e,
-        xform: Ce
+        xform: Re
       }) : await this._useSession(async (t) => {
         var r, n, i;
         const { data: a, error: o } = t;
@@ -4928,7 +4928,7 @@ class ft {
         return !(!((r = a.session) === null || r === void 0) && r.access_token) && !this.hasCustomAuthorizationHeader ? { data: { user: null }, error: new Te() } : await A(this.fetch, "GET", `${this.url}/user`, {
           headers: this.headers,
           jwt: (i = (n = a.session) === null || n === void 0 ? void 0 : n.access_token) !== null && i !== void 0 ? i : void 0,
-          xform: Ce
+          xform: Re
         });
       });
     } catch (t) {
@@ -4959,7 +4959,7 @@ class ft {
           redirectTo: t == null ? void 0 : t.emailRedirectTo,
           body: Object.assign(Object.assign({}, e), { code_challenge: o, code_challenge_method: c }),
           jwt: a.access_token,
-          xform: Ce
+          xform: Re
         });
         if (l)
           throw l;
@@ -6341,7 +6341,7 @@ const _o = /^(\d+)(th|st|nd|rd)?/i, wo = /\d+/i, bo = {
 }, Po = {
   narrow: /^(a|p|mi|n|(in the|at) (morning|afternoon|evening|night))/i,
   any: /^([ap]\.?\s?m\.?|midnight|noon|(in the|at) (morning|afternoon|evening|night))/i
-}, Co = {
+}, Ro = {
   any: {
     am: /^a/i,
     pm: /^p/i,
@@ -6352,7 +6352,7 @@ const _o = /^(\d+)(th|st|nd|rd)?/i, wo = /\d+/i, bo = {
     evening: /evening/i,
     night: /night/i
   }
-}, Ro = {
+}, Co = {
   ordinalNumber: yo({
     matchPattern: _o,
     parsePattern: wo,
@@ -6386,7 +6386,7 @@ const _o = /^(\d+)(th|st|nd|rd)?/i, wo = /\d+/i, bo = {
   dayPeriod: lt({
     matchPatterns: Po,
     defaultMatchWidth: "any",
-    parsePatterns: Co,
+    parsePatterns: Ro,
     defaultParseWidth: "any"
   })
 }, Ao = {
@@ -6395,7 +6395,7 @@ const _o = /^(\d+)(th|st|nd|rd)?/i, wo = /\d+/i, bo = {
   formatLong: no,
   formatRelative: ao,
   localize: po,
-  match: Ro,
+  match: Co,
   options: {
     weekStartsOn: 0,
     firstWeekContainsDate: 1
@@ -7116,7 +7116,7 @@ const Xo = { BASE_URL: "./", DEV: !1, MODE: "production", PROD: !0, SSR: !1, VIT
   } }, u = e = s(r, n, c);
   return c;
 }, Zo = (s) => s ? cs(s) : cs;
-var mr = { exports: {} }, rr = {}, Ct = { exports: {} }, sr = {};
+var mr = { exports: {} }, rr = {}, Rt = { exports: {} }, sr = {};
 /**
  * @license React
  * use-sync-external-store-shim.production.min.js
@@ -7246,10 +7246,10 @@ function tc() {
 }
 var ds;
 function zs() {
-  if (ds) return Ct.exports;
+  if (ds) return Rt.exports;
   ds = 1;
   var s = {};
-  return s.NODE_ENV === "production" ? Ct.exports = ec() : Ct.exports = tc(), Ct.exports;
+  return s.NODE_ENV === "production" ? Rt.exports = ec() : Rt.exports = tc(), Rt.exports;
 }
 /**
  * @license React
@@ -7385,11 +7385,11 @@ const ps = (s) => {
   const e = typeof s == "function" ? Zo(s) : s, t = (r, n) => uc(e, r, n);
   return Object.assign(t, e), t;
 }, dc = (s) => s ? ps(s) : ps;
-let hc = { data: "" }, fc = (s) => typeof window == "object" ? ((s ? s.querySelector("#_goober") : window._goober) || Object.assign((s || document.head).appendChild(document.createElement("style")), { innerHTML: " ", id: "_goober" })).firstChild : s || hc, gc = /(?:([\u0080-\uFFFF\w-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|(}\s*)/g, pc = /\/\*[^]*?\*\/|  +/g, ms = /\n+/g, Re = (s, e) => {
+let hc = { data: "" }, fc = (s) => typeof window == "object" ? ((s ? s.querySelector("#_goober") : window._goober) || Object.assign((s || document.head).appendChild(document.createElement("style")), { innerHTML: " ", id: "_goober" })).firstChild : s || hc, gc = /(?:([\u0080-\uFFFF\w-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|(}\s*)/g, pc = /\/\*[^]*?\*\/|  +/g, ms = /\n+/g, Ce = (s, e) => {
   let t = "", r = "", n = "";
   for (let i in s) {
     let a = s[i];
-    i[0] == "@" ? i[1] == "i" ? t = i + " " + a + ";" : r += i[1] == "f" ? Re(a, i) : i + "{" + Re(a, i[1] == "k" ? "" : e) + "}" : typeof a == "object" ? r += Re(a, e ? e.replace(/([^,])+/g, (o) => i.replace(/([^,]*:\S+\([^)]*\))|([^,])+/g, (c) => /&/.test(c) ? c.replace(/&/g, o) : o ? o + " " + c : c)) : i) : a != null && (i = /^--/.test(i) ? i : i.replace(/[A-Z]/g, "-$&").toLowerCase(), n += Re.p ? Re.p(i, a) : i + ":" + a + ";");
+    i[0] == "@" ? i[1] == "i" ? t = i + " " + a + ";" : r += i[1] == "f" ? Ce(a, i) : i + "{" + Ce(a, i[1] == "k" ? "" : e) + "}" : typeof a == "object" ? r += Ce(a, e ? e.replace(/([^,])+/g, (o) => i.replace(/([^,]*:\S+\([^)]*\))|([^,])+/g, (c) => /&/.test(c) ? c.replace(/&/g, o) : o ? o + " " + c : c)) : i) : a != null && (i = /^--/.test(i) ? i : i.replace(/[A-Z]/g, "-$&").toLowerCase(), n += Ce.p ? Ce.p(i, a) : i + ":" + a + ";");
   }
   return t + (e && n ? e + "{" + n + "}" : n) + r;
 }, ye = {}, Js = (s) => {
@@ -7411,7 +7411,7 @@ let hc = { data: "" }, fc = (s) => typeof window == "object" ? ((s ? s.querySele
       for (; l = gc.exec(u.replace(pc, "")); ) l[4] ? f.shift() : l[3] ? (h = l[3].replace(ms, " ").trim(), f.unshift(f[0][h] = f[0][h] || {})) : f[0][l[1]] = l[2].replace(ms, " ").trim();
       return f[0];
     })(s);
-    ye[a] = Re(n ? { ["@keyframes " + a]: c } : c, t ? "" : "." + a);
+    ye[a] = Ce(n ? { ["@keyframes " + a]: c } : c, t ? "" : "." + a);
   }
   let o = t && ye.g ? ye.g : null;
   return t && (ye.g = ye[a]), ((c, u, l, h) => {
@@ -7421,7 +7421,7 @@ let hc = { data: "" }, fc = (s) => typeof window == "object" ? ((s ? s.querySele
   let a = e[i];
   if (a && a.call) {
     let o = a(t), c = o && o.props && o.props.className || /^go/.test(o) && o;
-    a = c ? "." + c : o && typeof o == "object" ? o.props ? "" : Re(o, "") : o === !1 ? "" : o;
+    a = c ? "." + c : o && typeof o == "object" ? o.props ? "" : Ce(o, "") : o === !1 ? "" : o;
   }
   return r + n + (a ?? "");
 }, "");
@@ -7433,7 +7433,7 @@ let Gs, vr, yr;
 Wt.bind({ g: 1 });
 let we = Wt.bind({ k: 1 });
 function yc(s, e, t, r) {
-  Re.p = e, Gs = s, vr = t, yr = r;
+  Ce.p = e, Gs = s, vr = t, yr = r;
 }
 function Ae(s, e) {
   let t = this || {};
@@ -7460,14 +7460,14 @@ var _c = (s) => typeof s == "function", _r = (s, e) => _c(s) ? s(e) : s, wc = /*
     }
     return s;
   };
-})(), Sc = 20, Rt = /* @__PURE__ */ new Map(), kc = 1e3, vs = (s) => {
-  if (Rt.has(s)) return;
+})(), Sc = 20, Ct = /* @__PURE__ */ new Map(), kc = 1e3, vs = (s) => {
+  if (Ct.has(s)) return;
   let e = setTimeout(() => {
-    Rt.delete(s), Bt({ type: 4, toastId: s });
+    Ct.delete(s), Bt({ type: 4, toastId: s });
   }, kc);
-  Rt.set(s, e);
+  Ct.set(s, e);
 }, xc = (s) => {
-  let e = Rt.get(s);
+  let e = Ct.get(s);
   e && clearTimeout(e);
 }, wr = (s, e) => {
   switch (e.type) {
@@ -7537,7 +7537,7 @@ from {
 to {
   transform: scale(1) rotate(90deg);
 	opacity: 1;
-}`, Cc = Ae("div")`
+}`, Rc = Ae("div")`
   width: 20px;
   opacity: 0;
   height: 20px;
@@ -7570,7 +7570,7 @@ to {
     animation-delay: 180ms;
     transform: rotate(90deg);
   }
-`, Rc = we`
+`, Cc = we`
   from {
     transform: rotate(0deg);
   }
@@ -7585,7 +7585,7 @@ to {
   border-radius: 100%;
   border-color: ${(s) => s.secondary || "#e0e0e0"};
   border-right-color: ${(s) => s.primary || "#616161"};
-  animation: ${Rc} 1s linear infinite;
+  animation: ${Cc} 1s linear infinite;
 `, $c = we`
 from {
   transform: scale(0) rotate(45deg);
@@ -7661,7 +7661,7 @@ to {
     forwards;
 `, Fc = ({ toast: s }) => {
   let { icon: e, type: t, iconTheme: r } = s;
-  return e !== void 0 ? typeof e == "string" ? se.createElement(Uc, null, e) : e : t === "blank" ? null : se.createElement(Nc, null, se.createElement(Ac, { ...r }), t !== "loading" && se.createElement(Lc, null, t === "error" ? se.createElement(Cc, { ...r }) : se.createElement(Dc, { ...r })));
+  return e !== void 0 ? typeof e == "string" ? se.createElement(Uc, null, e) : e : t === "blank" ? null : se.createElement(Nc, null, se.createElement(Ac, { ...r }), t !== "loading" && se.createElement(Lc, null, t === "error" ? se.createElement(Rc, { ...r }) : se.createElement(Dc, { ...r })));
 }, qc = (s) => `
 0% {transform: translate3d(0,${s * -200}%,0) scale(.6); opacity:.5;}
 100% {transform: translate3d(0,0,0) scale(1); opacity:1;}
@@ -7794,16 +7794,16 @@ const Jc = async (s, e, t, r) => {
   }
 })), ys = "chatbot_session_id", Kc = 180;
 function Qc({ domainId: s }) {
-  const [e, t] = K(!1), [r, n] = K(""), [i, a] = K([]), [o, c] = K([]), [u, l] = K("history"), [h, f] = K(null), [p, _] = K(!1), [v] = K(/* @__PURE__ */ new Set()), [S, P] = K(null), [j, O] = K(null), E = Mr(null), [k, D] = K(!1), I = Mr(null), { sendMessage: Y } = Gc(), [ne, B] = K(!1), [ue, be] = K(400), [ie, J] = K(380);
+  const [e, t] = K(!1), [r, n] = K(""), [i, a] = K([]), [o, c] = K([]), [u, l] = K("history"), [h, f] = K(null), [p, _] = K(!1), [v] = K(/* @__PURE__ */ new Set()), [S, P] = K(null), [j, O] = K(null), E = Mr(null), [k, D] = K(!1), I = Mr(null), { sendMessage: Y } = Gc(), [ne, B] = K(!1), [ue, be] = K(6), [ie, J] = K(6);
   ge(() => {
-    console.log("Widget Height:", ue), console.log("Widget Width:", ie);
+    console.log("Bottom Position:", ue), console.log("Right Position:", ie);
   }, [ue, ie]);
   const X = (m, b) => b.some(
-    (C) => (
+    (R) => (
       // Check for exact ID match
-      C.id === m.id || // Check for temp ID being replaced by real ID
-      C.id.startsWith("temp-") && C.content === m.content && C.sender_type === m.sender_type || // Check for exact content match within a small time window (2 seconds)
-      C.content === m.content && C.sender_type === m.sender_type && Math.abs(new Date(C.created_at).getTime() - new Date(m.created_at).getTime()) < 2e3
+      R.id === m.id || // Check for temp ID being replaced by real ID
+      R.id.startsWith("temp-") && R.content === m.content && R.sender_type === m.sender_type || // Check for exact content match within a small time window (2 seconds)
+      R.content === m.content && R.sender_type === m.sender_type && Math.abs(new Date(R.created_at).getTime() - new Date(m.created_at).getTime()) < 2e3
     )
   );
   ge(() => {
@@ -7818,8 +7818,8 @@ function Qc({ domainId: s }) {
       },
       (b) => {
         if (b.eventType === "INSERT") {
-          const C = b.new;
-          c((N) => [C, ...N]);
+          const R = b.new;
+          c((N) => [R, ...N]);
         }
       }
     ).subscribe();
@@ -7838,7 +7838,7 @@ function Qc({ domainId: s }) {
       },
       (b) => {
         b.eventType === "UPDATE" && (c(
-          (C) => C.map(
+          (R) => R.map(
             (N) => N.id === b.new.id ? { ...N, ...b.new } : N
           )
         ), b.new.id === h && D(b.new.status === "archived"));
@@ -7872,7 +7872,7 @@ function Qc({ domainId: s }) {
     try {
       f(m.id), D(m.status === "archived"), xe(null), B(!1);
       const { data: b } = await U.from("messages").select("*").eq("conversation_id", m.id).order("created_at", { ascending: !0 });
-      b && (a(b), v.clear(), b.forEach((C) => v.add(C.id))), m.status === "archived" && xe(m.rating || null), l("chat");
+      b && (a(b), v.clear(), b.forEach((R) => v.add(R.id))), m.status === "archived" && xe(m.rating || null), l("chat");
     } catch (b) {
       console.error("Error loading conversation:", b);
     }
@@ -7918,14 +7918,14 @@ function Qc({ domainId: s }) {
       },
       (b) => {
         if (console.log("Received real-time event:", b), b.eventType === "INSERT") {
-          const C = b.new;
-          console.log("New message:", C), a((N) => {
-            if (X(C, N))
+          const R = b.new;
+          console.log("New message:", R), a((N) => {
+            if (X(R, N))
               return console.log("Message already exists, skipping"), N;
             const G = N.filter(
-              (ae) => !(ae.id.startsWith("temp-") && ae.content === C.content && ae.sender_type === C.sender_type)
+              (ae) => !(ae.id.startsWith("temp-") && ae.content === R.content && ae.sender_type === R.sender_type)
             );
-            return v.add(C.id), C.sender_type === "bot" && et(), console.log("Adding new message to state"), [...G, C];
+            return v.add(R.id), R.sender_type === "bot" && et(), console.log("Adding new message to state"), [...G, R];
           });
         }
       }
@@ -7943,8 +7943,8 @@ function Qc({ domainId: s }) {
   }, []);
   const _t = async (m) => {
     try {
-      const { data: b, error: C } = await U.from("conversations").select("*").eq("session_id", m).eq("status", "active").order("last_message_at", { ascending: !1 }).limit(1);
-      if (C) throw C;
+      const { data: b, error: R } = await U.from("conversations").select("*").eq("session_id", m).eq("status", "active").order("last_message_at", { ascending: !1 }).limit(1);
+      if (R) throw R;
       if (!b || b.length === 0) {
         console.log("No active conversations found for this session");
         return;
@@ -7980,14 +7980,14 @@ function Qc({ domainId: s }) {
         if (ae) throw ae;
         return G.id;
       }
-      const { data: b, error: C } = await U.from("conversations").insert({
+      const { data: b, error: R } = await U.from("conversations").insert({
         domain_id: s,
         user_id: m.id,
         session_id: j,
         last_message_at: (/* @__PURE__ */ new Date()).toISOString(),
         status: "active"
       }).select().single();
-      if (C) throw C;
+      if (R) throw R;
       return b.id;
     } catch (m) {
       throw console.error("Error creating conversation:", m), m;
@@ -7997,15 +7997,15 @@ function Qc({ domainId: s }) {
       _(!0), P(null);
       const { data: { user: b } } = await U.auth.getUser();
       b || await U.auth.signInAnonymously();
-      const C = h || await wt();
-      h || f(C);
+      const R = h || await wt();
+      h || f(R);
       const N = {
         id: `temp-${Date.now()}`,
         content: m,
         sender_type: "user",
         created_at: (/* @__PURE__ */ new Date()).toISOString()
       };
-      a((G) => X(N, G) ? G : [...G, N]), await Y(m, C), n("");
+      a((G) => X(N, G) ? G : [...G, N]), await Y(m, R), n("");
     } catch (b) {
       console.error("Error sending message:", b), P("Failed to send message. Please try again.");
     } finally {
@@ -8061,7 +8061,7 @@ function Qc({ domainId: s }) {
         const { error: b } = await U.from("conversations").update({ rating: m }).eq("id", h);
         if (b) throw b;
         xe(m), c(
-          (C) => C.map(
+          (R) => R.map(
             (N) => N.id === h ? { ...N, rating: m } : N
           )
         );
@@ -8082,268 +8082,278 @@ function Qc({ domainId: s }) {
           sender_type: "bot",
           created_at: (/* @__PURE__ */ new Date()).toISOString()
         };
-        a((C) => [...C, b]);
+        a((R) => [...R, b]);
       } catch (m) {
         console.error("Error requesting live chat:", m), P("Failed to request live chat. Please try again.");
       }
   };
-  return /* @__PURE__ */ y.jsxs("div", { className: "fixed bottom-6 right-6 flex flex-col items-end z-[9999]", children: [
-    e && /* @__PURE__ */ y.jsxs("div", { className: "mb-4 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden", style: { width: `${ie}px` }, children: [
-      /* @__PURE__ */ y.jsxs("div", { className: "p-4 border-b flex items-center gap-3", style: { backgroundColor: V.color }, children: [
-        /* @__PURE__ */ y.jsxs("div", { className: "relative flex-shrink-0", children: [
-          /* @__PURE__ */ y.jsx("div", { className: "w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center", children: /* @__PURE__ */ y.jsx("span", { className: "text-lg", children: "🤖" }) }),
-          /* @__PURE__ */ y.jsx("div", { className: "absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white", style: $e })
-        ] }),
-        /* @__PURE__ */ y.jsxs("div", { className: "flex-1", children: [
-          /* @__PURE__ */ y.jsx("h3", { className: "font-medium", style: { color: V.headerTextColor }, children: V.chatbotName }),
-          /* @__PURE__ */ y.jsxs("p", { className: "text-sm", style: { color: V.headerTextColor }, children: [
-            "from ",
-            V.chatbotName
-          ] })
-        ] }),
-        u === "chat" && /* @__PURE__ */ y.jsxs("div", { className: "flex items-center gap-2", children: [
-          /* @__PURE__ */ y.jsxs("div", { className: "flex items-center gap-0.5", children: [
-            /* @__PURE__ */ y.jsx(
-              "button",
-              {
-                onClick: () => be((m) => m + 50),
-                className: "text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs",
-                style: { color: V.headerTextColor },
-                title: "Increase height",
-                children: "H+"
-              }
-            ),
-            /* @__PURE__ */ y.jsx(
-              "button",
-              {
-                onClick: () => be((m) => Math.max(200, m - 50)),
-                className: "text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs",
-                style: { color: V.headerTextColor },
-                title: "Decrease height",
-                children: "H-"
-              }
-            ),
-            /* @__PURE__ */ y.jsx(
-              "button",
-              {
-                onClick: () => J((m) => m + 50),
-                className: "text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs",
-                style: { color: V.headerTextColor },
-                title: "Increase width",
-                children: "W+"
-              }
-            ),
-            /* @__PURE__ */ y.jsx(
-              "button",
-              {
-                onClick: () => J((m) => Math.max(300, m - 50)),
-                className: "text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs",
-                style: { color: V.headerTextColor },
-                title: "Decrease width",
-                children: "W-"
-              }
-            )
-          ] }),
-          ne ? /* @__PURE__ */ y.jsx(
-            "div",
-            {
-              className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
-              style: { color: V.headerTextColor },
-              title: "Waiting for agent",
-              children: /* @__PURE__ */ y.jsx(Cn, { className: "h-4 w-4" })
-            }
-          ) : /* @__PURE__ */ y.jsx(
-            "button",
-            {
-              onClick: Ht,
-              className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm hover:bg-white/30",
-              style: { color: V.headerTextColor },
-              title: "Request live agent",
-              disabled: !h || k,
-              children: /* @__PURE__ */ y.jsx(Mn, { className: "h-4 w-4" })
-            }
-          ),
-          /* @__PURE__ */ y.jsx(
-            "button",
-            {
-              onClick: rt,
-              className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
-              style: { color: V.headerTextColor },
-              title: "Refresh chat",
-              children: /* @__PURE__ */ y.jsx(In, { className: "h-4 w-4" })
-            }
-          ),
-          /* @__PURE__ */ y.jsx(
-            "button",
-            {
-              onClick: ke,
-              className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
-              style: { color: V.headerTextColor },
-              children: /* @__PURE__ */ y.jsx(An, { className: "h-4 w-4" })
-            }
-          )
-        ] })
-      ] }),
-      /* @__PURE__ */ y.jsx("div", { className: "overflow-y-auto p-4 bg-gray-50 relative", style: { height: `${ue}px` }, children: u === "history" ? /* @__PURE__ */ y.jsxs("div", { className: "space-y-4 h-full", children: [
-        /* @__PURE__ */ y.jsxs("div", { className: "flex justify-between items-center mb-4", children: [
-          /* @__PURE__ */ y.jsx("h3", { className: "font-medium text-gray-900", children: "Conversation History" }),
-          /* @__PURE__ */ y.jsxs(
-            "button",
-            {
-              onClick: Se,
-              className: "flex items-center gap-2 px-3 py-1.5 bg-orange-500 text-white text-sm rounded-lg hover:bg-orange-600",
-              children: [
-                /* @__PURE__ */ y.jsx(Rn, { className: "h-4 w-4" }),
-                "Start New Chat"
-              ]
-            }
-          )
-        ] }),
-        o.map((m) => /* @__PURE__ */ y.jsxs(
-          "button",
-          {
-            onClick: () => yt(m),
-            className: "w-full text-left p-4 rounded-lg hover:bg-gray-100 transition-colors border border-gray-200",
-            children: [
-              /* @__PURE__ */ y.jsxs("div", { className: "flex justify-between items-center mb-1", children: [
-                /* @__PURE__ */ y.jsx("span", { className: "text-sm font-medium text-gray-900", children: Pt(new Date(m.created_at), "PPP") }),
-                /* @__PURE__ */ y.jsx("span", { className: `text-xs px-2 py-1 rounded-full ${m.status === "archived" ? "bg-gray-100 text-gray-600" : "bg-green-100 text-green-600"}`, children: m.status === "archived" ? "Archived" : "Active" })
-              ] }),
-              /* @__PURE__ */ y.jsxs("p", { className: "text-sm text-gray-600", children: [
-                "Last message: ",
-                Pt(new Date(m.last_message_at), "p")
+  return /* @__PURE__ */ y.jsxs(
+    "div",
+    {
+      className: "fixed flex flex-col items-end z-[9999]",
+      style: {
+        bottom: `${ue}rem`,
+        right: `${ie}rem`
+      },
+      children: [
+        e && /* @__PURE__ */ y.jsxs("div", { className: "mb-4 w-[380px] bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden", children: [
+          /* @__PURE__ */ y.jsxs("div", { className: "p-4 border-b flex items-center gap-3", style: { backgroundColor: V.color }, children: [
+            /* @__PURE__ */ y.jsxs("div", { className: "relative flex-shrink-0", children: [
+              /* @__PURE__ */ y.jsx("div", { className: "w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center", children: /* @__PURE__ */ y.jsx("span", { className: "text-lg", children: "🤖" }) }),
+              /* @__PURE__ */ y.jsx("div", { className: "absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white", style: $e })
+            ] }),
+            /* @__PURE__ */ y.jsxs("div", { className: "flex-1", children: [
+              /* @__PURE__ */ y.jsx("h3", { className: "font-medium", style: { color: V.headerTextColor }, children: V.chatbotName }),
+              /* @__PURE__ */ y.jsxs("p", { className: "text-sm", style: { color: V.headerTextColor }, children: [
+                "from ",
+                V.chatbotName
               ] })
-            ]
-          },
-          m.id
-        )),
-        o.length === 0 && /* @__PURE__ */ y.jsx("div", { className: "flex flex-col items-center justify-center h-full text-center", children: /* @__PURE__ */ y.jsx("p", { className: "mb-4", children: "No previous conversations found" }) })
-      ] }) : /* @__PURE__ */ y.jsxs("div", { className: "space-y-4", children: [
-        u === "chat" && /* @__PURE__ */ y.jsxs("div", { className: "flex gap-2", children: [
-          /* @__PURE__ */ y.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
-          /* @__PURE__ */ y.jsxs("div", { className: "bg-white p-3 rounded-lg shadow-sm max-w-[80%]", children: [
-            /* @__PURE__ */ y.jsx("p", { className: "text-sm", children: V.greetingMessage }),
-            /* @__PURE__ */ y.jsx("span", { className: "text-xs text-gray-500 mt-1 block", children: Pt(/* @__PURE__ */ new Date(), "h:mm a") })
-          ] })
-        ] }),
-        i.map((m) => /* @__PURE__ */ y.jsxs(
-          "div",
-          {
-            className: `flex gap-2 ${m.sender_type === "user" ? "justify-end" : ""}`,
-            children: [
-              m.sender_type === "bot" && /* @__PURE__ */ y.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
-              /* @__PURE__ */ y.jsxs(
+            ] }),
+            u === "chat" && /* @__PURE__ */ y.jsxs("div", { className: "flex items-center gap-2", children: [
+              /* @__PURE__ */ y.jsxs("div", { className: "flex items-center gap-0.5", children: [
+                /* @__PURE__ */ y.jsx(
+                  "button",
+                  {
+                    onClick: () => be((m) => m + 1),
+                    className: "text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs",
+                    style: { color: V.headerTextColor },
+                    title: "Move Up",
+                    children: "↑"
+                  }
+                ),
+                /* @__PURE__ */ y.jsx(
+                  "button",
+                  {
+                    onClick: () => be((m) => Math.max(0, m - 1)),
+                    className: "text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs",
+                    style: { color: V.headerTextColor },
+                    title: "Move Down",
+                    children: "↓"
+                  }
+                ),
+                /* @__PURE__ */ y.jsx(
+                  "button",
+                  {
+                    onClick: () => J((m) => m + 1),
+                    className: "text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs",
+                    style: { color: V.headerTextColor },
+                    title: "Move Left",
+                    children: "←"
+                  }
+                ),
+                /* @__PURE__ */ y.jsx(
+                  "button",
+                  {
+                    onClick: () => J((m) => Math.max(0, m - 1)),
+                    className: "text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs",
+                    style: { color: V.headerTextColor },
+                    title: "Move Right",
+                    children: "→"
+                  }
+                )
+              ] }),
+              ne ? /* @__PURE__ */ y.jsx(
                 "div",
                 {
-                  className: `p-3 rounded-lg max-w-[80%] ${m.sender_type === "user" ? "bg-orange-500 text-white ml-auto" : "bg-white shadow-sm"}`,
-                  children: [
-                    /* @__PURE__ */ y.jsx("p", { className: "text-sm", children: m.content }),
-                    /* @__PURE__ */ y.jsx("span", { className: `text-xs mt-1 block ${m.sender_type === "user" ? "text-orange-100" : "text-gray-500"}`, children: Pt(new Date(m.created_at), "h:mm a") })
-                  ]
+                  className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
+                  style: { color: V.headerTextColor },
+                  title: "Waiting for agent",
+                  children: /* @__PURE__ */ y.jsx(Rn, { className: "h-4 w-4" })
                 }
-              ),
-              m.sender_type === "user" && /* @__PURE__ */ y.jsx("div", { className: "w-8 h-8 rounded-full bg-orange-100 flex-shrink-0 flex items-center justify-center", children: "👤" })
-            ]
-          },
-          m.id
-        )),
-        k && /* @__PURE__ */ y.jsxs("div", { className: "flex flex-col items-center gap-3 my-4", children: [
-          /* @__PURE__ */ y.jsxs("div", { className: "bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600", children: [
-            /* @__PURE__ */ y.jsx(Pn, { className: "h-4 w-4" }),
-            /* @__PURE__ */ y.jsx("span", { className: "text-sm", children: "This conversation has been archived" })
-          ] }),
-          !de && /* @__PURE__ */ y.jsxs("div", { className: "flex flex-col items-center gap-2", children: [
-            /* @__PURE__ */ y.jsx("p", { className: "text-sm text-gray-600", children: "How was this conversation?" }),
-            /* @__PURE__ */ y.jsxs("div", { className: "flex gap-3", children: [
-              /* @__PURE__ */ y.jsxs(
+              ) : /* @__PURE__ */ y.jsx(
                 "button",
                 {
-                  onClick: () => Ee("bad"),
-                  className: "flex items-center gap-1 px-4 py-2 rounded-lg bg-red-100 text-red-600 hover:bg-red-200 transition-colors",
-                  children: [
-                    /* @__PURE__ */ y.jsx(Ln, { className: "h-4 w-4" }),
-                    /* @__PURE__ */ y.jsx("span", { children: "Bad" })
-                  ]
+                  onClick: Ht,
+                  className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm hover:bg-white/30",
+                  style: { color: V.headerTextColor },
+                  title: "Request live agent",
+                  disabled: !h || k,
+                  children: /* @__PURE__ */ y.jsx(Mn, { className: "h-4 w-4" })
                 }
               ),
-              /* @__PURE__ */ y.jsxs(
+              /* @__PURE__ */ y.jsx(
                 "button",
                 {
-                  onClick: () => Ee("ok"),
-                  className: "flex items-center gap-1 px-4 py-2 rounded-lg bg-yellow-100 text-yellow-600 hover:bg-yellow-200 transition-colors",
-                  children: [
-                    /* @__PURE__ */ y.jsx($n, { className: "h-4 w-4" }),
-                    /* @__PURE__ */ y.jsx("span", { children: "OK" })
-                  ]
+                  onClick: rt,
+                  className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
+                  style: { color: V.headerTextColor },
+                  title: "Refresh chat",
+                  children: /* @__PURE__ */ y.jsx(In, { className: "h-4 w-4" })
                 }
               ),
-              /* @__PURE__ */ y.jsxs(
+              /* @__PURE__ */ y.jsx(
                 "button",
                 {
-                  onClick: () => Ee("good"),
-                  className: "flex items-center gap-1 px-4 py-2 rounded-lg bg-green-100 text-green-600 hover:bg-green-200 transition-colors",
-                  children: [
-                    /* @__PURE__ */ y.jsx(Nn, { className: "h-4 w-4" }),
-                    /* @__PURE__ */ y.jsx("span", { children: "Good" })
-                  ]
+                  onClick: ke,
+                  className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
+                  style: { color: V.headerTextColor },
+                  children: /* @__PURE__ */ y.jsx(An, { className: "h-4 w-4" })
                 }
               )
             ] })
           ] }),
-          de && /* @__PURE__ */ y.jsxs("div", { className: "flex flex-col items-center gap-2 text-center", children: [
-            /* @__PURE__ */ y.jsx("span", { className: "text-sm text-gray-600", children: "You rated this conversation:" }),
-            /* @__PURE__ */ y.jsx("span", { className: `font-medium ${de === "bad" ? "text-red-600" : de === "ok" ? "text-yellow-600" : "text-green-600"}`, children: de === "bad" ? "Bad 👎" : de === "ok" ? "OK 😐" : "Good 👍" })
+          /* @__PURE__ */ y.jsx("div", { className: "overflow-y-auto p-4 bg-gray-50 relative", style: { height: `${widgetHeight}px` }, children: u === "history" ? /* @__PURE__ */ y.jsxs("div", { className: "space-y-4 h-full", children: [
+            /* @__PURE__ */ y.jsxs("div", { className: "flex justify-between items-center mb-4", children: [
+              /* @__PURE__ */ y.jsx("h3", { className: "font-medium text-gray-900", children: "Conversation History" }),
+              /* @__PURE__ */ y.jsxs(
+                "button",
+                {
+                  onClick: Se,
+                  className: "flex items-center gap-2 px-3 py-1.5 bg-orange-500 text-white text-sm rounded-lg hover:bg-orange-600",
+                  children: [
+                    /* @__PURE__ */ y.jsx(Cn, { className: "h-4 w-4" }),
+                    "Start New Chat"
+                  ]
+                }
+              )
+            ] }),
+            o.map((m) => /* @__PURE__ */ y.jsxs(
+              "button",
+              {
+                onClick: () => yt(m),
+                className: "w-full text-left p-4 rounded-lg hover:bg-gray-100 transition-colors border border-gray-200",
+                children: [
+                  /* @__PURE__ */ y.jsxs("div", { className: "flex justify-between items-center mb-1", children: [
+                    /* @__PURE__ */ y.jsx("span", { className: "text-sm font-medium text-gray-900", children: Pt(new Date(m.created_at), "PPP") }),
+                    /* @__PURE__ */ y.jsx("span", { className: `text-xs px-2 py-1 rounded-full ${m.status === "archived" ? "bg-gray-100 text-gray-600" : "bg-green-100 text-green-600"}`, children: m.status === "archived" ? "Archived" : "Active" })
+                  ] }),
+                  /* @__PURE__ */ y.jsxs("p", { className: "text-sm text-gray-600", children: [
+                    "Last message: ",
+                    Pt(new Date(m.last_message_at), "p")
+                  ] })
+                ]
+              },
+              m.id
+            )),
+            o.length === 0 && /* @__PURE__ */ y.jsx("div", { className: "flex flex-col items-center justify-center h-full text-center", children: /* @__PURE__ */ y.jsx("p", { className: "mb-4", children: "No previous conversations found" }) })
+          ] }) : /* @__PURE__ */ y.jsxs("div", { className: "space-y-4", children: [
+            u === "chat" && /* @__PURE__ */ y.jsxs("div", { className: "flex gap-2", children: [
+              /* @__PURE__ */ y.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
+              /* @__PURE__ */ y.jsxs("div", { className: "bg-white p-3 rounded-lg shadow-sm max-w-[80%]", children: [
+                /* @__PURE__ */ y.jsx("p", { className: "text-sm", children: V.greetingMessage }),
+                /* @__PURE__ */ y.jsx("span", { className: "text-xs text-gray-500 mt-1 block", children: Pt(/* @__PURE__ */ new Date(), "h:mm a") })
+              ] })
+            ] }),
+            i.map((m) => /* @__PURE__ */ y.jsxs(
+              "div",
+              {
+                className: `flex gap-2 ${m.sender_type === "user" ? "justify-end" : ""}`,
+                children: [
+                  m.sender_type === "bot" && /* @__PURE__ */ y.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
+                  /* @__PURE__ */ y.jsxs(
+                    "div",
+                    {
+                      className: `p-3 rounded-lg max-w-[80%] ${m.sender_type === "user" ? "bg-orange-500 text-white ml-auto" : "bg-white shadow-sm"}`,
+                      children: [
+                        /* @__PURE__ */ y.jsx("p", { className: "text-sm", children: m.content }),
+                        /* @__PURE__ */ y.jsx("span", { className: `text-xs mt-1 block ${m.sender_type === "user" ? "text-orange-100" : "text-gray-500"}`, children: Pt(new Date(m.created_at), "h:mm a") })
+                      ]
+                    }
+                  ),
+                  m.sender_type === "user" && /* @__PURE__ */ y.jsx("div", { className: "w-8 h-8 rounded-full bg-orange-100 flex-shrink-0 flex items-center justify-center", children: "👤" })
+                ]
+              },
+              m.id
+            )),
+            k && /* @__PURE__ */ y.jsxs("div", { className: "flex flex-col items-center gap-3 my-4", children: [
+              /* @__PURE__ */ y.jsxs("div", { className: "bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600", children: [
+                /* @__PURE__ */ y.jsx(Pn, { className: "h-4 w-4" }),
+                /* @__PURE__ */ y.jsx("span", { className: "text-sm", children: "This conversation has been archived" })
+              ] }),
+              !de && /* @__PURE__ */ y.jsxs("div", { className: "flex flex-col items-center gap-2", children: [
+                /* @__PURE__ */ y.jsx("p", { className: "text-sm text-gray-600", children: "How was this conversation?" }),
+                /* @__PURE__ */ y.jsxs("div", { className: "flex gap-3", children: [
+                  /* @__PURE__ */ y.jsxs(
+                    "button",
+                    {
+                      onClick: () => Ee("bad"),
+                      className: "flex items-center gap-1 px-4 py-2 rounded-lg bg-red-100 text-red-600 hover:bg-red-200 transition-colors",
+                      children: [
+                        /* @__PURE__ */ y.jsx(Ln, { className: "h-4 w-4" }),
+                        /* @__PURE__ */ y.jsx("span", { children: "Bad" })
+                      ]
+                    }
+                  ),
+                  /* @__PURE__ */ y.jsxs(
+                    "button",
+                    {
+                      onClick: () => Ee("ok"),
+                      className: "flex items-center gap-1 px-4 py-2 rounded-lg bg-yellow-100 text-yellow-600 hover:bg-yellow-200 transition-colors",
+                      children: [
+                        /* @__PURE__ */ y.jsx($n, { className: "h-4 w-4" }),
+                        /* @__PURE__ */ y.jsx("span", { children: "OK" })
+                      ]
+                    }
+                  ),
+                  /* @__PURE__ */ y.jsxs(
+                    "button",
+                    {
+                      onClick: () => Ee("good"),
+                      className: "flex items-center gap-1 px-4 py-2 rounded-lg bg-green-100 text-green-600 hover:bg-green-200 transition-colors",
+                      children: [
+                        /* @__PURE__ */ y.jsx(Nn, { className: "h-4 w-4" }),
+                        /* @__PURE__ */ y.jsx("span", { children: "Good" })
+                      ]
+                    }
+                  )
+                ] })
+              ] }),
+              de && /* @__PURE__ */ y.jsxs("div", { className: "flex flex-col items-center gap-2 text-center", children: [
+                /* @__PURE__ */ y.jsx("span", { className: "text-sm text-gray-600", children: "You rated this conversation:" }),
+                /* @__PURE__ */ y.jsx("span", { className: `font-medium ${de === "bad" ? "text-red-600" : de === "ok" ? "text-yellow-600" : "text-green-600"}`, children: de === "bad" ? "Bad 👎" : de === "ok" ? "OK 😐" : "Good 👍" })
+              ] })
+            ] }),
+            /* @__PURE__ */ y.jsx("div", { ref: E })
+          ] }) }),
+          u === "chat" && /* @__PURE__ */ y.jsxs("form", { onSubmit: St, className: "p-4 border-t bg-white", children: [
+            /* @__PURE__ */ y.jsxs("div", { className: "flex gap-2", children: [
+              /* @__PURE__ */ y.jsx("div", { className: "flex-1 relative", children: /* @__PURE__ */ y.jsx(
+                "input",
+                {
+                  type: "text",
+                  value: r,
+                  onChange: (m) => n(m.target.value),
+                  placeholder: "Type your message...",
+                  className: "w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 pr-10 disabled:opacity-50 disabled:cursor-not-allowed",
+                  style: { "--tw-ring-color": V.color },
+                  disabled: p || k
+                }
+              ) }),
+              /* @__PURE__ */ y.jsx(
+                "button",
+                {
+                  type: "submit",
+                  disabled: !r.trim() || p || k,
+                  className: "p-2 rounded-full text-white flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed",
+                  style: $e,
+                  children: p ? /* @__PURE__ */ y.jsx("div", { className: "h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" }) : /* @__PURE__ */ y.jsx(Dn, { className: "h-5 w-5" })
+                }
+              )
+            ] }),
+            /* @__PURE__ */ y.jsx("div", { className: "text-center mt-2", children: /* @__PURE__ */ y.jsx(
+              "a",
+              {
+                href: "https://dashboard.ai",
+                target: "_blank",
+                rel: "noopener noreferrer",
+                className: "text-sm text-gray-600 hover:text-gray-700",
+                children: "Powered by Dashboard.ai"
+              }
+            ) })
           ] })
         ] }),
-        /* @__PURE__ */ y.jsx("div", { ref: E })
-      ] }) }),
-      u === "chat" && /* @__PURE__ */ y.jsxs("form", { onSubmit: St, className: "p-4 border-t bg-white", children: [
-        /* @__PURE__ */ y.jsxs("div", { className: "flex gap-2", children: [
-          /* @__PURE__ */ y.jsx("div", { className: "flex-1 relative", children: /* @__PURE__ */ y.jsx(
-            "input",
-            {
-              type: "text",
-              value: r,
-              onChange: (m) => n(m.target.value),
-              placeholder: "Type your message...",
-              className: "w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 pr-10 disabled:opacity-50 disabled:cursor-not-allowed",
-              style: { "--tw-ring-color": V.color },
-              disabled: p || k
-            }
-          ) }),
-          /* @__PURE__ */ y.jsx(
-            "button",
-            {
-              type: "submit",
-              disabled: !r.trim() || p || k,
-              className: "p-2 rounded-full text-white flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed",
-              style: $e,
-              children: p ? /* @__PURE__ */ y.jsx("div", { className: "h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" }) : /* @__PURE__ */ y.jsx(Dn, { className: "h-5 w-5" })
-            }
-          )
-        ] }),
-        /* @__PURE__ */ y.jsx("div", { className: "text-center mt-2", children: /* @__PURE__ */ y.jsx(
-          "a",
+        /* @__PURE__ */ y.jsx(
+          "button",
           {
-            href: "https://dashboard.ai",
-            target: "_blank",
-            rel: "noopener noreferrer",
-            className: "text-sm text-gray-600 hover:text-gray-700",
-            children: "Powered by Dashboard.ai"
+            className: "w-10 h-10 rounded-full text-white flex items-center justify-center shadow-lg",
+            style: $e,
+            onClick: () => t(!e),
+            children: e ? "×" : "💬"
           }
-        ) })
-      ] })
-    ] }),
-    /* @__PURE__ */ y.jsx(
-      "button",
-      {
-        className: "w-14 h-14 rounded-full text-white flex items-center justify-center shadow-lg",
-        style: $e,
-        onClick: () => t(!e),
-        children: e ? "×" : "💬"
-      }
-    )
-  ] });
+        )
+      ]
+    }
+  );
 }
 function Xc() {
   const s = document.createElement("div");
@@ -8355,4 +8365,4 @@ Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-C2LuAYDc.js.map
+//# sourceMappingURL=main-C2OUbsRq.js.map
