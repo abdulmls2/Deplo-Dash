@@ -13,7 +13,7 @@ interface ChatbotConfig {
   greetingMessage: string;
   color: string;
   headerTextColor: string;
-  // UI Dimensions
+  // Layout settings
   chatWidth: string;
   chatHeight: string;
   verticalPosition: 'top' | 'bottom';
@@ -507,7 +507,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             greetingMessage: data.greeting_message || 'Hello! How can I help you today?',
             color: data.primary_color || '#FF6B00',
             headerTextColor: data.header_text_color || '#000000',
-            // Default UI dimensions
+            // Default layout settings
             chatWidth: '380px',
             chatHeight: '400px',
             verticalPosition: 'bottom',
@@ -521,7 +521,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             greetingMessage: 'Hello! How can I help you today?',
             color: '#FF6B00',
             headerTextColor: '#000000',
-            // Default UI dimensions
+            // Default layout settings
             chatWidth: '380px',
             chatHeight: '400px',
             verticalPosition: 'bottom',
@@ -537,7 +537,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           greetingMessage: 'Hello! How can I help you today?',
           color: '#FF6B00',
           headerTextColor: '#000000',
-          // Default UI dimensions
+          // Default layout settings
           chatWidth: '380px',
           chatHeight: '400px',
           verticalPosition: 'bottom',
@@ -557,7 +557,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     greetingMessage: 'Hello! How can I help you today?',
     color: '#FF6B00', 
     headerTextColor: '#000000',
-    // Default UI dimensions
+    // Default layout settings
     chatWidth: '380px',
     chatHeight: '400px',
     verticalPosition: 'bottom',
@@ -654,7 +654,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   };
 
   return (
-    <div className={`fixed ${config.verticalPosition}-[${config.verticalOffset}] right-6 flex flex-col items-end z-[9999]`}>
+    <div className={`fixed ${config.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`} style={{ [config.verticalPosition]: config.verticalOffset }}>
       {isExpanded && (
         <div className="mb-4 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden" style={{ width: config.chatWidth }}>
           {/* Header */}
@@ -709,7 +709,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             )}
           </div>
 
-          {/* Chat Area with configurable height */}
+          {/* Chat Area */}
           <div className="overflow-y-auto p-4 bg-gray-50 relative" style={{ height: config.chatHeight }}>
             {view === 'history' ? (
               <div className="space-y-4 h-full">
@@ -898,14 +898,14 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
         </div>
       )}
 
-      {/* Toggle Button with configurable size */}
+      {/* Toggle Button */}
       <button
-        style={{
-          ...buttonStyle,
+        className="rounded-full text-white flex items-center justify-center shadow-lg"
+        style={{ 
+          backgroundColor: config.color,
           width: config.toggleButtonSize,
           height: config.toggleButtonSize
         }}
-        className="rounded-full text-white flex items-center justify-center shadow-lg"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         {isExpanded ? '×' : '💬'}
