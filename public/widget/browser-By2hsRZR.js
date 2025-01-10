@@ -1,4 +1,4 @@
-import { g as e } from "./main-DlSFtMga.js";
+import { g as e } from "./main-CKZkus6F.js";
 var o = function() {
   throw new Error(
     "ws does not work in the browser. Browser clients must use the native WebSocket object"
@@ -11,4 +11,4 @@ const r = /* @__PURE__ */ e(o), s = /* @__PURE__ */ Object.freeze(/* @__PURE__ *
 export {
   s as b
 };
-//# sourceMappingURL=browser-ClWBaDqU.js.map
+//# sourceMappingURL=browser-By2hsRZR.js.map

@@ -50,20 +50,14 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const [widgetWidth, setWidgetWidth] = useState(380);   // New state for width
 
   // New state for vertical position and toggle button size
-  const [verticalPosition, setVerticalPosition] = useState(6);  // Default 6 (bottom-6 in Tailwind)
-  const [toggleButtonSize, setToggleButtonSize] = useState(14);  // Default 14 (w-14 h-14)
+  const [verticalPosition, setVerticalPosition] = useState(1);  // Changed to 1
+  const [toggleButtonSize, setToggleButtonSize] = useState(8);  // Changed to 8
 
   // Log height and width whenever they change
   useEffect(() => {
     console.log('Widget Height:', widgetHeight);
     console.log('Widget Width:', widgetWidth);
   }, [widgetHeight, widgetWidth]);
-
-  // Log position and button size whenever they change
-  useEffect(() => {
-    console.log('Vertical Position:', verticalPosition);
-    console.log('Toggle Button Size:', toggleButtonSize);
-  }, [verticalPosition, toggleButtonSize]);
 
   // Add this helper function at the top of the component
   const isMessageDuplicate = (newMsg: Message, existingMessages: Message[]) => {
@@ -662,41 +656,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             </div>
             {view === 'chat' && (
               <div className="flex items-center gap-2">
-                {/* Position and size adjustment buttons */}
-                <div className="flex items-center gap-0.5">
-                  <button
-                    onClick={() => setVerticalPosition(p => p + 1)}
-                    className="text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs"
-                    style={{ color: config.headerTextColor }}
-                    title="Move Up"
-                  >
-                    ↑
-                  </button>
-                  <button
-                    onClick={() => setVerticalPosition(p => Math.max(0, p - 1))}
-                    className="text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs"
-                    style={{ color: config.headerTextColor }}
-                    title="Move Down"
-                  >
-                    ↓
-                  </button>
-                  <button
-                    onClick={() => setToggleButtonSize(s => s + 2)}
-                    className="text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs"
-                    style={{ color: config.headerTextColor }}
-                    title="Increase Toggle Button Size"
-                  >
-                    +
-                  </button>
-                  <button
-                    onClick={() => setToggleButtonSize(s => Math.max(8, s - 2))}
-                    className="text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs"
-                    style={{ color: config.headerTextColor }}
-                    title="Decrease Toggle Button Size"
-                  >
-                    -
-                  </button>
-                </div>
                 {!isRequestingLiveChat ? (
                   <button
                     onClick={handleRequestLiveChat}
