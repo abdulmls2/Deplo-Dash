@@ -51,7 +51,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
 
   // New state for vertical position and toggle button size
   const [verticalPosition, setVerticalPosition] = useState(1);  // Changed to 1
-  const [toggleButtonSize, setToggleButtonSize] = useState(10.5);  // Changed to 8
+  const [toggleButtonSize, setToggleButtonSize] = useState(10);  // Changed to 8
 
   // Log height and width whenever they change
   useEffect(() => {
