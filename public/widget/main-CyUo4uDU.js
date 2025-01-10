@@ -2626,7 +2626,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-By2hsRZR.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-CfdZd4G3.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7794,7 +7794,7 @@ const Jc = async (s, e, t, r) => {
   }
 })), bs = "chatbot_session_id", Kc = 180;
 function Qc({ domainId: s }) {
-  const [e, t] = z(!1), [r, n] = z(""), [i, a] = z([]), [o, c] = z([]), [u, l] = z("history"), [h, f] = z(null), [p, _] = z(!1), [v] = z(/* @__PURE__ */ new Set()), [S, P] = z(null), [j, O] = z(null), x = qr(null), [k, D] = z(!1), I = qr(null), { sendMessage: Y } = Gc(), [ne, B] = z(!1), [ce, qe] = z(400), [le, G] = z(380), [ee, be] = z(1), [me, Re] = z(8);
+  const [e, t] = z(!1), [r, n] = z(""), [i, a] = z([]), [o, c] = z([]), [u, l] = z("history"), [h, f] = z(null), [p, _] = z(!1), [v] = z(/* @__PURE__ */ new Set()), [S, P] = z(null), [j, O] = z(null), x = qr(null), [k, D] = z(!1), I = qr(null), { sendMessage: Y } = Gc(), [ne, B] = z(!1), [ce, qe] = z(380), [le, G] = z(380), [ee, be] = z(1), [me, Re] = z(9);
   fe(() => {
     console.log("Widget Height:", ce), console.log("Widget Width:", le);
   }, [ce, le]);
@@ -8320,4 +8320,4 @@ Xc();
 export {
   bn as g
 };
-//# sourceMappingURL=main-CKZkus6F.js.map
+//# sourceMappingURL=main-CyUo4uDU.js.map

@@ -46,12 +46,12 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const notificationSound = useRef<HTMLAudioElement | null>(null);
   const { sendMessage: chatbotSendMessage } = useChatbotStore();
   const [isRequestingLiveChat, setIsRequestingLiveChat] = useState(false);
-  const [widgetHeight, setWidgetHeight] = useState(400);  // New state for height
+  const [widgetHeight, setWidgetHeight] = useState(380);  // New state for height
   const [widgetWidth, setWidgetWidth] = useState(380);   // New state for width
 
   // New state for vertical position and toggle button size
   const [verticalPosition, setVerticalPosition] = useState(1);  // Changed to 1
-  const [toggleButtonSize, setToggleButtonSize] = useState(8);  // Changed to 8
+  const [toggleButtonSize, setToggleButtonSize] = useState(9);  // Changed to 8
 
   // Log height and width whenever they change
   useEffect(() => {
@@ -468,7 +468,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       const tempMessage: Message = {
         id: `temp-${Date.now()}`,
         content: content,
-        sender_type: 'user' as const,
+        sender_type: 'user',
         created_at: new Date().toISOString(),
       };
 
@@ -620,10 +620,10 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       setIsRequestingLiveChat(true);
       
       // Add system message about live chat request
-      const systemMessage: Message = {
+      const systemMessage = {
         id: `temp-${Date.now()}`,
         content: "I'll connect you with a live agent. Please wait a moment while I transfer your chat.",
-        sender_type: 'bot' as const,
+        sender_type: 'bot',
         created_at: new Date().toISOString(),
       };
 
