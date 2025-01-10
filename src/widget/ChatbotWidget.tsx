@@ -46,16 +46,24 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const notificationSound = useRef<HTMLAudioElement | null>(null);
   const { sendMessage: chatbotSendMessage } = useChatbotStore();
   const [isRequestingLiveChat, setIsRequestingLiveChat] = useState(false);
-  
-  // Replace width and height with positioning
-  const [bottomPosition, setBottomPosition] = useState(6);
-  const [rightPosition, setRightPosition] = useState(6);
+  const [widgetHeight, setWidgetHeight] = useState(400);  // New state for height
+  const [widgetWidth, setWidgetWidth] = useState(380);   // New state for width
 
-  // Log position whenever they change
+  // New state for vertical position and toggle button size
+  const [verticalPosition, setVerticalPosition] = useState(6);  // Default 6 (bottom-6 in Tailwind)
+  const [toggleButtonSize, setToggleButtonSize] = useState(14);  // Default 14 (w-14 h-14)
+
+  // Log height and width whenever they change
   useEffect(() => {
-    console.log('Bottom Position:', bottomPosition);
-    console.log('Right Position:', rightPosition);
-  }, [bottomPosition, rightPosition]);
+    console.log('Widget Height:', widgetHeight);
+    console.log('Widget Width:', widgetWidth);
+  }, [widgetHeight, widgetWidth]);
+
+  // Log position and button size whenever they change
+  useEffect(() => {
+    console.log('Vertical Position:', verticalPosition);
+    console.log('Toggle Button Size:', toggleButtonSize);
+  }, [verticalPosition, toggleButtonSize]);
 
   // Add this helper function at the top of the component
   const isMessageDuplicate = (newMsg: Message, existingMessages: Message[]) => {
@@ -618,10 +626,10 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       setIsRequestingLiveChat(true);
       
       // Add system message about live chat request
-      const systemMessage = {
+      const systemMessage: Message = {
         id: `temp-${Date.now()}`,
         content: "I'll connect you with a live agent. Please wait a moment while I transfer your chat.",
-        sender_type: 'bot',
+        sender_type: 'bot' as const,
         created_at: new Date().toISOString(),
       };
 
@@ -635,14 +643,11 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
 
   return (
     <div 
-      className="fixed flex flex-col items-end z-[9999]" 
-      style={{ 
-        bottom: `${bottomPosition}rem`, 
-        right: `${rightPosition}rem` 
-      }}
+      className={`fixed right-6 flex flex-col items-end z-[9999]`} 
+      style={{ bottom: `${verticalPosition}rem` }}
     >
       {isExpanded && (
-        <div className="mb-4 w-[380px] bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden">
+        <div className="mb-4 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden" style={{ width: `380px` }}>
           {/* Header */}
           <div className="p-4 border-b flex items-center gap-3" style={{ backgroundColor: config.color }}>
             <div className="relative flex-shrink-0">
@@ -657,10 +662,10 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             </div>
             {view === 'chat' && (
               <div className="flex items-center gap-2">
-                {/* Positioning adjustment buttons */}
+                {/* Position and size adjustment buttons */}
                 <div className="flex items-center gap-0.5">
                   <button
-                    onClick={() => setBottomPosition(b => b + 1)}
+                    onClick={() => setVerticalPosition(p => p + 1)}
                     className="text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs"
                     style={{ color: config.headerTextColor }}
                     title="Move Up"
@@ -668,7 +673,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                     ↑
                   </button>
                   <button
-                    onClick={() => setBottomPosition(b => Math.max(0, b - 1))}
+                    onClick={() => setVerticalPosition(p => Math.max(0, p - 1))}
                     className="text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs"
                     style={{ color: config.headerTextColor }}
                     title="Move Down"
@@ -676,20 +681,20 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                     ↓
                   </button>
                   <button
-                    onClick={() => setRightPosition(r => r + 1)}
+                    onClick={() => setToggleButtonSize(s => s + 2)}
                     className="text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs"
                     style={{ color: config.headerTextColor }}
-                    title="Move Left"
+                    title="Increase Toggle Button Size"
                   >
-                    ←
+                    +
                   </button>
                   <button
-                    onClick={() => setRightPosition(r => Math.max(0, r - 1))}
+                    onClick={() => setToggleButtonSize(s => Math.max(8, s - 2))}
                     className="text-[10px] px-1 py-0.5 bg-white/20 rounded text-xs"
                     style={{ color: config.headerTextColor }}
-                    title="Move Right"
+                    title="Decrease Toggle Button Size"
                   >
-                    →
+                    -
                   </button>
                 </div>
                 {!isRequestingLiveChat ? (
@@ -919,9 +924,9 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
         </div>
       )}
 
-      {/* Toggle Button - Reduced size */}
+      {/* Toggle Button */}
       <button
-        className="w-10 h-10 rounded-full text-white flex items-center justify-center shadow-lg"
+        className={`w-${toggleButtonSize} h-${toggleButtonSize} rounded-full text-white flex items-center justify-center shadow-lg`}
         style={buttonStyle}
         onClick={() => setIsExpanded(!isExpanded)}
       >
