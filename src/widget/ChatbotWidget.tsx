@@ -8,6 +8,15 @@ import { useChatbotStore } from '../lib/store/chatbotStore';
 const SESSION_KEY = 'chatbot_session_id';
 const CONVERSATION_EXPIRY_DAYS = 180; // 6 months default expiry
 
+// Add layout constants at the top of the file
+const LAYOUT_CONFIG = {
+  chatWidth: '380px',
+  chatHeight: '380px',
+  verticalPosition: 'bottom' as const,
+  verticalOffset: '15px',
+  toggleButtonSize: '48px',
+};
+
 interface ChatbotConfig {
   chatbotName: string;
   greetingMessage: string;
@@ -36,64 +45,6 @@ interface Conversation {
   rating?: 'bad' | 'ok' | 'good';
 }
 
-// Add new Layout Editor component
-function LayoutEditor({ config, setConfig }: { config: ChatbotConfig; setConfig: (config: ChatbotConfig) => void }) {
-  return (
-    <div className="fixed top-4 left-4 bg-white p-4 rounded-lg shadow-lg border border-gray-200 z-[10000] w-[300px]">
-      <h3 className="font-medium mb-4 text-gray-900">Layout Editor</h3>
-      <div className="space-y-3">
-        <div>
-          <label className="block text-sm text-gray-600 mb-1">Chat Width</label>
-          <input
-            type="text"
-            value={config.chatWidth}
-            onChange={(e) => setConfig({ ...config, chatWidth: e.target.value })}
-            className="w-full px-3 py-1.5 border rounded text-sm"
-          />
-        </div>
-        <div>
-          <label className="block text-sm text-gray-600 mb-1">Chat Height</label>
-          <input
-            type="text"
-            value={config.chatHeight}
-            onChange={(e) => setConfig({ ...config, chatHeight: e.target.value })}
-            className="w-full px-3 py-1.5 border rounded text-sm"
-          />
-        </div>
-        <div>
-          <label className="block text-sm text-gray-600 mb-1">Vertical Position</label>
-          <select
-            value={config.verticalPosition}
-            onChange={(e) => setConfig({ ...config, verticalPosition: e.target.value as 'top' | 'bottom' })}
-            className="w-full px-3 py-1.5 border rounded text-sm"
-          >
-            <option value="top">Top</option>
-            <option value="bottom">Bottom</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm text-gray-600 mb-1">Vertical Offset</label>
-          <input
-            type="text"
-            value={config.verticalOffset}
-            onChange={(e) => setConfig({ ...config, verticalOffset: e.target.value })}
-            className="w-full px-3 py-1.5 border rounded text-sm"
-          />
-        </div>
-        <div>
-          <label className="block text-sm text-gray-600 mb-1">Toggle Button Size</label>
-          <input
-            type="text"
-            value={config.toggleButtonSize}
-            onChange={(e) => setConfig({ ...config, toggleButtonSize: e.target.value })}
-            className="w-full px-3 py-1.5 border rounded text-sm"
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [message, setMessage] = useState('');
@@ -110,7 +61,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const notificationSound = useRef<HTMLAudioElement | null>(null);
   const { sendMessage: chatbotSendMessage } = useChatbotStore();
   const [isRequestingLiveChat, setIsRequestingLiveChat] = useState(false);
-  const [showLayoutEditor, setShowLayoutEditor] = useState(false);
 
   // Add this helper function at the top of the component
   const isMessageDuplicate = (newMsg: Message, existingMessages: Message[]) => {
@@ -566,12 +516,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             greetingMessage: data.greeting_message || 'Hello! How can I help you today?',
             color: data.primary_color || '#FF6B00',
             headerTextColor: data.header_text_color || '#000000',
-            // Default layout settings
-            chatWidth: '380px',
-            chatHeight: '380px',
-            verticalPosition: 'bottom',
-            verticalOffset: '15px',
-            toggleButtonSize: '48px',
+            ...LAYOUT_CONFIG
           });
         } else {
           // Use default config if no settings exist
@@ -580,12 +525,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             greetingMessage: 'Hello! How can I help you today?',
             color: '#FF6B00',
             headerTextColor: '#000000',
-            // Default layout settings
-            chatWidth: '380px',
-            chatHeight: '380px',
-            verticalPosition: 'bottom',
-            verticalOffset: '15px',
-            toggleButtonSize: '48px',
+            ...LAYOUT_CONFIG
           });
         }
       } catch (error) {
@@ -596,12 +536,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           greetingMessage: 'Hello! How can I help you today?',
           color: '#FF6B00',
           headerTextColor: '#000000',
-          // Default layout settings
-          chatWidth: '380px',
-          chatHeight: '380px',
-          verticalPosition: 'bottom',
-          verticalOffset: '15px',
-          toggleButtonSize: '48px',
+          ...LAYOUT_CONFIG
         });
       }
     };
@@ -616,12 +551,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     greetingMessage: 'Hello! How can I help you today?',
     color: '#FF6B00', 
     headerTextColor: '#000000',
-    // Default layout settings
-    chatWidth: '380px',
-    chatHeight: '380px',
-    verticalPosition: 'bottom',
-    verticalOffset: '15px',
-    toggleButtonSize: '48px',
+    ...LAYOUT_CONFIG
   });
 
   const buttonStyle = {
@@ -713,276 +643,262 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   };
 
   return (
-    <>
-      {/* Layout Editor Button */}
-      <button
-        className="fixed top-4 right-4 bg-gray-800 text-white px-3 py-1.5 rounded-lg text-sm z-[10000] opacity-30 hover:opacity-100"
-        onClick={() => setShowLayoutEditor(!showLayoutEditor)}
-      >
-        {showLayoutEditor ? 'Hide Layout Editor' : 'Show Layout Editor'}
-      </button>
-
-      {/* Layout Editor Panel */}
-      {showLayoutEditor && <LayoutEditor config={config} setConfig={setConfig} />}
-
-      {/* Existing Chatbot Widget */}
-      <div className={`fixed ${config.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`} style={{ [config.verticalPosition]: config.verticalOffset }}>
-        {isExpanded && (
-          <div className="mb-4 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden" style={{ width: config.chatWidth }}>
-            {/* Header */}
-            <div className="p-4 border-b flex items-center gap-3" style={{ backgroundColor: config.color }}>
-              <div className="relative flex-shrink-0">
-                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-                  <span className="text-lg">🤖</span>
-                </div>
-                <div className="absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white" style={buttonStyle}></div>
+    <div className={`fixed ${config.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`} style={{ [config.verticalPosition]: config.verticalOffset }}>
+      {isExpanded && (
+        <div className="mb-4 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden" style={{ width: config.chatWidth }}>
+          {/* Header */}
+          <div className="p-4 border-b flex items-center gap-3" style={{ backgroundColor: config.color }}>
+            <div className="relative flex-shrink-0">
+              <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+                <span className="text-lg">🤖</span>
               </div>
-              <div className="flex-1">
-                <h3 className="font-medium" style={{ color: config.headerTextColor }}>{config.chatbotName}</h3>
-                <p className="text-sm" style={{ color: config.headerTextColor }}>from {config.chatbotName}</p>
-              </div>
-              {view === 'chat' && (
-                <div className="flex items-center gap-2">
-                  {!isRequestingLiveChat ? (
-                    <button
-                      onClick={handleRequestLiveChat}
-                      className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm hover:bg-white/30"
-                      style={{ color: config.headerTextColor }}
-                      title="Request live agent"
-                      disabled={!conversationId || isArchived}
-                    >
-                      <UserRound className="h-4 w-4" />
-                    </button>
-                  ) : (
-                    <div
-                      className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
-                      style={{ color: config.headerTextColor }}
-                      title="Waiting for agent"
-                    >
-                      <Hourglass className="h-4 w-4" />
-                    </div>
-                  )}
-                  <button
-                    onClick={handleRefreshChat}
-                    className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
-                    style={{ color: config.headerTextColor }}
-                    title="Refresh chat"
-                  >
-                    <RefreshCw className="h-4 w-4" />
-                  </button>
-                  <button
-                    onClick={handleBackToHistory}
-                    className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
-                    style={{ color: config.headerTextColor }}
-                  >
-                    <MessageSquare className="h-4 w-4" />
-                  </button>
-                </div>
-              )}
+              <div className="absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white" style={buttonStyle}></div>
             </div>
-
-            {/* Chat Area */}
-            <div className="overflow-y-auto p-4 bg-gray-50 relative" style={{ height: config.chatHeight }}>
-              {view === 'history' ? (
-                <div className="space-y-4 h-full">
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="font-medium text-gray-900">Conversation History</h3>
-                    <button
-                      onClick={handleStartNewConversation}
-                      className="flex items-center gap-2 px-3 py-1.5 bg-orange-500 text-white text-sm rounded-lg hover:bg-orange-600"
-                    >
-                      <MessageSquarePlus className="h-4 w-4" />
-                      Start New Chat
-                    </button>
-                  </div>
-                  {conversations.map((conv) => (
-                    <button
-                      key={conv.id}
-                      onClick={() => handleSelectConversation(conv)}
-                      className="w-full text-left p-4 rounded-lg hover:bg-gray-100 transition-colors border border-gray-200"
-                    >
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="text-sm font-medium text-gray-900">
-                          {format(new Date(conv.created_at), 'PPP')}
-                        </span>
-                        <span className={`text-xs px-2 py-1 rounded-full ${
-                          conv.status === 'archived' 
-                            ? 'bg-gray-100 text-gray-600' 
-                            : 'bg-green-100 text-green-600'
-                        }`}>
-                          {conv.status === 'archived' ? 'Archived' : 'Active'}
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-600">
-                        Last message: {format(new Date(conv.last_message_at), 'p')}
-                      </p>
-                    </button>
-                  ))}
-                  {conversations.length === 0 && (
-                    <div className="flex flex-col items-center justify-center h-full text-center">
-                      <p className="mb-4">No previous conversations found</p>
-                    </div>
-                  )}
-                </div>
-              ) : (
-              <div className="space-y-4">
-                {/* Welcome Message */}
-                {/* Always show greeting message in chat view */}
-                {view === 'chat' && (
-                  <div className="flex gap-2">
-                  <div className="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center">
-                    🤖
-                  </div>
-                  <div className="bg-white p-3 rounded-lg shadow-sm max-w-[80%]">
-                    <p className="text-sm">{config.greetingMessage}</p>
-                    <span className="text-xs text-gray-500 mt-1 block">
-                      {format(new Date(), 'h:mm a')}
-                    </span>
-                  </div>
-                </div>
-                )}
-                
-                {/* Messages */}
-                {messages.map((msg) => (
+            <div className="flex-1">
+              <h3 className="font-medium" style={{ color: config.headerTextColor }}>{config.chatbotName}</h3>
+              <p className="text-sm" style={{ color: config.headerTextColor }}>from {config.chatbotName}</p>
+            </div>
+            {view === 'chat' && (
+              <div className="flex items-center gap-2">
+                {!isRequestingLiveChat ? (
+                  <button
+                    onClick={handleRequestLiveChat}
+                    className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm hover:bg-white/30"
+                    style={{ color: config.headerTextColor }}
+                    title="Request live agent"
+                    disabled={!conversationId || isArchived}
+                  >
+                    <UserRound className="h-4 w-4" />
+                  </button>
+                ) : (
                   <div
-                    key={msg.id}
-                    className={`flex gap-2 ${msg.sender_type === 'user' ? 'justify-end' : ''}`}
+                    className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
+                    style={{ color: config.headerTextColor }}
+                    title="Waiting for agent"
                   >
-                    {msg.sender_type === 'bot' && (
-                      <div className="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center">
-                        🤖
-                      </div>
-                    )}
-                    <div 
-                      className={`p-3 rounded-lg max-w-[80%] ${
-                        msg.sender_type === 'user' 
-                          ? 'bg-orange-500 text-white ml-auto' 
-                          : 'bg-white shadow-sm'
-                      }`}
-                    >
-                      <p className="text-sm">{msg.content}</p>
-                      <span className={`text-xs mt-1 block ${
-                        msg.sender_type === 'user' ? 'text-orange-100' : 'text-gray-500'
-                      }`}>
-                        {format(new Date(msg.created_at), 'h:mm a')}
-                      </span>
-                    </div>
-                    {msg.sender_type === 'user' && (
-                      <div className="w-8 h-8 rounded-full bg-orange-100 flex-shrink-0 flex items-center justify-center">
-                        👤
-                      </div>
-                    )}
-                  </div>
-                ))}
-                {isArchived && (
-                  <div className="flex flex-col items-center gap-3 my-4">
-                    <div className="bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600">
-                      <Archive className="h-4 w-4" />
-                      <span className="text-sm">This conversation has been archived</span>
-                    </div>
-                    
-                    {!conversationRating && (
-                      <div className="flex flex-col items-center gap-2">
-                        <p className="text-sm text-gray-600">How was this conversation?</p>
-                        <div className="flex gap-3">
-                          <button
-                            onClick={() => handleRateConversation('bad')}
-                            className="flex items-center gap-1 px-4 py-2 rounded-lg bg-red-100 text-red-600 hover:bg-red-200 transition-colors"
-                          >
-                            <ThumbsDown className="h-4 w-4" />
-                            <span>Bad</span>
-                          </button>
-                          <button
-                            onClick={() => handleRateConversation('ok')}
-                            className="flex items-center gap-1 px-4 py-2 rounded-lg bg-yellow-100 text-yellow-600 hover:bg-yellow-200 transition-colors"
-                          >
-                            <Minus className="h-4 w-4" />
-                            <span>OK</span>
-                          </button>
-                          <button
-                            onClick={() => handleRateConversation('good')}
-                            className="flex items-center gap-1 px-4 py-2 rounded-lg bg-green-100 text-green-600 hover:bg-green-200 transition-colors"
-                          >
-                            <ThumbsUp className="h-4 w-4" />
-                            <span>Good</span>
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                    {conversationRating && (
-                      <div className="flex flex-col items-center gap-2 text-center">
-                        <span className="text-sm text-gray-600">You rated this conversation:</span>
-                        <span className={`font-medium ${
-                          conversationRating === 'bad' ? 'text-red-600' :
-                          conversationRating === 'ok' ? 'text-yellow-600' :
-                          'text-green-600'
-                        }`}>
-                          {conversationRating === 'bad' ? 'Bad 👎' : 
-                           conversationRating === 'ok' ? 'OK 😐' : 
-                           'Good 👍'}
-                        </span>
-                      </div>
-                    )}
+                    <Hourglass className="h-4 w-4" />
                   </div>
                 )}
-                <div ref={messagesEndRef} />
-              </div>
-              )}
-            </div>
-
-            {/* Input Area */}
-            {view === 'chat' && <form onSubmit={handleSubmit} className="p-4 border-t bg-white">
-              <div className="flex gap-2">
-                <div className="flex-1 relative">
-                  <input
-                    type="text"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Type your message..."
-                    className="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 pr-10 disabled:opacity-50 disabled:cursor-not-allowed"
-                    style={{ '--tw-ring-color': config.color } as React.CSSProperties}
-                    disabled={isLoading || isArchived} />
-                </div>
-                <button 
-                  type="submit"
-                  disabled={!message.trim() || isLoading || isArchived}
-                  className="p-2 rounded-full text-white flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-                  style={buttonStyle}
+                <button
+                  onClick={handleRefreshChat}
+                  className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
+                  style={{ color: config.headerTextColor }}
+                  title="Refresh chat"
                 >
-                  {isLoading ? (
-                    <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  ) : (
-                    <Send className="h-5 w-5" />
-                  )}
+                  <RefreshCw className="h-4 w-4" />
+                </button>
+                <button
+                  onClick={handleBackToHistory}
+                  className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
+                  style={{ color: config.headerTextColor }}
+                >
+                  <MessageSquare className="h-4 w-4" />
                 </button>
               </div>
-              <div className="text-center mt-2">
-                <a 
-                  href="https://dashboard.ai" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-sm text-gray-600 hover:text-gray-700"
-                >
-                  Powered by Dashboard.ai
-                </a>
-              </div>
-            </form>}
+            )}
           </div>
-        )}
 
-        {/* Toggle Button */}
-        <button
-          className="rounded-full text-white flex items-center justify-center shadow-lg"
-          style={{ 
-            backgroundColor: config.color,
-            width: config.toggleButtonSize,
-            height: config.toggleButtonSize
-          }}
-          onClick={() => setIsExpanded(!isExpanded)}
-        >
-          {isExpanded ? '×' : '💬'}
-        </button>
-      </div>
-    </>
+          {/* Chat Area */}
+          <div className="overflow-y-auto p-4 bg-gray-50 relative" style={{ height: config.chatHeight }}>
+            {view === 'history' ? (
+              <div className="space-y-4 h-full">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="font-medium text-gray-900">Conversation History</h3>
+                  <button
+                    onClick={handleStartNewConversation}
+                    className="flex items-center gap-2 px-3 py-1.5 bg-orange-500 text-white text-sm rounded-lg hover:bg-orange-600"
+                  >
+                    <MessageSquarePlus className="h-4 w-4" />
+                    Start New Chat
+                  </button>
+                </div>
+                {conversations.map((conv) => (
+                  <button
+                    key={conv.id}
+                    onClick={() => handleSelectConversation(conv)}
+                    className="w-full text-left p-4 rounded-lg hover:bg-gray-100 transition-colors border border-gray-200"
+                  >
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-sm font-medium text-gray-900">
+                        {format(new Date(conv.created_at), 'PPP')}
+                      </span>
+                      <span className={`text-xs px-2 py-1 rounded-full ${
+                        conv.status === 'archived' 
+                          ? 'bg-gray-100 text-gray-600' 
+                          : 'bg-green-100 text-green-600'
+                      }`}>
+                        {conv.status === 'archived' ? 'Archived' : 'Active'}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-600">
+                      Last message: {format(new Date(conv.last_message_at), 'p')}
+                    </p>
+                  </button>
+                ))}
+                {conversations.length === 0 && (
+                  <div className="flex flex-col items-center justify-center h-full text-center">
+                    <p className="mb-4">No previous conversations found</p>
+                  </div>
+                )}
+              </div>
+            ) : (
+            <div className="space-y-4">
+              {/* Welcome Message */}
+              {/* Always show greeting message in chat view */}
+              {view === 'chat' && (
+                <div className="flex gap-2">
+                <div className="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center">
+                  🤖
+                </div>
+                <div className="bg-white p-3 rounded-lg shadow-sm max-w-[80%]">
+                  <p className="text-sm">{config.greetingMessage}</p>
+                  <span className="text-xs text-gray-500 mt-1 block">
+                    {format(new Date(), 'h:mm a')}
+                  </span>
+                </div>
+              </div>
+              )}
+              
+              {/* Messages */}
+              {messages.map((msg) => (
+                <div
+                  key={msg.id}
+                  className={`flex gap-2 ${msg.sender_type === 'user' ? 'justify-end' : ''}`}
+                >
+                  {msg.sender_type === 'bot' && (
+                    <div className="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center">
+                      🤖
+                    </div>
+                  )}
+                  <div 
+                    className={`p-3 rounded-lg max-w-[80%] ${
+                      msg.sender_type === 'user' 
+                        ? 'bg-orange-500 text-white ml-auto' 
+                        : 'bg-white shadow-sm'
+                    }`}
+                  >
+                    <p className="text-sm">{msg.content}</p>
+                    <span className={`text-xs mt-1 block ${
+                      msg.sender_type === 'user' ? 'text-orange-100' : 'text-gray-500'
+                    }`}>
+                      {format(new Date(msg.created_at), 'h:mm a')}
+                    </span>
+                  </div>
+                  {msg.sender_type === 'user' && (
+                    <div className="w-8 h-8 rounded-full bg-orange-100 flex-shrink-0 flex items-center justify-center">
+                      👤
+                    </div>
+                  )}
+                </div>
+              ))}
+              {isArchived && (
+                <div className="flex flex-col items-center gap-3 my-4">
+                  <div className="bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600">
+                    <Archive className="h-4 w-4" />
+                    <span className="text-sm">This conversation has been archived</span>
+                  </div>
+                  
+                  {!conversationRating && (
+                    <div className="flex flex-col items-center gap-2">
+                      <p className="text-sm text-gray-600">How was this conversation?</p>
+                      <div className="flex gap-3">
+                        <button
+                          onClick={() => handleRateConversation('bad')}
+                          className="flex items-center gap-1 px-4 py-2 rounded-lg bg-red-100 text-red-600 hover:bg-red-200 transition-colors"
+                        >
+                          <ThumbsDown className="h-4 w-4" />
+                          <span>Bad</span>
+                        </button>
+                        <button
+                          onClick={() => handleRateConversation('ok')}
+                          className="flex items-center gap-1 px-4 py-2 rounded-lg bg-yellow-100 text-yellow-600 hover:bg-yellow-200 transition-colors"
+                        >
+                          <Minus className="h-4 w-4" />
+                          <span>OK</span>
+                        </button>
+                        <button
+                          onClick={() => handleRateConversation('good')}
+                          className="flex items-center gap-1 px-4 py-2 rounded-lg bg-green-100 text-green-600 hover:bg-green-200 transition-colors"
+                        >
+                          <ThumbsUp className="h-4 w-4" />
+                          <span>Good</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                  {conversationRating && (
+                    <div className="flex flex-col items-center gap-2 text-center">
+                      <span className="text-sm text-gray-600">You rated this conversation:</span>
+                      <span className={`font-medium ${
+                        conversationRating === 'bad' ? 'text-red-600' :
+                        conversationRating === 'ok' ? 'text-yellow-600' :
+                        'text-green-600'
+                      }`}>
+                        {conversationRating === 'bad' ? 'Bad 👎' : 
+                         conversationRating === 'ok' ? 'OK 😐' : 
+                         'Good 👍'}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+            )}
+          </div>
+
+          {/* Input Area */}
+          {view === 'chat' && <form onSubmit={handleSubmit} className="p-4 border-t bg-white">
+            <div className="flex gap-2">
+              <div className="flex-1 relative">
+                <input
+                  type="text"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Type your message..."
+                  className="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 pr-10 disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{ '--tw-ring-color': config.color } as React.CSSProperties}
+                  disabled={isLoading || isArchived} />
+              </div>
+              <button 
+                type="submit"
+                disabled={!message.trim() || isLoading || isArchived}
+                className="p-2 rounded-full text-white flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                style={buttonStyle}
+              >
+                {isLoading ? (
+                  <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <Send className="h-5 w-5" />
+                )}
+              </button>
+            </div>
+            <div className="text-center mt-2">
+              <a 
+                href="https://dashboard.ai" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm text-gray-600 hover:text-gray-700"
+              >
+                Powered by Dashboard.ai
+              </a>
+            </div>
+          </form>}
+        </div>
+      )}
+
+      {/* Toggle Button */}
+      <button
+        className="rounded-full text-white flex items-center justify-center shadow-lg"
+        style={{ 
+          backgroundColor: config.color,
+          width: config.toggleButtonSize,
+          height: config.toggleButtonSize
+        }}
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        {isExpanded ? '×' : '💬'}
+      </button>
+    </div>
   );
 }
