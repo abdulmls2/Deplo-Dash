@@ -7,6 +7,10 @@ interface ChatbotPreviewProps {
   color: string;
   domainName: string;
   headerTextColor: string;
+  agentMessageColor: string;
+  userMessageColor: string;
+  agentMessageTextColor: string;
+  userMessageTextColor: string;
 }
 
 export default function ChatbotPreview({ 
@@ -14,7 +18,11 @@ export default function ChatbotPreview({
   greetingMessage, 
   color,
   domainName,
-  headerTextColor
+  headerTextColor,
+  agentMessageColor,
+  userMessageColor,
+  agentMessageTextColor,
+  userMessageTextColor
 }: ChatbotPreviewProps) {
   const [isExpanded, setIsExpanded] = useState(true);
   const [message, setMessage] = useState('');
@@ -51,9 +59,19 @@ export default function ChatbotPreview({
               <div className="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center">
                 🤖
               </div>
-              <div className="bg-white p-3 rounded-lg shadow-sm max-w-[80%]">
-                <p className="text-sm">{greetingMessage}</p>
-                <span className="text-xs text-gray-500 mt-1 block">
+              <div className="p-3 rounded-lg shadow-sm max-w-[80%]" style={{ backgroundColor: agentMessageColor }}>
+                <p className="text-sm" style={{ color: agentMessageTextColor }}>{greetingMessage}</p>
+                <span className="text-xs mt-1 block opacity-75" style={{ color: agentMessageTextColor }}>
+                  {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </span>
+              </div>
+            </div>
+
+            {/* Default User Message */}
+            <div className="flex gap-2 mb-4 justify-end">
+              <div className="p-3 rounded-lg shadow-sm max-w-[80%]" style={{ backgroundColor: userMessageColor }}>
+                <p className="text-sm" style={{ color: userMessageTextColor }}>Hi! I have a question about your services.</p>
+                <span className="text-xs mt-1 block opacity-75" style={{ color: userMessageTextColor }}>
                   {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                 </span>
               </div>
@@ -69,8 +87,7 @@ export default function ChatbotPreview({
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Type your message..."
-                  className="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 pr-10"
-                  style={{ focusRing: color }}
+                  className="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 pr-10"
                 />
                 <button className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-gray-600">
                   <Paperclip className="h-5 w-5" />

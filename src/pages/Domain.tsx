@@ -16,6 +16,10 @@ interface DomainSettings {
   color: string;
   header_text_color: string;
   primary_color: string;
+  agent_message_color: string;
+  user_message_color: string;
+  agent_message_text_color: string;
+  user_message_text_color: string;
 }
 
 export default function Domain() {
@@ -35,9 +39,21 @@ export default function Domain() {
   const [headerTextColor, setHeaderTextColor] = useState('#000000');
   const [showHeaderColorPicker, setShowHeaderColorPicker] = useState(false);
   const [primaryColor, setPrimaryColor] = useState('#FF6B00');
+  const [agentMessageColor, setAgentMessageColor] = useState('#E5E7EB');
+  const [showAgentMessageColorPicker, setShowAgentMessageColorPicker] = useState(false);
+  const [userMessageColor, setUserMessageColor] = useState('#FFF1E7');
+  const [showUserMessageColorPicker, setShowUserMessageColorPicker] = useState(false);
+  const [agentMessageTextColor, setAgentMessageTextColor] = useState('#000000');
+  const [showAgentMessageTextColorPicker, setShowAgentMessageTextColorPicker] = useState(false);
+  const [userMessageTextColor, setUserMessageTextColor] = useState('#000000');
+  const [showUserMessageTextColorPicker, setShowUserMessageTextColorPicker] = useState(false);
 
   const colorPickerRef = useRef<HTMLDivElement>(null);
   const headerColorPickerRef = useRef<HTMLDivElement>(null);
+  const agentMessageColorPickerRef = useRef<HTMLDivElement>(null);
+  const userMessageColorPickerRef = useRef<HTMLDivElement>(null);
+  const agentMessageTextColorPickerRef = useRef<HTMLDivElement>(null);
+  const userMessageTextColorPickerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setDomainName(currentDomain?.name || '');
@@ -85,6 +101,10 @@ export default function Domain() {
           setColor(settings.primary_color || '#FF6B00');
           setHeaderTextColor(settings.header_text_color || '#000000');
           setPrimaryColor(settings.primary_color || '#FF6B00');
+          setAgentMessageColor(settings.agent_message_color || '#E5E7EB');
+          setUserMessageColor(settings.user_message_color || '#FFF1E7');
+          setAgentMessageTextColor(settings.agent_message_text_color || '#000000');
+          setUserMessageTextColor(settings.user_message_text_color || '#000000');
         }
       } catch (error) {
         console.error('Error fetching settings:', error);
@@ -102,6 +122,18 @@ export default function Domain() {
       }
       if (headerColorPickerRef.current && !headerColorPickerRef.current.contains(event.target as Node)) {
         setShowHeaderColorPicker(false);
+      }
+      if (agentMessageColorPickerRef.current && !agentMessageColorPickerRef.current.contains(event.target as Node)) {
+        setShowAgentMessageColorPicker(false);
+      }
+      if (userMessageColorPickerRef.current && !userMessageColorPickerRef.current.contains(event.target as Node)) {
+        setShowUserMessageColorPicker(false);
+      }
+      if (agentMessageTextColorPickerRef.current && !agentMessageTextColorPickerRef.current.contains(event.target as Node)) {
+        setShowAgentMessageTextColorPicker(false);
+      }
+      if (userMessageTextColorPickerRef.current && !userMessageTextColorPickerRef.current.contains(event.target as Node)) {
+        setShowUserMessageTextColorPicker(false);
       }
     };
 
@@ -223,7 +255,11 @@ export default function Domain() {
           chatbot_name: chatbotName,
           greeting_message: greetingMessage,
           primary_color: color,
-          header_text_color: headerTextColor
+          header_text_color: headerTextColor,
+          agent_message_color: agentMessageColor,
+          user_message_color: userMessageColor,
+          agent_message_text_color: agentMessageTextColor,
+          user_message_text_color: userMessageTextColor
         }, {
           onConflict: 'domain_id',
           ignoreDuplicates: false
@@ -288,6 +324,26 @@ export default function Domain() {
             setShowHeaderColorPicker={setShowHeaderColorPicker}
             colorPickerRef={colorPickerRef}
             headerColorPickerRef={headerColorPickerRef}
+            agentMessageColor={agentMessageColor}
+            setAgentMessageColor={setAgentMessageColor}
+            showAgentMessageColorPicker={showAgentMessageColorPicker}
+            setShowAgentMessageColorPicker={setShowAgentMessageColorPicker}
+            userMessageColor={userMessageColor}
+            setUserMessageColor={setUserMessageColor}
+            showUserMessageColorPicker={showUserMessageColorPicker}
+            setShowUserMessageColorPicker={setShowUserMessageColorPicker}
+            agentMessageColorPickerRef={agentMessageColorPickerRef}
+            userMessageColorPickerRef={userMessageColorPickerRef}
+            agentMessageTextColor={agentMessageTextColor}
+            setAgentMessageTextColor={setAgentMessageTextColor}
+            showAgentMessageTextColorPicker={showAgentMessageTextColorPicker}
+            setShowAgentMessageTextColorPicker={setShowAgentMessageTextColorPicker}
+            userMessageTextColor={userMessageTextColor}
+            setUserMessageTextColor={setUserMessageTextColor}
+            showUserMessageTextColorPicker={showUserMessageTextColorPicker}
+            setShowUserMessageTextColorPicker={setShowUserMessageTextColorPicker}
+            agentMessageTextColorPickerRef={agentMessageTextColorPickerRef}
+            userMessageTextColorPickerRef={userMessageTextColorPickerRef}
           />
         </section>
 
@@ -327,6 +383,10 @@ export default function Domain() {
         color={color}
         domainName={domainName}
         headerTextColor={headerTextColor}
+        agentMessageColor={agentMessageColor}
+        userMessageColor={userMessageColor}
+        agentMessageTextColor={agentMessageTextColor}
+        userMessageTextColor={userMessageTextColor}
       />
     </div>
   );
