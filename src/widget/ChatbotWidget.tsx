@@ -22,6 +22,10 @@ interface ChatbotConfig {
   greetingMessage: string;
   color: string;
   headerTextColor: string;
+  agentMessageColor: string;
+  userMessageColor: string;
+  agentMessageTextColor: string;
+  userMessageTextColor: string;
   // Layout settings
   chatWidth: string;
   chatHeight: string;
@@ -516,6 +520,10 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             greetingMessage: data.greeting_message || 'Hello! How can I help you today?',
             color: data.primary_color || '#FF6B00',
             headerTextColor: data.header_text_color || '#000000',
+            agentMessageColor: data.agent_message_color || '#E5E7EB',
+            userMessageColor: data.user_message_color || '#FFF1E7',
+            agentMessageTextColor: data.agent_message_text_color || '#000000',
+            userMessageTextColor: data.user_message_text_color || '#000000',
             ...LAYOUT_CONFIG
           });
         } else {
@@ -525,6 +533,10 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             greetingMessage: 'Hello! How can I help you today?',
             color: '#FF6B00',
             headerTextColor: '#000000',
+            agentMessageColor: '#E5E7EB',
+            userMessageColor: '#FFF1E7',
+            agentMessageTextColor: '#000000',
+            userMessageTextColor: '#000000',
             ...LAYOUT_CONFIG
           });
         }
@@ -536,6 +548,10 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           greetingMessage: 'Hello! How can I help you today?',
           color: '#FF6B00',
           headerTextColor: '#000000',
+          agentMessageColor: '#E5E7EB',
+          userMessageColor: '#FFF1E7',
+          agentMessageTextColor: '#000000',
+          userMessageTextColor: '#000000',
           ...LAYOUT_CONFIG
         });
       }
@@ -551,6 +567,10 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     greetingMessage: 'Hello! How can I help you today?',
     color: '#FF6B00', 
     headerTextColor: '#000000',
+    agentMessageColor: '#E5E7EB',
+    userMessageColor: '#FFF1E7',
+    agentMessageTextColor: '#000000',
+    userMessageTextColor: '#000000',
     ...LAYOUT_CONFIG
   });
 
@@ -747,16 +767,16 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
               {/* Always show greeting message in chat view */}
               {view === 'chat' && (
                 <div className="flex gap-2">
-                <div className="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center">
-                  🤖
+                  <div className="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center">
+                    🤖
+                  </div>
+                  <div className="p-3 rounded-lg max-w-[80%]" style={{ backgroundColor: config.agentMessageColor }}>
+                    <p className="text-sm" style={{ color: config.agentMessageTextColor }}>{config.greetingMessage}</p>
+                    <span className="text-xs mt-1 block opacity-75" style={{ color: config.agentMessageTextColor }}>
+                      {format(new Date(), 'h:mm a')}
+                    </span>
+                  </div>
                 </div>
-                <div className="bg-white p-3 rounded-lg shadow-sm max-w-[80%]">
-                  <p className="text-sm">{config.greetingMessage}</p>
-                  <span className="text-xs text-gray-500 mt-1 block">
-                    {format(new Date(), 'h:mm a')}
-                  </span>
-                </div>
-              </div>
               )}
               
               {/* Messages */}
@@ -771,16 +791,19 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                     </div>
                   )}
                   <div 
-                    className={`p-3 rounded-lg max-w-[80%] ${
-                      msg.sender_type === 'user' 
-                        ? 'bg-orange-500 text-white ml-auto' 
-                        : 'bg-white shadow-sm'
-                    }`}
+                    className="p-3 rounded-lg max-w-[80%]"
+                    style={{ 
+                      backgroundColor: msg.sender_type === 'user' ? config.userMessageColor : config.agentMessageColor
+                    }}
                   >
-                    <p className="text-sm">{msg.content}</p>
-                    <span className={`text-xs mt-1 block ${
-                      msg.sender_type === 'user' ? 'text-orange-100' : 'text-gray-500'
-                    }`}>
+                    <p className="text-sm" style={{ 
+                      color: msg.sender_type === 'user' ? config.userMessageTextColor : config.agentMessageTextColor 
+                    }}>
+                      {msg.content}
+                    </p>
+                    <span className="text-xs mt-1 block opacity-75" style={{ 
+                      color: msg.sender_type === 'user' ? config.userMessageTextColor : config.agentMessageTextColor 
+                    }}>
                       {format(new Date(msg.created_at), 'h:mm a')}
                     </span>
                   </div>
