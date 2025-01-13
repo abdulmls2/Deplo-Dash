@@ -733,13 +733,22 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
               <div className="space-y-4 h-full">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="font-medium text-gray-900">Conversation History</h3>
-                  <button
-                    onClick={handleStartNewConversation}
-                    className="flex items-center gap-2 px-3 py-1.5 bg-orange-500 text-white text-sm rounded-lg hover:bg-orange-600"
-                  >
-                    <MessageSquarePlus className="h-4 w-4" />
-                    Start New Chat
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handleStartNewConversation}
+                      className="flex items-center gap-2 px-3 py-1.5 bg-orange-500 text-white text-sm rounded-lg hover:bg-orange-600"
+                    >
+                      <MessageSquarePlus className="h-4 w-4" />
+                      Start New Chat
+                    </button>
+                    <button
+                      onClick={() => setIsExpanded(false)}
+                      className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm bg-gray-200 hover:bg-gray-300"
+                      title="Close chat"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </div>
                 </div>
                 {conversations.map((conv) => (
                   <button
