@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-D_cKTYDk.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-CZYWaBPx.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -8091,21 +8091,21 @@ function Xc({ domainId: s }) {
           /* @__PURE__ */ _.jsx(
             "button",
             {
-              onClick: () => t(!1),
-              className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
-              style: { color: L.headerTextColor },
-              title: "Close chat",
-              children: /* @__PURE__ */ _.jsx(Nn, { className: "h-4 w-4" })
-            }
-          ),
-          /* @__PURE__ */ _.jsx(
-            "button",
-            {
               onClick: yt,
               className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
               style: { color: L.headerTextColor },
               title: "Refresh chat",
               children: /* @__PURE__ */ _.jsx(In, { className: "h-4 w-4" })
+            }
+          ),
+          /* @__PURE__ */ _.jsx(
+            "button",
+            {
+              onClick: () => t(!1),
+              className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
+              style: { color: L.headerTextColor },
+              title: "Close chat",
+              children: /* @__PURE__ */ _.jsx(Nn, { className: "h-4 w-4" })
             }
           )
         ] })
@@ -8292,4 +8292,4 @@ Qc();
 export {
   Sn as g
 };
-//# sourceMappingURL=main-vKexSEcq.js.map
+//# sourceMappingURL=main-CPnVxtkL.js.map

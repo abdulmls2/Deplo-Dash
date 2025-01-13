@@ -688,20 +688,20 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   <MessageSquare className="h-4 w-4" />
                 </button>
                 <button
-                  onClick={() => setIsExpanded(false)}
-                  className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
-                  style={{ color: config.headerTextColor }}
-                  title="Close chat"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-                <button
                   onClick={handleRefreshChat}
                   className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
                   style={{ color: config.headerTextColor }}
                   title="Refresh chat"
                 >
                   <RefreshCw className="h-4 w-4" />
+                </button>
+                <button
+                  onClick={() => setIsExpanded(false)}
+                  className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
+                  style={{ color: config.headerTextColor }}
+                  title="Close chat"
+                >
+                  <X className="h-4 w-4" />
                 </button>
               </div>
             )}
