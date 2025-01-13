@@ -676,12 +676,12 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   };
 
   return (
-    <div className="fixed bottom-0 right-6 flex flex-col items-end z-[9999]" style={{ bottom: config.verticalOffset }}>
+    <div className={`fixed ${config.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`} 
+      style={{ [config.verticalPosition]: config.verticalOffset }}>
       {isExpanded && (
-        <div className={`${isMobileView() ? 'fixed inset-0 w-full h-full' : 'mb-4'} bg-white rounded-lg shadow-xl overflow-hidden`}
+        <div className={`${isMobileView() ? 'fixed inset-0 w-full h-full' : 'mb-4 bg-white rounded-lg shadow-xl overflow-hidden'}`}
           style={{ 
-            width: isMobileView() ? '100%' : config.chatWidth,
-            height: isMobileView() ? '100%' : config.chatHeight 
+            width: isMobileView() ? '100%' : config.chatWidth
           }}>
           {/* Header */}
           <div className="p-4 border-b flex items-center gap-3" style={{ backgroundColor: config.color }}>
@@ -727,7 +727,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           {/* Chat Area */}
           <div className="overflow-y-auto p-4 bg-gray-50 relative" 
             style={{ 
-              height: isMobileView() ? 'calc(100% - 72px - 80px)' : config.chatHeight 
+              height: isMobileView() ? 'calc(100vh - 72px - 80px)' : config.chatHeight 
             }}>
             {view === 'history' ? (
               <div className="space-y-4 h-full">

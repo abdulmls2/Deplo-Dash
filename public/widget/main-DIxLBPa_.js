@@ -1,4 +1,4 @@
-import * as ie from "react";
+import * as ne from "react";
 import Fe, { forwardRef as wn, createElement as Nr, useState as K, useRef as Ur, useEffect as fe } from "react";
 import bn from "react-dom";
 var ce = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
@@ -104,7 +104,7 @@ function xn() {
       var M = g.displayName || g.name || "";
       return M !== "" ? w + "(" + M + ")" : w;
     }
-    function te(d) {
+    function ie(d) {
       return d.displayName || "Context";
     }
     function J(d) {
@@ -132,10 +132,10 @@ function xn() {
         switch (d.$$typeof) {
           case c:
             var g = d;
-            return te(g) + ".Consumer";
+            return ie(g) + ".Consumer";
           case o:
             var w = d;
-            return te(w._context) + ".Provider";
+            return ie(w._context) + ".Provider";
           case u:
             return Re(d, d.render, "ForwardRef");
           case f:
@@ -152,10 +152,10 @@ function xn() {
         }
       return null;
     }
-    var re = Object.assign, pe = 0, Se, Ee, Ze, yt, _t, wt, bt;
-    function N() {
+    var te = Object.assign, pe = 0, Se, Ee, Ze, yt, _t, wt, bt;
+    function L() {
     }
-    N.__reactDisabledLog = !0;
+    L.__reactDisabledLog = !0;
     function et() {
       {
         if (pe === 0) {
@@ -163,7 +163,7 @@ function xn() {
           var d = {
             configurable: !0,
             enumerable: !0,
-            value: N,
+            value: L,
             writable: !0
           };
           Object.defineProperties(console, {
@@ -188,25 +188,25 @@ function xn() {
             writable: !0
           };
           Object.defineProperties(console, {
-            log: re({}, d, {
+            log: te({}, d, {
               value: Se
             }),
-            info: re({}, d, {
+            info: te({}, d, {
               value: Ee
             }),
-            warn: re({}, d, {
+            warn: te({}, d, {
               value: Ze
             }),
-            error: re({}, d, {
+            error: te({}, d, {
               value: yt
             }),
-            group: re({}, d, {
+            group: te({}, d, {
               value: _t
             }),
-            groupCollapsed: re({}, d, {
+            groupCollapsed: te({}, d, {
               value: wt
             }),
-            groupEnd: re({}, d, {
+            groupEnd: te({}, d, {
               value: bt
             })
           });
@@ -307,7 +307,7 @@ function xn() {
     function W(d, g, w) {
       return R(d, !1);
     }
-    function se(d) {
+    function re(d) {
       var g = d.prototype;
       return !!(g && g.isReactComponent);
     }
@@ -315,7 +315,7 @@ function xn() {
       if (d == null)
         return "";
       if (typeof d == "function")
-        return R(d, se(d));
+        return R(d, re(d));
       if (typeof d == "string")
         return me(d);
       switch (d) {
@@ -1855,10 +1855,10 @@ var Ge;
 (function(s) {
   s[s.connecting = 0] = "connecting", s[s.open = 1] = "open", s[s.closing = 2] = "closing", s[s.closed = 3] = "closed";
 })(Ge || (Ge = {}));
-var ne;
+var se;
 (function(s) {
   s.closed = "closed", s.errored = "errored", s.joined = "joined", s.joining = "joining", s.leaving = "leaving";
-})(ne || (ne = {}));
+})(se || (se = {}));
 var ue;
 (function(s) {
   s.close = "phx_close", s.error = "phx_error", s.join = "phx_join", s.reply = "phx_reply", s.leave = "phx_leave", s.access_token = "access_token";
@@ -2235,18 +2235,18 @@ var ye;
 })(ye || (ye = {}));
 class Er {
   constructor(e, t = { config: {} }, r) {
-    this.topic = e, this.params = t, this.socket = r, this.bindings = {}, this.state = ne.closed, this.joinedOnce = !1, this.pushBuffer = [], this.subTopic = e.replace(/^realtime:/i, ""), this.params.config = Object.assign({
+    this.topic = e, this.params = t, this.socket = r, this.bindings = {}, this.state = se.closed, this.joinedOnce = !1, this.pushBuffer = [], this.subTopic = e.replace(/^realtime:/i, ""), this.params.config = Object.assign({
       broadcast: { ack: !1, self: !1 },
       presence: { key: "" },
       private: !1
     }, t.config), this.timeout = this.socket.timeout, this.joinPush = new Xt(this, ue.join, this.params, this.timeout), this.rejoinTimer = new As(() => this._rejoinUntilConnected(), this.socket.reconnectAfterMs), this.joinPush.receive("ok", () => {
-      this.state = ne.joined, this.rejoinTimer.reset(), this.pushBuffer.forEach((n) => n.send()), this.pushBuffer = [];
+      this.state = se.joined, this.rejoinTimer.reset(), this.pushBuffer.forEach((n) => n.send()), this.pushBuffer = [];
     }), this._onClose(() => {
-      this.rejoinTimer.reset(), this.socket.log("channel", `close ${this.topic} ${this._joinRef()}`), this.state = ne.closed, this.socket._remove(this);
+      this.rejoinTimer.reset(), this.socket.log("channel", `close ${this.topic} ${this._joinRef()}`), this.state = se.closed, this.socket._remove(this);
     }), this._onError((n) => {
-      this._isLeaving() || this._isClosed() || (this.socket.log("channel", `error ${this.topic}`, n), this.state = ne.errored, this.rejoinTimer.scheduleTimeout());
+      this._isLeaving() || this._isClosed() || (this.socket.log("channel", `error ${this.topic}`, n), this.state = se.errored, this.rejoinTimer.scheduleTimeout());
     }), this.joinPush.receive("timeout", () => {
-      this._isJoining() && (this.socket.log("channel", `timeout ${this.topic}`, this.joinPush.timeout), this.state = ne.errored, this.rejoinTimer.scheduleTimeout());
+      this._isJoining() && (this.socket.log("channel", `timeout ${this.topic}`, this.joinPush.timeout), this.state = se.errored, this.rejoinTimer.scheduleTimeout());
     }), this._on(ue.reply, {}, (n, i) => {
       this._trigger(this._replyEventName(i), n);
     }), this.presence = new dt(this), this.broadcastEndpointURL = Is(this.socket.endPoint) + "/api/broadcast", this.private = this.params.config.private || !1;
@@ -2367,7 +2367,7 @@ class Er {
    * channel.unsubscribe().receive("ok", () => alert("left!") )
    */
   unsubscribe(e = this.timeout) {
-    this.state = ne.leaving;
+    this.state = se.leaving;
     const t = () => {
       this.socket.log("channel", `leave ${this.topic}`), this._trigger(ue.close, "leave", this._joinRef());
     };
@@ -2455,19 +2455,19 @@ class Er {
   }
   /** @internal */
   _isClosed() {
-    return this.state === ne.closed;
+    return this.state === se.closed;
   }
   /** @internal */
   _isJoined() {
-    return this.state === ne.joined;
+    return this.state === se.joined;
   }
   /** @internal */
   _isJoining() {
-    return this.state === ne.joining;
+    return this.state === se.joining;
   }
   /** @internal */
   _isLeaving() {
-    return this.state === ne.leaving;
+    return this.state === se.leaving;
   }
   /** @internal */
   _replyEventName(e) {
@@ -2529,7 +2529,7 @@ class Er {
   }
   /** @internal */
   _rejoin(e = this.timeout) {
-    this._isLeaving() || (this.socket._leaveOpenTopic(this.topic), this.state = ne.joining, this.joinPush.resend(e));
+    this._isLeaving() || (this.socket._leaveOpenTopic(this.topic), this.state = se.joining, this.joinPush.resend(e));
   }
   /** @internal */
   _getPayloadRecords(e) {
@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-D_ODJUZX.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-DbMfj28T.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -6406,7 +6406,7 @@ function Mo(s, e) {
   const t = de(s), r = +gt(t, e) - +Do(t, e);
   return Math.round(r / Bs) + 1;
 }
-function L(s, e) {
+function N(s, e) {
   const t = s < 0 ? "-" : "", r = Math.abs(s).toString().padStart(e, "0");
   return t + r;
 }
@@ -6414,16 +6414,16 @@ const ke = {
   // Year
   y(s, e) {
     const t = s.getFullYear(), r = t > 0 ? t : 1 - t;
-    return L(e === "yy" ? r % 100 : r, e.length);
+    return N(e === "yy" ? r % 100 : r, e.length);
   },
   // Month
   M(s, e) {
     const t = s.getMonth();
-    return e === "M" ? String(t + 1) : L(t + 1, 2);
+    return e === "M" ? String(t + 1) : N(t + 1, 2);
   },
   // Day of the month
   d(s, e) {
-    return L(s.getDate(), e.length);
+    return N(s.getDate(), e.length);
   },
   // AM or PM
   a(s, e) {
@@ -6443,26 +6443,26 @@ const ke = {
   },
   // Hour [1-12]
   h(s, e) {
-    return L(s.getHours() % 12 || 12, e.length);
+    return N(s.getHours() % 12 || 12, e.length);
   },
   // Hour [0-23]
   H(s, e) {
-    return L(s.getHours(), e.length);
+    return N(s.getHours(), e.length);
   },
   // Minute
   m(s, e) {
-    return L(s.getMinutes(), e.length);
+    return N(s.getMinutes(), e.length);
   },
   // Second
   s(s, e) {
-    return L(s.getSeconds(), e.length);
+    return N(s.getSeconds(), e.length);
   },
   // Fraction of second
   S(s, e) {
     const t = e.length, r = s.getMilliseconds(), n = Math.trunc(
       r * Math.pow(10, t - 3)
     );
-    return L(n, e.length);
+    return N(n, e.length);
   }
 }, Je = {
   am: "am",
@@ -6502,14 +6502,14 @@ const ke = {
     const n = Hs(s, r), i = n > 0 ? n : 1 - n;
     if (e === "YY") {
       const a = i % 100;
-      return L(a, 2);
+      return N(a, 2);
     }
-    return e === "Yo" ? t.ordinalNumber(i, { unit: "year" }) : L(i, e.length);
+    return e === "Yo" ? t.ordinalNumber(i, { unit: "year" }) : N(i, e.length);
   },
   // ISO week-numbering year
   R: function(s, e) {
     const t = zs(s);
-    return L(t, e.length);
+    return N(t, e.length);
   },
   // Extended year. This is a single number designating the year of this calendar system.
   // The main difference between `y` and `u` localizers are B.C. years:
@@ -6522,7 +6522,7 @@ const ke = {
   // while `uu` pads single digit years to 2 characters and returns other years unchanged.
   u: function(s, e) {
     const t = s.getFullYear();
-    return L(t, e.length);
+    return N(t, e.length);
   },
   // Quarter
   Q: function(s, e, t) {
@@ -6531,7 +6531,7 @@ const ke = {
       case "Q":
         return String(r);
       case "QQ":
-        return L(r, 2);
+        return N(r, 2);
       case "Qo":
         return t.ordinalNumber(r, { unit: "quarter" });
       case "QQQ":
@@ -6559,7 +6559,7 @@ const ke = {
       case "q":
         return String(r);
       case "qq":
-        return L(r, 2);
+        return N(r, 2);
       case "qo":
         return t.ordinalNumber(r, { unit: "quarter" });
       case "qqq":
@@ -6611,7 +6611,7 @@ const ke = {
       case "L":
         return String(r + 1);
       case "LL":
-        return L(r + 1, 2);
+        return N(r + 1, 2);
       case "Lo":
         return t.ordinalNumber(r + 1, { unit: "month" });
       case "LLL":
@@ -6632,12 +6632,12 @@ const ke = {
   // Local week of year
   w: function(s, e, t, r) {
     const n = Mo(s, r);
-    return e === "wo" ? t.ordinalNumber(n, { unit: "week" }) : L(n, e.length);
+    return e === "wo" ? t.ordinalNumber(n, { unit: "week" }) : N(n, e.length);
   },
   // ISO week of year
   I: function(s, e, t) {
     const r = Io(s);
-    return e === "Io" ? t.ordinalNumber(r, { unit: "week" }) : L(r, e.length);
+    return e === "Io" ? t.ordinalNumber(r, { unit: "week" }) : N(r, e.length);
   },
   // Day of the month
   d: function(s, e, t) {
@@ -6646,7 +6646,7 @@ const ke = {
   // Day of year
   D: function(s, e, t) {
     const r = $o(s);
-    return e === "Do" ? t.ordinalNumber(r, { unit: "dayOfYear" }) : L(r, e.length);
+    return e === "Do" ? t.ordinalNumber(r, { unit: "dayOfYear" }) : N(r, e.length);
   },
   // Day of week
   E: function(s, e, t) {
@@ -6684,7 +6684,7 @@ const ke = {
       case "e":
         return String(i);
       case "ee":
-        return L(i, 2);
+        return N(i, 2);
       case "eo":
         return t.ordinalNumber(i, { unit: "day" });
       case "eee":
@@ -6717,7 +6717,7 @@ const ke = {
       case "c":
         return String(i);
       case "cc":
-        return L(i, e.length);
+        return N(i, e.length);
       case "co":
         return t.ordinalNumber(i, { unit: "day" });
       case "ccc":
@@ -6750,7 +6750,7 @@ const ke = {
       case "i":
         return String(n);
       case "ii":
-        return L(n, e.length);
+        return N(n, e.length);
       case "io":
         return t.ordinalNumber(n, { unit: "day" });
       case "iii":
@@ -6873,12 +6873,12 @@ const ke = {
   // Hour [0-11]
   K: function(s, e, t) {
     const r = s.getHours() % 12;
-    return e === "Ko" ? t.ordinalNumber(r, { unit: "hour" }) : L(r, e.length);
+    return e === "Ko" ? t.ordinalNumber(r, { unit: "hour" }) : N(r, e.length);
   },
   // Hour [1-24]
   k: function(s, e, t) {
     let r = s.getHours();
-    return r === 0 && (r = 24), e === "ko" ? t.ordinalNumber(r, { unit: "hour" }) : L(r, e.length);
+    return r === 0 && (r = 24), e === "ko" ? t.ordinalNumber(r, { unit: "hour" }) : N(r, e.length);
   },
   // Minute
   m: function(s, e, t) {
@@ -6953,23 +6953,23 @@ const ke = {
   // Seconds timestamp
   t: function(s, e, t) {
     const r = Math.trunc(s.getTime() / 1e3);
-    return L(r, e.length);
+    return N(r, e.length);
   },
   // Milliseconds timestamp
   T: function(s, e, t) {
     const r = s.getTime();
-    return L(r, e.length);
+    return N(r, e.length);
   }
 };
 function as(s, e = "") {
   const t = s > 0 ? "-" : "+", r = Math.abs(s), n = Math.trunc(r / 60), i = r % 60;
-  return i === 0 ? t + String(n) : t + String(n) + e + L(i, 2);
+  return i === 0 ? t + String(n) : t + String(n) + e + N(i, 2);
 }
 function os(s, e) {
-  return s % 60 === 0 ? (s > 0 ? "-" : "+") + L(Math.abs(s) / 60, 2) : Le(s, e);
+  return s % 60 === 0 ? (s > 0 ? "-" : "+") + N(Math.abs(s) / 60, 2) : Le(s, e);
 }
 function Le(s, e = "") {
-  const t = s > 0 ? "-" : "+", r = Math.abs(s), n = L(Math.trunc(r / 60), 2), i = L(r % 60, 2);
+  const t = s > 0 ? "-" : "+", r = Math.abs(s), n = N(Math.trunc(r / 60), 2), i = N(r % 60, 2);
   return t + n + e + i;
 }
 const cs = (s, e) => {
@@ -7308,22 +7308,22 @@ function sc() {
         value: null
       }, S.current = P) : P = S.current;
       var j = c(function() {
-        var D = !1, I, Y, le = function(te) {
+        var D = !1, I, Y, le = function(ie) {
           if (!D) {
-            D = !0, I = te;
-            var J = y(te);
+            D = !0, I = ie;
+            var J = y(ie);
             if (v !== void 0 && P.hasValue) {
-              var re = P.value;
-              if (v(re, J))
-                return Y = re, re;
+              var te = P.value;
+              if (v(te, J))
+                return Y = te, te;
             }
             return Y = J, J;
           }
           var pe = I, Se = Y;
-          if (n(pe, te))
+          if (n(pe, ie))
             return Se;
-          var Ee = y(te);
-          return v !== void 0 && v(Se, Ee) ? Se : (I = te, Y = Ee, Ee);
+          var Ee = y(ie);
+          return v !== void 0 && v(Se, Ee) ? Se : (I = ie, Y = Ee, Ee);
         }, H = p === void 0 ? null : p, be = function() {
           return le(f());
         }, Re = H === null ? void 0 : function() {
@@ -7640,7 +7640,7 @@ to {
     forwards;
 `, Fc = ({ toast: s }) => {
   let { icon: e, type: t, iconTheme: r } = s;
-  return e !== void 0 ? typeof e == "string" ? ie.createElement(Uc, null, e) : e : t === "blank" ? null : ie.createElement(Lc, null, ie.createElement(Ac, { ...r }), t !== "loading" && ie.createElement(Mc, null, t === "error" ? ie.createElement(Cc, { ...r }) : ie.createElement(Dc, { ...r })));
+  return e !== void 0 ? typeof e == "string" ? ne.createElement(Uc, null, e) : e : t === "blank" ? null : ne.createElement(Lc, null, ne.createElement(Ac, { ...r }), t !== "loading" && ne.createElement(Mc, null, t === "error" ? ne.createElement(Cc, { ...r }) : ne.createElement(Dc, { ...r })));
 }, Wc = (s) => `
 0% {transform: translate3d(0,${s * -200}%,0) scale(.6); opacity:.5;}
 100% {transform: translate3d(0,0,0) scale(1); opacity:1;}
@@ -7670,11 +7670,11 @@ to {
   let t = s.includes("top") ? 1 : -1, [r, n] = bc() ? [Bc, zc] : [Wc(t), qc(t)];
   return { animation: e ? `${_e(r)} 0.35s cubic-bezier(.21,1.02,.73,1) forwards` : `${_e(n)} 0.4s forwards cubic-bezier(.06,.71,.55,1)` };
 };
-ie.memo(({ toast: s, position: e, style: t, children: r }) => {
-  let n = s.height ? Yc(s.position || e || "top-center", s.visible) : { opacity: 0 }, i = ie.createElement(Fc, { toast: s }), a = ie.createElement(Vc, { ...s.ariaProps }, _r(s.message, s));
-  return ie.createElement(Hc, { className: s.className, style: { ...n, ...t, ...s.style } }, typeof r == "function" ? r({ icon: i, message: a }) : ie.createElement(ie.Fragment, null, i, a));
+ne.memo(({ toast: s, position: e, style: t, children: r }) => {
+  let n = s.height ? Yc(s.position || e || "top-center", s.visible) : { opacity: 0 }, i = ne.createElement(Fc, { toast: s }), a = ne.createElement(Vc, { ...s.ariaProps }, _r(s.message, s));
+  return ne.createElement(Hc, { className: s.className, style: { ...n, ...t, ...s.style } }, typeof r == "function" ? r({ icon: i, message: a }) : ne.createElement(ne.Fragment, null, i, a));
 });
-yc(ie.createElement);
+yc(ne.createElement);
 Bt`
   z-index: 9999;
   > * {
@@ -7786,7 +7786,7 @@ function Xc({ domainId: s }) {
     };
     return window.addEventListener("resize", m), () => window.removeEventListener("resize", m);
   }, []);
-  const te = () => window.matchMedia("(max-width: 640px)").matches, J = (m, b) => b.some(
+  const ie = () => window.matchMedia("(max-width: 640px)").matches, J = (m, b) => b.some(
     (R) => (
       // Check for exact ID match
       R.id === m.id || // Check for temp ID being replaced by real ID
@@ -7839,7 +7839,7 @@ function Xc({ domainId: s }) {
     var m;
     e && (i.length > 0 || E) && ((m = x.current) == null || m.scrollIntoView({ behavior: "smooth" }));
   }, [i, e, E]);
-  const re = async () => {
+  const te = async () => {
     if (j)
       try {
         const { data: m, error: b } = await F.from("conversations").select("*").eq("session_id", j).order("last_message_at", { ascending: !1 });
@@ -7850,7 +7850,7 @@ function Xc({ domainId: s }) {
       }
   };
   fe(() => {
-    j && re();
+    j && te();
   }, [j]);
   const pe = async () => {
     a([]), f(null), D(!1), me(null), H(!1), l("chat");
@@ -7910,10 +7910,10 @@ function Xc({ domainId: s }) {
           console.log("New message:", R), a((W) => {
             if (J(R, W))
               return console.log("Message already exists, skipping"), W;
-            const se = W.filter(
+            const re = W.filter(
               (X) => !(X.id.startsWith("temp-") && X.content === R.content && X.sender_type === R.sender_type)
             );
-            return v.add(R.id), R.sender_type === "bot" && Ze(), console.log("Adding new message to state"), [...se, R];
+            return v.add(R.id), R.sender_type === "bot" && Ze(), console.log("Adding new message to state"), [...re, R];
           });
         }
       }
@@ -7937,8 +7937,8 @@ function Xc({ domainId: s }) {
         console.log("No active conversations found for this session");
         return;
       }
-      const W = b[0], se = /* @__PURE__ */ new Date();
-      if (se.setDate(se.getDate() - Kc), new Date(W.last_message_at) < se) {
+      const W = b[0], re = /* @__PURE__ */ new Date();
+      if (re.setDate(re.getDate() - Kc), new Date(W.last_message_at) < re) {
         await F.from("conversations").update({ status: "archived" }).eq("id", W.id);
         return;
       }
@@ -7958,7 +7958,7 @@ function Xc({ domainId: s }) {
         await F.auth.signInAnonymously();
         const { data: { user: W } } = await F.auth.getUser();
         if (!W) throw new Error("Failed to create anonymous session");
-        const { data: se, error: X } = await F.from("conversations").insert({
+        const { data: re, error: X } = await F.from("conversations").insert({
           domain_id: s,
           user_id: W.id,
           session_id: j,
@@ -7966,7 +7966,7 @@ function Xc({ domainId: s }) {
           status: "active"
         }).select().single();
         if (X) throw X;
-        return se.id;
+        return re.id;
       }
       const { data: b, error: R } = await F.from("conversations").insert({
         domain_id: s,
@@ -7993,7 +7993,7 @@ function Xc({ domainId: s }) {
         sender_type: "user",
         created_at: (/* @__PURE__ */ new Date()).toISOString()
       };
-      a((se) => J(W, se) ? se : [...se, W]), await Y(m, R), n("");
+      a((re) => J(W, re) ? re : [...re, W]), await Y(m, R), n("");
     } catch (b) {
       console.error("Error sending message:", b), P("Failed to send message. Please try again.");
     } finally {
@@ -8042,7 +8042,7 @@ function Xc({ domainId: s }) {
       }
     })();
   }, [s]);
-  const [N, et] = K({
+  const [L, et] = K({
     chatbotName: "Chatbot",
     greetingMessage: "Hello! How can I help you today?",
     color: "#FF6B00",
@@ -8053,7 +8053,7 @@ function Xc({ domainId: s }) {
     userMessageTextColor: "#000000",
     ...Rt
   }), St = {
-    backgroundColor: N.color
+    backgroundColor: L.color
   }, tt = async () => {
     if (h)
       try {
@@ -8077,236 +8077,242 @@ function Xc({ domainId: s }) {
         console.error("Error rating conversation:", b);
       }
   };
-  return /* @__PURE__ */ _.jsxs("div", { className: "fixed bottom-0 right-6 flex flex-col items-end z-[9999]", style: { bottom: N.verticalOffset }, children: [
-    e && /* @__PURE__ */ _.jsxs(
-      "div",
-      {
-        className: `${te() ? "fixed inset-0 w-full h-full" : "mb-4"} bg-white rounded-lg shadow-xl overflow-hidden`,
-        style: {
-          width: te() ? "100%" : N.chatWidth,
-          height: te() ? "100%" : N.chatHeight
-        },
-        children: [
-          /* @__PURE__ */ _.jsxs("div", { className: "p-4 border-b flex items-center gap-3", style: { backgroundColor: N.color }, children: [
-            /* @__PURE__ */ _.jsxs("div", { className: "relative flex-shrink-0", children: [
-              /* @__PURE__ */ _.jsx("div", { className: "w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center", children: /* @__PURE__ */ _.jsx("span", { className: "text-lg", children: "🤖" }) }),
-              /* @__PURE__ */ _.jsx("div", { className: "absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white", style: St })
-            ] }),
-            /* @__PURE__ */ _.jsx("div", { className: "flex-1", children: /* @__PURE__ */ _.jsx("h3", { className: "font-medium", style: { color: N.headerTextColor }, children: N.chatbotName }) }),
-            u === "chat" && /* @__PURE__ */ _.jsxs("div", { className: "flex items-center gap-2", children: [
-              /* @__PURE__ */ _.jsx(
-                "button",
-                {
-                  onClick: Se,
-                  className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
-                  style: { color: N.headerTextColor },
-                  children: /* @__PURE__ */ _.jsx(An, { className: "h-4 w-4" })
-                }
-              ),
-              /* @__PURE__ */ _.jsx(
-                "button",
-                {
-                  onClick: tt,
-                  className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
-                  style: { color: N.headerTextColor },
-                  title: "Refresh chat",
-                  children: /* @__PURE__ */ _.jsx(In, { className: "h-4 w-4" })
-                }
-              ),
-              /* @__PURE__ */ _.jsx(
-                "button",
-                {
-                  onClick: () => t(!1),
-                  className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
-                  style: { color: N.headerTextColor },
-                  title: "Close chat",
-                  children: /* @__PURE__ */ _.jsx(Nn, { className: "h-4 w-4" })
-                }
-              )
-            ] })
-          ] }),
-          /* @__PURE__ */ _.jsx(
-            "div",
-            {
-              className: "overflow-y-auto p-4 bg-gray-50 relative",
-              style: {
-                height: te() ? "calc(100% - 72px - 80px)" : N.chatHeight
-              },
-              children: u === "history" ? /* @__PURE__ */ _.jsxs("div", { className: "space-y-4 h-full", children: [
-                /* @__PURE__ */ _.jsxs("div", { className: "flex justify-between items-center mb-4", children: [
-                  /* @__PURE__ */ _.jsx("h3", { className: "font-medium text-gray-900", children: "Conversation History" }),
-                  /* @__PURE__ */ _.jsxs(
+  return /* @__PURE__ */ _.jsxs(
+    "div",
+    {
+      className: `fixed ${L.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`,
+      style: { [L.verticalPosition]: L.verticalOffset },
+      children: [
+        e && /* @__PURE__ */ _.jsxs(
+          "div",
+          {
+            className: `${ie() ? "fixed inset-0 w-full h-full" : "mb-4 bg-white rounded-lg shadow-xl overflow-hidden"}`,
+            style: {
+              width: ie() ? "100%" : L.chatWidth
+            },
+            children: [
+              /* @__PURE__ */ _.jsxs("div", { className: "p-4 border-b flex items-center gap-3", style: { backgroundColor: L.color }, children: [
+                /* @__PURE__ */ _.jsxs("div", { className: "relative flex-shrink-0", children: [
+                  /* @__PURE__ */ _.jsx("div", { className: "w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center", children: /* @__PURE__ */ _.jsx("span", { className: "text-lg", children: "🤖" }) }),
+                  /* @__PURE__ */ _.jsx("div", { className: "absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white", style: St })
+                ] }),
+                /* @__PURE__ */ _.jsx("div", { className: "flex-1", children: /* @__PURE__ */ _.jsx("h3", { className: "font-medium", style: { color: L.headerTextColor }, children: L.chatbotName }) }),
+                u === "chat" && /* @__PURE__ */ _.jsxs("div", { className: "flex items-center gap-2", children: [
+                  /* @__PURE__ */ _.jsx(
                     "button",
                     {
-                      onClick: pe,
-                      className: "flex items-center gap-2 px-3 py-1.5 bg-orange-500 text-white text-sm rounded-lg hover:bg-orange-600",
-                      children: [
-                        /* @__PURE__ */ _.jsx(Rn, { className: "h-4 w-4" }),
-                        "Start New Chat"
-                      ]
+                      onClick: Se,
+                      className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
+                      style: { color: L.headerTextColor },
+                      children: /* @__PURE__ */ _.jsx(An, { className: "h-4 w-4" })
+                    }
+                  ),
+                  /* @__PURE__ */ _.jsx(
+                    "button",
+                    {
+                      onClick: tt,
+                      className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
+                      style: { color: L.headerTextColor },
+                      title: "Refresh chat",
+                      children: /* @__PURE__ */ _.jsx(In, { className: "h-4 w-4" })
+                    }
+                  ),
+                  /* @__PURE__ */ _.jsx(
+                    "button",
+                    {
+                      onClick: () => t(!1),
+                      className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
+                      style: { color: L.headerTextColor },
+                      title: "Close chat",
+                      children: /* @__PURE__ */ _.jsx(Nn, { className: "h-4 w-4" })
                     }
                   )
-                ] }),
-                o.map((m) => /* @__PURE__ */ _.jsxs(
-                  "button",
-                  {
-                    onClick: () => Ee(m),
-                    className: "w-full text-left p-4 rounded-lg hover:bg-gray-100 transition-colors border border-gray-200",
-                    children: [
-                      /* @__PURE__ */ _.jsxs("div", { className: "flex justify-between items-center mb-1", children: [
-                        /* @__PURE__ */ _.jsx("span", { className: "text-sm font-medium text-gray-900", children: Pt(new Date(m.created_at), "PPP") }),
-                        /* @__PURE__ */ _.jsx("span", { className: `text-xs px-2 py-1 rounded-full ${m.status === "archived" ? "bg-gray-100 text-gray-600" : "bg-green-100 text-green-600"}`, children: m.status === "archived" ? "Archived" : "Active" })
-                      ] }),
-                      /* @__PURE__ */ _.jsxs("p", { className: "text-sm text-gray-600", children: [
-                        "Last message: ",
-                        Pt(new Date(m.last_message_at), "p")
-                      ] })
-                    ]
+                ] })
+              ] }),
+              /* @__PURE__ */ _.jsx(
+                "div",
+                {
+                  className: "overflow-y-auto p-4 bg-gray-50 relative",
+                  style: {
+                    height: ie() ? "calc(100vh - 72px - 80px)" : L.chatHeight
                   },
-                  m.id
-                )),
-                o.length === 0 && /* @__PURE__ */ _.jsx("div", { className: "flex flex-col items-center justify-center h-full text-center", children: /* @__PURE__ */ _.jsx("p", { className: "mb-4", children: "No previous conversations found" }) })
-              ] }) : /* @__PURE__ */ _.jsxs("div", { className: "space-y-4", children: [
-                u === "chat" && /* @__PURE__ */ _.jsxs("div", { className: "flex gap-2", children: [
-                  /* @__PURE__ */ _.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
-                  /* @__PURE__ */ _.jsxs("div", { className: "p-3 rounded-lg max-w-[80%]", style: { backgroundColor: N.agentMessageColor }, children: [
-                    /* @__PURE__ */ _.jsx("p", { className: "text-sm", style: { color: N.agentMessageTextColor }, children: N.greetingMessage }),
-                    /* @__PURE__ */ _.jsx("span", { className: "text-xs mt-1 block opacity-75", style: { color: N.agentMessageTextColor }, children: Pt(/* @__PURE__ */ new Date(), "h:mm a") })
-                  ] })
-                ] }),
-                i.map((m) => /* @__PURE__ */ _.jsxs(
-                  "div",
-                  {
-                    className: `flex gap-2 ${m.sender_type === "user" ? "justify-end" : ""}`,
-                    children: [
-                      m.sender_type === "bot" && /* @__PURE__ */ _.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
-                      /* @__PURE__ */ _.jsxs(
-                        "div",
-                        {
-                          className: "p-3 rounded-lg max-w-[80%]",
-                          style: {
-                            backgroundColor: m.sender_type === "user" ? N.userMessageColor : N.agentMessageColor
-                          },
-                          children: [
-                            /* @__PURE__ */ _.jsx("p", { className: "text-sm", style: {
-                              color: m.sender_type === "user" ? N.userMessageTextColor : N.agentMessageTextColor
-                            }, children: m.content }),
-                            /* @__PURE__ */ _.jsx("span", { className: "text-xs mt-1 block opacity-75", style: {
-                              color: m.sender_type === "user" ? N.userMessageTextColor : N.agentMessageTextColor
-                            }, children: Pt(new Date(m.created_at), "h:mm a") })
-                          ]
-                        }
-                      ),
-                      m.sender_type === "user" && /* @__PURE__ */ _.jsx("div", { className: "w-8 h-8 rounded-full bg-orange-100 flex-shrink-0 flex items-center justify-center", children: "👤" })
-                    ]
-                  },
-                  m.id
-                )),
-                E && /* @__PURE__ */ _.jsxs("div", { className: "flex flex-col items-center gap-3 my-4", children: [
-                  /* @__PURE__ */ _.jsxs("div", { className: "bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600", children: [
-                    /* @__PURE__ */ _.jsx(Cn, { className: "h-4 w-4" }),
-                    /* @__PURE__ */ _.jsx("span", { className: "text-sm", children: "This conversation has been archived" })
-                  ] }),
-                  !he && /* @__PURE__ */ _.jsxs("div", { className: "flex flex-col items-center gap-2", children: [
-                    /* @__PURE__ */ _.jsx("p", { className: "text-sm text-gray-600", children: "How was this conversation?" }),
-                    /* @__PURE__ */ _.jsxs("div", { className: "flex gap-3", children: [
+                  children: u === "history" ? /* @__PURE__ */ _.jsxs("div", { className: "space-y-4 h-full", children: [
+                    /* @__PURE__ */ _.jsxs("div", { className: "flex justify-between items-center mb-4", children: [
+                      /* @__PURE__ */ _.jsx("h3", { className: "font-medium text-gray-900", children: "Conversation History" }),
                       /* @__PURE__ */ _.jsxs(
                         "button",
                         {
-                          onClick: () => Ae("bad"),
-                          className: "flex items-center gap-1 px-4 py-2 rounded-lg bg-red-100 text-red-600 hover:bg-red-200 transition-colors",
+                          onClick: pe,
+                          className: "flex items-center gap-2 px-3 py-1.5 bg-orange-500 text-white text-sm rounded-lg hover:bg-orange-600",
                           children: [
-                            /* @__PURE__ */ _.jsx(Mn, { className: "h-4 w-4" }),
-                            /* @__PURE__ */ _.jsx("span", { children: "Bad" })
-                          ]
-                        }
-                      ),
-                      /* @__PURE__ */ _.jsxs(
-                        "button",
-                        {
-                          onClick: () => Ae("ok"),
-                          className: "flex items-center gap-1 px-4 py-2 rounded-lg bg-yellow-100 text-yellow-600 hover:bg-yellow-200 transition-colors",
-                          children: [
-                            /* @__PURE__ */ _.jsx($n, { className: "h-4 w-4" }),
-                            /* @__PURE__ */ _.jsx("span", { children: "OK" })
-                          ]
-                        }
-                      ),
-                      /* @__PURE__ */ _.jsxs(
-                        "button",
-                        {
-                          onClick: () => Ae("good"),
-                          className: "flex items-center gap-1 px-4 py-2 rounded-lg bg-green-100 text-green-600 hover:bg-green-200 transition-colors",
-                          children: [
-                            /* @__PURE__ */ _.jsx(Ln, { className: "h-4 w-4" }),
-                            /* @__PURE__ */ _.jsx("span", { children: "Good" })
+                            /* @__PURE__ */ _.jsx(Rn, { className: "h-4 w-4" }),
+                            "Start New Chat"
                           ]
                         }
                       )
-                    ] })
-                  ] }),
-                  he && /* @__PURE__ */ _.jsxs("div", { className: "flex flex-col items-center gap-2 text-center", children: [
-                    /* @__PURE__ */ _.jsx("span", { className: "text-sm text-gray-600", children: "You rated this conversation:" }),
-                    /* @__PURE__ */ _.jsx("span", { className: `font-medium ${he === "bad" ? "text-red-600" : he === "ok" ? "text-yellow-600" : "text-green-600"}`, children: he === "bad" ? "Bad 👎" : he === "ok" ? "OK 😐" : "Good 👍" })
+                    ] }),
+                    o.map((m) => /* @__PURE__ */ _.jsxs(
+                      "button",
+                      {
+                        onClick: () => Ee(m),
+                        className: "w-full text-left p-4 rounded-lg hover:bg-gray-100 transition-colors border border-gray-200",
+                        children: [
+                          /* @__PURE__ */ _.jsxs("div", { className: "flex justify-between items-center mb-1", children: [
+                            /* @__PURE__ */ _.jsx("span", { className: "text-sm font-medium text-gray-900", children: Pt(new Date(m.created_at), "PPP") }),
+                            /* @__PURE__ */ _.jsx("span", { className: `text-xs px-2 py-1 rounded-full ${m.status === "archived" ? "bg-gray-100 text-gray-600" : "bg-green-100 text-green-600"}`, children: m.status === "archived" ? "Archived" : "Active" })
+                          ] }),
+                          /* @__PURE__ */ _.jsxs("p", { className: "text-sm text-gray-600", children: [
+                            "Last message: ",
+                            Pt(new Date(m.last_message_at), "p")
+                          ] })
+                        ]
+                      },
+                      m.id
+                    )),
+                    o.length === 0 && /* @__PURE__ */ _.jsx("div", { className: "flex flex-col items-center justify-center h-full text-center", children: /* @__PURE__ */ _.jsx("p", { className: "mb-4", children: "No previous conversations found" }) })
+                  ] }) : /* @__PURE__ */ _.jsxs("div", { className: "space-y-4", children: [
+                    u === "chat" && /* @__PURE__ */ _.jsxs("div", { className: "flex gap-2", children: [
+                      /* @__PURE__ */ _.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
+                      /* @__PURE__ */ _.jsxs("div", { className: "p-3 rounded-lg max-w-[80%]", style: { backgroundColor: L.agentMessageColor }, children: [
+                        /* @__PURE__ */ _.jsx("p", { className: "text-sm", style: { color: L.agentMessageTextColor }, children: L.greetingMessage }),
+                        /* @__PURE__ */ _.jsx("span", { className: "text-xs mt-1 block opacity-75", style: { color: L.agentMessageTextColor }, children: Pt(/* @__PURE__ */ new Date(), "h:mm a") })
+                      ] })
+                    ] }),
+                    i.map((m) => /* @__PURE__ */ _.jsxs(
+                      "div",
+                      {
+                        className: `flex gap-2 ${m.sender_type === "user" ? "justify-end" : ""}`,
+                        children: [
+                          m.sender_type === "bot" && /* @__PURE__ */ _.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
+                          /* @__PURE__ */ _.jsxs(
+                            "div",
+                            {
+                              className: "p-3 rounded-lg max-w-[80%]",
+                              style: {
+                                backgroundColor: m.sender_type === "user" ? L.userMessageColor : L.agentMessageColor
+                              },
+                              children: [
+                                /* @__PURE__ */ _.jsx("p", { className: "text-sm", style: {
+                                  color: m.sender_type === "user" ? L.userMessageTextColor : L.agentMessageTextColor
+                                }, children: m.content }),
+                                /* @__PURE__ */ _.jsx("span", { className: "text-xs mt-1 block opacity-75", style: {
+                                  color: m.sender_type === "user" ? L.userMessageTextColor : L.agentMessageTextColor
+                                }, children: Pt(new Date(m.created_at), "h:mm a") })
+                              ]
+                            }
+                          ),
+                          m.sender_type === "user" && /* @__PURE__ */ _.jsx("div", { className: "w-8 h-8 rounded-full bg-orange-100 flex-shrink-0 flex items-center justify-center", children: "👤" })
+                        ]
+                      },
+                      m.id
+                    )),
+                    E && /* @__PURE__ */ _.jsxs("div", { className: "flex flex-col items-center gap-3 my-4", children: [
+                      /* @__PURE__ */ _.jsxs("div", { className: "bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600", children: [
+                        /* @__PURE__ */ _.jsx(Cn, { className: "h-4 w-4" }),
+                        /* @__PURE__ */ _.jsx("span", { className: "text-sm", children: "This conversation has been archived" })
+                      ] }),
+                      !he && /* @__PURE__ */ _.jsxs("div", { className: "flex flex-col items-center gap-2", children: [
+                        /* @__PURE__ */ _.jsx("p", { className: "text-sm text-gray-600", children: "How was this conversation?" }),
+                        /* @__PURE__ */ _.jsxs("div", { className: "flex gap-3", children: [
+                          /* @__PURE__ */ _.jsxs(
+                            "button",
+                            {
+                              onClick: () => Ae("bad"),
+                              className: "flex items-center gap-1 px-4 py-2 rounded-lg bg-red-100 text-red-600 hover:bg-red-200 transition-colors",
+                              children: [
+                                /* @__PURE__ */ _.jsx(Mn, { className: "h-4 w-4" }),
+                                /* @__PURE__ */ _.jsx("span", { children: "Bad" })
+                              ]
+                            }
+                          ),
+                          /* @__PURE__ */ _.jsxs(
+                            "button",
+                            {
+                              onClick: () => Ae("ok"),
+                              className: "flex items-center gap-1 px-4 py-2 rounded-lg bg-yellow-100 text-yellow-600 hover:bg-yellow-200 transition-colors",
+                              children: [
+                                /* @__PURE__ */ _.jsx($n, { className: "h-4 w-4" }),
+                                /* @__PURE__ */ _.jsx("span", { children: "OK" })
+                              ]
+                            }
+                          ),
+                          /* @__PURE__ */ _.jsxs(
+                            "button",
+                            {
+                              onClick: () => Ae("good"),
+                              className: "flex items-center gap-1 px-4 py-2 rounded-lg bg-green-100 text-green-600 hover:bg-green-200 transition-colors",
+                              children: [
+                                /* @__PURE__ */ _.jsx(Ln, { className: "h-4 w-4" }),
+                                /* @__PURE__ */ _.jsx("span", { children: "Good" })
+                              ]
+                            }
+                          )
+                        ] })
+                      ] }),
+                      he && /* @__PURE__ */ _.jsxs("div", { className: "flex flex-col items-center gap-2 text-center", children: [
+                        /* @__PURE__ */ _.jsx("span", { className: "text-sm text-gray-600", children: "You rated this conversation:" }),
+                        /* @__PURE__ */ _.jsx("span", { className: `font-medium ${he === "bad" ? "text-red-600" : he === "ok" ? "text-yellow-600" : "text-green-600"}`, children: he === "bad" ? "Bad 👎" : he === "ok" ? "OK 😐" : "Good 👍" })
+                      ] })
+                    ] }),
+                    /* @__PURE__ */ _.jsx("div", { ref: x })
                   ] })
+                }
+              ),
+              u === "chat" && /* @__PURE__ */ _.jsxs("form", { onSubmit: bt, className: "p-4 border-t bg-white", children: [
+                /* @__PURE__ */ _.jsxs("div", { className: "flex gap-2", children: [
+                  /* @__PURE__ */ _.jsx("div", { className: "flex-1 relative", children: /* @__PURE__ */ _.jsx(
+                    "input",
+                    {
+                      type: "text",
+                      value: r,
+                      onChange: (m) => n(m.target.value),
+                      placeholder: "Type your message...",
+                      className: "w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 pr-10 disabled:opacity-50 disabled:cursor-not-allowed",
+                      style: { "--tw-ring-color": L.color },
+                      disabled: p || E
+                    }
+                  ) }),
+                  /* @__PURE__ */ _.jsx(
+                    "button",
+                    {
+                      type: "submit",
+                      disabled: !r.trim() || p || E,
+                      className: "p-2 rounded-full text-white flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed",
+                      style: St,
+                      children: p ? /* @__PURE__ */ _.jsx("div", { className: "h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" }) : /* @__PURE__ */ _.jsx(Dn, { className: "h-5 w-5" })
+                    }
+                  )
                 ] }),
-                /* @__PURE__ */ _.jsx("div", { ref: x })
+                /* @__PURE__ */ _.jsx("div", { className: "text-center mt-2", children: /* @__PURE__ */ _.jsx(
+                  "a",
+                  {
+                    href: "https://dashboard.ai",
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    className: "text-sm text-gray-600 hover:text-gray-700",
+                    children: "Powered by Dashboard.ai"
+                  }
+                ) })
               ] })
-            }
-          ),
-          u === "chat" && /* @__PURE__ */ _.jsxs("form", { onSubmit: bt, className: "p-4 border-t bg-white", children: [
-            /* @__PURE__ */ _.jsxs("div", { className: "flex gap-2", children: [
-              /* @__PURE__ */ _.jsx("div", { className: "flex-1 relative", children: /* @__PURE__ */ _.jsx(
-                "input",
-                {
-                  type: "text",
-                  value: r,
-                  onChange: (m) => n(m.target.value),
-                  placeholder: "Type your message...",
-                  className: "w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 pr-10 disabled:opacity-50 disabled:cursor-not-allowed",
-                  style: { "--tw-ring-color": N.color },
-                  disabled: p || E
-                }
-              ) }),
-              /* @__PURE__ */ _.jsx(
-                "button",
-                {
-                  type: "submit",
-                  disabled: !r.trim() || p || E,
-                  className: "p-2 rounded-full text-white flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed",
-                  style: St,
-                  children: p ? /* @__PURE__ */ _.jsx("div", { className: "h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" }) : /* @__PURE__ */ _.jsx(Dn, { className: "h-5 w-5" })
-                }
-              )
-            ] }),
-            /* @__PURE__ */ _.jsx("div", { className: "text-center mt-2", children: /* @__PURE__ */ _.jsx(
-              "a",
-              {
-                href: "https://dashboard.ai",
-                target: "_blank",
-                rel: "noopener noreferrer",
-                className: "text-sm text-gray-600 hover:text-gray-700",
-                children: "Powered by Dashboard.ai"
-              }
-            ) })
-          ] })
-        ]
-      }
-    ),
-    /* @__PURE__ */ _.jsx(
-      "button",
-      {
-        className: "rounded-full text-white flex items-center justify-center shadow-lg",
-        style: {
-          backgroundColor: N.color,
-          width: N.toggleButtonSize,
-          height: N.toggleButtonSize
-        },
-        onClick: () => t(!e),
-        children: e ? "×" : "💬"
-      }
-    )
-  ] });
+            ]
+          }
+        ),
+        /* @__PURE__ */ _.jsx(
+          "button",
+          {
+            className: "rounded-full text-white flex items-center justify-center shadow-lg",
+            style: {
+              backgroundColor: L.color,
+              width: L.toggleButtonSize,
+              height: L.toggleButtonSize
+            },
+            onClick: () => t(!e),
+            children: e ? "×" : "💬"
+          }
+        )
+      ]
+    }
+  );
 }
 function Qc() {
   const s = document.createElement("div");
@@ -8318,4 +8324,4 @@ Qc();
 export {
   Sn as g
 };
-//# sourceMappingURL=main-DaaLTsLc.js.map
+//# sourceMappingURL=main-DIxLBPa_.js.map
