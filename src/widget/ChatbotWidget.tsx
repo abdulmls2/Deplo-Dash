@@ -676,7 +676,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             </div>
             <div className="flex-1">
               <h3 className="font-medium" style={{ color: config.headerTextColor }}>{config.chatbotName}</h3>
-              <p className="text-sm" style={{ color: config.headerTextColor }}>from {config.chatbotName}</p>
+              {/* <p className="text-sm" style={{ color: config.headerTextColor }}>from {config.chatbotName}</p> */}
             </div>
             {view === 'chat' && (
               <div className="flex items-center gap-2">
