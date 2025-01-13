@@ -680,25 +680,14 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             </div>
             {view === 'chat' && (
               <div className="flex items-center gap-2">
-                {!isRequestingLiveChat ? (
-                  <button
-                    onClick={handleRequestLiveChat}
-                    className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm hover:bg-white/30"
-                    style={{ color: config.headerTextColor }}
-                    title="Request live agent"
-                    disabled={!conversationId || isArchived}
-                  >
-                    <UserRound className="h-4 w-4" />
-                  </button>
-                ) : (
-                  <div
-                    className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
-                    style={{ color: config.headerTextColor }}
-                    title="Waiting for agent"
-                  >
-                    <Hourglass className="h-4 w-4" />
-                  </div>
-                )}
+                <button
+                  onClick={() => setIsExpanded(false)}
+                  className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
+                  style={{ color: config.headerTextColor }}
+                  title="Close chat"
+                >
+                  <X className="h-4 w-4" />
+                </button>
                 <button
                   onClick={handleRefreshChat}
                   className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
