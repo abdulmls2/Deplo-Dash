@@ -65,6 +65,19 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const notificationSound = useRef<HTMLAudioElement | null>(null);
   const { sendMessage: chatbotSendMessage } = useChatbotStore();
   const [isRequestingLiveChat, setIsRequestingLiveChat] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // Add window resize listener
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobileView = () => window.matchMedia('(max-width: 640px)').matches;
 
   // Add this helper function at the top of the component
   const isMessageDuplicate = (newMsg: Message, existingMessages: Message[]) => {
@@ -663,9 +676,13 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   };
 
   return (
-    <div className={`fixed ${config.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`} style={{ [config.verticalPosition]: config.verticalOffset }}>
+    <div className="fixed bottom-0 right-6 flex flex-col items-end z-[9999]" style={{ bottom: config.verticalOffset }}>
       {isExpanded && (
-        <div className="mb-4 bg-white rounded-lg shadow-xl overflow-hidden" style={{ width: config.chatWidth }}>
+        <div className={`${isMobileView() ? 'fixed inset-0 w-full h-full' : 'mb-4'} bg-white rounded-lg shadow-xl overflow-hidden`}
+          style={{ 
+            width: isMobileView() ? '100%' : config.chatWidth,
+            height: isMobileView() ? '100%' : config.chatHeight 
+          }}>
           {/* Header */}
           <div className="p-4 border-b flex items-center gap-3" style={{ backgroundColor: config.color }}>
             <div className="relative flex-shrink-0">
@@ -708,7 +725,10 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           </div>
 
           {/* Chat Area */}
-          <div className="overflow-y-auto p-4 bg-gray-50 relative" style={{ height: config.chatHeight }}>
+          <div className="overflow-y-auto p-4 bg-gray-50 relative" 
+            style={{ 
+              height: isMobileView() ? 'calc(100% - 72px - 80px)' : config.chatHeight 
+            }}>
             {view === 'history' ? (
               <div className="space-y-4 h-full">
                 <div className="flex justify-between items-center mb-4">
