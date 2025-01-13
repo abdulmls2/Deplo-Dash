@@ -665,7 +665,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   return (
     <div className={`fixed ${config.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`} style={{ [config.verticalPosition]: config.verticalOffset }}>
       {isExpanded && (
-        <div className="mb-4 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden" style={{ width: config.chatWidth }}>
+        <div className="mb-4 bg-white rounded-lg shadow-xl overflow-hidden" style={{ width: config.chatWidth }}>
           {/* Header */}
           <div className="p-4 border-b flex items-center gap-3" style={{ backgroundColor: config.color }}>
             <div className="relative flex-shrink-0">

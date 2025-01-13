@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-CZYWaBPx.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-DIjswwJR.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -8071,7 +8071,7 @@ function Xc({ domainId: s }) {
       }
   };
   return /* @__PURE__ */ _.jsxs("div", { className: `fixed ${L.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`, style: { [L.verticalPosition]: L.verticalOffset }, children: [
-    e && /* @__PURE__ */ _.jsxs("div", { className: "mb-4 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden", style: { width: L.chatWidth }, children: [
+    e && /* @__PURE__ */ _.jsxs("div", { className: "mb-4 bg-white rounded-lg shadow-xl overflow-hidden", style: { width: L.chatWidth }, children: [
       /* @__PURE__ */ _.jsxs("div", { className: "p-4 border-b flex items-center gap-3", style: { backgroundColor: L.color }, children: [
         /* @__PURE__ */ _.jsxs("div", { className: "relative flex-shrink-0", children: [
           /* @__PURE__ */ _.jsx("div", { className: "w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center", children: /* @__PURE__ */ _.jsx("span", { className: "text-lg", children: "🤖" }) }),
@@ -8292,4 +8292,4 @@ Qc();
 export {
   Sn as g
 };
-//# sourceMappingURL=main-CPnVxtkL.js.map
+//# sourceMappingURL=main-SKzZ6Ihe.js.map
