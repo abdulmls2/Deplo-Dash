@@ -680,6 +680,13 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             </div>
             {view === 'chat' && (
               <div className="flex items-center gap-2">
+                 <button
+                  onClick={handleBackToHistory}
+                  className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
+                  style={{ color: config.headerTextColor }}
+                >
+                  <MessageSquare className="h-4 w-4" />
+                </button>
                 <button
                   onClick={() => setIsExpanded(false)}
                   className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
@@ -695,13 +702,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   title="Refresh chat"
                 >
                   <RefreshCw className="h-4 w-4" />
-                </button>
-                <button
-                  onClick={handleBackToHistory}
-                  className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
-                  style={{ color: config.headerTextColor }}
-                >
-                  <MessageSquare className="h-4 w-4" />
                 </button>
               </div>
             )}
