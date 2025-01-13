@@ -693,11 +693,10 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             </div>
             <div className="flex-1">
               <h3 className="font-medium" style={{ color: config.headerTextColor }}>{config.chatbotName}</h3>
-              {/* <p className="text-sm" style={{ color: config.headerTextColor }}>from {config.chatbotName}</p> */}
             </div>
-            {view === 'chat' && (
+            {view === 'chat' ? (
               <div className="flex items-center gap-2">
-                 <button
+                <button
                   onClick={handleBackToHistory}
                   className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
                   style={{ color: config.headerTextColor }}
@@ -721,6 +720,17 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   <X className="h-4 w-4" />
                 </button>
               </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setIsExpanded(false)}
+                  className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm"
+                  style={{ color: config.headerTextColor }}
+                  title="Close chat"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
             )}
           </div>
 
@@ -733,22 +743,13 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
               <div className="space-y-4 h-full">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="font-medium text-gray-900">Conversation History</h3>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={handleStartNewConversation}
-                      className="flex items-center gap-2 px-3 py-1.5 bg-orange-500 text-white text-sm rounded-lg hover:bg-orange-600"
-                    >
-                      <MessageSquarePlus className="h-4 w-4" />
-                      Start New Chat
-                    </button>
-                    <button
-                      onClick={() => setIsExpanded(false)}
-                      className="flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm bg-gray-200 hover:bg-gray-300"
-                      title="Close chat"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                  </div>
+                  <button
+                    onClick={handleStartNewConversation}
+                    className="flex items-center gap-2 px-3 py-1.5 bg-orange-500 text-white text-sm rounded-lg hover:bg-orange-600"
+                  >
+                    <MessageSquarePlus className="h-4 w-4" />
+                    Start New Chat
+                  </button>
                 </div>
                 {conversations.map((conv) => (
                   <button

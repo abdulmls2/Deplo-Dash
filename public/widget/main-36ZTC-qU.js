@@ -80,8 +80,8 @@ function On() {
     }
     function x(d, g, w) {
       {
-        var E = j.ReactDebugCurrentFrame, M = E.getStackAddendum();
-        M !== "" && (g += "%s", w = w.concat([M]));
+        var E = j.ReactDebugCurrentFrame, L = E.getStackAddendum();
+        L !== "" && (g += "%s", w = w.concat([L]));
         var U = w.map(function($) {
           return String($);
         });
@@ -101,8 +101,8 @@ function On() {
       var E = d.displayName;
       if (E)
         return E;
-      var M = g.displayName || g.name || "";
-      return M !== "" ? w + "(" + M + ")" : w;
+      var L = g.displayName || g.name || "";
+      return L !== "" ? w + "(" + L + ")" : w;
     }
     function te(d) {
       return d.displayName || "Context";
@@ -142,7 +142,7 @@ function On() {
             var E = d.displayName || null;
             return E !== null ? E : J(d.type) || "Memo";
           case p: {
-            var M = d, U = M._payload, $ = M._init;
+            var L = d, U = L._payload, $ = L._init;
             try {
               return J($(U));
             } catch {
@@ -153,9 +153,9 @@ function On() {
       return null;
     }
     var re = Object.assign, pe = 0, Se, ke, Ze, yt, _t, wt, bt;
-    function L() {
+    function M() {
     }
-    L.__reactDisabledLog = !0;
+    M.__reactDisabledLog = !0;
     function et() {
       {
         if (pe === 0) {
@@ -163,7 +163,7 @@ function On() {
           var d = {
             configurable: !0,
             enumerable: !0,
-            value: L,
+            value: M,
             writable: !0
           };
           Object.defineProperties(console, {
@@ -220,8 +220,8 @@ function On() {
         if (he === void 0)
           try {
             throw Error();
-          } catch (M) {
-            var E = M.stack.trim().match(/\n( *(at )?)/);
+          } catch (L) {
+            var E = L.stack.trim().match(/\n( *(at )?)/);
             he = E && E[1] || "";
           }
         return `
@@ -243,7 +243,7 @@ function On() {
       }
       var E;
       Ae = !0;
-      var M = Error.prepareStackTrace;
+      var L = Error.prepareStackTrace;
       Error.prepareStackTrace = void 0;
       var U;
       U = tt.current, tt.current = null, et();
@@ -299,7 +299,7 @@ function On() {
             }
         }
       } finally {
-        Ae = !1, tt.current = U, St(), Error.prepareStackTrace = M;
+        Ae = !1, tt.current = U, St(), Error.prepareStackTrace = L;
       }
       var ze = d ? d.displayName || d.name : "", Ie = ze ? me(ze) : "";
       return typeof d == "function" && m.set(d, Ie), Ie;
@@ -331,9 +331,9 @@ function On() {
           case f:
             return X(d.type, g, w);
           case p: {
-            var E = d, M = E._payload, U = E._init;
+            var E = d, L = E._payload, U = E._init;
             try {
-              return X(U(M), g, w);
+              return X(U(L), g, w);
             } catch {
             }
           }
@@ -348,7 +348,7 @@ function On() {
       } else
         Or.setExtraStackFrame(null);
     }
-    function Qs(d, g, w, E, M) {
+    function Qs(d, g, w, E, L) {
       {
         var U = Function.call.bind($e);
         for (var $ in d)
@@ -363,7 +363,7 @@ function On() {
             } catch (B) {
               C = B;
             }
-            C && !(C instanceof Error) && (kt(M), O("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", E || "React class", w, $, typeof C), kt(null)), C instanceof Error && !(C.message in rt) && (rt[C.message] = !0, kt(M), O("Failed %s type: %s", w, C.message), kt(null));
+            C && !(C instanceof Error) && (kt(L), O("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", E || "React class", w, $, typeof C), kt(null)), C instanceof Error && !(C.message in rt) && (rt[C.message] = !0, kt(L), O("Failed %s type: %s", w, C.message), kt(null));
           }
       }
     }
@@ -442,7 +442,7 @@ function On() {
         });
       }
     }
-    var ln = function(d, g, w, E, M, U, $) {
+    var ln = function(d, g, w, E, L, U, $) {
       var C = {
         // This tag allows us to uniquely identify this as a React Element
         $$typeof: t,
@@ -468,13 +468,13 @@ function On() {
         configurable: !1,
         enumerable: !1,
         writable: !1,
-        value: M
+        value: L
       }), Object.freeze && (Object.freeze(C.props), Object.freeze(C)), C;
     };
-    function un(d, g, w, E, M) {
+    function un(d, g, w, E, L) {
       {
         var U, $ = {}, C = null, G = null;
-        w !== void 0 && (jr(w), C = "" + w), nn(g) && (jr(g.key), C = "" + g.key), sn(g) && (G = g.ref, an(g, M));
+        w !== void 0 && (jr(w), C = "" + w), nn(g) && (jr(g.key), C = "" + g.key), sn(g) && (G = g.ref, an(g, L));
         for (U in g)
           $e.call(g, U) && !rn.hasOwnProperty(U) && ($[U] = g[U]);
         if (d && d.defaultProps) {
@@ -486,7 +486,7 @@ function On() {
           var z = typeof d == "function" ? d.displayName || d.name || "Unknown" : d;
           C && on($, z), G && cn($, z);
         }
-        return ln(d, C, G, M, E, st.current, $);
+        return ln(d, C, G, L, E, st.current, $);
       }
     }
     var Yt = j.ReactCurrentOwner, Rr = j.ReactDebugCurrentFrame;
@@ -555,9 +555,9 @@ Check the top-level render call using <` + w + ">.");
         else if (Gt(d))
           d._store && (d._store.validated = !0);
         else if (d) {
-          var M = P(d);
-          if (typeof M == "function" && M !== d.entries)
-            for (var U = M.call(d), $; !($ = U.next()).done; )
+          var L = P(d);
+          if (typeof L == "function" && L !== d.entries)
+            for (var U = L.call(d), $; !($ = U.next()).done; )
               Gt($.value) && Ir($.value, g);
         }
       }
@@ -581,8 +581,8 @@ Check the top-level render call using <` + w + ">.");
           Qs(w, d.props, "prop", E, d);
         } else if (g.PropTypes !== void 0 && !Jt) {
           Jt = !0;
-          var M = J(g);
-          O("Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?", M || "Unknown");
+          var L = J(g);
+          O("Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?", L || "Unknown");
         }
         typeof g.getDefaultProps == "function" && !g.getDefaultProps.isReactClassApproved && O("getDefaultProps is only used on classic React.createClass definitions. Use a static property named `defaultProps` instead.");
       }
@@ -600,7 +600,7 @@ Check the top-level render call using <` + w + ">.");
       }
     }
     var Mr = {};
-    function Lr(d, g, w, E, M, U) {
+    function Lr(d, g, w, E, L, U) {
       {
         var $ = be(d);
         if (!$) {
@@ -611,7 +611,7 @@ Check the top-level render call using <` + w + ">.");
           var B;
           d === null ? B = "null" : Ht(d) ? B = "array" : d !== void 0 && d.$$typeof === t ? (B = "<" + (J(d.type) || "Unknown") + " />", C = " Did you accidentally export a JSX literal instead of a component?") : B = typeof d, O("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", B, C);
         }
-        var z = un(d, g, w, M, U);
+        var z = un(d, g, w, L, U);
         if (z == null)
           return z;
         if ($) {
@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-DFzO4yme.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-BrrsRUQi.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -8042,7 +8042,7 @@ function Xc({ domainId: s }) {
       }
     })();
   }, [s]);
-  const [L, et] = K({
+  const [M, et] = K({
     chatbotName: "Chatbot",
     greetingMessage: "Hello! How can I help you today?",
     color: "#FF6B00",
@@ -8053,7 +8053,7 @@ function Xc({ domainId: s }) {
     userMessageTextColor: "#000000",
     ...Rt
   }), St = {
-    backgroundColor: L.color
+    backgroundColor: M.color
   }, tt = async () => {
     if (h)
       try {
@@ -8080,30 +8080,30 @@ function Xc({ domainId: s }) {
   return /* @__PURE__ */ y.jsxs(
     "div",
     {
-      className: `fixed ${L.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`,
-      style: { [L.verticalPosition]: L.verticalOffset },
+      className: `fixed ${M.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`,
+      style: { [M.verticalPosition]: M.verticalOffset },
       children: [
         e && /* @__PURE__ */ y.jsxs(
           "div",
           {
             className: `${te() ? "fixed inset-0 w-full h-full flex flex-col" : "mb-4 bg-white rounded-lg shadow-xl overflow-hidden"}`,
             style: {
-              width: te() ? "100%" : L.chatWidth
+              width: te() ? "100%" : M.chatWidth
             },
             children: [
-              /* @__PURE__ */ y.jsxs("div", { className: "p-4 border-b flex items-center gap-3", style: { backgroundColor: L.color }, children: [
+              /* @__PURE__ */ y.jsxs("div", { className: "p-4 border-b flex items-center gap-3", style: { backgroundColor: M.color }, children: [
                 /* @__PURE__ */ y.jsxs("div", { className: "relative flex-shrink-0", children: [
                   /* @__PURE__ */ y.jsx("div", { className: "w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center", children: /* @__PURE__ */ y.jsx("span", { className: "text-lg", children: "🤖" }) }),
                   /* @__PURE__ */ y.jsx("div", { className: "absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white", style: St })
                 ] }),
-                /* @__PURE__ */ y.jsx("div", { className: "flex-1", children: /* @__PURE__ */ y.jsx("h3", { className: "font-medium", style: { color: L.headerTextColor }, children: L.chatbotName }) }),
-                u === "chat" && /* @__PURE__ */ y.jsxs("div", { className: "flex items-center gap-2", children: [
+                /* @__PURE__ */ y.jsx("div", { className: "flex-1", children: /* @__PURE__ */ y.jsx("h3", { className: "font-medium", style: { color: M.headerTextColor }, children: M.chatbotName }) }),
+                u === "chat" ? /* @__PURE__ */ y.jsxs("div", { className: "flex items-center gap-2", children: [
                   /* @__PURE__ */ y.jsx(
                     "button",
                     {
                       onClick: Se,
                       className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
-                      style: { color: L.headerTextColor },
+                      style: { color: M.headerTextColor },
                       children: /* @__PURE__ */ y.jsx($n, { className: "h-4 w-4" })
                     }
                   ),
@@ -8112,7 +8112,7 @@ function Xc({ domainId: s }) {
                     {
                       onClick: tt,
                       className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
-                      style: { color: L.headerTextColor },
+                      style: { color: M.headerTextColor },
                       title: "Refresh chat",
                       children: /* @__PURE__ */ y.jsx(Dn, { className: "h-4 w-4" })
                     }
@@ -8122,45 +8122,43 @@ function Xc({ domainId: s }) {
                     {
                       onClick: () => t(!1),
                       className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
-                      style: { color: L.headerTextColor },
+                      style: { color: M.headerTextColor },
                       title: "Close chat",
                       children: /* @__PURE__ */ y.jsx(Br, { className: "h-4 w-4" })
                     }
                   )
-                ] })
+                ] }) : /* @__PURE__ */ y.jsx("div", { className: "flex items-center gap-2", children: /* @__PURE__ */ y.jsx(
+                  "button",
+                  {
+                    onClick: () => t(!1),
+                    className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
+                    style: { color: M.headerTextColor },
+                    title: "Close chat",
+                    children: /* @__PURE__ */ y.jsx(Br, { className: "h-4 w-4" })
+                  }
+                ) })
               ] }),
               /* @__PURE__ */ y.jsx(
                 "div",
                 {
                   className: `overflow-y-auto p-4 bg-gray-50 relative ${te() ? "flex-1" : ""}`,
                   style: {
-                    height: te() ? "auto" : L.chatHeight
+                    height: te() ? "auto" : M.chatHeight
                   },
                   children: u === "history" ? /* @__PURE__ */ y.jsxs("div", { className: "space-y-4 h-full", children: [
                     /* @__PURE__ */ y.jsxs("div", { className: "flex justify-between items-center mb-4", children: [
                       /* @__PURE__ */ y.jsx("h3", { className: "font-medium text-gray-900", children: "Conversation History" }),
-                      /* @__PURE__ */ y.jsxs("div", { className: "flex items-center gap-2", children: [
-                        /* @__PURE__ */ y.jsxs(
-                          "button",
-                          {
-                            onClick: pe,
-                            className: "flex items-center gap-2 px-3 py-1.5 bg-orange-500 text-white text-sm rounded-lg hover:bg-orange-600",
-                            children: [
-                              /* @__PURE__ */ y.jsx(An, { className: "h-4 w-4" }),
-                              "Start New Chat"
-                            ]
-                          }
-                        ),
-                        /* @__PURE__ */ y.jsx(
-                          "button",
-                          {
-                            onClick: () => t(!1),
-                            className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm bg-gray-200 hover:bg-gray-300",
-                            title: "Close chat",
-                            children: /* @__PURE__ */ y.jsx(Br, { className: "h-4 w-4" })
-                          }
-                        )
-                      ] })
+                      /* @__PURE__ */ y.jsxs(
+                        "button",
+                        {
+                          onClick: pe,
+                          className: "flex items-center gap-2 px-3 py-1.5 bg-orange-500 text-white text-sm rounded-lg hover:bg-orange-600",
+                          children: [
+                            /* @__PURE__ */ y.jsx(An, { className: "h-4 w-4" }),
+                            "Start New Chat"
+                          ]
+                        }
+                      )
                     ] }),
                     o.map((m) => /* @__PURE__ */ y.jsxs(
                       "button",
@@ -8184,9 +8182,9 @@ function Xc({ domainId: s }) {
                   ] }) : /* @__PURE__ */ y.jsxs("div", { className: "space-y-4", children: [
                     u === "chat" && /* @__PURE__ */ y.jsxs("div", { className: "flex gap-2", children: [
                       /* @__PURE__ */ y.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
-                      /* @__PURE__ */ y.jsxs("div", { className: "p-3 rounded-lg max-w-[80%]", style: { backgroundColor: L.agentMessageColor }, children: [
-                        /* @__PURE__ */ y.jsx("p", { className: "text-sm", style: { color: L.agentMessageTextColor }, children: L.greetingMessage }),
-                        /* @__PURE__ */ y.jsx("span", { className: "text-xs mt-1 block opacity-75", style: { color: L.agentMessageTextColor }, children: Pt(/* @__PURE__ */ new Date(), "h:mm a") })
+                      /* @__PURE__ */ y.jsxs("div", { className: "p-3 rounded-lg max-w-[80%]", style: { backgroundColor: M.agentMessageColor }, children: [
+                        /* @__PURE__ */ y.jsx("p", { className: "text-sm", style: { color: M.agentMessageTextColor }, children: M.greetingMessage }),
+                        /* @__PURE__ */ y.jsx("span", { className: "text-xs mt-1 block opacity-75", style: { color: M.agentMessageTextColor }, children: Pt(/* @__PURE__ */ new Date(), "h:mm a") })
                       ] })
                     ] }),
                     i.map((m) => /* @__PURE__ */ y.jsxs(
@@ -8200,14 +8198,14 @@ function Xc({ domainId: s }) {
                             {
                               className: "p-3 rounded-lg max-w-[80%]",
                               style: {
-                                backgroundColor: m.sender_type === "user" ? L.userMessageColor : L.agentMessageColor
+                                backgroundColor: m.sender_type === "user" ? M.userMessageColor : M.agentMessageColor
                               },
                               children: [
                                 /* @__PURE__ */ y.jsx("p", { className: "text-sm", style: {
-                                  color: m.sender_type === "user" ? L.userMessageTextColor : L.agentMessageTextColor
+                                  color: m.sender_type === "user" ? M.userMessageTextColor : M.agentMessageTextColor
                                 }, children: m.content }),
                                 /* @__PURE__ */ y.jsx("span", { className: "text-xs mt-1 block opacity-75", style: {
-                                  color: m.sender_type === "user" ? L.userMessageTextColor : L.agentMessageTextColor
+                                  color: m.sender_type === "user" ? M.userMessageTextColor : M.agentMessageTextColor
                                 }, children: Pt(new Date(m.created_at), "h:mm a") })
                               ]
                             }
@@ -8279,7 +8277,7 @@ function Xc({ domainId: s }) {
                       onChange: (m) => n(m.target.value),
                       placeholder: "Type your message...",
                       className: "w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 pr-10 disabled:opacity-50 disabled:cursor-not-allowed",
-                      style: { "--tw-ring-color": L.color },
+                      style: { "--tw-ring-color": M.color },
                       disabled: p || k
                     }
                   ) }),
@@ -8313,9 +8311,9 @@ function Xc({ domainId: s }) {
           {
             className: "rounded-full text-white flex items-center justify-center shadow-lg",
             style: {
-              backgroundColor: L.color,
-              width: L.toggleButtonSize,
-              height: L.toggleButtonSize
+              backgroundColor: M.color,
+              width: M.toggleButtonSize,
+              height: M.toggleButtonSize
             },
             onClick: () => t(!e),
             children: e ? "×" : "💬"
@@ -8335,4 +8333,4 @@ Qc();
 export {
   kn as g
 };
-//# sourceMappingURL=main-Chi3h9Bf.js.map
+//# sourceMappingURL=main-36ZTC-qU.js.map
