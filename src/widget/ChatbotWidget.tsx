@@ -735,7 +735,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           </div>
 
           {/* Chat Area */}
-          <div className={`overflow-y-auto p-4 bg-gray-50 relative ${isMobileView() ? 'flex-1' : ''}`} 
+          <div className={`overflow-y-auto p-4 bg-white relative ${isMobileView() ? 'flex-1' : ''}`} 
             style={{ 
               height: isMobileView() ? 'auto' : config.chatHeight 
             }}>
@@ -890,7 +890,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           </div>
 
           {/* Input Area */}
-          {view === 'chat' && <form onSubmit={handleSubmit} className="p-4 border-t bg-white">
+          {view === 'chat' && <form onSubmit={handleSubmit} className="p-4 border-t bg-gray-50">
             <div className="flex gap-2">
               <div className="flex-1 relative">
                 <input

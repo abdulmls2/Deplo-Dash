@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-BrrsRUQi.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-mm_yEO-T.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -8141,7 +8141,7 @@ function Xc({ domainId: s }) {
               /* @__PURE__ */ y.jsx(
                 "div",
                 {
-                  className: `overflow-y-auto p-4 bg-gray-50 relative ${te() ? "flex-1" : ""}`,
+                  className: `overflow-y-auto p-4 bg-white relative ${te() ? "flex-1" : ""}`,
                   style: {
                     height: te() ? "auto" : M.chatHeight
                   },
@@ -8267,7 +8267,7 @@ function Xc({ domainId: s }) {
                   ] })
                 }
               ),
-              u === "chat" && /* @__PURE__ */ y.jsxs("form", { onSubmit: bt, className: "p-4 border-t bg-white", children: [
+              u === "chat" && /* @__PURE__ */ y.jsxs("form", { onSubmit: bt, className: "p-4 border-t bg-gray-50", children: [
                 /* @__PURE__ */ y.jsxs("div", { className: "flex gap-2", children: [
                   /* @__PURE__ */ y.jsx("div", { className: "flex-1 relative", children: /* @__PURE__ */ y.jsx(
                     "input",
@@ -8333,4 +8333,4 @@ Qc();
 export {
   kn as g
 };
-//# sourceMappingURL=main-36ZTC-qU.js.map
+//# sourceMappingURL=main-xpNmX4Oj.js.map
