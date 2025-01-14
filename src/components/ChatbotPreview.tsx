@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, Paperclip } from 'lucide-react';
+import { Send, Paperclip, MessageSquare, RefreshCw, X } from 'lucide-react';
 
 interface ChatbotPreviewProps {
   chatbotName: string;
@@ -49,7 +49,17 @@ export default function ChatbotPreview({
             </div>
             <div>
               <h3 className="font-medium" style={{ color: headerTextColor }}>{chatbotName}</h3>
-              <p className="text-sm" style={{ color: headerTextColor }}>from {domainName}</p>
+            </div>
+            <div className="flex items-center gap-2 ml-auto">
+              <button className="flex items-center justify-center p-2 text-gray-600 hover:text-gray-800" title="Back to History">
+                <MessageSquare className="h-5 w-5" />
+              </button>
+              <button className="flex items-center justify-center p-2 text-gray-600 hover:text-gray-800" title="Refresh Chat">
+                <RefreshCw className="h-5 w-5" />
+              </button>
+              <button className="flex items-center justify-center p-2 text-gray-600 hover:text-gray-800" title="Close Chat">
+                <X className="h-5 w-5" />
+              </button>
             </div>
           </div>
 
