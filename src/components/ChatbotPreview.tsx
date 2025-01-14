@@ -64,7 +64,7 @@ export default function ChatbotPreview({
           </div>
 
           {/* Chat Area */}
-          <div className="h-[400px] overflow-y-auto p-4 bg-gray-50">
+          <div className="h-[380px] overflow-y-auto p-4 bg-gray-50">
             <div className="flex gap-2 mb-4">
               <div className="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center">
                 🤖
@@ -119,7 +119,7 @@ export default function ChatbotPreview({
 
       {/* Toggle Button */}
       <button
-        className="w-14 h-14 rounded-full text-white flex items-center justify-center shadow-lg"
+        className="w-11 h-11 rounded-full text-white flex items-center justify-center shadow-lg"
         style={buttonStyle}
         onClick={() => setIsExpanded(!isExpanded)}
       >
