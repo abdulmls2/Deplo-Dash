@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-mm_yEO-T.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-B5KZ6wQW.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -8102,7 +8102,7 @@ function Xc({ domainId: s }) {
                     "button",
                     {
                       onClick: Se,
-                      className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
+                      className: "flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm",
                       style: { color: M.headerTextColor },
                       children: /* @__PURE__ */ y.jsx($n, { className: "h-4 w-4" })
                     }
@@ -8111,7 +8111,7 @@ function Xc({ domainId: s }) {
                     "button",
                     {
                       onClick: tt,
-                      className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
+                      className: "flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm",
                       style: { color: M.headerTextColor },
                       title: "Refresh chat",
                       children: /* @__PURE__ */ y.jsx(Dn, { className: "h-4 w-4" })
@@ -8121,7 +8121,7 @@ function Xc({ domainId: s }) {
                     "button",
                     {
                       onClick: () => t(!1),
-                      className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
+                      className: "flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm",
                       style: { color: M.headerTextColor },
                       title: "Close chat",
                       children: /* @__PURE__ */ y.jsx(Br, { className: "h-4 w-4" })
@@ -8131,7 +8131,7 @@ function Xc({ domainId: s }) {
                   "button",
                   {
                     onClick: () => t(!1),
-                    className: "flex items-center gap-1 px-3 py-1.5 bg-white/20 rounded-lg text-sm",
+                    className: "flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm",
                     style: { color: M.headerTextColor },
                     title: "Close chat",
                     children: /* @__PURE__ */ y.jsx(Br, { className: "h-4 w-4" })
@@ -8333,4 +8333,4 @@ Qc();
 export {
   kn as g
 };
-//# sourceMappingURL=main-xpNmX4Oj.js.map
+//# sourceMappingURL=main-CAx-l5Et.js.map
