@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-B5KZ6wQW.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-CmAGeY1g.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -8104,6 +8104,7 @@ function Xc({ domainId: s }) {
                       onClick: Se,
                       className: "flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm",
                       style: { color: M.headerTextColor },
+                      title: "Chat history",
                       children: /* @__PURE__ */ y.jsx($n, { className: "h-4 w-4" })
                     }
                   ),
@@ -8333,4 +8334,4 @@ Qc();
 export {
   kn as g
 };
-//# sourceMappingURL=main-CAx-l5Et.js.map
+//# sourceMappingURL=main-BqkVt30V.js.map

@@ -700,6 +700,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   onClick={handleBackToHistory}
                   className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm"
                   style={{ color: config.headerTextColor }}
+                  title="Chat history"
                 >
                   <MessageSquare className="h-4 w-4" />
                 </button>
