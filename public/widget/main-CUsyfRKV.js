@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-CXuwmRcD.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-Bf2HtTVH.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7788,8 +7788,8 @@ const Gc = async (s, e, t, r) => {
   "svg",
   {
     fill: "#ffffff",
-    height: "18px",
-    width: "18px",
+    height: "14px",
+    width: "14px",
     version: "1.1",
     id: "Capa_1",
     xmlns: "http://www.w3.org/2000/svg",
@@ -8361,4 +8361,4 @@ el();
 export {
   xn as g
 };
-//# sourceMappingURL=main-CXE6zdT7.js.map
+//# sourceMappingURL=main-CUsyfRKV.js.map

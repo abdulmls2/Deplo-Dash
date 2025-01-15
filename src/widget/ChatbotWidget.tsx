@@ -69,8 +69,8 @@ const TypingIndicator = () => (
 const ChatIcon = () => (
   <svg
     fill="#ffffff"
-    height="18px" // Set to match button size
-    width="18px"  // Set to match button size
+    height="14px" // Set to match button size
+    width="14px"  // Set to match button size
     version="1.1"
     id="Capa_1"
     xmlns="http://www.w3.org/2000/svg"
