@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-DvIqqorq.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-DJ-2Jg2m.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -8282,7 +8282,7 @@ function Qc({ domainId: s }) {
                     "input",
                     {
                       type: "text",
-                      value: r,
+                      value: p ? "" : r,
                       onChange: (m) => n(m.target.value),
                       placeholder: "Type your message...",
                       className: "w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 pr-10 disabled:opacity-50 disabled:cursor-not-allowed",
@@ -8342,4 +8342,4 @@ Zc();
 export {
   En as g
 };
-//# sourceMappingURL=main-BWkKiNs4.js.map
+//# sourceMappingURL=main-D222CGwp.js.map

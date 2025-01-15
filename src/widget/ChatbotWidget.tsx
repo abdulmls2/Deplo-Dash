@@ -486,45 +486,45 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
 
   const sendMessage = async (content: string) => {
     try {
-      setIsLoading(true);
-      setError(null);
+        setIsLoading(true);
+        setError(null);
 
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        await supabase.auth.signInAnonymously();
-      }
-      
-      // Create a new conversation if one doesn't exist
-      const currentConversationId = conversationId || await createConversation();
-      if (!conversationId) {
-        setConversationId(currentConversationId);
-      }
-
-      // Create a temporary message object for immediate display
-      const tempMessage: Message = {
-        id: `temp-${Date.now()}`,
-        content: content,
-        sender_type: 'user',
-        created_at: new Date().toISOString(),
-      };
-
-      // Add to messages only if it's not a duplicate
-      setMessages(prevMessages => {
-        if (isMessageDuplicate(tempMessage, prevMessages)) {
-          return prevMessages;
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) {
+            await supabase.auth.signInAnonymously();
         }
-        return [...prevMessages, tempMessage];
-      });
+        
+        // Create a new conversation if one doesn't exist
+        const currentConversationId = conversationId || await createConversation();
+        if (!conversationId) {
+            setConversationId(currentConversationId);
+        }
 
-      // Send message through chatbot store which will handle OpenAI integration
-      await chatbotSendMessage(content, currentConversationId);
+        // Create a temporary message object for immediate display
+        const tempMessage: Message = {
+            id: `temp-${Date.now()}`,
+            content: content,
+            sender_type: 'user',
+            created_at: new Date().toISOString(),
+        };
 
-      setMessage('');
+        // Add to messages only if it's not a duplicate
+        setMessages(prevMessages => {
+            if (isMessageDuplicate(tempMessage, prevMessages)) {
+                return prevMessages;
+            }
+            return [...prevMessages, tempMessage];
+        });
+
+        // Send message through chatbot store which will handle OpenAI integration
+        await chatbotSendMessage(content, currentConversationId);
+
+        setMessage(''); // Clear the input field to show placeholder
     } catch (error) {
-      console.error('Error sending message:', error);
-      setError('Failed to send message. Please try again.');
+        console.error('Error sending message:', error);
+        setError('Failed to send message. Please try again.');
     } finally {
-      setIsLoading(false);
+        setIsLoading(false);
     }
   };
 
@@ -913,7 +913,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
               <div className="flex-1 relative">
                 <input
                   type="text"
-                  value={message}
+                  value={isLoading ? '' : message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Type your message..."
                   className="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 pr-10 disabled:opacity-50 disabled:cursor-not-allowed"
