@@ -49,6 +49,22 @@ interface Conversation {
   rating?: 'bad' | 'ok' | 'good';
 }
 
+// Add this new component near the top of the file
+const TypingIndicator = () => (
+  <div className="flex gap-2">
+    <div className="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center">
+      🤖
+    </div>
+    <div className="p-3 rounded-lg" style={{ backgroundColor: '#E5E7EB' }}>
+      <div className="flex gap-2">
+        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+        <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+      </div>
+    </div>
+  </div>
+);
+
 export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [message, setMessage] = useState('');
@@ -834,6 +850,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   )}
                 </div>
               ))}
+              {isLoading && <TypingIndicator />}
               {isArchived && (
                 <div className="flex flex-col items-center gap-3 my-4">
                   <div className="bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600">
@@ -909,11 +926,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                 className="p-2 rounded-full text-white flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
                 style={buttonStyle}
               >
-                {isLoading ? (
-                  <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                ) : (
-                  <Send className="h-5 w-5" />
-                )}
+                <Send className="h-5 w-5" />
               </button>
             </div>
             <div className="text-center mt-2">
