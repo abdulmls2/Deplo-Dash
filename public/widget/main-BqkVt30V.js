@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-DvGwqkLJ.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-CmAGeY1g.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7982,7 +7982,7 @@ function Xc({ domainId: s }) {
     }
   }, wt = async (m) => {
     try {
-      _(!0), P(null), n("");
+      _(!0), P(null);
       const { data: { user: b } } = await F.auth.getUser();
       b || await F.auth.signInAnonymously();
       const R = h || await _t();
@@ -7993,7 +7993,7 @@ function Xc({ domainId: s }) {
         sender_type: "user",
         created_at: (/* @__PURE__ */ new Date()).toISOString()
       };
-      a((se) => J(W, se) ? se : [...se, W]), await Y(m, R);
+      a((se) => J(W, se) ? se : [...se, W]), await Y(m, R), n("");
     } catch (b) {
       console.error("Error sending message:", b), P("Failed to send message. Please try again.");
     } finally {
@@ -8334,4 +8334,4 @@ Qc();
 export {
   kn as g
 };
-//# sourceMappingURL=main-a2aJdcDl.js.map
+//# sourceMappingURL=main-BqkVt30V.js.map

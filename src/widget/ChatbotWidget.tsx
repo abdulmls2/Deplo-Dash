@@ -488,8 +488,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     try {
       setIsLoading(true);
       setError(null);
-      // Clear the input field immediately after sending
-      setMessage('');
 
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
@@ -521,6 +519,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       // Send message through chatbot store which will handle OpenAI integration
       await chatbotSendMessage(content, currentConversationId);
 
+      setMessage('');
     } catch (error) {
       console.error('Error sending message:', error);
       setError('Failed to send message. Please try again.');
