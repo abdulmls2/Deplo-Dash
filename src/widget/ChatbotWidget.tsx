@@ -850,6 +850,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   )}
                 </div>
               ))}
+              {isLoading && <TypingIndicator />}
               {isArchived && (
                 <div className="flex flex-col items-center gap-3 my-4">
                   <div className="bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600">
@@ -925,11 +926,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                 className="p-2 rounded-full text-white flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
                 style={buttonStyle}
               >
-                {isLoading ? (
-                  <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                ) : (
-                  <Send className="h-5 w-5" />
-                )}
+                <Send className="h-5 w-5" />
               </button>
             </div>
             <div className="text-center mt-2">
