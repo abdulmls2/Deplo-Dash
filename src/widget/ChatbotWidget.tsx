@@ -208,24 +208,36 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     if (!sessionId) return;
     
     try {
-      // Calculate the expiry date (now subtract 1 minute)
-      const expiryDate = new Date();
-      expiryDate.setMinutes(expiryDate.getMinutes() - CONVERSATION_EXPIRY_MINUTES);
-
-      const { data, error } = await supabase
+      // Get all active conversations
+      const { data: activeConversations } = await supabase
         .from('conversations')
         .select('*')
         .eq('session_id', sessionId)
-        // Show ALL active conversations
-        // For archived conversations, only show those not older than the expiry date
-        .or(`
-          status.eq.active,
-          and(status.eq.archived,last_message_at.gt.${expiryDate.toISOString()})
-        `)
+        .eq('status', 'active')
         .order('last_message_at', { ascending: false });
 
-      if (error) throw error;
-      setConversations(data || []);
+      // Calculate expiry date for archived conversations
+      const expiryDate = new Date();
+      expiryDate.setMinutes(expiryDate.getMinutes() - CONVERSATION_EXPIRY_MINUTES);
+
+      // Get archived conversations that haven't expired
+      const { data: archivedConversations } = await supabase
+        .from('conversations')
+        .select('*')
+        .eq('session_id', sessionId)
+        .eq('status', 'archived')
+        .gt('last_message_at', expiryDate.toISOString())
+        .order('last_message_at', { ascending: false });
+
+      // Combine and sort both sets of conversations
+      const allConversations = [
+        ...(activeConversations || []),
+        ...(archivedConversations || [])
+      ].sort((a, b) => 
+        new Date(b.last_message_at).getTime() - new Date(a.last_message_at).getTime()
+      );
+
+      setConversations(allConversations);
     } catch (error) {
       console.error('Error loading conversation history:', error);
     }
