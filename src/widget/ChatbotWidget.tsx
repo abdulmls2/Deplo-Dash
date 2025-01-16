@@ -790,6 +790,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                     className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm"
                     style={{ backgroundColor: config.color, color: config.headerTextColor }}
                     disabled={conversations.filter(conv => conv.status === 'active').length >= 2}
+                    title={conversations.filter(conv => conv.status === 'active').length >= 2 ? 'You can only have 2 active conversations at a time.' : ''}
                   >
                     <MessageSquarePlus className="h-4 w-4" />
                     Start New Chat
