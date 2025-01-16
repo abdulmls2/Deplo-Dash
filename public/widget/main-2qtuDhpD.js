@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-ByBJ14fj.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-FI6xFBZZ.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -8172,7 +8172,7 @@ function Zc({ domainId: s }) {
                   style: {
                     height: te() ? "auto" : D.chatHeight
                   },
-                  children: u === "history" ? /* @__PURE__ */ m.jsxs("div", { className: "space-y-4 h-full overflow-y-auto", children: [
+                  children: u === "history" ? /* @__PURE__ */ m.jsxs("div", { className: "space-y-4 h-full", children: [
                     /* @__PURE__ */ m.jsxs("div", { className: "flex justify-between items-center mb-4", children: [
                       /* @__PURE__ */ m.jsx("h3", { className: "font-medium text-gray-900", children: "Conversation History" }),
                       /* @__PURE__ */ m.jsxs(
@@ -8362,4 +8362,4 @@ el();
 export {
   xn as g
 };
-//# sourceMappingURL=main-Cf-2LxaI.js.map
+//# sourceMappingURL=main-2qtuDhpD.js.map
