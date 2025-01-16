@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-BZhMTrSG.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-CxlZiMjL.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7879,7 +7879,7 @@ function Zc({ domainId: s }) {
     j && xe();
   }, [j]);
   const Se = async () => {
-    o.filter((v) => v.status === "active").length >= 2 || (a([]), f(null), M(!1), me(null), V(!1), l("chat"));
+    o.filter((v) => v.status === "active").length >= 5 || (a([]), f(null), M(!1), me(null), V(!1), l("chat"));
   }, yt = () => {
     l("history"), a([]), f(null), M(!1);
   }, _t = async (v) => {
@@ -8183,7 +8183,7 @@ function Zc({ domainId: s }) {
                             className: "flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm",
                             style: { backgroundColor: D.color, color: D.headerTextColor },
                             disabled: o.filter((v) => v.status === "active").length >= 2,
-                            title: !H() && o.filter((v) => v.status === "active").length >= 2 ? "You can only have 2 active conversations at a time." : "",
+                            title: !H() && o.filter((v) => v.status === "active").length >= 2 ? "You can only have 5 active conversations at a time." : "",
                             children: [
                               /* @__PURE__ */ p.jsx(An, { className: "h-4 w-4" }),
                               "Start New Chat"
@@ -8191,7 +8191,7 @@ function Zc({ domainId: s }) {
                           }
                         ),
                         H() && o.filter((v) => v.status === "active").length >= 2 && de && /* @__PURE__ */ p.jsxs("div", { className: "flex items-center gap-1 text-xs text-gray-600", children: [
-                          /* @__PURE__ */ p.jsx("span", { children: "Maximum 2 active conversations allowed" }),
+                          /* @__PURE__ */ p.jsx("span", { children: "Maximum 5 active conversations allowed" }),
                           /* @__PURE__ */ p.jsx(
                             "button",
                             {
@@ -8377,4 +8377,4 @@ el();
 export {
   Sn as g
 };
-//# sourceMappingURL=main-B8Ub-Hgb.js.map
+//# sourceMappingURL=main-Chx59z5V.js.map
