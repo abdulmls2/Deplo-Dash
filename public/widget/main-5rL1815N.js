@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-FI6xFBZZ.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-msl_S6kX.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -8170,7 +8170,7 @@ function Zc({ domainId: s }) {
                 {
                   className: `overflow-y-auto p-4 bg-white relative ${te() ? "flex-1" : ""}`,
                   style: {
-                    height: te() ? "auto" : D.chatHeight
+                    height: te() ? "auto" : u === "history" ? "calc(" + D.chatHeight + " + 100px)" : D.chatHeight
                   },
                   children: u === "history" ? /* @__PURE__ */ m.jsxs("div", { className: "space-y-4 h-full", children: [
                     /* @__PURE__ */ m.jsxs("div", { className: "flex justify-between items-center mb-4", children: [
@@ -8362,4 +8362,4 @@ el();
 export {
   xn as g
 };
-//# sourceMappingURL=main-2qtuDhpD.js.map
+//# sourceMappingURL=main-5rL1815N.js.map
