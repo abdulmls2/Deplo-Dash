@@ -1,4 +1,4 @@
-import * as ne from "react";
+import * as ie from "react";
 import Fe, { forwardRef as bn, createElement as Nr, useState as K, useRef as Ur, useEffect as fe } from "react";
 import Sn from "react-dom";
 var ce = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
@@ -104,7 +104,7 @@ function On() {
       var L = g.displayName || g.name || "";
       return L !== "" ? w + "(" + L + ")" : w;
     }
-    function ie(d) {
+    function te(d) {
       return d.displayName || "Context";
     }
     function G(d) {
@@ -132,10 +132,10 @@ function On() {
         switch (d.$$typeof) {
           case c:
             var g = d;
-            return ie(g) + ".Consumer";
+            return te(g) + ".Consumer";
           case o:
             var w = d;
-            return ie(w._context) + ".Provider";
+            return te(w._context) + ".Provider";
           case u:
             return Re(d, d.render, "ForwardRef");
           case f:
@@ -152,7 +152,7 @@ function On() {
         }
       return null;
     }
-    var te = Object.assign, pe = 0, Se, xe, Ze, yt, _t, wt, bt;
+    var re = Object.assign, pe = 0, Se, xe, Ze, yt, _t, wt, bt;
     function D() {
     }
     D.__reactDisabledLog = !0;
@@ -188,25 +188,25 @@ function On() {
             writable: !0
           };
           Object.defineProperties(console, {
-            log: te({}, d, {
+            log: re({}, d, {
               value: Se
             }),
-            info: te({}, d, {
+            info: re({}, d, {
               value: xe
             }),
-            warn: te({}, d, {
+            warn: re({}, d, {
               value: Ze
             }),
-            error: te({}, d, {
+            error: re({}, d, {
               value: yt
             }),
-            group: te({}, d, {
+            group: re({}, d, {
               value: _t
             }),
-            groupCollapsed: te({}, d, {
+            groupCollapsed: re({}, d, {
               value: wt
             }),
-            groupEnd: te({}, d, {
+            groupEnd: re({}, d, {
               value: bt
             })
           });
@@ -307,7 +307,7 @@ function On() {
     function W(d, g, w) {
       return R(d, !1);
     }
-    function re(d) {
+    function se(d) {
       var g = d.prototype;
       return !!(g && g.isReactComponent);
     }
@@ -315,7 +315,7 @@ function On() {
       if (d == null)
         return "";
       if (typeof d == "function")
-        return R(d, re(d));
+        return R(d, se(d));
       if (typeof d == "string")
         return me(d);
       switch (d) {
@@ -1855,10 +1855,10 @@ var Je;
 (function(s) {
   s[s.connecting = 0] = "connecting", s[s.open = 1] = "open", s[s.closing = 2] = "closing", s[s.closed = 3] = "closed";
 })(Je || (Je = {}));
-var se;
+var ne;
 (function(s) {
   s.closed = "closed", s.errored = "errored", s.joined = "joined", s.joining = "joining", s.leaving = "leaving";
-})(se || (se = {}));
+})(ne || (ne = {}));
 var ue;
 (function(s) {
   s.close = "phx_close", s.error = "phx_error", s.join = "phx_join", s.reply = "phx_reply", s.leave = "phx_leave", s.access_token = "access_token";
@@ -2235,18 +2235,18 @@ var ye;
 })(ye || (ye = {}));
 class xr {
   constructor(e, t = { config: {} }, r) {
-    this.topic = e, this.params = t, this.socket = r, this.bindings = {}, this.state = se.closed, this.joinedOnce = !1, this.pushBuffer = [], this.subTopic = e.replace(/^realtime:/i, ""), this.params.config = Object.assign({
+    this.topic = e, this.params = t, this.socket = r, this.bindings = {}, this.state = ne.closed, this.joinedOnce = !1, this.pushBuffer = [], this.subTopic = e.replace(/^realtime:/i, ""), this.params.config = Object.assign({
       broadcast: { ack: !1, self: !1 },
       presence: { key: "" },
       private: !1
     }, t.config), this.timeout = this.socket.timeout, this.joinPush = new Xt(this, ue.join, this.params, this.timeout), this.rejoinTimer = new $s(() => this._rejoinUntilConnected(), this.socket.reconnectAfterMs), this.joinPush.receive("ok", () => {
-      this.state = se.joined, this.rejoinTimer.reset(), this.pushBuffer.forEach((n) => n.send()), this.pushBuffer = [];
+      this.state = ne.joined, this.rejoinTimer.reset(), this.pushBuffer.forEach((n) => n.send()), this.pushBuffer = [];
     }), this._onClose(() => {
-      this.rejoinTimer.reset(), this.socket.log("channel", `close ${this.topic} ${this._joinRef()}`), this.state = se.closed, this.socket._remove(this);
+      this.rejoinTimer.reset(), this.socket.log("channel", `close ${this.topic} ${this._joinRef()}`), this.state = ne.closed, this.socket._remove(this);
     }), this._onError((n) => {
-      this._isLeaving() || this._isClosed() || (this.socket.log("channel", `error ${this.topic}`, n), this.state = se.errored, this.rejoinTimer.scheduleTimeout());
+      this._isLeaving() || this._isClosed() || (this.socket.log("channel", `error ${this.topic}`, n), this.state = ne.errored, this.rejoinTimer.scheduleTimeout());
     }), this.joinPush.receive("timeout", () => {
-      this._isJoining() && (this.socket.log("channel", `timeout ${this.topic}`, this.joinPush.timeout), this.state = se.errored, this.rejoinTimer.scheduleTimeout());
+      this._isJoining() && (this.socket.log("channel", `timeout ${this.topic}`, this.joinPush.timeout), this.state = ne.errored, this.rejoinTimer.scheduleTimeout());
     }), this._on(ue.reply, {}, (n, i) => {
       this._trigger(this._replyEventName(i), n);
     }), this.presence = new dt(this), this.broadcastEndpointURL = Ds(this.socket.endPoint) + "/api/broadcast", this.private = this.params.config.private || !1;
@@ -2367,7 +2367,7 @@ class xr {
    * channel.unsubscribe().receive("ok", () => alert("left!") )
    */
   unsubscribe(e = this.timeout) {
-    this.state = se.leaving;
+    this.state = ne.leaving;
     const t = () => {
       this.socket.log("channel", `leave ${this.topic}`), this._trigger(ue.close, "leave", this._joinRef());
     };
@@ -2455,19 +2455,19 @@ class xr {
   }
   /** @internal */
   _isClosed() {
-    return this.state === se.closed;
+    return this.state === ne.closed;
   }
   /** @internal */
   _isJoined() {
-    return this.state === se.joined;
+    return this.state === ne.joined;
   }
   /** @internal */
   _isJoining() {
-    return this.state === se.joining;
+    return this.state === ne.joining;
   }
   /** @internal */
   _isLeaving() {
-    return this.state === se.leaving;
+    return this.state === ne.leaving;
   }
   /** @internal */
   _replyEventName(e) {
@@ -2529,7 +2529,7 @@ class xr {
   }
   /** @internal */
   _rejoin(e = this.timeout) {
-    this._isLeaving() || (this.socket._leaveOpenTopic(this.topic), this.state = se.joining, this.joinPush.resend(e));
+    this._isLeaving() || (this.socket._leaveOpenTopic(this.topic), this.state = ne.joining, this.joinPush.resend(e));
   }
   /** @internal */
   _getPayloadRecords(e) {
@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-F13OaMnU.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-FI6xFBZZ.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7308,22 +7308,22 @@ function sc() {
         value: null
       }, S.current = P) : P = S.current;
       var j = c(function() {
-        var M = !1, I, Y, le = function(ie) {
+        var M = !1, I, Y, le = function(te) {
           if (!M) {
-            M = !0, I = ie;
-            var G = _(ie);
+            M = !0, I = te;
+            var G = _(te);
             if (y !== void 0 && P.hasValue) {
-              var te = P.value;
-              if (y(te, G))
-                return Y = te, te;
+              var re = P.value;
+              if (y(re, G))
+                return Y = re, re;
             }
             return Y = G, G;
           }
           var pe = I, Se = Y;
-          if (n(pe, ie))
+          if (n(pe, te))
             return Se;
-          var xe = _(ie);
-          return y !== void 0 && y(Se, xe) ? Se : (I = ie, Y = xe, xe);
+          var xe = _(te);
+          return y !== void 0 && y(Se, xe) ? Se : (I = te, Y = xe, xe);
         }, V = p === void 0 ? null : p, be = function() {
           return le(f());
         }, Re = V === null ? void 0 : function() {
@@ -7640,7 +7640,7 @@ to {
     forwards;
 `, Fc = ({ toast: s }) => {
   let { icon: e, type: t, iconTheme: r } = s;
-  return e !== void 0 ? typeof e == "string" ? ne.createElement(Uc, null, e) : e : t === "blank" ? null : ne.createElement(Lc, null, ne.createElement(Ac, { ...r }), t !== "loading" && ne.createElement(Mc, null, t === "error" ? ne.createElement(Cc, { ...r }) : ne.createElement(Dc, { ...r })));
+  return e !== void 0 ? typeof e == "string" ? ie.createElement(Uc, null, e) : e : t === "blank" ? null : ie.createElement(Lc, null, ie.createElement(Ac, { ...r }), t !== "loading" && ie.createElement(Mc, null, t === "error" ? ie.createElement(Cc, { ...r }) : ie.createElement(Dc, { ...r })));
 }, Wc = (s) => `
 0% {transform: translate3d(0,${s * -200}%,0) scale(.6); opacity:.5;}
 100% {transform: translate3d(0,0,0) scale(1); opacity:1;}
@@ -7670,11 +7670,11 @@ to {
   let t = s.includes("top") ? 1 : -1, [r, n] = bc() ? [qc, zc] : [Wc(t), Bc(t)];
   return { animation: e ? `${_e(r)} 0.35s cubic-bezier(.21,1.02,.73,1) forwards` : `${_e(n)} 0.4s forwards cubic-bezier(.06,.71,.55,1)` };
 };
-ne.memo(({ toast: s, position: e, style: t, children: r }) => {
-  let n = s.height ? Yc(s.position || e || "top-center", s.visible) : { opacity: 0 }, i = ne.createElement(Fc, { toast: s }), a = ne.createElement(Hc, { ...s.ariaProps }, _r(s.message, s));
-  return ne.createElement(Vc, { className: s.className, style: { ...n, ...t, ...s.style } }, typeof r == "function" ? r({ icon: i, message: a }) : ne.createElement(ne.Fragment, null, i, a));
+ie.memo(({ toast: s, position: e, style: t, children: r }) => {
+  let n = s.height ? Yc(s.position || e || "top-center", s.visible) : { opacity: 0 }, i = ie.createElement(Fc, { toast: s }), a = ie.createElement(Hc, { ...s.ariaProps }, _r(s.message, s));
+  return ie.createElement(Vc, { className: s.className, style: { ...n, ...t, ...s.style } }, typeof r == "function" ? r({ icon: i, message: a }) : ie.createElement(ie.Fragment, null, i, a));
 });
-yc(ne.createElement);
+yc(ie.createElement);
 qt`
   z-index: 9999;
   > * {
@@ -7812,7 +7812,7 @@ function Zc({ domainId: s }) {
     };
     return window.addEventListener("resize", v), () => window.removeEventListener("resize", v);
   }, []);
-  const ie = () => window.matchMedia("(max-width: 640px)").matches, G = (v, b) => b.some(
+  const te = () => window.matchMedia("(max-width: 640px)").matches, G = (v, b) => b.some(
     (R) => (
       // Check for exact ID match
       R.id === v.id || // Check for temp ID being replaced by real ID
@@ -7865,7 +7865,7 @@ function Zc({ domainId: s }) {
     var v;
     e && (i.length > 0 || x) && ((v = E.current) == null || v.scrollIntoView({ behavior: "smooth" }));
   }, [i, e, x]);
-  const te = async () => {
+  const re = async () => {
     if (j)
       try {
         const { data: v, error: b } = await F.from("conversations").select("*").eq("session_id", j).order("last_message_at", { ascending: !1 });
@@ -7876,7 +7876,7 @@ function Zc({ domainId: s }) {
       }
   };
   fe(() => {
-    j && te();
+    j && re();
   }, [j]);
   const pe = async () => {
     a([]), f(null), M(!1), me(null), V(!1), l("chat");
@@ -7936,10 +7936,10 @@ function Zc({ domainId: s }) {
           console.log("New message:", R), a((W) => {
             if (G(R, W))
               return console.log("Message already exists, skipping"), W;
-            const re = W.filter(
+            const se = W.filter(
               (X) => !(X.id.startsWith("temp-") && X.content === R.content && X.sender_type === R.sender_type)
             );
-            return y.add(R.id), R.sender_type === "bot" && Ze(), console.log("Adding new message to state"), [...re, R];
+            return y.add(R.id), R.sender_type === "bot" && Ze(), console.log("Adding new message to state"), [...se, R];
           });
         }
       }
@@ -7963,8 +7963,8 @@ function Zc({ domainId: s }) {
         console.log("No active conversations found for this session");
         return;
       }
-      const W = b[0], re = /* @__PURE__ */ new Date();
-      if (re.setDate(re.getDate() - Kc), new Date(W.last_message_at) < re) {
+      const W = b[0], se = /* @__PURE__ */ new Date();
+      if (se.setDate(se.getDate() - Kc), new Date(W.last_message_at) < se) {
         await F.from("conversations").update({ status: "archived" }).eq("id", W.id);
         return;
       }
@@ -7984,7 +7984,7 @@ function Zc({ domainId: s }) {
         await F.auth.signInAnonymously();
         const { data: { user: W } } = await F.auth.getUser();
         if (!W) throw new Error("Failed to create anonymous session");
-        const { data: re, error: X } = await F.from("conversations").insert({
+        const { data: se, error: X } = await F.from("conversations").insert({
           domain_id: s,
           user_id: W.id,
           session_id: j,
@@ -7992,7 +7992,7 @@ function Zc({ domainId: s }) {
           status: "active"
         }).select().single();
         if (X) throw X;
-        return re.id;
+        return se.id;
       }
       const { data: b, error: R } = await F.from("conversations").insert({
         domain_id: s,
@@ -8019,7 +8019,7 @@ function Zc({ domainId: s }) {
         sender_type: "user",
         created_at: (/* @__PURE__ */ new Date()).toISOString()
       };
-      a((re) => G(W, re) ? re : [...re, W]), await Y(v, R), n("");
+      a((se) => G(W, se) ? se : [...se, W]), await Y(v, R), n("");
     } catch (b) {
       console.error("Error sending message:", b), P("Failed to send message. Please try again.");
     } finally {
@@ -8112,9 +8112,9 @@ function Zc({ domainId: s }) {
         e && /* @__PURE__ */ m.jsxs(
           "div",
           {
-            className: `${ie() ? "fixed inset-0 w-full h-full flex flex-col" : "mb-4 bg-white rounded-lg shadow-xl overflow-hidden"}`,
+            className: `${te() ? "fixed inset-0 w-full h-full flex flex-col" : "mb-4 bg-white rounded-lg shadow-xl overflow-hidden"}`,
             style: {
-              width: ie() ? "100%" : D.chatWidth
+              width: te() ? "100%" : D.chatWidth
             },
             children: [
               /* @__PURE__ */ m.jsxs("div", { className: "p-4 border-b flex items-center gap-3", style: { backgroundColor: D.color }, children: [
@@ -8168,10 +8168,9 @@ function Zc({ domainId: s }) {
               /* @__PURE__ */ m.jsx(
                 "div",
                 {
-                  className: `overflow-y-auto p-4 bg-white relative ${ie() ? "flex-1" : ""}`,
+                  className: `overflow-y-auto p-4 bg-white relative ${te() ? "flex-1" : ""}`,
                   style: {
-                    width: D.chatWidth,
-                    height: D.chatHeight
+                    height: te() ? "auto" : D.chatHeight
                   },
                   children: u === "history" ? /* @__PURE__ */ m.jsxs("div", { className: "space-y-4 h-full", children: [
                     /* @__PURE__ */ m.jsxs("div", { className: "flex justify-between items-center mb-4", children: [
@@ -8363,4 +8362,4 @@ el();
 export {
   xn as g
 };
-//# sourceMappingURL=main-DXgHnSMJ.js.map
+//# sourceMappingURL=main-2qtuDhpD.js.map
