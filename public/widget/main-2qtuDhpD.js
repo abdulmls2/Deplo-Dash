@@ -104,7 +104,7 @@ function On() {
       var L = g.displayName || g.name || "";
       return L !== "" ? w + "(" + L + ")" : w;
     }
-    function X(d) {
+    function te(d) {
       return d.displayName || "Context";
     }
     function G(d) {
@@ -132,10 +132,10 @@ function On() {
         switch (d.$$typeof) {
           case c:
             var g = d;
-            return X(g) + ".Consumer";
+            return te(g) + ".Consumer";
           case o:
             var w = d;
-            return X(w._context) + ".Provider";
+            return te(w._context) + ".Provider";
           case u:
             return Re(d, d.render, "ForwardRef");
           case f:
@@ -259,29 +259,29 @@ function On() {
           }), typeof Reflect == "object" && Reflect.construct) {
             try {
               Reflect.construct($, []);
-            } catch (Z) {
-              k = Z;
+            } catch (Q) {
+              k = Q;
             }
             Reflect.construct(d, [], $);
           } else {
             try {
               $.call();
-            } catch (Z) {
-              k = Z;
+            } catch (Q) {
+              k = Q;
             }
             d.call($.prototype);
           }
         } else {
           try {
             throw Error();
-          } catch (Z) {
-            k = Z;
+          } catch (Q) {
+            k = Q;
           }
           d();
         }
-      } catch (Z) {
-        if (Z && k && typeof Z.stack == "string") {
-          for (var C = Z.stack.split(`
+      } catch (Q) {
+        if (Q && k && typeof Q.stack == "string") {
+          for (var C = Q.stack.split(`
 `), J = k.stack.split(`
 `), q = C.length - 1, z = J.length - 1; q >= 1 && z >= 0 && C[q] !== J[z]; )
             z--;
@@ -311,7 +311,7 @@ function On() {
       var g = d.prototype;
       return !!(g && g.isReactComponent);
     }
-    function Q(d, g, w) {
+    function X(d, g, w) {
       if (d == null)
         return "";
       if (typeof d == "function")
@@ -329,11 +329,11 @@ function On() {
           case u:
             return W(d.render);
           case f:
-            return Q(d.type, g, w);
+            return X(d.type, g, w);
           case p: {
             var k = d, L = k._payload, U = k._init;
             try {
-              return Q(U(L), g, w);
+              return X(U(L), g, w);
             } catch {
             }
           }
@@ -343,7 +343,7 @@ function On() {
     var $e = Object.prototype.hasOwnProperty, rt = {}, Or = j.ReactDebugCurrentFrame;
     function xt(d) {
       if (d) {
-        var g = d._owner, w = Q(d.type, d._source, g ? g.type : null);
+        var g = d._owner, w = X(d.type, d._source, g ? g.type : null);
         Or.setExtraStackFrame(w);
       } else
         Or.setExtraStackFrame(null);
@@ -492,7 +492,7 @@ function On() {
     var Yt = j.ReactCurrentOwner, Rr = j.ReactDebugCurrentFrame;
     function qe(d) {
       if (d) {
-        var g = d._owner, w = Q(d.type, d._source, g ? g.type : null);
+        var g = d._owner, w = X(d.type, d._source, g ? g.type : null);
         Rr.setExtraStackFrame(w);
       } else
         Rr.setExtraStackFrame(null);
@@ -628,11 +628,11 @@ Check the top-level render call using <` + w + ">.");
               Dr(ae, d);
         }
         if ($e.call(g, "key")) {
-          var Ie = G(d), Z = Object.keys(g).filter(function(wn) {
+          var Ie = G(d), Q = Object.keys(g).filter(function(wn) {
             return wn !== "key";
-          }), Kt = Z.length > 0 ? "{key: someKey, " + Z.join(": ..., ") + ": ...}" : "{key: someKey}";
+          }), Kt = Q.length > 0 ? "{key: someKey, " + Q.join(": ..., ") + ": ...}" : "{key: someKey}";
           if (!Mr[Ie + Kt]) {
-            var _n = Z.length > 0 ? "{" + Z.join(": ..., ") + ": ...}" : "{}";
+            var _n = Q.length > 0 ? "{" + Q.join(": ..., ") + ": ...}" : "{}";
             O(`A props object containing a "key" prop is being spread into JSX:
   let props = %s;
   <%s {...props} />
@@ -927,7 +927,7 @@ class zn {
     });
   }
 }
-var te = {}, Sr = {}, Dt = {}, pt = {}, Mt = {}, Lt = {}, Vn = function() {
+var ee = {}, Sr = {}, Dt = {}, pt = {}, Mt = {}, Lt = {}, Vn = function() {
   if (typeof self < "u")
     return self;
   if (typeof window < "u")
@@ -1821,21 +1821,21 @@ Sr.default = hi;
 var Qe = ce && ce.__importDefault || function(s) {
   return s && s.__esModule ? s : { default: s };
 };
-Object.defineProperty(te, "__esModule", { value: !0 });
-te.PostgrestError = te.PostgrestBuilder = te.PostgrestTransformBuilder = te.PostgrestFilterBuilder = te.PostgrestQueryBuilder = te.PostgrestClient = void 0;
+Object.defineProperty(ee, "__esModule", { value: !0 });
+ee.PostgrestError = ee.PostgrestBuilder = ee.PostgrestTransformBuilder = ee.PostgrestFilterBuilder = ee.PostgrestQueryBuilder = ee.PostgrestClient = void 0;
 const Os = Qe(Sr);
-te.PostgrestClient = Os.default;
+ee.PostgrestClient = Os.default;
 const Ts = Qe(Dt);
-te.PostgrestQueryBuilder = Ts.default;
+ee.PostgrestQueryBuilder = Ts.default;
 const js = Qe(pt);
-te.PostgrestFilterBuilder = js.default;
+ee.PostgrestFilterBuilder = js.default;
 const Ps = Qe(Mt);
-te.PostgrestTransformBuilder = Ps.default;
+ee.PostgrestTransformBuilder = Ps.default;
 const Cs = Qe(Lt);
-te.PostgrestBuilder = Cs.default;
+ee.PostgrestBuilder = Cs.default;
 const Rs = Qe(Nt);
-te.PostgrestError = Rs.default;
-var fi = te.default = {
+ee.PostgrestError = Rs.default;
+var fi = ee.default = {
   PostgrestClient: Os.default,
   PostgrestQueryBuilder: Ts.default,
   PostgrestFilterBuilder: js.default,
@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-BG19rO1M.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-FI6xFBZZ.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -2990,7 +2990,7 @@ function Ls(s, e, t, r, n) {
     return mt(s, "DELETE", e, r, n, t);
   });
 }
-var ee = function(s, e, t, r) {
+var Z = function(s, e, t, r) {
   function n(i) {
     return i instanceof t ? i : new t(function(a) {
       a(i);
@@ -3041,7 +3041,7 @@ class Ui {
    * @param fileBody The body of the file to be stored in the bucket.
    */
   uploadOrUpdate(e, t, r, n) {
-    return ee(this, void 0, void 0, function* () {
+    return Z(this, void 0, void 0, function* () {
       try {
         let i;
         const a = Object.assign(Object.assign({}, Gr), n);
@@ -3067,7 +3067,7 @@ class Ui {
    * @param fileBody The body of the file to be stored in the bucket.
    */
   upload(e, t, r) {
-    return ee(this, void 0, void 0, function* () {
+    return Z(this, void 0, void 0, function* () {
       return this.uploadOrUpdate("POST", e, t, r);
     });
   }
@@ -3078,7 +3078,7 @@ class Ui {
    * @param fileBody The body of the file to be stored in the bucket.
    */
   uploadToSignedUrl(e, t, r, n) {
-    return ee(this, void 0, void 0, function* () {
+    return Z(this, void 0, void 0, function* () {
       const i = this._removeEmptyFolders(e), a = this._getFinalPath(i), o = new URL(this.url + `/object/upload/sign/${a}`);
       o.searchParams.set("token", t);
       try {
@@ -3109,7 +3109,7 @@ class Ui {
    * @param options.upsert If set to true, allows the file to be overwritten if it already exists.
    */
   createSignedUploadUrl(e, t) {
-    return ee(this, void 0, void 0, function* () {
+    return Z(this, void 0, void 0, function* () {
       try {
         let r = this._getFinalPath(e);
         const n = Object.assign({}, this.headers);
@@ -3132,7 +3132,7 @@ class Ui {
    * @param fileBody The body of the file to be stored in the bucket.
    */
   update(e, t, r) {
-    return ee(this, void 0, void 0, function* () {
+    return Z(this, void 0, void 0, function* () {
       return this.uploadOrUpdate("PUT", e, t, r);
     });
   }
@@ -3144,7 +3144,7 @@ class Ui {
    * @param options The destination options.
    */
   move(e, t, r) {
-    return ee(this, void 0, void 0, function* () {
+    return Z(this, void 0, void 0, function* () {
       try {
         return { data: yield Te(this.fetch, `${this.url}/object/move`, {
           bucketId: this.bucketId,
@@ -3167,7 +3167,7 @@ class Ui {
    * @param options The destination options.
    */
   copy(e, t, r) {
-    return ee(this, void 0, void 0, function* () {
+    return Z(this, void 0, void 0, function* () {
       try {
         return { data: { path: (yield Te(this.fetch, `${this.url}/object/copy`, {
           bucketId: this.bucketId,
@@ -3191,7 +3191,7 @@ class Ui {
    * @param options.transform Transform the asset before serving it to the client.
    */
   createSignedUrl(e, t, r) {
-    return ee(this, void 0, void 0, function* () {
+    return Z(this, void 0, void 0, function* () {
       try {
         let n = this._getFinalPath(e), i = yield Te(this.fetch, `${this.url}/object/sign/${n}`, Object.assign({ expiresIn: t }, r != null && r.transform ? { transform: r.transform } : {}), { headers: this.headers });
         const a = r != null && r.download ? `&download=${r.download === !0 ? "" : r.download}` : "";
@@ -3211,7 +3211,7 @@ class Ui {
    * @param options.download triggers the file as a download if set to true. Set this parameter as the name of the file if you want to trigger the download with a different filename.
    */
   createSignedUrls(e, t, r) {
-    return ee(this, void 0, void 0, function* () {
+    return Z(this, void 0, void 0, function* () {
       try {
         const n = yield Te(this.fetch, `${this.url}/object/sign/${this.bucketId}`, { expiresIn: t, paths: e }, { headers: this.headers }), i = r != null && r.download ? `&download=${r.download === !0 ? "" : r.download}` : "";
         return {
@@ -3232,7 +3232,7 @@ class Ui {
    * @param options.transform Transform the asset before serving it to the client.
    */
   download(e, t) {
-    return ee(this, void 0, void 0, function* () {
+    return Z(this, void 0, void 0, function* () {
       const n = typeof (t == null ? void 0 : t.transform) < "u" ? "render/image/authenticated" : "object", i = this.transformOptsToQueryString((t == null ? void 0 : t.transform) || {}), a = i ? `?${i}` : "";
       try {
         const o = this._getFinalPath(e);
@@ -3252,7 +3252,7 @@ class Ui {
    * @param path
    */
   info(e) {
-    return ee(this, void 0, void 0, function* () {
+    return Z(this, void 0, void 0, function* () {
       const t = this._getFinalPath(e);
       try {
         const r = yield $t(this.fetch, `${this.url}/object/info/${t}`, {
@@ -3271,7 +3271,7 @@ class Ui {
    * @param path
    */
   exists(e) {
-    return ee(this, void 0, void 0, function* () {
+    return Z(this, void 0, void 0, function* () {
       const t = this._getFinalPath(e);
       try {
         return yield Li(this.fetch, `${this.url}/object/${t}`, {
@@ -3311,7 +3311,7 @@ class Ui {
    * @param paths An array of files to delete, including the path and file name. For example [`'folder/image.png'`].
    */
   remove(e) {
-    return ee(this, void 0, void 0, function* () {
+    return Z(this, void 0, void 0, function* () {
       try {
         return { data: yield Ls(this.fetch, `${this.url}/object/${this.bucketId}`, { prefixes: e }, { headers: this.headers }), error: null };
       } catch (t) {
@@ -3385,7 +3385,7 @@ class Ui {
    * @param path The folder path.
    */
   list(e, t, r) {
-    return ee(this, void 0, void 0, function* () {
+    return Z(this, void 0, void 0, function* () {
       try {
         const n = Object.assign(Object.assign(Object.assign({}, Ni), t), { prefix: e || "" });
         return { data: yield Te(this.fetch, `${this.url}/object/list/${this.bucketId}`, n, { headers: this.headers }, r), error: null };
@@ -7308,10 +7308,10 @@ function sc() {
         value: null
       }, S.current = P) : P = S.current;
       var j = c(function() {
-        var M = !1, I, Y, le = function(X) {
+        var M = !1, I, Y, le = function(te) {
           if (!M) {
-            M = !0, I = X;
-            var G = _(X);
+            M = !0, I = te;
+            var G = _(te);
             if (y !== void 0 && P.hasValue) {
               var re = P.value;
               if (y(re, G))
@@ -7320,10 +7320,10 @@ function sc() {
             return Y = G, G;
           }
           var pe = I, Se = Y;
-          if (n(pe, X))
+          if (n(pe, te))
             return Se;
-          var xe = _(X);
-          return y !== void 0 && y(Se, xe) ? Se : (I = X, Y = xe, xe);
+          var xe = _(te);
+          return y !== void 0 && y(Se, xe) ? Se : (I = te, Y = xe, xe);
         }, V = p === void 0 ? null : p, be = function() {
           return le(f());
         }, Re = V === null ? void 0 : function() {
@@ -7812,7 +7812,7 @@ function Zc({ domainId: s }) {
     };
     return window.addEventListener("resize", v), () => window.removeEventListener("resize", v);
   }, []);
-  const X = () => window.matchMedia("(max-width: 640px)").matches, G = (v, b) => b.some(
+  const te = () => window.matchMedia("(max-width: 640px)").matches, G = (v, b) => b.some(
     (R) => (
       // Check for exact ID match
       R.id === v.id || // Check for temp ID being replaced by real ID
@@ -7937,7 +7937,7 @@ function Zc({ domainId: s }) {
             if (G(R, W))
               return console.log("Message already exists, skipping"), W;
             const se = W.filter(
-              (Q) => !(Q.id.startsWith("temp-") && Q.content === R.content && Q.sender_type === R.sender_type)
+              (X) => !(X.id.startsWith("temp-") && X.content === R.content && X.sender_type === R.sender_type)
             );
             return y.add(R.id), R.sender_type === "bot" && Ze(), console.log("Adding new message to state"), [...se, R];
           });
@@ -7969,9 +7969,9 @@ function Zc({ domainId: s }) {
         return;
       }
       f(W.id);
-      const { data: Q } = await F.from("messages").select("*").eq("conversation_id", W.id).order("created_at", { ascending: !0 });
-      if (Q) {
-        const $e = Q.filter((rt) => y.has(rt.id) ? !1 : (y.add(rt.id), !0));
+      const { data: X } = await F.from("messages").select("*").eq("conversation_id", W.id).order("created_at", { ascending: !0 });
+      if (X) {
+        const $e = X.filter((rt) => y.has(rt.id) ? !1 : (y.add(rt.id), !0));
         a($e);
       }
     } catch (b) {
@@ -7984,14 +7984,14 @@ function Zc({ domainId: s }) {
         await F.auth.signInAnonymously();
         const { data: { user: W } } = await F.auth.getUser();
         if (!W) throw new Error("Failed to create anonymous session");
-        const { data: se, error: Q } = await F.from("conversations").insert({
+        const { data: se, error: X } = await F.from("conversations").insert({
           domain_id: s,
           user_id: W.id,
           session_id: j,
           last_message_at: (/* @__PURE__ */ new Date()).toISOString(),
           status: "active"
         }).select().single();
-        if (Q) throw Q;
+        if (X) throw X;
         return se.id;
       }
       const { data: b, error: R } = await F.from("conversations").insert({
@@ -8112,10 +8112,9 @@ function Zc({ domainId: s }) {
         e && /* @__PURE__ */ m.jsxs(
           "div",
           {
-            className: `${X() ? "fixed inset-0 w-full h-full flex flex-col" : "mb-4 bg-white rounded-lg shadow-xl overflow-hidden"}`,
+            className: `${te() ? "fixed inset-0 w-full h-full flex flex-col" : "mb-4 bg-white rounded-lg shadow-xl overflow-hidden"}`,
             style: {
-              width: X() ? "100%" : D.chatWidth,
-              height: X() ? "auto" : D.chatHeight
+              width: te() ? "100%" : D.chatWidth
             },
             children: [
               /* @__PURE__ */ m.jsxs("div", { className: "p-4 border-b flex items-center gap-3", style: { backgroundColor: D.color }, children: [
@@ -8169,9 +8168,9 @@ function Zc({ domainId: s }) {
               /* @__PURE__ */ m.jsx(
                 "div",
                 {
-                  className: `overflow-y-auto p-4 bg-white relative ${X() ? "flex-1" : ""}`,
+                  className: `overflow-y-auto p-4 bg-white relative ${te() ? "flex-1" : ""}`,
                   style: {
-                    height: X() ? "auto" : D.chatHeight
+                    height: te() ? "auto" : D.chatHeight
                   },
                   children: u === "history" ? /* @__PURE__ */ m.jsxs("div", { className: "space-y-4 h-full", children: [
                     /* @__PURE__ */ m.jsxs("div", { className: "flex justify-between items-center mb-4", children: [
@@ -8363,4 +8362,4 @@ el();
 export {
   xn as g
 };
-//# sourceMappingURL=main-DWJo__JB.js.map
+//# sourceMappingURL=main-2qtuDhpD.js.map
