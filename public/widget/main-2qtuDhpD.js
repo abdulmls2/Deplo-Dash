@@ -88,10 +88,10 @@ function On() {
         U.unshift("Warning: " + g), Function.prototype.apply.call(console[d], console, U);
       }
     }
-    var x = !1, D = !1, I = !1, Y = !1, le = !1, V;
+    var x = !1, M = !1, I = !1, Y = !1, le = !1, V;
     V = Symbol.for("react.module.reference");
     function be(d) {
-      return !!(typeof d == "string" || typeof d == "function" || d === n || d === a || le || d === i || d === l || d === h || Y || d === _ || x || D || I || typeof d == "object" && d !== null && (d.$$typeof === p || d.$$typeof === f || d.$$typeof === o || d.$$typeof === c || d.$$typeof === u || // This needs to include all possible module reference object
+      return !!(typeof d == "string" || typeof d == "function" || d === n || d === a || le || d === i || d === l || d === h || Y || d === _ || x || M || I || typeof d == "object" && d !== null && (d.$$typeof === p || d.$$typeof === f || d.$$typeof === o || d.$$typeof === c || d.$$typeof === u || // This needs to include all possible module reference object
       // types supported by any Flight configuration anywhere since
       // we don't know which Flight build this will end up being used
       // with.
@@ -153,9 +153,9 @@ function On() {
       return null;
     }
     var re = Object.assign, pe = 0, Se, xe, Ze, yt, _t, wt, bt;
-    function M() {
+    function D() {
     }
-    M.__reactDisabledLog = !0;
+    D.__reactDisabledLog = !0;
     function et() {
       {
         if (pe === 0) {
@@ -163,7 +163,7 @@ function On() {
           var d = {
             configurable: !0,
             enumerable: !0,
-            value: M,
+            value: D,
             writable: !0
           };
           Object.defineProperties(console, {
@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-Bf2HtTVH.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-FI6xFBZZ.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7159,16 +7159,16 @@ function tc() {
     var e = Fe, t = e.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
     function r(E) {
       {
-        for (var x = arguments.length, D = new Array(x > 1 ? x - 1 : 0), I = 1; I < x; I++)
-          D[I - 1] = arguments[I];
-        n("error", E, D);
+        for (var x = arguments.length, M = new Array(x > 1 ? x - 1 : 0), I = 1; I < x; I++)
+          M[I - 1] = arguments[I];
+        n("error", E, M);
       }
     }
-    function n(E, x, D) {
+    function n(E, x, M) {
       {
         var I = t.ReactDebugCurrentFrame, Y = I.getStackAddendum();
-        Y !== "" && (x += "%s", D = D.concat([Y]));
-        var le = D.map(function(V) {
+        Y !== "" && (x += "%s", M = M.concat([Y]));
+        var le = M.map(function(V) {
           return String(V);
         });
         le.unshift("Warning: " + x), Function.prototype.apply.call(console[E], console, le);
@@ -7178,7 +7178,7 @@ function tc() {
       return E === x && (E !== 0 || 1 / E === 1 / x) || E !== E && x !== x;
     }
     var a = typeof Object.is == "function" ? Object.is : i, o = e.useState, c = e.useEffect, u = e.useLayoutEffect, l = e.useDebugValue, h = !1, f = !1;
-    function p(E, x, D) {
+    function p(E, x, M) {
       h || e.startTransition !== void 0 && (h = !0, r("You are using an outdated, pre-release alpha of React 18 that does not support useSyncExternalStore. The use-sync-external-store shim will not work correctly. Upgrade to a newer pre-release."));
       var I = x();
       if (!f) {
@@ -7208,15 +7208,15 @@ function tc() {
       }, [E]), l(I), I;
     }
     function _(E) {
-      var x = E.getSnapshot, D = E.value;
+      var x = E.getSnapshot, M = E.value;
       try {
         var I = x();
-        return !a(D, I);
+        return !a(M, I);
       } catch {
         return !0;
       }
     }
-    function y(E, x, D) {
+    function y(E, x, M) {
       return x();
     }
     var S = typeof window < "u" && typeof window.document < "u" && typeof window.document.createElement < "u", P = !S, j = P ? y : p, O = e.useSyncExternalStore !== void 0 ? e.useSyncExternalStore : j;
@@ -7255,17 +7255,17 @@ function rc() {
       _.current = y;
     } else y = _.current;
     _ = o(function() {
-      function P(D) {
+      function P(M) {
         if (!j) {
-          if (j = !0, O = D, D = f(D), p !== void 0 && y.hasValue) {
+          if (j = !0, O = M, M = f(M), p !== void 0 && y.hasValue) {
             var I = y.value;
-            if (p(I, D)) return E = I;
+            if (p(I, M)) return E = I;
           }
-          return E = D;
+          return E = M;
         }
-        if (I = E, r(O, D)) return I;
-        var Y = f(D);
-        return p !== void 0 && p(I, Y) ? I : (O = D, E = Y);
+        if (I = E, r(O, M)) return I;
+        var Y = f(M);
+        return p !== void 0 && p(I, Y) ? I : (O = M, E = Y);
       }
       var j = !1, O, E, x = h === void 0 ? null : h;
       return [function() {
@@ -7308,9 +7308,9 @@ function sc() {
         value: null
       }, S.current = P) : P = S.current;
       var j = c(function() {
-        var D = !1, I, Y, le = function(te) {
-          if (!D) {
-            D = !0, I = te;
+        var M = !1, I, Y, le = function(te) {
+          if (!M) {
+            M = !0, I = te;
             var G = _(te);
             if (y !== void 0 && P.hasValue) {
               var re = P.value;
@@ -7805,7 +7805,7 @@ const Gc = async (s, e, t, r) => {
   }
 );
 function Zc({ domainId: s }) {
-  const [e, t] = K(!1), [r, n] = K(""), [i, a] = K([]), [o, c] = K([]), [u, l] = K("history"), [h, f] = K(null), [p, _] = K(!1), [y] = K(/* @__PURE__ */ new Set()), [S, P] = K(null), [j, O] = K(null), E = Ur(null), [x, D] = K(!1), I = Ur(null), { sendMessage: Y } = Jc(), [le, V] = K(!1), [be, Re] = K(window.innerWidth);
+  const [e, t] = K(!1), [r, n] = K(""), [i, a] = K([]), [o, c] = K([]), [u, l] = K("history"), [h, f] = K(null), [p, _] = K(!1), [y] = K(/* @__PURE__ */ new Set()), [S, P] = K(null), [j, O] = K(null), E = Ur(null), [x, M] = K(!1), I = Ur(null), { sendMessage: Y } = Jc(), [le, V] = K(!1), [be, Re] = K(window.innerWidth);
   fe(() => {
     const v = () => {
       Re(window.innerWidth);
@@ -7855,7 +7855,7 @@ function Zc({ domainId: s }) {
           (R) => R.map(
             (W) => W.id === b.new.id ? { ...W, ...b.new } : W
           )
-        ), b.new.id === h && D(b.new.status === "archived"));
+        ), b.new.id === h && M(b.new.status === "archived"));
       }
     ).subscribe();
     return () => {
@@ -7879,12 +7879,12 @@ function Zc({ domainId: s }) {
     j && re();
   }, [j]);
   const pe = async () => {
-    a([]), f(null), D(!1), me(null), V(!1), l("chat");
+    a([]), f(null), M(!1), me(null), V(!1), l("chat");
   }, Se = () => {
-    l("history"), a([]), f(null), D(!1);
+    l("history"), a([]), f(null), M(!1);
   }, xe = async (v) => {
     try {
-      f(v.id), D(v.status === "archived"), me(null), V(!1);
+      f(v.id), M(v.status === "archived"), me(null), V(!1);
       const { data: b } = await F.from("messages").select("*").eq("conversation_id", v.id).order("created_at", { ascending: !0 });
       b && (a(b), y.clear(), b.forEach((R) => y.add(R.id))), v.status === "archived" && me(v.rating || null), l("chat");
     } catch (b) {
@@ -7902,7 +7902,7 @@ function Zc({ domainId: s }) {
         filter: `id=eq.${h}`
       },
       (b) => {
-        b.new.status === "archived" ? (D(!0), Ze()) : D(!1);
+        b.new.status === "archived" ? (M(!0), Ze()) : M(!1);
       }
     ).subscribe();
     return () => {
@@ -8068,7 +8068,7 @@ function Zc({ domainId: s }) {
       }
     })();
   }, [s]);
-  const [M, et] = K({
+  const [D, et] = K({
     chatbotName: "Chatbot",
     greetingMessage: "Hello! How can I help you today?",
     color: "#FF6B00",
@@ -8079,7 +8079,7 @@ function Zc({ domainId: s }) {
     userMessageTextColor: "#000000",
     ...Rt
   }), St = {
-    backgroundColor: M.color
+    backgroundColor: D.color
   }, tt = async () => {
     if (h)
       try {
@@ -8106,30 +8106,30 @@ function Zc({ domainId: s }) {
   return /* @__PURE__ */ m.jsxs(
     "div",
     {
-      className: `fixed ${M.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`,
-      style: { [M.verticalPosition]: M.verticalOffset },
+      className: `fixed ${D.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`,
+      style: { [D.verticalPosition]: D.verticalOffset },
       children: [
         e && /* @__PURE__ */ m.jsxs(
           "div",
           {
             className: `${te() ? "fixed inset-0 w-full h-full flex flex-col" : "mb-4 bg-white rounded-lg shadow-xl overflow-hidden"}`,
             style: {
-              width: te() ? "100%" : M.chatWidth
+              width: te() ? "100%" : D.chatWidth
             },
             children: [
-              /* @__PURE__ */ m.jsxs("div", { className: "p-4 border-b flex items-center gap-3", style: { backgroundColor: M.color }, children: [
+              /* @__PURE__ */ m.jsxs("div", { className: "p-4 border-b flex items-center gap-3", style: { backgroundColor: D.color }, children: [
                 /* @__PURE__ */ m.jsxs("div", { className: "relative flex-shrink-0", children: [
                   /* @__PURE__ */ m.jsx("div", { className: "w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center", children: /* @__PURE__ */ m.jsx("span", { className: "text-lg", children: "🤖" }) }),
                   /* @__PURE__ */ m.jsx("div", { className: "absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white", style: St })
                 ] }),
-                /* @__PURE__ */ m.jsx("div", { className: "flex-1", children: /* @__PURE__ */ m.jsx("h3", { className: "font-medium", style: { color: M.headerTextColor }, children: M.chatbotName }) }),
+                /* @__PURE__ */ m.jsx("div", { className: "flex-1", children: /* @__PURE__ */ m.jsx("h3", { className: "font-medium", style: { color: D.headerTextColor }, children: D.chatbotName }) }),
                 u === "chat" ? /* @__PURE__ */ m.jsxs("div", { className: "flex items-center gap-2", children: [
                   /* @__PURE__ */ m.jsx(
                     "button",
                     {
                       onClick: Se,
                       className: "flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm",
-                      style: { color: M.headerTextColor },
+                      style: { color: D.headerTextColor },
                       title: "Chat history",
                       children: /* @__PURE__ */ m.jsx($n, { className: "h-4 w-4" })
                     }
@@ -8139,7 +8139,7 @@ function Zc({ domainId: s }) {
                     {
                       onClick: tt,
                       className: "flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm",
-                      style: { color: M.headerTextColor },
+                      style: { color: D.headerTextColor },
                       title: "Refresh chat",
                       children: /* @__PURE__ */ m.jsx(Dn, { className: "h-4 w-4" })
                     }
@@ -8149,7 +8149,7 @@ function Zc({ domainId: s }) {
                     {
                       onClick: () => t(!1),
                       className: "flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm",
-                      style: { color: M.headerTextColor },
+                      style: { color: D.headerTextColor },
                       title: "Close chat",
                       children: /* @__PURE__ */ m.jsx(qr, { className: "h-4 w-4" })
                     }
@@ -8159,7 +8159,7 @@ function Zc({ domainId: s }) {
                   {
                     onClick: () => t(!1),
                     className: "flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm",
-                    style: { color: M.headerTextColor },
+                    style: { color: D.headerTextColor },
                     title: "Close chat",
                     children: /* @__PURE__ */ m.jsx(qr, { className: "h-4 w-4" })
                   }
@@ -8170,7 +8170,7 @@ function Zc({ domainId: s }) {
                 {
                   className: `overflow-y-auto p-4 bg-white relative ${te() ? "flex-1" : ""}`,
                   style: {
-                    height: te() ? "auto" : M.chatHeight
+                    height: te() ? "auto" : D.chatHeight
                   },
                   children: u === "history" ? /* @__PURE__ */ m.jsxs("div", { className: "space-y-4 h-full", children: [
                     /* @__PURE__ */ m.jsxs("div", { className: "flex justify-between items-center mb-4", children: [
@@ -8179,7 +8179,8 @@ function Zc({ domainId: s }) {
                         "button",
                         {
                           onClick: pe,
-                          className: "flex items-center gap-2 px-3 py-1.5 bg-orange-500 text-white text-sm rounded-lg hover:bg-orange-600",
+                          className: "flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm",
+                          style: { backgroundColor: D.color, color: D.headerTextColor },
                           children: [
                             /* @__PURE__ */ m.jsx(An, { className: "h-4 w-4" }),
                             "Start New Chat"
@@ -8209,9 +8210,9 @@ function Zc({ domainId: s }) {
                   ] }) : /* @__PURE__ */ m.jsxs("div", { className: "space-y-4", children: [
                     u === "chat" && /* @__PURE__ */ m.jsxs("div", { className: "flex gap-2", children: [
                       /* @__PURE__ */ m.jsx("div", { className: "w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center", children: "🤖" }),
-                      /* @__PURE__ */ m.jsxs("div", { className: "p-3 rounded-lg max-w-[80%]", style: { backgroundColor: M.agentMessageColor }, children: [
-                        /* @__PURE__ */ m.jsx("p", { className: "text-sm", style: { color: M.agentMessageTextColor }, children: M.greetingMessage }),
-                        /* @__PURE__ */ m.jsx("span", { className: "text-xs mt-1 block opacity-75", style: { color: M.agentMessageTextColor }, children: Pt(/* @__PURE__ */ new Date(), "h:mm a") })
+                      /* @__PURE__ */ m.jsxs("div", { className: "p-3 rounded-lg max-w-[80%]", style: { backgroundColor: D.agentMessageColor }, children: [
+                        /* @__PURE__ */ m.jsx("p", { className: "text-sm", style: { color: D.agentMessageTextColor }, children: D.greetingMessage }),
+                        /* @__PURE__ */ m.jsx("span", { className: "text-xs mt-1 block opacity-75", style: { color: D.agentMessageTextColor }, children: Pt(/* @__PURE__ */ new Date(), "h:mm a") })
                       ] })
                     ] }),
                     i.map((v) => /* @__PURE__ */ m.jsxs(
@@ -8225,14 +8226,14 @@ function Zc({ domainId: s }) {
                             {
                               className: "p-3 rounded-lg max-w-[80%]",
                               style: {
-                                backgroundColor: v.sender_type === "user" ? M.userMessageColor : M.agentMessageColor
+                                backgroundColor: v.sender_type === "user" ? D.userMessageColor : D.agentMessageColor
                               },
                               children: [
                                 /* @__PURE__ */ m.jsx("p", { className: "text-sm", style: {
-                                  color: v.sender_type === "user" ? M.userMessageTextColor : M.agentMessageTextColor
+                                  color: v.sender_type === "user" ? D.userMessageTextColor : D.agentMessageTextColor
                                 }, children: v.content }),
                                 /* @__PURE__ */ m.jsx("span", { className: "text-xs mt-1 block opacity-75", style: {
-                                  color: v.sender_type === "user" ? M.userMessageTextColor : M.agentMessageTextColor
+                                  color: v.sender_type === "user" ? D.userMessageTextColor : D.agentMessageTextColor
                                 }, children: Pt(new Date(v.created_at), "h:mm a") })
                               ]
                             }
@@ -8305,7 +8306,7 @@ function Zc({ domainId: s }) {
                       onChange: (v) => n(v.target.value),
                       placeholder: "Type your message...",
                       className: "w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 pr-10 disabled:opacity-50 disabled:cursor-not-allowed",
-                      style: { "--tw-ring-color": M.color },
+                      style: { "--tw-ring-color": D.color },
                       disabled: p || x
                     }
                   ) }),
@@ -8339,9 +8340,9 @@ function Zc({ domainId: s }) {
           {
             className: "rounded-full text-white flex items-center justify-center shadow-lg",
             style: {
-              backgroundColor: M.color,
-              width: M.toggleButtonSize,
-              height: M.toggleButtonSize
+              backgroundColor: D.color,
+              width: D.toggleButtonSize,
+              height: D.toggleButtonSize
             },
             onClick: () => t(!e),
             children: e ? /* @__PURE__ */ m.jsx("span", { style: { fontSize: "24px" }, children: "×" }) : /* @__PURE__ */ m.jsx(Qc, {})
@@ -8361,4 +8362,4 @@ el();
 export {
   xn as g
 };
-//# sourceMappingURL=main-CUsyfRKV.js.map
+//# sourceMappingURL=main-2qtuDhpD.js.map

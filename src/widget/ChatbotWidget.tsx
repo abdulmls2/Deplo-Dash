@@ -784,7 +784,8 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   <h3 className="font-medium text-gray-900">Conversation History</h3>
                   <button
                     onClick={handleStartNewConversation}
-                    className="flex items-center gap-2 px-3 py-1.5 bg-orange-500 text-white text-sm rounded-lg hover:bg-orange-600"
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm"
+                    style={{ backgroundColor: config.color, color: config.headerTextColor }}
                   >
                     <MessageSquarePlus className="h-4 w-4" />
                     Start New Chat
