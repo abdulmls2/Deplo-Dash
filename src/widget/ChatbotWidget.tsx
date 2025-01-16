@@ -779,7 +779,13 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
               height: isMobileView() ? 'auto' : config.chatHeight 
             }}>
             {view === 'history' ? (
-              <div className="space-y-4 h-full">
+              <div 
+                className="space-y-4 h-full overflow-y-auto" 
+                style={{ 
+                  height: isMobileView() ? 'auto' : config.chatHeight,
+                  width: isMobileView() ? '100%' : config.chatWidth 
+                }}
+              >
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="font-medium text-gray-900">Conversation History</h3>
                   <button
