@@ -104,6 +104,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const { sendMessage: chatbotSendMessage } = useChatbotStore();
   const [isRequestingLiveChat, setIsRequestingLiveChat] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [showMaxConversationsMessage, setShowMaxConversationsMessage] = useState(false);
 
   // Add window resize listener
   useEffect(() => {
@@ -228,13 +229,15 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
 
   const handleStartNewConversation = async () => {
     if (conversations.filter(conv => conv.status === 'active').length >= 2) {
+        setShowMaxConversationsMessage(true);
+        setTimeout(() => setShowMaxConversationsMessage(false), 3000);
         return;
     }
     setMessages([]);
     setConversationId(null);
     setIsArchived(false);
-    setConversationRating(null);  // Reset conversation rating
-    setIsRequestingLiveChat(false); // Reset live chat request state
+    setConversationRating(null);
+    setIsRequestingLiveChat(false);
     setView('chat');
   };
 
@@ -783,7 +786,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             }}>
             {view === 'history' ? (
               <div className="space-y-4 h-full">
-                <div className="flex justify-between items-center mb-4">
+                <div className="flex justify-between items-center mb-4 relative">
                   <h3 className="font-medium text-gray-900">Conversation History</h3>
                   <button
                     onClick={handleStartNewConversation}
@@ -795,6 +798,13 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                     <MessageSquarePlus className="h-4 w-4" />
                     Start New Chat
                   </button>
+                  {showMaxConversationsMessage && (
+                    <div className="absolute top-full left-0 right-0 mt-2 text-center">
+                      <div className="bg-gray-800 text-white text-sm py-2 px-4 rounded-lg inline-block">
+                        You can only have 2 active conversations at a time
+                      </div>
+                    </div>
+                  )}
                 </div>
                 {conversations.map((conv) => (
                   <button
