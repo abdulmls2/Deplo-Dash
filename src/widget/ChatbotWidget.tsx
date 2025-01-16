@@ -6,7 +6,7 @@ import { useConversationStore } from '../lib/store/conversationStore';
 import { useChatbotStore } from '../lib/store/chatbotStore';
 
 const SESSION_KEY = 'chatbot_session_id';
-const CONVERSATION_EXPIRY_MINUTES = 1; // 1 minute for testing
+const CONVERSATION_EXPIRY_DAYS = 30; // 30 days
 
 // Add layout constants at the top of the file
 const LAYOUT_CONFIG = {
@@ -218,7 +218,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
 
       // Calculate expiry date for archived conversations
       const expiryDate = new Date();
-      expiryDate.setMinutes(expiryDate.getMinutes() - CONVERSATION_EXPIRY_MINUTES);
+      expiryDate.setDate(expiryDate.getDate() - CONVERSATION_EXPIRY_DAYS);
 
       // Get archived conversations that haven't expired
       const { data: archivedConversations } = await supabase
