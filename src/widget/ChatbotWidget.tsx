@@ -6,7 +6,7 @@ import { useConversationStore } from '../lib/store/conversationStore';
 import { useChatbotStore } from '../lib/store/chatbotStore';
 
 const SESSION_KEY = 'chatbot_session_id';
-const CONVERSATION_EXPIRY_DAYS = 30; // 30 days
+const CONVERSATION_EXPIRY_DAYS = 180; // 6 months default expiry
 
 // Add layout constants at the top of the file
 const LAYOUT_CONFIG = {
@@ -208,36 +208,14 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     if (!sessionId) return;
     
     try {
-      // Get all active conversations
-      const { data: activeConversations } = await supabase
+      const { data, error } = await supabase
         .from('conversations')
         .select('*')
         .eq('session_id', sessionId)
-        .eq('status', 'active')
         .order('last_message_at', { ascending: false });
 
-      // Calculate expiry date for archived conversations
-      const expiryDate = new Date();
-      expiryDate.setDate(expiryDate.getDate() - CONVERSATION_EXPIRY_DAYS);
-
-      // Get archived conversations that haven't expired
-      const { data: archivedConversations } = await supabase
-        .from('conversations')
-        .select('*')
-        .eq('session_id', sessionId)
-        .eq('status', 'archived')
-        .gt('last_message_at', expiryDate.toISOString())
-        .order('last_message_at', { ascending: false });
-
-      // Combine and sort both sets of conversations
-      const allConversations = [
-        ...(activeConversations || []),
-        ...(archivedConversations || [])
-      ].sort((a, b) => 
-        new Date(b.last_message_at).getTime() - new Date(a.last_message_at).getTime()
-      );
-
-      setConversations(allConversations);
+      if (error) throw error;
+      setConversations(data || []);
     } catch (error) {
       console.error('Error loading conversation history:', error);
     }
