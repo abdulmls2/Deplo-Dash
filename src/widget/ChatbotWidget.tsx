@@ -6,7 +6,7 @@ import { useConversationStore } from '../lib/store/conversationStore';
 import { useChatbotStore } from '../lib/store/chatbotStore';
 
 const SESSION_KEY = 'chatbot_session_id';
-const CONVERSATION_EXPIRY_DAYS = 180; // 6 months default expiry
+const CONVERSATION_EXPIRY_DAYS = 5 / 1440; // 5 minutes expiry
 
 // Add layout constants at the top of the file
 const LAYOUT_CONFIG = {

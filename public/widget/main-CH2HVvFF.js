@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-7xNAxHiE.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-BhMRh38P.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7771,7 +7771,7 @@ const Gc = async (s, e, t, r) => {
       s({ isLoading: !1 });
     }
   }
-})), ws = "chatbot_session_id", Kc = 180, Rt = {
+})), ws = "chatbot_session_id", Kc = 5 / 1440, Rt = {
   chatWidth: "380px",
   chatHeight: "380px",
   verticalPosition: "bottom",
@@ -8377,4 +8377,4 @@ el();
 export {
   Sn as g
 };
-//# sourceMappingURL=main-DW2zFPFA.js.map
+//# sourceMappingURL=main-CH2HVvFF.js.map
