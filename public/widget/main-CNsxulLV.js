@@ -1,5 +1,5 @@
 import * as ie from "react";
-import Fe, { forwardRef as bn, createElement as Nr, useState as J, useRef as Ur, useEffect as fe } from "react";
+import Fe, { forwardRef as bn, createElement as Nr, useState as K, useRef as Ur, useEffect as fe } from "react";
 import Sn from "react-dom";
 var ce = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
 function xn(s) {
@@ -282,14 +282,14 @@ function On() {
       } catch (Q) {
         if (Q && k && typeof Q.stack == "string") {
           for (var C = Q.stack.split(`
-`), K = k.stack.split(`
-`), q = C.length - 1, z = K.length - 1; q >= 1 && z >= 0 && C[q] !== K[z]; )
+`), J = k.stack.split(`
+`), q = C.length - 1, z = J.length - 1; q >= 1 && z >= 0 && C[q] !== J[z]; )
             z--;
           for (; q >= 1 && z >= 0; q--, z--)
-            if (C[q] !== K[z]) {
+            if (C[q] !== J[z]) {
               if (q !== 1 || z !== 1)
                 do
-                  if (q--, z--, z < 0 || C[q] !== K[z]) {
+                  if (q--, z--, z < 0 || C[q] !== J[z]) {
                     var ae = `
 ` + C[q].replace(" at new ", " at ");
                     return d.displayName && ae.includes("<anonymous>") && (ae = ae.replace("<anonymous>", d.displayName)), typeof d == "function" && v.set(d, ae), ae;
@@ -356,8 +356,8 @@ function On() {
             var C = void 0;
             try {
               if (typeof d[$] != "function") {
-                var K = Error((k || "React class") + ": " + w + " type `" + $ + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof d[$] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
-                throw K.name = "Invariant Violation", K;
+                var J = Error((k || "React class") + ": " + w + " type `" + $ + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof d[$] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
+                throw J.name = "Invariant Violation", J;
               }
               C = d[$](g, $, k, w, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
             } catch (q) {
@@ -473,8 +473,8 @@ function On() {
     };
     function un(d, g, w, k, L) {
       {
-        var U, $ = {}, C = null, K = null;
-        w !== void 0 && (jr(w), C = "" + w), nn(g) && (jr(g.key), C = "" + g.key), sn(g) && (K = g.ref, an(g, L));
+        var U, $ = {}, C = null, J = null;
+        w !== void 0 && (jr(w), C = "" + w), nn(g) && (jr(g.key), C = "" + g.key), sn(g) && (J = g.ref, an(g, L));
         for (U in g)
           $e.call(g, U) && !rn.hasOwnProperty(U) && ($[U] = g[U]);
         if (d && d.defaultProps) {
@@ -482,11 +482,11 @@ function On() {
           for (U in q)
             $[U] === void 0 && ($[U] = q[U]);
         }
-        if (C || K) {
+        if (C || J) {
           var z = typeof d == "function" ? d.displayName || d.name || "Unknown" : d;
-          C && on($, z), K && cn($, z);
+          C && on($, z), J && cn($, z);
         }
-        return ln(d, C, K, L, k, st.current, $);
+        return ln(d, C, J, L, k, st.current, $);
       }
     }
     var Yt = j.ReactCurrentOwner, Rr = j.ReactDebugCurrentFrame;
@@ -606,8 +606,8 @@ Check the top-level render call using <` + w + ">.");
         if (!$) {
           var C = "";
           (d === void 0 || typeof d == "object" && d !== null && Object.keys(d).length === 0) && (C += " You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.");
-          var K = dn();
-          K ? C += K : C += Ar();
+          var J = dn();
+          J ? C += J : C += Ar();
           var q;
           d === null ? q = "null" : Vt(d) ? q = "array" : d !== void 0 && d.$$typeof === t ? (q = "<" + (G(d.type) || "Unknown") + " />", C = " Did you accidentally export a JSX literal instead of a component?") : q = typeof d, O("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", q, C);
         }
@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-C2Pwrjy9.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-DxmZEKAi.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7805,8 +7805,8 @@ const Gc = async (s, e, t, r) => {
   }
 );
 function Zc({ domainId: s }) {
-  const [e, t] = J(!1), [r, n] = J(""), [i, a] = J([]), [o, c] = J([]), [u, l] = J("history"), [h, f] = J(null), [p, _] = J(!1), [y] = J(/* @__PURE__ */ new Set()), [S, P] = J(null), [j, O] = J(null), E = Ur(null), [x, M] = J(!1), I = Ur(null), { sendMessage: Y } = Jc(), [le, V] = J(!1), [be, Re] = J(window.innerWidth);
-  J(null), fe(() => {
+  const [e, t] = K(!1), [r, n] = K(""), [i, a] = K([]), [o, c] = K([]), [u, l] = K("history"), [h, f] = K(null), [p, _] = K(!1), [y] = K(/* @__PURE__ */ new Set()), [S, P] = K(null), [j, O] = K(null), E = Ur(null), [x, M] = K(!1), I = Ur(null), { sendMessage: Y } = Jc(), [le, V] = K(!1), [be, Re] = K(window.innerWidth);
+  fe(() => {
     const v = () => {
       Re(window.innerWidth);
     };
@@ -8068,7 +8068,7 @@ function Zc({ domainId: s }) {
       }
     })();
   }, [s]);
-  const [D, et] = J({
+  const [D, et] = K({
     chatbotName: "Chatbot",
     greetingMessage: "Hello! How can I help you today?",
     color: "#FF6B00",
@@ -8089,7 +8089,7 @@ function Zc({ domainId: s }) {
       } catch (v) {
         console.error("Error refreshing chat:", v), P("Failed to refresh chat");
       }
-  }, [he, me] = J(null), Ae = async (v) => {
+  }, [he, me] = K(null), Ae = async (v) => {
     if (h)
       try {
         const { error: b } = await F.from("conversations").update({ rating: v }).eq("id", h);
@@ -8363,4 +8363,4 @@ el();
 export {
   xn as g
 };
-//# sourceMappingURL=main-B8Eu7SuZ.js.map
+//# sourceMappingURL=main-CNsxulLV.js.map

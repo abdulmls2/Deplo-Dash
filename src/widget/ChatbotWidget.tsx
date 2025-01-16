@@ -104,7 +104,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const { sendMessage: chatbotSendMessage } = useChatbotStore();
   const [isRequestingLiveChat, setIsRequestingLiveChat] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [notificationMessage, setNotificationMessage] = useState<string | null>(null);
 
   // Add window resize listener
   useEffect(() => {
