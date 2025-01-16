@@ -776,7 +776,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           {/* Chat Area */}
           <div className={`overflow-y-auto p-4 bg-white relative ${isMobileView() ? 'flex-1' : ''}`} 
             style={{ 
-              height: isMobileView() ? 'auto' : (view === 'history' ? 'calc(' + config.chatHeight + ' + 100px)' : config.chatHeight)
+              height: isMobileView() ? 'auto' : (view === 'history' ? 'calc(' + config.chatHeight + ' + 105px)' : config.chatHeight)
             }}>
             {view === 'history' ? (
               <div className="space-y-4 h-full">
