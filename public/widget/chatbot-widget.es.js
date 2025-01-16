@@ -1,2 +1,2 @@
-import "./main-B8Ub-Hgb.js";
+import "./main-DW2zFPFA.js";
 //# sourceMappingURL=chatbot-widget.es.js.map
