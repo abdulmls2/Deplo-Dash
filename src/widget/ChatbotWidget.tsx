@@ -229,7 +229,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
 
   const handleStartNewConversation = async () => {
     if (conversations.filter(conv => conv.status === 'active').length >= 2) {
-        setNotificationMessage('You can only have 2 active conversations at a time.');
         return;
     }
     setMessages([]);
@@ -787,13 +786,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
               <div className="space-y-4 h-full">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="font-medium text-gray-900">Conversation History</h3>
-                  <div className="mb-2">
-                    {notificationMessage && (
-                        <div className="p-2 bg-red-100 text-red-600 rounded-lg text-center">
-                            {notificationMessage}
-                        </div>
-                    )}
-                  </div>
                   <button
                     onClick={handleStartNewConversation}
                     className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm"
