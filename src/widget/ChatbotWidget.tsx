@@ -104,6 +104,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const { sendMessage: chatbotSendMessage } = useChatbotStore();
   const [isRequestingLiveChat, setIsRequestingLiveChat] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [showMobileMessage, setShowMobileMessage] = useState(true);
 
   // Add window resize listener
   useEffect(() => {
@@ -117,7 +118,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
 
   const isMobileView = () => window.matchMedia('(max-width: 640px)').matches;
 
-  // Add this helper function at the top of the component
+  // Add this helper function at the top of the components
   const isMessageDuplicate = (newMsg: Message, existingMessages: Message[]) => {
     return existingMessages.some(msg => 
       // Check for exact ID match
@@ -785,16 +786,29 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
               <div className="space-y-4 h-full">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="font-medium text-gray-900">Conversation History</h3>
-                  <button
-                    onClick={handleStartNewConversation}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm"
-                    style={{ backgroundColor: config.color, color: config.headerTextColor }}
-                    disabled={conversations.filter(conv => conv.status === 'active').length >= 2}
-                    title={conversations.filter(conv => conv.status === 'active').length >= 2 ? 'You can only have 2 active conversations at a time.' : ''}
-                  >
-                    <MessageSquarePlus className="h-4 w-4" />
-                    Start New Chat
-                  </button>
+                  <div className="flex flex-col items-end gap-1">
+                    <button
+                      onClick={handleStartNewConversation}
+                      className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm"
+                      style={{ backgroundColor: config.color, color: config.headerTextColor }}
+                      disabled={conversations.filter(conv => conv.status === 'active').length >= 2}
+                      title={!isMobileView() && conversations.filter(conv => conv.status === 'active').length >= 2 ? 'You can only have 2 active conversations at a time.' : ''}
+                    >
+                      <MessageSquarePlus className="h-4 w-4" />
+                      Start New Chat
+                    </button>
+                    {isMobileView() && conversations.filter(conv => conv.status === 'active').length >= 2 && showMobileMessage && (
+                      <div className="flex items-center gap-1 text-xs text-gray-600">
+                        <span>Maximum 2 active conversations allowed</span>
+                        <button 
+                          onClick={() => setShowMobileMessage(false)}
+                          className="p-1 hover:text-gray-800"
+                        >
+                          <X className="h-3 w-3" />
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
                 {conversations.map((conv) => (
                   <button
