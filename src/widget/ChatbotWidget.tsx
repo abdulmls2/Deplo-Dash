@@ -6,7 +6,7 @@ import { useConversationStore } from '../lib/store/conversationStore';
 import { useChatbotStore } from '../lib/store/chatbotStore';
 
 const SESSION_KEY = 'chatbot_session_id';
-const CONVERSATION_EXPIRY_DAYS = 5 / 1440; // 5 minutes expiry
+const CONVERSATION_EXPIRY_MINUTES = 1; // 1 minute for testing
 
 // Add layout constants at the top of the file
 const LAYOUT_CONFIG = {
@@ -208,10 +208,21 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     if (!sessionId) return;
     
     try {
+      // Calculate the expiry date (now subtract 1 minute)
+      const expiryDate = new Date();
+      expiryDate.setMinutes(expiryDate.getMinutes() - CONVERSATION_EXPIRY_MINUTES);
+
       const { data, error } = await supabase
         .from('conversations')
         .select('*')
         .eq('session_id', sessionId)
+        // Only show conversations that are either:
+        // 1. Active, or
+        // 2. Archived but not older than the expiry date
+        .or(`
+          status.eq.active,
+          and(status.eq.archived,last_message_at.gt.${expiryDate.toISOString()})
+        `)
         .order('last_message_at', { ascending: false });
 
       if (error) throw error;
@@ -424,7 +435,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
 
       // Check if conversation has expired
       const expiryDate = new Date();
-      expiryDate.setDate(expiryDate.getDate() - CONVERSATION_EXPIRY_DAYS);
+      expiryDate.setMinutes(expiryDate.getMinutes() - CONVERSATION_EXPIRY_MINUTES);
       
       if (new Date(conversation.last_message_at) < expiryDate) {
         // Conversation has expired, archive it
