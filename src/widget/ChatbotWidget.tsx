@@ -719,7 +719,8 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       {isExpanded && (
         <div className={`${isMobileView() ? 'fixed inset-0 w-full h-full flex flex-col' : 'mb-4 bg-white rounded-lg shadow-xl overflow-hidden'}`}
           style={{ 
-            width: isMobileView() ? '100%' : config.chatWidth
+            width: isMobileView() ? '100%' : config.chatWidth,
+            height: !isMobileView() ? config.chatHeight : 'auto'
           }}>
           {/* Header */}
           <div className="p-4 border-b flex items-center gap-3" style={{ backgroundColor: config.color }}>
