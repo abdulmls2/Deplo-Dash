@@ -216,9 +216,8 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
         .from('conversations')
         .select('*')
         .eq('session_id', sessionId)
-        // Only show conversations that are either:
-        // 1. Active, or
-        // 2. Archived but not older than the expiry date
+        // Show ALL active conversations
+        // For archived conversations, only show those not older than the expiry date
         .or(`
           status.eq.active,
           and(status.eq.archived,last_message_at.gt.${expiryDate.toISOString()})
@@ -435,7 +434,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
 
       // Check if conversation has expired
       const expiryDate = new Date();
-      expiryDate.setMinutes(expiryDate.getMinutes() - CONVERSATION_EXPIRY_MINUTES);
+      expiryDate.setDate(expiryDate.getDate() - CONVERSATION_EXPIRY_DAYS);
       
       if (new Date(conversation.last_message_at) < expiryDate) {
         // Conversation has expired, archive it
