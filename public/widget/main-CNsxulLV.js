@@ -2605,7 +2605,7 @@ class Pi {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-CjpYGh6c.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-DxmZEKAi.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7879,7 +7879,7 @@ function Zc({ domainId: s }) {
     j && re();
   }, [j]);
   const pe = async () => {
-    a([]), f(null), M(!1), me(null), V(!1), l("chat");
+    o.filter((v) => v.status === "active").length >= 2 || (a([]), f(null), M(!1), me(null), V(!1), l("chat"));
   }, Se = () => {
     l("history"), a([]), f(null), M(!1);
   }, xe = async (v) => {
@@ -8181,6 +8181,7 @@ function Zc({ domainId: s }) {
                           onClick: pe,
                           className: "flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm",
                           style: { backgroundColor: D.color, color: D.headerTextColor },
+                          disabled: o.filter((v) => v.status === "active").length >= 2,
                           children: [
                             /* @__PURE__ */ m.jsx(An, { className: "h-4 w-4" }),
                             "Start New Chat"
@@ -8362,4 +8363,4 @@ el();
 export {
   xn as g
 };
-//# sourceMappingURL=main-CJzo_rXM.js.map
+//# sourceMappingURL=main-CNsxulLV.js.map

@@ -227,6 +227,9 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   }, [sessionId]);
 
   const handleStartNewConversation = async () => {
+    if (conversations.filter(conv => conv.status === 'active').length >= 2) {
+        return;
+    }
     setMessages([]);
     setConversationId(null);
     setIsArchived(false);
@@ -786,6 +789,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                     onClick={handleStartNewConversation}
                     className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm"
                     style={{ backgroundColor: config.color, color: config.headerTextColor }}
+                    disabled={conversations.filter(conv => conv.status === 'active').length >= 2}
                   >
                     <MessageSquarePlus className="h-4 w-4" />
                     Start New Chat
