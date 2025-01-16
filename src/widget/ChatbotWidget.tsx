@@ -228,7 +228,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   }, [sessionId]);
 
   const handleStartNewConversation = async () => {
-    if (conversations.filter(conv => conv.status === 'active').length >= 5) {
+    if (conversations.filter(conv => conv.status === 'active').length >= 2) {
         return;
     }
     setMessages([]);
@@ -792,14 +792,14 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                       className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm"
                       style={{ backgroundColor: config.color, color: config.headerTextColor }}
                       disabled={conversations.filter(conv => conv.status === 'active').length >= 2}
-                      title={!isMobileView() && conversations.filter(conv => conv.status === 'active').length >= 2 ? 'You can only have 5 active conversations at a time.' : ''}
+                      title={!isMobileView() && conversations.filter(conv => conv.status === 'active').length >= 2 ? 'You can only have 2 active conversations at a time.' : ''}
                     >
                       <MessageSquarePlus className="h-4 w-4" />
                       Start New Chat
                     </button>
                     {isMobileView() && conversations.filter(conv => conv.status === 'active').length >= 2 && showMobileMessage && (
                       <div className="flex items-center gap-1 text-xs text-gray-600">
-                        <span>Maximum 5 active conversations allowed</span>
+                        <span>Maximum 2 active conversations allowed</span>
                         <button 
                           onClick={() => setShowMobileMessage(false)}
                           className="p-1 hover:text-gray-800"
