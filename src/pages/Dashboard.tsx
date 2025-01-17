@@ -6,61 +6,102 @@ import PlanUsage from '../components/dashboard/PlanUsage';
 import RecentTransactions from '../components/dashboard/RecentTransactions';
 
 export default function Dashboard() {
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [todayConversations, setTodayConversations] = useState(0);
   const [ratings, setRatings] = useState({ good: 0, ok: 0, bad: 0 });
   const [liveConversations, setLiveConversations] = useState(0);
 
   useEffect(() => {
-    async function fetchTodayConversations() {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
+    fetchData(selectedDate);
+  }, [selectedDate]);
 
-      const { count, error } = await supabase
-        .from('conversations')
-        .select('*', { count: 'exact', head: true })
-        .gte('created_at', today.toISOString())
-        .in('status', ['active', 'archived']);
+  async function fetchData(date: Date) {
+    const startOfDay = new Date(date);
+    startOfDay.setHours(0, 0, 0, 0);
+    const endOfDay = new Date(date);
+    endOfDay.setHours(23, 59, 59, 999);
 
-      if (!error && count !== null) {
-        setTodayConversations(count);
-      }
+    await fetchTodayConversations(startOfDay, endOfDay);
+    await fetchRatings(startOfDay, endOfDay);
+    await fetchLiveConversations(startOfDay, endOfDay);
+  }
+
+  async function fetchTodayConversations(startOfDay: Date, endOfDay: Date) {
+    const { count, error } = await supabase
+      .from('conversations')
+      .select('*', { count: 'exact', head: true })
+      .gte('created_at', startOfDay.toISOString())
+      .lte('created_at', endOfDay.toISOString())
+      .in('status', ['active', 'archived']);
+
+    if (!error && count !== null) {
+      setTodayConversations(count);
     }
+  }
 
-    async function fetchRatings() {
-      const { data, error } = await supabase
-        .from('conversations')
-        .select('rating')
-        .not('rating', 'is', null)
-        .in('status', ['active', 'archived']);
+  async function fetchRatings(startOfDay: Date, endOfDay: Date) {
+    const { data, error } = await supabase
+      .from('conversations')
+      .select('rating')
+      .not('rating', 'is', null)
+      .gte('created_at', startOfDay.toISOString())
+      .lte('created_at', endOfDay.toISOString())
+      .in('status', ['active', 'archived']);
 
-      if (!error && data) {
-        const ratingCounts = {
-          good: data.filter(conv => conv.rating === 'good').length,
-          ok: data.filter(conv => conv.rating === 'ok').length,
-          bad: data.filter(conv => conv.rating === 'bad').length
-        };
-        setRatings(ratingCounts);
-      }
+    if (!error && data) {
+      const ratingCounts = {
+        good: data.filter(conv => conv.rating === 'good').length,
+        ok: data.filter(conv => conv.rating === 'ok').length,
+        bad: data.filter(conv => conv.rating === 'bad').length
+      };
+      setRatings(ratingCounts);
     }
+  }
 
-    async function fetchLiveConversations() {
-      const { count, error } = await supabase
-        .from('conversations')
-        .select('*', { count: 'exact', head: true })
-        .eq('live_mode', true);
+  async function fetchLiveConversations(startOfDay: Date, endOfDay: Date) {
+    const { count, error } = await supabase
+      .from('conversations')
+      .select('*', { count: 'exact', head: true })
+      .eq('live_mode', true)
+      .gte('created_at', startOfDay.toISOString())
+      .lte('created_at', endOfDay.toISOString());
 
-      if (!error && count !== null) {
-        setLiveConversations(count);
-      }
+    if (!error && count !== null) {
+      setLiveConversations(count);
     }
+  }
 
-    fetchTodayConversations();
-    fetchRatings();
-    fetchLiveConversations();
-  }, []);
+  const handleToday = () => {
+    setSelectedDate(new Date());
+  };
+
+  const handleYesterday = () => {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    setSelectedDate(yesterday);
+  };
+
+  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedDate(new Date(event.target.value));
+  };
 
   return (
     <div className="p-6">
+      <div className="mb-4">
+        <button onClick={handleToday} className="mr-2 bg-blue-500 text-white px-4 py-2 rounded">
+          Today
+        </button>
+        <button onClick={handleYesterday} className="bg-gray-300 text-black px-4 py-2 rounded">
+          Yesterday
+        </button>
+        <input 
+          type="date" 
+          value={selectedDate.toISOString().split('T')[0]}
+          onChange={handleDateChange} 
+          className="ml-2 border rounded px-2 py-1"
+        />
+      </div>
+
       <div className="mb-6">
         <h1 className="text-2xl font-bold mb-2">Dashboard</h1>
         <p className="text-gray-600">
