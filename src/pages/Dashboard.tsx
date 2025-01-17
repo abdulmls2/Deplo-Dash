@@ -8,6 +8,7 @@ import RecentTransactions from '../components/dashboard/RecentTransactions';
 export default function Dashboard() {
   const [todayConversations, setTodayConversations] = useState(0);
   const [ratings, setRatings] = useState({ good: 0, ok: 0, bad: 0 });
+  const [liveConversations, setLiveConversations] = useState(0);
 
   useEffect(() => {
     async function fetchTodayConversations() {
@@ -42,8 +43,20 @@ export default function Dashboard() {
       }
     }
 
+    async function fetchLiveConversations() {
+      const { count, error } = await supabase
+        .from('conversations')
+        .select('*', { count: 'exact', head: true })
+        .eq('live_mode', true);
+
+      if (!error && count !== null) {
+        setLiveConversations(count);
+      }
+    }
+
     fetchTodayConversations();
     fetchRatings();
+    fetchLiveConversations();
   }, []);
 
   return (
@@ -80,8 +93,8 @@ export default function Dashboard() {
           className="bg-red-50"
         />
         <StatsCard 
-          title="Potential Clients" 
-          value="5" 
+          title="Live Conversations"
+          value={liveConversations.toString()}
           Icon={Users}
         />
         <StatsCard 
