@@ -20,6 +20,7 @@ interface DomainSettings {
   user_message_color: string;
   agent_message_text_color: string;
   user_message_text_color: string;
+  logo_url: string | null;
 }
 
 export default function Domain() {
@@ -47,6 +48,7 @@ export default function Domain() {
   const [showAgentMessageTextColorPicker, setShowAgentMessageTextColorPicker] = useState(false);
   const [userMessageTextColor, setUserMessageTextColor] = useState('#000000');
   const [showUserMessageTextColorPicker, setShowUserMessageTextColorPicker] = useState(false);
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
 
   const colorPickerRef = useRef<HTMLDivElement>(null);
   const headerColorPickerRef = useRef<HTMLDivElement>(null);
@@ -105,6 +107,7 @@ export default function Domain() {
           setUserMessageColor(settings.user_message_color || '#FFF1E7');
           setAgentMessageTextColor(settings.agent_message_text_color || '#000000');
           setUserMessageTextColor(settings.user_message_text_color || '#000000');
+          setLogoUrl(settings.logo_url);
         }
       } catch (error) {
         console.error('Error fetching settings:', error);
@@ -259,7 +262,8 @@ export default function Domain() {
           agent_message_color: agentMessageColor,
           user_message_color: userMessageColor,
           agent_message_text_color: agentMessageTextColor,
-          user_message_text_color: userMessageTextColor
+          user_message_text_color: userMessageTextColor,
+          logo_url: logoUrl
         }, {
           onConflict: 'domain_id',
           ignoreDuplicates: false
@@ -273,6 +277,34 @@ export default function Domain() {
     } catch (error) {
       console.error('Error saving settings:', error);
       toast.error('Failed to save changes');
+    }
+  };
+
+  const handleSaveSettings = async () => {
+    if (!currentDomain?.id) return;
+
+    try {
+      const { error } = await supabase
+        .from('domain_settings')
+        .upsert({
+          domain_id: currentDomain.id,
+          chatbot_name: chatbotName,
+          greeting_message: greetingMessage,
+          primary_color: color,
+          header_text_color: headerTextColor,
+          agent_message_color: agentMessageColor,
+          user_message_color: userMessageColor,
+          agent_message_text_color: agentMessageTextColor,
+          user_message_text_color: userMessageTextColor,
+          logo_url: logoUrl
+        });
+
+      if (error) throw error;
+
+      toast.success('Settings saved successfully');
+    } catch (error) {
+      console.error('Error saving settings:', error);
+      toast.error('Failed to save settings');
     }
   };
 
@@ -344,6 +376,9 @@ export default function Domain() {
             setShowUserMessageTextColorPicker={setShowUserMessageTextColorPicker}
             agentMessageTextColorPickerRef={agentMessageTextColorPickerRef}
             userMessageTextColorPickerRef={userMessageTextColorPickerRef}
+            logoUrl={logoUrl}
+            setLogoUrl={setLogoUrl}
+            domainId={currentDomain?.id || ''}
           />
         </section>
 

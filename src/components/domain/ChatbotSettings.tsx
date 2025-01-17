@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import { HexColorPicker } from 'react-colorful';
+import { Upload } from 'lucide-react';
+import { supabase } from '../../lib/supabase';
 
 interface ChatbotSettingsProps {
   chatbotName: string;
@@ -36,6 +38,9 @@ interface ChatbotSettingsProps {
   setShowUserMessageTextColorPicker: (show: boolean) => void;
   agentMessageTextColorPickerRef: React.RefObject<HTMLDivElement>;
   userMessageTextColorPickerRef: React.RefObject<HTMLDivElement>;
+  logoUrl: string | null;
+  setLogoUrl: (url: string | null) => void;
+  domainId: string;
 }
 
 export default function ChatbotSettings({
@@ -72,10 +77,102 @@ export default function ChatbotSettings({
   showUserMessageTextColorPicker,
   setShowUserMessageTextColorPicker,
   agentMessageTextColorPickerRef,
-  userMessageTextColorPickerRef
+  userMessageTextColorPickerRef,
+  logoUrl,
+  setLogoUrl,
+  domainId
 }: ChatbotSettingsProps) {
+  const handleLogoUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      const file = event.target.files?.[0];
+      if (!file) return;
+
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        alert('Please upload an image file');
+        return;
+      }
+
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('File size must be less than 5MB');
+        return;
+      }
+
+      // Upload to Supabase Storage
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${domainId}-logo-${Date.now()}.${fileExt}`;
+      const { data, error } = await supabase.storage
+        .from('chatbot-logos')
+        .upload(fileName, file);
+
+      if (error) throw error;
+
+      // Get public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('chatbot-logos')
+        .getPublicUrl(fileName);
+
+      // Update domain settings with new logo URL
+      const { error: updateError } = await supabase
+        .from('domain_settings')
+        .update({ logo_url: publicUrl })
+        .eq('domain_id', domainId);
+
+      if (updateError) throw updateError;
+
+      setLogoUrl(publicUrl);
+    } catch (error) {
+      console.error('Error uploading logo:', error);
+      alert('Failed to upload logo. Please try again.');
+    }
+  };
+
   return (
     <div className="space-y-6">
+      {/* Logo Upload */}
+      <div className="bg-white rounded-lg shadow p-6">
+        <h3 className="text-lg font-semibold mb-4">Chatbot Logo</h3>
+        <div className="max-w-md">
+          <div className="flex items-center gap-4">
+            {logoUrl ? (
+              <div className="relative">
+                <img 
+                  src={logoUrl} 
+                  alt="Chatbot Logo" 
+                  className="w-16 h-16 rounded-full object-cover"
+                />
+                <button
+                  onClick={() => setLogoUrl(null)}
+                  className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 text-xs"
+                >
+                  ×
+                </button>
+              </div>
+            ) : (
+              <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center">
+                🤖
+              </div>
+            )}
+            <div className="flex-1">
+              <label className="flex items-center gap-2 px-4 py-2 bg-orange-500 text-white rounded-lg cursor-pointer hover:bg-orange-600 transition-colors">
+                <Upload className="w-4 h-4" />
+                <span>Upload Logo</span>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleLogoUpload}
+                  className="hidden"
+                />
+              </label>
+              <p className="mt-2 text-sm text-gray-600">
+                Upload a square image (recommended size: 400x400px, max 5MB)
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Chatbot Name */}
       <div className="bg-white rounded-lg shadow p-6">
         <h3 className="text-lg font-semibold mb-4">Chatbot Name</h3>

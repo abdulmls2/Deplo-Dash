@@ -26,6 +26,7 @@ interface ChatbotConfig {
   userMessageColor: string;
   agentMessageTextColor: string;
   userMessageTextColor: string;
+  logoUrl: string | null;
   // Layout settings
   chatWidth: string;
   chatHeight: string;
@@ -579,6 +580,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             userMessageColor: data.user_message_color || '#FFF1E7',
             agentMessageTextColor: data.agent_message_text_color || '#000000',
             userMessageTextColor: data.user_message_text_color || '#000000',
+            logoUrl: data.logo_url,
             ...LAYOUT_CONFIG
           });
         } else {
@@ -592,6 +594,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             userMessageColor: '#FFF1E7',
             agentMessageTextColor: '#000000',
             userMessageTextColor: '#000000',
+            logoUrl: null,
             ...LAYOUT_CONFIG
           });
         }
@@ -607,6 +610,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           userMessageColor: '#FFF1E7',
           agentMessageTextColor: '#000000',
           userMessageTextColor: '#000000',
+          logoUrl: null,
           ...LAYOUT_CONFIG
         });
       }
@@ -626,6 +630,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     userMessageColor: '#FFF1E7',
     agentMessageTextColor: '#000000',
     userMessageTextColor: '#000000',
+    logoUrl: null,
     ...LAYOUT_CONFIG
   });
 
@@ -717,6 +722,24 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     }
   };
 
+  // Update the bot icon rendering in the header and messages
+  // Replace the emoji div with this component:
+  const BotIcon = ({ size = 'md' }: { size?: 'sm' | 'md' }) => {
+    const dimensions = size === 'sm' ? 'w-8 h-8' : 'w-10 h-10';
+    
+    return config.logoUrl ? (
+      <img 
+        src={config.logoUrl} 
+        alt={config.chatbotName}
+        className={`${dimensions} rounded-full object-cover flex-shrink-0`}
+      />
+    ) : (
+      <div className={`${dimensions} rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center`}>
+        <span className={size === 'sm' ? 'text-base' : 'text-lg'}>🤖</span>
+      </div>
+    );
+  };
+
   return (
     <div className={`fixed ${config.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`} 
       style={{ [config.verticalPosition]: config.verticalOffset }}>
@@ -728,9 +751,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           {/* Header */}
           <div className="p-4 border-b flex items-center gap-3" style={{ backgroundColor: config.color }}>
             <div className="relative flex-shrink-0">
-              <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
-                <span className="text-lg">🤖</span>
-              </div>
+              <BotIcon />
               <div className="absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white" style={buttonStyle}></div>
             </div>
             <div className="flex-1">
@@ -845,9 +866,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
               {/* Always show greeting message in chat view */}
               {view === 'chat' && (
                 <div className="flex gap-2">
-                  <div className="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center">
-                    🤖
-                  </div>
+                  <BotIcon size="sm" />
                   <div className="p-3 rounded-lg max-w-[80%]" style={{ backgroundColor: config.agentMessageColor }}>
                     <p className="text-sm" style={{ color: config.agentMessageTextColor }}>{config.greetingMessage}</p>
                     <span className="text-xs mt-1 block opacity-75" style={{ color: config.agentMessageTextColor }}>
@@ -863,11 +882,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   key={msg.id}
                   className={`flex gap-2 ${msg.sender_type === 'user' ? 'justify-end' : ''}`}
                 >
-                  {msg.sender_type === 'bot' && (
-                    <div className="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center">
-                      🤖
-                    </div>
-                  )}
+                  {msg.sender_type === 'bot' && <BotIcon size="sm" />}
                   <div 
                     className="p-3 rounded-lg max-w-[80%]"
                     style={{ 
