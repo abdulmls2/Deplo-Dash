@@ -50,12 +50,27 @@ interface Conversation {
   rating?: 'bad' | 'ok' | 'good';
 }
 
-// Add this new component near the top of the file
-const TypingIndicator = () => (
-  <div className="flex gap-2">
-    <div className="w-8 h-8 rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center">
-      🤖
+// Bot Icon Component
+const BotIcon = ({ size = 'md', config }: { size?: 'sm' | 'md', config: ChatbotConfig }) => {
+  const dimensions = size === 'sm' ? 'w-8 h-8' : 'w-10 h-10';
+  
+  return config.logoUrl ? (
+    <img 
+      src={config.logoUrl} 
+      alt={config.chatbotName}
+      className={`${dimensions} rounded-full object-cover flex-shrink-0`}
+    />
+  ) : (
+    <div className={`${dimensions} rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center`}>
+      <span className={size === 'sm' ? 'text-base' : 'text-lg'}>🤖</span>
     </div>
+  );
+};
+
+// Add this new component near the top of the file
+const TypingIndicator = ({ config }: { config: ChatbotConfig }) => (
+  <div className="flex gap-2">
+    <BotIcon size="sm" config={config} />
     <div className="p-3 rounded-lg" style={{ backgroundColor: '#E5E7EB' }}>
       <div className="flex gap-2">
         <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
@@ -722,24 +737,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     }
   };
 
-  // Update the bot icon rendering in the header and messages
-  // Replace the emoji div with this component:
-  const BotIcon = ({ size = 'md' }: { size?: 'sm' | 'md' }) => {
-    const dimensions = size === 'sm' ? 'w-8 h-8' : 'w-10 h-10';
-    
-    return config.logoUrl ? (
-      <img 
-        src={config.logoUrl} 
-        alt={config.chatbotName}
-        className={`${dimensions} rounded-full object-cover flex-shrink-0`}
-      />
-    ) : (
-      <div className={`${dimensions} rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center`}>
-        <span className={size === 'sm' ? 'text-base' : 'text-lg'}>🤖</span>
-      </div>
-    );
-  };
-
   return (
     <div className={`fixed ${config.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`} 
       style={{ [config.verticalPosition]: config.verticalOffset }}>
@@ -751,7 +748,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           {/* Header */}
           <div className="p-4 border-b flex items-center gap-3" style={{ backgroundColor: config.color }}>
             <div className="relative flex-shrink-0">
-              <BotIcon />
+              <BotIcon config={config} />
               <div className="absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white" style={buttonStyle}></div>
             </div>
             <div className="flex-1">
@@ -866,7 +863,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
               {/* Always show greeting message in chat view */}
               {view === 'chat' && (
                 <div className="flex gap-2">
-                  <BotIcon size="sm" />
+                  <BotIcon size="sm" config={config} />
                   <div className="p-3 rounded-lg max-w-[80%]" style={{ backgroundColor: config.agentMessageColor }}>
                     <p className="text-sm" style={{ color: config.agentMessageTextColor }}>{config.greetingMessage}</p>
                     <span className="text-xs mt-1 block opacity-75" style={{ color: config.agentMessageTextColor }}>
@@ -882,7 +879,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   key={msg.id}
                   className={`flex gap-2 ${msg.sender_type === 'user' ? 'justify-end' : ''}`}
                 >
-                  {msg.sender_type === 'bot' && <BotIcon size="sm" />}
+                  {msg.sender_type === 'bot' && <BotIcon size="sm" config={config} />}
                   <div 
                     className="p-3 rounded-lg max-w-[80%]"
                     style={{ 
@@ -907,7 +904,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   )}
                 </div>
               ))}
-              {isLoading && <TypingIndicator />}
+              {isLoading && <TypingIndicator config={config} />}
               {isArchived && (
                 <div className="flex flex-col items-center gap-3 my-4">
                   <div className="bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600">
