@@ -150,10 +150,6 @@ export default function ConversationList({ onSelectConversation, selectedId }: C
                 </div>
               )}
               
-              {!conversation.is_read && (
-                <div className="absolute top-0 right-0 w-3 h-3 bg-blue-500 rounded-full animate-pulse border-2 border-white shadow-md"></div>
-              )}
-              
               {conversation.requested_live_at && (
                 <div className="mt-2 flex items-center gap-2">
                   <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
