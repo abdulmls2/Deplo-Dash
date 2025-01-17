@@ -44,13 +44,6 @@ export default function Header() {
       </div>
       
       <div className="flex items-center gap-4">
-        <div className="relative">
-          <Bell className="h-6 w-6 text-gray-600" />
-          <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-            6
-          </span>
-        </div>
-        
         <div className="relative" ref={dropdownRef}>
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
