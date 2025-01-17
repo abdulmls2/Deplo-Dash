@@ -87,23 +87,45 @@ export default function Dashboard() {
 
   return (
     <div className="p-6">
-      <div className="mb-4">
-        <button onClick={handleToday} className="mr-2 bg-blue-500 text-white px-4 py-2 rounded">
-          Today
-        </button>
-        <button onClick={handleYesterday} className="bg-gray-300 text-black px-4 py-2 rounded">
-          Yesterday
-        </button>
-        <input 
-          type="date" 
-          value={selectedDate.toISOString().split('T')[0]}
-          onChange={handleDateChange} 
-          className="ml-2 border rounded px-2 py-1"
-        />
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">Dashboard</h1>
+        <div className="flex items-center mt-1">
+          <button 
+            onClick={handleToday} 
+            className={`mr-2 px-4 py-2 rounded ${
+              // Check if selected date is today
+              selectedDate.toDateString() === new Date().toDateString() 
+                ? 'bg-black text-white' 
+                : 'bg-white text-black border border-gray-300 hover:bg-gray-100'
+            }`}
+          >
+            Today
+          </button>
+          <button 
+            onClick={handleYesterday} 
+            className={`px-4 py-2 rounded ${
+              // Check if selected date is yesterday
+              selectedDate.toDateString() === (() => {
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+                return yesterday.toDateString();
+              })()
+                ? 'bg-black text-white' 
+                : 'bg-white text-black border border-gray-300 hover:bg-gray-100'
+            }`}
+          >
+            Yesterday
+          </button>
+          <input 
+            type="date" 
+            value={selectedDate.toISOString().split('T')[0]}
+            onChange={handleDateChange} 
+            className="ml-2 border rounded px-2 py-1"
+          />
+        </div>
       </div>
 
       <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-2">Dashboard</h1>
         <p className="text-gray-600">
           A detailed overview of your metrics, usage, customers and more
         </p>
