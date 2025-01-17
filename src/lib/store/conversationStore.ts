@@ -22,6 +22,7 @@ interface ConversationStore {
   isLoading: boolean;
   error: string | null;
   currentDomainId: string | null;
+  playedUrgentSound: Set<string>;
   setCurrentDomainId: (domainId: string | null) => void;
   fetchConversations: () => Promise<void>;
   fetchMessages: (conversationId: string) => Promise<void>;
@@ -54,6 +55,7 @@ export const useConversationStore = create<ConversationStore>((set, get) => ({
   sortOrder: 'newest',
   activeFilter: 'active',
   currentDomainId: null,
+  playedUrgentSound: new Set<string>(),
 
   setCurrentDomainId: (domainId: string | null) => {
     set({ currentDomainId: domainId });
@@ -89,7 +91,20 @@ export const useConversationStore = create<ConversationStore>((set, get) => ({
           },
           async (payload) => {
             const updatedConversation = payload.new as Conversation;
-            const { activeFilter } = get();
+            const { activeFilter, playedUrgentSound } = get();
+
+            // Check if conversation became urgent and hasn't played sound yet
+            if (updatedConversation.requested_live_at !== null && 
+                !playedUrgentSound.has(updatedConversation.id)) {
+              // Play the notification sound
+              const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2354/2354.mp3');
+              audio.play().catch(console.error);
+              
+              // Mark this conversation as having played the sound
+              set(state => ({
+                playedUrgentSound: new Set([...state.playedUrgentSound, updatedConversation.id])
+              }));
+            }
 
             set((state) => {
               // Find the index of the existing conversation

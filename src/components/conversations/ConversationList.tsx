@@ -31,11 +31,10 @@ export default function ConversationList({ onSelectConversation, selectedId }: C
           .select('content')
           .eq('conversation_id', conversation.id)
           .order('created_at', { ascending: false })
-          .limit(1)
-          .single();
+          .limit(1);
         
-        if (data) {
-          messages[conversation.id] = data.content;
+        if (data && data.length > 0) {
+          messages[conversation.id] = data[0].content;
         }
       }
       setLatestMessages(messages);

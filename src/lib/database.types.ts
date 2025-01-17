@@ -21,6 +21,8 @@ export interface Database {
           user_id: string
           is_starred: boolean
           is_read: boolean
+          requested_live_at: string | null
+          domain_id: string
         }
         Insert: {
           id?: string
@@ -32,6 +34,8 @@ export interface Database {
           user_id: string
           is_starred?: boolean
           is_read?: boolean
+          requested_live_at?: string | null
+          domain_id: string
         }
         Update: {
           id?: string
@@ -43,6 +47,8 @@ export interface Database {
           user_id?: string
           is_starred?: boolean
           is_read?: boolean
+          requested_live_at?: string | null
+          domain_id?: string
         }
       }
       messages: {
