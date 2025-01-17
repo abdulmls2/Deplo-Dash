@@ -31,16 +31,9 @@ export default function Header() {
 
   return (
     <div className="h-16 bg-white shadow-sm flex items-center px-4 justify-between">
-      <div className="flex items-center flex-1 ml-20 gap-4">
+      <div className="flex items-center flex-1 justify-between">
         <DomainSelector />
-        <div className="relative flex-1 max-w-2xl">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-          <input
-            type="text"
-            placeholder="Search"
-            className="w-full pl-10 pr-4 py-2 bg-gray-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-          />
-        </div>
+        <div className="flex-1" />
       </div>
       
       <div className="flex items-center gap-4">
