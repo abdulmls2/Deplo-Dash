@@ -7,6 +7,7 @@ import RecentTransactions from '../components/dashboard/RecentTransactions';
 
 export default function Dashboard() {
   const [todayConversations, setTodayConversations] = useState(0);
+  const [ratings, setRatings] = useState({ good: 0, ok: 0, bad: 0 });
 
   useEffect(() => {
     async function fetchTodayConversations() {
@@ -17,14 +18,32 @@ export default function Dashboard() {
         .from('conversations')
         .select('*', { count: 'exact', head: true })
         .gte('created_at', today.toISOString())
-        .eq('status', 'active');
+        .in('status', ['active', 'archived']);
 
       if (!error && count !== null) {
         setTodayConversations(count);
       }
     }
 
+    async function fetchRatings() {
+      const { data, error } = await supabase
+        .from('conversations')
+        .select('rating')
+        .not('rating', 'is', null)
+        .in('status', ['active', 'archived']);
+
+      if (!error && data) {
+        const ratingCounts = {
+          good: data.filter(conv => conv.rating === 'good').length,
+          ok: data.filter(conv => conv.rating === 'ok').length,
+          bad: data.filter(conv => conv.rating === 'bad').length
+        };
+        setRatings(ratingCounts);
+      }
+    }
+
     fetchTodayConversations();
+    fetchRatings();
   }, []);
 
   return (
@@ -41,6 +60,24 @@ export default function Dashboard() {
           title="Today's Conversations" 
           value={todayConversations.toString()} 
           Icon={Users}
+        />
+        <StatsCard 
+          title="Good Ratings" 
+          value={ratings.good.toString()}
+          Icon={Users}
+          className="bg-green-50"
+        />
+        <StatsCard 
+          title="OK Ratings" 
+          value={ratings.ok.toString()}
+          Icon={Users}
+          className="bg-yellow-50"
+        />
+        <StatsCard 
+          title="Bad Ratings" 
+          value={ratings.bad.toString()}
+          Icon={Users}
+          className="bg-red-50"
         />
         <StatsCard 
           title="Potential Clients" 
