@@ -153,15 +153,7 @@ export default function Domain() {
 <script>
   window.CHATBOT_CONFIG = {
     domainId: "${currentDomain?.id || ''}",
-    color: "${color}",
-    headerTextColor: "${headerTextColor}",
-    agentMessageColor: "${agentMessageColor}",
-    userMessageColor: "${userMessageColor}",
-    agentMessageTextColor: "${agentMessageTextColor}",
-    userMessageTextColor: "${userMessageTextColor}",
-    chatbotName: "${chatbotName}",
-    greetingMessage: "${greetingMessage}",
-    logoUrl: ${logoUrl ? `"${logoUrl}"` : 'null'}
+    color: "${color}"
   };
 </script>
 <script src="https://deplo-dash.vercel.app/widget/chatbot-widget.umd.js"></script>
