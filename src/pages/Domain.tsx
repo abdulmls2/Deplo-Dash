@@ -150,13 +150,21 @@ export default function Domain() {
 <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 <link href="https://deplo-dash.vercel.app/widget/style.css" rel="stylesheet">
-  <script>
+<script>
   window.CHATBOT_CONFIG = {
     domainId: "${currentDomain?.id || ''}",
+    color: "${color}",
+    headerTextColor: "${headerTextColor}",
+    agentMessageColor: "${agentMessageColor}",
+    userMessageColor: "${userMessageColor}",
+    agentMessageTextColor: "${agentMessageTextColor}",
+    userMessageTextColor: "${userMessageTextColor}",
+    chatbotName: "${chatbotName}",
+    greetingMessage: "${greetingMessage}",
+    logoUrl: ${logoUrl ? `"${logoUrl}"` : 'null'}
   };
 </script>
 <script src="https://deplo-dash.vercel.app/widget/chatbot-widget.umd.js"></script>
-
 `;
 
   const handleCopyCode = async () => {

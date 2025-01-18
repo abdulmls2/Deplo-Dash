@@ -104,6 +104,23 @@ const ChatIcon = () => (
   </svg>
 );
 
+// Get the config from the window object
+const getInitialConfig = (): ChatbotConfig => {
+  const windowConfig = (window as any).CHATBOT_CONFIG || {};
+  return {
+    chatbotName: windowConfig.chatbotName || 'Chatbot',
+    greetingMessage: windowConfig.greetingMessage || 'Hello! How can I help you today?',
+    color: windowConfig.color || '#FF6B00',
+    headerTextColor: windowConfig.headerTextColor || '#000000',
+    agentMessageColor: windowConfig.agentMessageColor || '#E5E7EB',
+    userMessageColor: windowConfig.userMessageColor || '#FFF1E7',
+    agentMessageTextColor: windowConfig.agentMessageTextColor || '#000000',
+    userMessageTextColor: windowConfig.userMessageTextColor || '#000000',
+    logoUrl: windowConfig.logoUrl || null,
+    ...LAYOUT_CONFIG
+  };
+};
+
 export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [message, setMessage] = useState('');
@@ -122,6 +139,43 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const [isRequestingLiveChat, setIsRequestingLiveChat] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showMobileMessage, setShowMobileMessage] = useState(true);
+
+  // Replace the existing config state with the new initialization
+  const [config, setConfig] = useState<ChatbotConfig>(getInitialConfig());
+
+  // Modify the fetchConfig useEffect to only update if values are different
+  useEffect(() => {
+    const fetchConfig = async () => {
+      try {
+        const { data } = await supabase
+          .from('domain_settings')
+          .select('*')
+          .eq('domain_id', domainId)
+          .single();
+
+        if (data) {
+          setConfig(prevConfig => ({
+            ...prevConfig,
+            chatbotName: data.chatbot_name || prevConfig.chatbotName,
+            greetingMessage: data.greeting_message || prevConfig.greetingMessage,
+            color: data.primary_color || prevConfig.color,
+            headerTextColor: data.header_text_color || prevConfig.headerTextColor,
+            agentMessageColor: data.agent_message_color || prevConfig.agentMessageColor,
+            userMessageColor: data.user_message_color || prevConfig.userMessageColor,
+            agentMessageTextColor: data.agent_message_text_color || prevConfig.agentMessageTextColor,
+            userMessageTextColor: data.user_message_text_color || prevConfig.userMessageTextColor,
+            logoUrl: data.logo_url || prevConfig.logoUrl,
+          }));
+        }
+      } catch (error) {
+        console.error('Error fetching chatbot config:', error);
+      }
+    };
+
+    if (domainId) {
+      fetchConfig();
+    }
+  }, [domainId]);
 
   // Add window resize listener
   useEffect(() => {
@@ -581,79 +635,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     if (!message.trim() || isLoading) return;
     await sendMessage(message.trim());
   };
-
-  useEffect(() => {
-    const fetchConfig = async () => {
-      try {
-        const { data } = await supabase
-          .from('domain_settings')
-          .select('*')
-          .eq('domain_id', domainId)
-          .single();
-
-        if (data) {
-          setConfig({
-            chatbotName: data.chatbot_name,
-            greetingMessage: data.greeting_message || 'Hello! How can I help you today?',
-            color: data.primary_color || '#FF6B00',
-            headerTextColor: data.header_text_color || '#000000',
-            agentMessageColor: data.agent_message_color || '#E5E7EB',
-            userMessageColor: data.user_message_color || '#FFF1E7',
-            agentMessageTextColor: data.agent_message_text_color || '#000000',
-            userMessageTextColor: data.user_message_text_color || '#000000',
-            logoUrl: data.logo_url,
-            ...LAYOUT_CONFIG
-          });
-        } else {
-          // Use default config if no settings exist
-          setConfig({
-            chatbotName: 'Friendly Assistant',
-            greetingMessage: 'Hello! How can I help you today?',
-            color: '#FF6B00',
-            headerTextColor: '#000000',
-            agentMessageColor: '#E5E7EB',
-            userMessageColor: '#FFF1E7',
-            agentMessageTextColor: '#000000',
-            userMessageTextColor: '#000000',
-            logoUrl: null,
-            ...LAYOUT_CONFIG
-          });
-        }
-      } catch (error) {
-        console.error('Error fetching chatbot config:', error);
-        // Use default config on error
-        setConfig({
-          chatbotName: 'Friendly Assistant',
-          greetingMessage: 'Hello! How can I help you today?',
-          color: '#FF6B00',
-          headerTextColor: '#000000',
-          agentMessageColor: '#E5E7EB',
-          userMessageColor: '#FFF1E7',
-          agentMessageTextColor: '#000000',
-          userMessageTextColor: '#000000',
-          logoUrl: null,
-          ...LAYOUT_CONFIG
-        });
-      }
-    };
-
-    if (domainId) {
-      fetchConfig();
-    }
-  }, [domainId]);
-
-  const [config, setConfig] = useState<ChatbotConfig>({
-    chatbotName: 'Chatbot',
-    greetingMessage: 'Hello! How can I help you today?',
-    color: '#FF6B00', 
-    headerTextColor: '#000000',
-    agentMessageColor: '#E5E7EB',
-    userMessageColor: '#FFF1E7',
-    agentMessageTextColor: '#000000',
-    userMessageTextColor: '#000000',
-    logoUrl: null,
-    ...LAYOUT_CONFIG
-  });
 
   const buttonStyle = {
     backgroundColor: config.color,
