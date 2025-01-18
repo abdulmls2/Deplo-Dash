@@ -42,6 +42,8 @@ interface ConversationStore {
   setActiveFilter: (filter: 'active' | 'all' | 'urgent' | 'closed') => void;
   toggleLiveMode: (conversationId: string) => Promise<void>;
   markConversationAsRead: (conversationId: string) => Promise<void>;
+  ratingFilter: 'all' | 'good' | 'ok' | 'bad';
+  setRatingFilter: (filter: 'all' | 'good' | 'ok' | 'bad') => void;
 }
 
 export const useConversationStore = create<ConversationStore>((set, get) => ({
@@ -56,6 +58,7 @@ export const useConversationStore = create<ConversationStore>((set, get) => ({
   activeFilter: 'active',
   currentDomainId: null,
   playedUrgentSound: new Set<string>(),
+  ratingFilter: 'all',
 
   setCurrentDomainId: (domainId: string | null) => {
     set({ currentDomainId: domainId });
@@ -182,7 +185,7 @@ export const useConversationStore = create<ConversationStore>((set, get) => ({
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error('User not authenticated');
 
-      const { selectedTags, sortOrder, activeFilter } = get();
+      const { selectedTags, sortOrder, activeFilter, ratingFilter } = get();
 
       let query = supabase
         .from('conversations')
@@ -213,6 +216,10 @@ export const useConversationStore = create<ConversationStore>((set, get) => ({
           query = query.eq('status', 'archived');
           break;
         // 'all' filter doesn't need additional conditions
+      }
+
+      if (ratingFilter !== 'all') {
+        query = query.eq('rating', ratingFilter);
       }
 
       const { data, error } = await query;
@@ -582,5 +589,10 @@ export const useConversationStore = create<ConversationStore>((set, get) => ({
       console.error('Error marking conversation as read:', error);
       toast.error('Failed to mark conversation as read');
     }
+  },
+
+  setRatingFilter: (filter) => {
+    set({ ratingFilter: filter });
+    get().fetchConversations();
   },
 }));

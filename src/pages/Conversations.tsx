@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import {Hourglass, MessageCircleOff, Check, Mail, Clock, ChevronDown, Star, Trash2, Eye, EyeOff, Tag as TagIcon, ArrowUpDown, Archive, Bot, UserRound } from 'lucide-react';
+import {Hourglass, MessageCircleOff, Check, Mail, Clock, ChevronDown, Star, Trash2, Eye, EyeOff, Tag as TagIcon, ArrowUpDown, Archive, Bot, UserRound, ThumbsUp, ThumbsDown } from 'lucide-react';
 import ConversationList from '../components/conversations/ConversationList';
 import MessageList from '../components/conversations/MessageList';
 import MessageInput from '../components/conversations/MessageInput';
@@ -44,6 +44,7 @@ const initialFilters = [
 export default function Conversations() {
   const [showTagManager, setShowTagManager] = useState(false);
   const [showSortMenu, setShowSortMenu] = useState(false);
+  const [showRatingMenu, setShowRatingMenu] = useState(false);
   const [selectedConversationId, setSelectedConversationId] = useState<string | null>(null);
   const { 
     updateConversation, 
@@ -52,16 +53,20 @@ export default function Conversations() {
     setSortOrder, 
     setActiveFilter,
     activeFilter,
-    toggleLiveMode 
+    toggleLiveMode,
+    ratingFilter,
+    setRatingFilter 
   } = useConversationStore();
 
   // Refs for dropdown menus
   const tagManagerRef = useRef<HTMLDivElement>(null);
   const sortMenuRef = useRef<HTMLDivElement>(null);
+  const ratingMenuRef = useRef<HTMLDivElement>(null);
 
   // Use click outside hook
   useClickOutside(tagManagerRef, () => setShowTagManager(false));
   useClickOutside(sortMenuRef, () => setShowSortMenu(false));
+  useClickOutside(ratingMenuRef, () => setShowRatingMenu(false));
 
   const handleDeleteConversation = async () => {
     if (!selectedConversationId) return;
@@ -184,6 +189,68 @@ export default function Conversations() {
                     className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-50 whitespace-nowrap"
                   >
                     Oldest First
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <div className="relative" ref={ratingMenuRef}>
+              <button
+                onClick={() => setShowRatingMenu(!showRatingMenu)}
+                className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs bg-gray-300 text-black-600 hover:bg-gray-200 w-auto"
+              >
+                <ThumbsUp className="h-3 w-3" />
+                <span>Rating</span>
+                <ChevronDown className="h-3 w-3 ml-auto" />
+              </button>
+
+              {showRatingMenu && (
+                <div className="absolute top-full left-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-10 min-w-[150px] whitespace-nowrap">
+                  <button
+                    onClick={() => {
+                      setRatingFilter('all');
+                      setShowRatingMenu(false);
+                    }}
+                    className={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-50 whitespace-nowrap ${
+                      ratingFilter === 'all' ? 'bg-gray-100' : ''
+                    }`}
+                  >
+                    All Ratings
+                  </button>
+                  <button
+                    onClick={() => {
+                      setRatingFilter('good');
+                      setShowRatingMenu(false);
+                    }}
+                    className={`flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-50 ${
+                      ratingFilter === 'good' ? 'bg-gray-100' : ''
+                    }`}
+                  >
+                    <ThumbsUp className="h-3 w-3 text-green-600" />
+                    <span>Good</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setRatingFilter('ok');
+                      setShowRatingMenu(false);
+                    }}
+                    className={`flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-50 ${
+                      ratingFilter === 'ok' ? 'bg-gray-100' : ''
+                    }`}
+                  >
+                    <span className="text-yellow-600">OK</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setRatingFilter('bad');
+                      setShowRatingMenu(false);
+                    }}
+                    className={`flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-gray-50 ${
+                      ratingFilter === 'bad' ? 'bg-gray-100' : ''
+                    }`}
+                  >
+                    <ThumbsDown className="h-3 w-3 text-red-600" />
+                    <span>Bad</span>
                   </button>
                 </div>
               )}
