@@ -552,11 +552,15 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             created_at: new Date().toISOString(),
         };
 
-        // Add to messages only if it's not a duplicate
+        // Add to messages and trigger scroll
         setMessages(prevMessages => {
             if (isMessageDuplicate(tempMessage, prevMessages)) {
                 return prevMessages;
             }
+            // Force scroll after state update using setTimeout
+            setTimeout(() => {
+                messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
             return [...prevMessages, tempMessage];
         });
 
