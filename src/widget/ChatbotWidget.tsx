@@ -121,7 +121,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const [isRequestingLiveChat, setIsRequestingLiveChat] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showMobileMessage, setShowMobileMessage] = useState(true);
-  const [isLiveMode, setIsLiveMode] = useState(false);
 
   // Add window resize listener
   useEffect(() => {
@@ -530,45 +529,47 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
 
   const sendMessage = async (content: string) => {
     try {
-        setIsLoading(true);
-        setError(null);
+      if (isLiveMode) return; // Prevent sending message if in live mode
 
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user) {
-            await supabase.auth.signInAnonymously();
+      setIsLoading(true);
+      setError(null);
+
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        await supabase.auth.signInAnonymously();
+      }
+
+      // Create a new conversation if one doesn't exist
+      const currentConversationId = conversationId || await createConversation();
+      if (!conversationId) {
+        setConversationId(currentConversationId);
+      }
+
+      // Create a temporary message object for immediate display
+      const tempMessage: Message = {
+        id: `temp-${Date.now()}`,
+        content: content,
+        sender_type: 'user',
+        created_at: new Date().toISOString(),
+      };
+
+      // Add to messages only if it's not a duplicate
+      setMessages(prevMessages => {
+        if (isMessageDuplicate(tempMessage, prevMessages)) {
+          return prevMessages;
         }
-        
-        // Create a new conversation if one doesn't exist
-        const currentConversationId = conversationId || await createConversation();
-        if (!conversationId) {
-            setConversationId(currentConversationId);
-        }
+        return [...prevMessages, tempMessage];
+      });
 
-        // Create a temporary message object for immediate display
-        const tempMessage: Message = {
-            id: `temp-${Date.now()}`,
-            content: content,
-            sender_type: 'user',
-            created_at: new Date().toISOString(),
-        };
+      // Send message through chatbot store which will handle OpenAI integration
+      await chatbotSendMessage(content, currentConversationId);
 
-        // Add to messages only if it's not a duplicate
-        setMessages(prevMessages => {
-            if (isMessageDuplicate(tempMessage, prevMessages)) {
-                return prevMessages;
-            }
-            return [...prevMessages, tempMessage];
-        });
-
-        // Send message through chatbot store which will handle OpenAI integration
-        await chatbotSendMessage(content, currentConversationId);
-
-        setMessage(''); // Clear the input field to show placeholder
+      setMessage(''); // Clear the input field to show placeholder
     } catch (error) {
-        console.error('Error sending message:', error);
-        setError('Failed to send message. Please try again.');
+      console.error('Error sending message:', error);
+      setError('Failed to send message. Please try again.');
     } finally {
-        setIsLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -738,25 +739,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       setError('Failed to request live chat. Please try again.');
     }
   };
-
-  useEffect(() => {
-    if (conversationId) {
-      // Fetch the conversation details to set live mode
-      const fetchConversationDetails = async () => {
-        const { data: conversation } = await supabase
-          .from('conversations')
-          .select('live_mode')
-          .eq('id', conversationId)
-          .single();
-
-        if (conversation) {
-          setIsLiveMode(conversation.live_mode); // Set the live mode state
-        }
-      };
-
-      fetchConversationDetails();
-    }
-  }, [conversationId]);
 
   return (
     <div className={`fixed ${config.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`} 
