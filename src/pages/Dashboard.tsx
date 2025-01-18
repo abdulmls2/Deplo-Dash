@@ -286,8 +286,22 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <PlanUsage />
-        <RecentTransactions />
+        <div className="relative group">
+          <div className="absolute inset-0 bg-white/70 backdrop-blur-sm z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <span className="text-gray-600 font-semibold">Coming Soon</span>
+          </div>
+          <div className="opacity-30 pointer-events-none select-none">
+            <PlanUsage />
+          </div>
+        </div>
+        <div className="relative group">
+          <div className="absolute inset-0 bg-white/70 backdrop-blur-sm z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <span className="text-gray-600 font-semibold">Coming Soon</span>
+          </div>
+          <div className="opacity-30 pointer-events-none select-none">
+            <RecentTransactions />
+          </div>
+        </div>
       </div>
     </div>
   );
