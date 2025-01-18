@@ -529,48 +529,46 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   };
 
   const sendMessage = async (content: string) => {
-    if (isLiveMode) return; // Prevent sending message if in live mode
-
     try {
-      setIsLoading(true);
-      setError(null);
+        setIsLoading(true);
+        setError(null);
 
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        await supabase.auth.signInAnonymously();
-      }
-
-      // Create a new conversation if one doesn't exist
-      const currentConversationId = conversationId || await createConversation();
-      if (!conversationId) {
-        setConversationId(currentConversationId);
-      }
-
-      // Create a temporary message object for immediate display
-      const tempMessage: Message = {
-        id: `temp-${Date.now()}`,
-        content: content,
-        sender_type: 'user',
-        created_at: new Date().toISOString(),
-      };
-
-      // Add to messages only if it's not a duplicate
-      setMessages(prevMessages => {
-        if (isMessageDuplicate(tempMessage, prevMessages)) {
-          return prevMessages;
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) {
+            await supabase.auth.signInAnonymously();
         }
-        return [...prevMessages, tempMessage];
-      });
+        
+        // Create a new conversation if one doesn't exist
+        const currentConversationId = conversationId || await createConversation();
+        if (!conversationId) {
+            setConversationId(currentConversationId);
+        }
 
-      // Send message through chatbot store which will handle OpenAI integration
-      await chatbotSendMessage(content, currentConversationId);
+        // Create a temporary message object for immediate display
+        const tempMessage: Message = {
+            id: `temp-${Date.now()}`,
+            content: content,
+            sender_type: 'user',
+            created_at: new Date().toISOString(),
+        };
 
-      setMessage(''); // Clear the input field to show placeholder
+        // Add to messages only if it's not a duplicate
+        setMessages(prevMessages => {
+            if (isMessageDuplicate(tempMessage, prevMessages)) {
+                return prevMessages;
+            }
+            return [...prevMessages, tempMessage];
+        });
+
+        // Send message through chatbot store which will handle OpenAI integration
+        await chatbotSendMessage(content, currentConversationId);
+
+        setMessage(''); // Clear the input field to show placeholder
     } catch (error) {
-      console.error('Error sending message:', error);
-      setError('Failed to send message. Please try again.');
+        console.error('Error sending message:', error);
+        setError('Failed to send message. Please try again.');
     } finally {
-      setIsLoading(false);
+        setIsLoading(false);
     }
   };
 
@@ -741,6 +739,26 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     }
   };
 
+  useEffect(() => {
+    if (conversationId) {
+      // Fetch the conversation details to set live mode
+      const fetchConversationDetails = async () => {
+        const { data: conversation } = await supabase
+          .from('conversations')
+          .select('live_mode')
+          .eq('id', conversationId)
+          .single();
+
+        if (conversation) {
+          setIsLiveMode(conversation.live_mode); // Set the live mode state
+          console.log('Live mode set to:', conversation.live_mode); // Debugging statement
+        }
+      };
+
+      fetchConversationDetails();
+    }
+  }, [conversationId]);
+
   return (
     <div className={`fixed ${config.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`} 
       style={{ [config.verticalPosition]: config.verticalOffset }}>
@@ -908,6 +926,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   )}
                 </div>
               ))}
+              {console.log('isLoading:', isLoading, 'isLiveMode:', isLiveMode)}
               {isLoading && !isLiveMode && <TypingIndicator config={config} />}
               {isArchived && (
                 <div className="flex flex-col items-center gap-3 my-4">
