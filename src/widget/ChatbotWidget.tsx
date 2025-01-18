@@ -121,6 +121,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const [isRequestingLiveChat, setIsRequestingLiveChat] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showMobileMessage, setShowMobileMessage] = useState(true);
+  const [isLiveMode, setIsLiveMode] = useState(false);
 
   // Add window resize listener
   useEffect(() => {
@@ -738,6 +739,25 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     }
   };
 
+  useEffect(() => {
+    if (conversationId) {
+      // Fetch the conversation details to set live mode
+      const fetchConversationDetails = async () => {
+        const { data: conversation } = await supabase
+          .from('conversations')
+          .select('live_mode')
+          .eq('id', conversationId)
+          .single();
+
+        if (conversation) {
+          setIsLiveMode(conversation.live_mode); // Set the live mode state
+        }
+      };
+
+      fetchConversationDetails();
+    }
+  }, [conversationId]);
+
   return (
     <div className={`fixed ${config.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`} 
       style={{ [config.verticalPosition]: config.verticalOffset }}>
@@ -905,7 +925,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   )}
                 </div>
               ))}
-              {isLoading && <TypingIndicator config={config} />}
+              {isLoading && !isLiveMode && <TypingIndicator config={config} />}
               {isArchived && (
                 <div className="flex flex-col items-center gap-3 my-4">
                   <div className="bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600">
