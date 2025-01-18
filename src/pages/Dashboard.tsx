@@ -12,6 +12,7 @@ export default function Dashboard() {
   const [todayConversations, setTodayConversations] = useState(0);
   const [ratings, setRatings] = useState({ good: 0, ok: 0, bad: 0 });
   const [liveConversations, setLiveConversations] = useState(0);
+  const [botConversations, setBotConversations] = useState(0);
 
   useEffect(() => {
     fetchData(selectedDate);
@@ -30,6 +31,7 @@ export default function Dashboard() {
     await fetchTodayConversations(startOfDay, endOfDay);
     await fetchRatings(startOfDay, endOfDay);
     await fetchLiveConversations(startOfDay, endOfDay);
+    await fetchBotConversations(startOfDay, endOfDay);
   }
 
   async function fetchTodayConversations(startOfDay: Date, endOfDay: Date) {
@@ -77,6 +79,20 @@ export default function Dashboard() {
 
     if (!error && count !== null) {
       setLiveConversations(count);
+    }
+  }
+
+  async function fetchBotConversations(startOfDay: Date, endOfDay: Date) {
+    const { count, error } = await supabase
+      .from('conversations')
+      .select('*', { count: 'exact', head: true })
+      .eq('live_mode', false)
+      .gte('created_at', startOfDay.toISOString())
+      .lte('created_at', endOfDay.toISOString())
+      .eq('domain_id', currentDomain?.id);
+
+    if (!error && count !== null) {
+      setBotConversations(count);
     }
   }
 
@@ -154,19 +170,19 @@ export default function Dashboard() {
           Icon={Users}
         />
         <StatsCard 
-          title="Good Ratings" 
+          title="Good Rating" 
           value={ratings.good.toString()}
           Icon={Users}
           className="bg-green-50"
         />
         <StatsCard 
-          title="OK Ratings" 
+          title="OK Rating" 
           value={ratings.ok.toString()}
           Icon={Users}
           className="bg-yellow-50"
         />
         <StatsCard 
-          title="Bad Ratings" 
+          title="Bad Rating" 
           value={ratings.bad.toString()}
           Icon={Users}
           className="bg-red-50"
@@ -177,9 +193,9 @@ export default function Dashboard() {
           Icon={Users}
         />
         <StatsCard 
-          title="Pipeline Value" 
-          value="$125" 
-          Icon={DollarSign}
+          title="AI Agent Conversations"
+          value={botConversations.toString()}
+          Icon={Users}
         />
         <StatsCard 
           title="Appointments" 
