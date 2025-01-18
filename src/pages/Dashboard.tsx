@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Users, DollarSign, Calendar } from 'lucide-react';
+import { Users, DollarSign, Calendar, RefreshCcw } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import StatsCard from '../components/dashboard/StatsCard';
 import PlanUsage from '../components/dashboard/PlanUsage';
@@ -99,6 +99,13 @@ export default function Dashboard() {
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <div className="flex items-center mt-1">
+          <button 
+            onClick={() => fetchData(selectedDate)}
+            className="mr-2 p-2 rounded bg-white text-black border border-gray-300 hover:bg-gray-100"
+            title="Refresh Data"
+          >
+            <RefreshCcw className="h-4 w-4 text-gray-500" />
+          </button>
           <button 
             onClick={handleToday} 
             className={`mr-2 px-4 py-2 rounded ${
