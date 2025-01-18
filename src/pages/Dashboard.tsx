@@ -4,8 +4,10 @@ import { supabase } from '../lib/supabase';
 import StatsCard from '../components/dashboard/StatsCard';
 import PlanUsage from '../components/dashboard/PlanUsage';
 import RecentTransactions from '../components/dashboard/RecentTransactions';
+import { useDomain } from '../context/DomainContext';
 
 export default function Dashboard() {
+  const { currentDomain } = useDomain();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [todayConversations, setTodayConversations] = useState(0);
   const [ratings, setRatings] = useState({ good: 0, ok: 0, bad: 0 });
@@ -14,6 +16,10 @@ export default function Dashboard() {
   useEffect(() => {
     fetchData(selectedDate);
   }, [selectedDate]);
+
+  useEffect(() => {
+    fetchData(selectedDate);
+  }, [currentDomain]);
 
   async function fetchData(date: Date) {
     const startOfDay = new Date(date);
@@ -32,7 +38,8 @@ export default function Dashboard() {
       .select('*', { count: 'exact', head: true })
       .gte('created_at', startOfDay.toISOString())
       .lte('created_at', endOfDay.toISOString())
-      .in('status', ['active', 'archived']);
+      .in('status', ['active', 'archived'])
+      .eq('domain_id', currentDomain?.id);
 
     if (!error && count !== null) {
       setTodayConversations(count);
@@ -46,7 +53,8 @@ export default function Dashboard() {
       .not('rating', 'is', null)
       .gte('created_at', startOfDay.toISOString())
       .lte('created_at', endOfDay.toISOString())
-      .in('status', ['active', 'archived']);
+      .in('status', ['active', 'archived'])
+      .eq('domain_id', currentDomain?.id);
 
     if (!error && data) {
       const ratingCounts = {
@@ -64,7 +72,8 @@ export default function Dashboard() {
       .select('*', { count: 'exact', head: true })
       .eq('live_mode', true)
       .gte('created_at', startOfDay.toISOString())
-      .lte('created_at', endOfDay.toISOString());
+      .lte('created_at', endOfDay.toISOString())
+      .eq('domain_id', currentDomain?.id);
 
     if (!error && count !== null) {
       setLiveConversations(count);
