@@ -1,7 +1,7 @@
 import * as se from "react";
 import Fe, { forwardRef as xn, createElement as Fr, useState as X, useRef as Wr, useEffect as ge } from "react";
 import Sn from "react-dom";
-var ce = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
+var oe = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
 function kn(s) {
   return s && s.__esModule && Object.prototype.hasOwnProperty.call(s, "default") ? s.default : s;
 }
@@ -88,10 +88,10 @@ function Tn() {
         F.unshift("Warning: " + g), Function.prototype.apply.call(console[d], console, F);
       }
     }
-    var S = !1, M = !1, D = !1, G = !1, ne = !1, V;
+    var S = !1, M = !1, D = !1, G = !1, ce = !1, V;
     V = Symbol.for("react.module.reference");
     function xe(d) {
-      return !!(typeof d == "string" || typeof d == "function" || d === n || d === a || ne || d === i || d === l || d === h || G || d === _ || S || M || D || typeof d == "object" && d !== null && (d.$$typeof === m || d.$$typeof === f || d.$$typeof === o || d.$$typeof === c || d.$$typeof === u || // This needs to include all possible module reference object
+      return !!(typeof d == "string" || typeof d == "function" || d === n || d === a || ce || d === i || d === l || d === h || G || d === _ || S || M || D || typeof d == "object" && d !== null && (d.$$typeof === m || d.$$typeof === f || d.$$typeof === o || d.$$typeof === c || d.$$typeof === u || // This needs to include all possible module reference object
       // types supported by any Flight configuration anywhere since
       // we don't know which Flight build this will end up being used
       // with.
@@ -290,9 +290,9 @@ function Tn() {
               if (q !== 1 || z !== 1)
                 do
                   if (q--, z--, z < 0 || R[q] !== Q[z]) {
-                    var ae = `
+                    var ie = `
 ` + R[q].replace(" at new ", " at ");
-                    return d.displayName && ae.includes("<anonymous>") && (ae = ae.replace("<anonymous>", d.displayName)), typeof d == "function" && ve.set(d, ae), ae;
+                    return d.displayName && ie.includes("<anonymous>") && (ie = ie.replace("<anonymous>", d.displayName)), typeof d == "function" && ve.set(d, ie), ie;
                   }
                 while (q >= 1 && z >= 0);
               break;
@@ -340,7 +340,7 @@ function Tn() {
         }
       return "";
     }
-    var J = Object.prototype.hasOwnProperty, ie = {}, St = j.ReactDebugCurrentFrame;
+    var J = Object.prototype.hasOwnProperty, ne = {}, St = j.ReactDebugCurrentFrame;
     function $e(d) {
       if (d) {
         var g = d._owner, w = N(d.type, d._source, g ? g.type : null);
@@ -363,7 +363,7 @@ function Tn() {
             } catch (q) {
               R = q;
             }
-            R && !(R instanceof Error) && ($e(L), O("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", k || "React class", w, I, typeof R), $e(null)), R instanceof Error && !(R.message in ie) && (ie[R.message] = !0, $e(L), O("Failed %s type: %s", w, R.message), $e(null));
+            R && !(R instanceof Error) && ($e(L), O("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", k || "React class", w, I, typeof R), $e(null)), R instanceof Error && !(R.message in ne) && (ne[R.message] = !0, $e(L), O("Failed %s type: %s", w, R.message), $e(null));
           }
       }
     }
@@ -615,17 +615,17 @@ Check the top-level render call using <` + w + ">.");
         if (z == null)
           return z;
         if (I) {
-          var ae = g.children;
-          if (ae !== void 0)
+          var ie = g.children;
+          if (ie !== void 0)
             if (k)
-              if (Yt(ae)) {
-                for (var He = 0; He < ae.length; He++)
-                  Lr(ae[He], d);
-                Object.freeze && Object.freeze(ae);
+              if (Yt(ie)) {
+                for (var He = 0; He < ie.length; He++)
+                  Lr(ie[He], d);
+                Object.freeze && Object.freeze(ie);
               } else
                 O("React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead.");
             else
-              Lr(ae, d);
+              Lr(ie, d);
         }
         if (J.call(g, "key")) {
           var Ie = K(d), Z = Object.keys(g).filter(function(bn) {
@@ -952,7 +952,7 @@ let Xn = class extends Error {
   }
 };
 Ut.default = Xn;
-var ks = ce && ce.__importDefault || function(s) {
+var ks = oe && oe.__importDefault || function(s) {
   return s && s.__esModule ? s : { default: s };
 };
 Object.defineProperty(Nt, "__esModule", { value: !0 });
@@ -1038,7 +1038,7 @@ let ei = class {
   }
 };
 Nt.default = ei;
-var ti = ce && ce.__importDefault || function(s) {
+var ti = oe && oe.__importDefault || function(s) {
   return s && s.__esModule ? s : { default: s };
 };
 Object.defineProperty(Lt, "__esModule", { value: !0 });
@@ -1206,7 +1206,7 @@ let si = class extends ri.default {
   }
 };
 Lt.default = si;
-var ni = ce && ce.__importDefault || function(s) {
+var ni = oe && oe.__importDefault || function(s) {
   return s && s.__esModule ? s : { default: s };
 };
 Object.defineProperty(pt, "__esModule", { value: !0 });
@@ -1511,7 +1511,7 @@ let ai = class extends ii.default {
   }
 };
 pt.default = ai;
-var oi = ce && ce.__importDefault || function(s) {
+var oi = oe && oe.__importDefault || function(s) {
   return s && s.__esModule ? s : { default: s };
 };
 Object.defineProperty(Mt, "__esModule", { value: !0 });
@@ -1729,7 +1729,7 @@ Object.defineProperty(Ft, "__esModule", { value: !0 });
 Ft.DEFAULT_HEADERS = void 0;
 const li = Wt;
 Ft.DEFAULT_HEADERS = { "X-Client-Info": `postgrest-js/${li.version}` };
-var Es = ce && ce.__importDefault || function(s) {
+var Es = oe && oe.__importDefault || function(s) {
   return s && s.__esModule ? s : { default: s };
 };
 Object.defineProperty(Er, "__esModule", { value: !0 });
@@ -1818,7 +1818,7 @@ let fi = class Os {
   }
 };
 Er.default = fi;
-var et = ce && ce.__importDefault || function(s) {
+var et = oe && oe.__importDefault || function(s) {
   return s && s.__esModule ? s : { default: s };
 };
 Object.defineProperty(te, "__esModule", { value: !0 });
@@ -2605,7 +2605,7 @@ class Ci {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-lyMi93-X.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-BoFABKqD.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7168,10 +7168,10 @@ function rc() {
       {
         var D = t.ReactDebugCurrentFrame, G = D.getStackAddendum();
         G !== "" && (S += "%s", M = M.concat([G]));
-        var ne = M.map(function(V) {
+        var ce = M.map(function(V) {
           return String(V);
         });
-        ne.unshift("Warning: " + S), Function.prototype.apply.call(console[E], console, ne);
+        ce.unshift("Warning: " + S), Function.prototype.apply.call(console[E], console, ce);
       }
     }
     function i(E, S) {
@@ -7185,12 +7185,12 @@ function rc() {
         var G = S();
         a(D, G) || (r("The result of getSnapshot should be cached to avoid an infinite loop"), f = !0);
       }
-      var ne = o({
+      var ce = o({
         inst: {
           value: D,
           getSnapshot: S
         }
-      }), V = ne[0].inst, xe = ne[1];
+      }), V = ce[0].inst, xe = ce[1];
       return u(function() {
         V.value = D, V.getSnapshot = S, _(V) && xe({
           inst: V
@@ -7308,7 +7308,7 @@ function nc() {
         value: null
       }, x.current = P) : P = x.current;
       var j = c(function() {
-        var M = !1, D, G, ne = function(de) {
+        var M = !1, D, G, ce = function(de) {
           if (!M) {
             M = !0, D = de;
             var K = _(de);
@@ -7325,9 +7325,9 @@ function nc() {
           var Se = _(de);
           return y !== void 0 && y(me, Se) ? me : (D = de, G = Se, Se);
         }, V = m === void 0 ? null : m, xe = function() {
-          return ne(f());
+          return ce(f());
         }, Re = V === null ? void 0 : function() {
-          return ne(V());
+          return ce(V());
         };
         return [xe, Re];
       }, [f, m, _, y]), O = j[0], E = j[1], S = i(h, O, E);
@@ -7477,19 +7477,19 @@ var wc = (s) => typeof s == "function", xr = (s, e) => wc(s) ? s(e) : s, bc = /*
 }, Tc = (s, e = "blank", t) => ({ createdAt: Date.now(), visible: !0, type: e, ariaProps: { role: "status", "aria-live": "polite" }, message: s, pauseDuration: 0, ...t, id: (t == null ? void 0 : t.id) || bc() }), vt = (s) => (e, t) => {
   let r = Tc(e, s, t);
   return Vt({ type: 2, toast: r }), r.id;
-}, oe = (s, e) => vt("blank")(s, e);
-oe.error = vt("error");
-oe.success = vt("success");
-oe.loading = vt("loading");
-oe.custom = vt("custom");
-oe.dismiss = (s) => {
+}, ae = (s, e) => vt("blank")(s, e);
+ae.error = vt("error");
+ae.success = vt("success");
+ae.loading = vt("loading");
+ae.custom = vt("custom");
+ae.dismiss = (s) => {
   Vt({ type: 3, toastId: s });
 };
-oe.remove = (s) => Vt({ type: 4, toastId: s });
-oe.promise = (s, e, t) => {
-  let r = oe.loading(e.loading, { ...t, ...t == null ? void 0 : t.loading });
-  return s.then((n) => (oe.success(xr(e.success, n), { id: r, ...t, ...t == null ? void 0 : t.success }), n)).catch((n) => {
-    oe.error(xr(e.error, n), { id: r, ...t, ...t == null ? void 0 : t.error });
+ae.remove = (s) => Vt({ type: 4, toastId: s });
+ae.promise = (s, e, t) => {
+  let r = ae.loading(e.loading, { ...t, ...t == null ? void 0 : t.loading });
+  return s.then((n) => (ae.success(xr(e.success, n), { id: r, ...t, ...t == null ? void 0 : t.success }), n)).catch((n) => {
+    ae.error(xr(e.error, n), { id: r, ...t, ...t == null ? void 0 : t.error });
   }), s;
 };
 var jc = we`
@@ -7760,13 +7760,13 @@ const Jc = async (s, e, t, r) => {
             s({ isLoading: !1 });
           }
         } catch (x) {
-          console.error("Error generating bot response:", x), oe.error("Failed to generate bot response");
+          console.error("Error generating bot response:", x), ae.error("Failed to generate bot response");
         }
       }
       const { error: y } = await W.from("conversations").update({ last_message_at: (/* @__PURE__ */ new Date()).toISOString() }).eq("id", r);
       if (y) throw y;
     } catch (n) {
-      console.error("Error sending message:", n), s({ error: n.message }), oe.error("Failed to send message");
+      console.error("Error sending message:", n), s({ error: n.message }), ae.error("Failed to send message");
     } finally {
       s({ isLoading: !1 });
     }
@@ -7787,7 +7787,7 @@ const Jc = async (s, e, t, r) => {
       className: `${t} rounded-full object-cover flex-shrink-0`
     }
   ) : /* @__PURE__ */ p.jsx("div", { className: `${t} rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center`, children: /* @__PURE__ */ p.jsx("span", { className: s === "sm" ? "text-base" : "text-lg", children: "🤖" }) });
-}, Qc = ({ config: s, liveMode: e }) => /* @__PURE__ */ p.jsxs("div", { className: "flex gap-2", children: [
+}, Qc = ({ config: s }) => /* @__PURE__ */ p.jsxs("div", { className: "flex gap-2", children: [
   /* @__PURE__ */ p.jsx($t, { size: "sm", config: s }),
   /* @__PURE__ */ p.jsx("div", { className: "p-3 rounded-lg", style: { backgroundColor: "#E5E7EB" }, children: /* @__PURE__ */ p.jsxs("div", { className: "flex gap-2", children: [
     /* @__PURE__ */ p.jsx("div", { className: "w-2 h-2 bg-gray-500 rounded-full animate-bounce", style: { animationDelay: "0ms" } }),
@@ -7815,7 +7815,7 @@ const Jc = async (s, e, t, r) => {
   }
 );
 function el({ domainId: s }) {
-  const [e, t] = X(!1), [r, n] = X(""), [i, a] = X([]), [o, c] = X([]), [u, l] = X("history"), [h, f] = X(null), [m, _] = X(!1), [y] = X(/* @__PURE__ */ new Set()), [x, P] = X(null), [j, O] = X(null), E = Wr(null), [S, M] = X(!1), D = Wr(null), { sendMessage: G } = Kc(), [ne, V] = X(!1), [xe, Re] = X(window.innerWidth), [de, K] = X(!0);
+  const [e, t] = X(!1), [r, n] = X(""), [i, a] = X([]), [o, c] = X([]), [u, l] = X("history"), [h, f] = X(null), [m, _] = X(!1), [y] = X(/* @__PURE__ */ new Set()), [x, P] = X(null), [j, O] = X(null), E = Wr(null), [S, M] = X(!1), D = Wr(null), { sendMessage: G } = Kc(), [ce, V] = X(!1), [xe, Re] = X(window.innerWidth), [de, K] = X(!0);
   ge(() => {
     const v = () => {
       Re(window.innerWidth);
@@ -7947,7 +7947,7 @@ function el({ domainId: s }) {
             if (he($, N))
               return console.log("Message already exists, skipping"), N;
             const J = N.filter(
-              (ie) => !(ie.id.startsWith("temp-") && ie.content === $.content && ie.sender_type === $.sender_type)
+              (ne) => !(ne.id.startsWith("temp-") && ne.content === $.content && ne.sender_type === $.sender_type)
             );
             return y.add($.id), $.sender_type === "bot" && tt(), console.log("Adding new message to state"), [...J, $];
           });
@@ -7979,9 +7979,9 @@ function el({ domainId: s }) {
         return;
       }
       f(N.id);
-      const { data: ie } = await W.from("messages").select("*").eq("conversation_id", N.id).order("created_at", { ascending: !0 });
-      if (ie) {
-        const St = ie.filter(($e) => y.has($e.id) ? !1 : (y.add($e.id), !0));
+      const { data: ne } = await W.from("messages").select("*").eq("conversation_id", N.id).order("created_at", { ascending: !0 });
+      if (ne) {
+        const St = ne.filter(($e) => y.has($e.id) ? !1 : (y.add($e.id), !0));
         a(St);
       }
     } catch (b) {
@@ -7994,14 +7994,14 @@ function el({ domainId: s }) {
         await W.auth.signInAnonymously();
         const { data: { user: N } } = await W.auth.getUser();
         if (!N) throw new Error("Failed to create anonymous session");
-        const { data: J, error: ie } = await W.from("conversations").insert({
+        const { data: J, error: ne } = await W.from("conversations").insert({
           domain_id: s,
           user_id: N.id,
           session_id: j,
           last_message_at: (/* @__PURE__ */ new Date()).toISOString(),
           status: "active"
         }).select().single();
-        if (ie) throw ie;
+        if (ne) throw ne;
         return J.id;
       }
       const { data: b, error: $ } = await W.from("conversations").insert({
@@ -8272,7 +8272,7 @@ function el({ domainId: s }) {
                       },
                       v.id
                     )),
-                    m && !S && !ne && !isLiveMode && /* @__PURE__ */ p.jsx(Qc, { config: C, liveMode: isLiveMode }),
+                    m && /* @__PURE__ */ p.jsx(Qc, { config: C }),
                     S && /* @__PURE__ */ p.jsxs("div", { className: "flex flex-col items-center gap-3 my-4", children: [
                       /* @__PURE__ */ p.jsxs("div", { className: "bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600", children: [
                         /* @__PURE__ */ p.jsx(An, { className: "h-4 w-4" }),
@@ -8391,4 +8391,4 @@ tl();
 export {
   kn as g
 };
-//# sourceMappingURL=main-DPKT9vZr.js.map
+//# sourceMappingURL=main-ClKrwGbh.js.map
