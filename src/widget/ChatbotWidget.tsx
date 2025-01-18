@@ -122,7 +122,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const [isRequestingLiveChat, setIsRequestingLiveChat] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showMobileMessage, setShowMobileMessage] = useState(true);
-  const [isLoadingConfig, setIsLoadingConfig] = useState(true);
 
   // Add window resize listener
   useEffect(() => {
@@ -583,10 +582,8 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     await sendMessage(message.trim());
   };
 
-  // Fetch configuration
   useEffect(() => {
     const fetchConfig = async () => {
-      setIsLoadingConfig(true); // Set loading to true
       try {
         const { data } = await supabase
           .from('domain_settings')
@@ -594,13 +591,49 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           .eq('domain_id', domainId)
           .single();
 
-        // Set config based on fetched data
-        setConfig(data ? { ...data, ...LAYOUT_CONFIG } : defaultConfig);
+        if (data) {
+          setConfig({
+            chatbotName: data.chatbot_name,
+            greetingMessage: data.greeting_message || 'Hello! How can I help you today?',
+            color: data.primary_color || '#FF6B00',
+            headerTextColor: data.header_text_color || '#000000',
+            agentMessageColor: data.agent_message_color || '#E5E7EB',
+            userMessageColor: data.user_message_color || '#FFF1E7',
+            agentMessageTextColor: data.agent_message_text_color || '#000000',
+            userMessageTextColor: data.user_message_text_color || '#000000',
+            logoUrl: data.logo_url,
+            ...LAYOUT_CONFIG
+          });
+        } else {
+          // Use default config if no settings exist
+          setConfig({
+            chatbotName: 'Friendly Assistant',
+            greetingMessage: 'Hello! How can I help you today?',
+            color: '#FF6B00',
+            headerTextColor: '#000000',
+            agentMessageColor: '#E5E7EB',
+            userMessageColor: '#FFF1E7',
+            agentMessageTextColor: '#000000',
+            userMessageTextColor: '#000000',
+            logoUrl: null,
+            ...LAYOUT_CONFIG
+          });
+        }
       } catch (error) {
         console.error('Error fetching chatbot config:', error);
-        setConfig(defaultConfig); // Fallback to default config on error
-      } finally {
-        setIsLoadingConfig(false); // Set loading to false
+        // Use default config on error
+        setConfig({
+          chatbotName: 'Friendly Assistant',
+          greetingMessage: 'Hello! How can I help you today?',
+          color: '#FF6B00',
+          headerTextColor: '#000000',
+          agentMessageColor: '#E5E7EB',
+          userMessageColor: '#FFF1E7',
+          agentMessageTextColor: '#000000',
+          userMessageTextColor: '#000000',
+          logoUrl: null,
+          ...LAYOUT_CONFIG
+        });
       }
     };
 
