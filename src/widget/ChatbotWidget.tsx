@@ -743,13 +743,19 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     if (conversationId) {
       // Fetch the conversation details to set live mode
       const fetchConversationDetails = async () => {
-        const { data: conversation } = await supabase
+        const { data: conversation, error } = await supabase
           .from('conversations')
           .select('live_mode')
           .eq('id', conversationId)
           .single();
 
+        if (error) {
+          console.error('Error fetching conversation details:', error);
+          return;
+        }
+
         if (conversation) {
+          console.log('Fetched conversation:', conversation); // Debugging statement
           setIsLiveMode(conversation.live_mode); // Set the live mode state
           console.log('Live mode set to:', conversation.live_mode); // Debugging statement
         }
@@ -926,8 +932,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   )}
                 </div>
               ))}
-              {console.log('isLoading:', isLoading, 'isLiveMode:', isLiveMode)}
-              {isLoading && !isLiveMode && <TypingIndicator config={config} />}
+              {isLoading && <TypingIndicator config={config} />}
               {isArchived && (
                 <div className="flex flex-col items-center gap-3 my-4">
                   <div className="bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600">

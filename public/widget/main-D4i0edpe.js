@@ -1,4 +1,4 @@
-import * as ie from "react";
+import * as ne from "react";
 import Ue, { forwardRef as xn, createElement as Br, useState as G, useRef as qr, useEffect as ue } from "react";
 import Sn from "react-dom";
 var ce = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
@@ -70,8 +70,8 @@ function Tn() {
       var g = y && d[y] || d[x];
       return typeof g == "function" ? g : null;
     }
-    var j = e.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-    function O(d) {
+    var P = e.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+    function T(d) {
       {
         for (var g = arguments.length, b = new Array(g > 1 ? g - 1 : 0), k = 1; k < g; k++)
           b[k - 1] = arguments[k];
@@ -80,7 +80,7 @@ function Tn() {
     }
     function E(d, g, b) {
       {
-        var k = j.ReactDebugCurrentFrame, L = k.getStackAddendum();
+        var k = P.ReactDebugCurrentFrame, L = k.getStackAddendum();
         L !== "" && (g += "%s", b = b.concat([L]));
         var W = b.map(function(I) {
           return String(I);
@@ -110,7 +110,7 @@ function Tn() {
     function J(d) {
       if (d == null)
         return null;
-      if (typeof d.tag == "number" && O("Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue."), typeof d == "function")
+      if (typeof d.tag == "number" && T("Received an unexpected object in getComponentNameFromType(). This is likely a bug in React. Please file an issue."), typeof d == "function")
         return d.displayName || d.name || null;
       if (typeof d == "string")
         return d;
@@ -152,14 +152,14 @@ function Tn() {
         }
       return null;
     }
-    var X = Object.assign, pe = 0, se, me, et, _t, wt, bt, tt;
+    var ie = Object.assign, pe = 0, re, me, et, _t, wt, bt, tt;
     function xt() {
     }
     xt.__reactDisabledLog = !0;
     function Ht() {
       {
         if (pe === 0) {
-          se = console.log, me = console.info, et = console.warn, _t = console.error, wt = console.group, bt = console.groupCollapsed, tt = console.groupEnd;
+          re = console.log, me = console.info, et = console.warn, _t = console.error, wt = console.group, bt = console.groupCollapsed, tt = console.groupEnd;
           var d = {
             configurable: !0,
             enumerable: !0,
@@ -188,44 +188,44 @@ function Tn() {
             writable: !0
           };
           Object.defineProperties(console, {
-            log: X({}, d, {
-              value: se
+            log: ie({}, d, {
+              value: re
             }),
-            info: X({}, d, {
+            info: ie({}, d, {
               value: me
             }),
-            warn: X({}, d, {
+            warn: ie({}, d, {
               value: et
             }),
-            error: X({}, d, {
+            error: ie({}, d, {
               value: _t
             }),
-            group: X({}, d, {
+            group: ie({}, d, {
               value: wt
             }),
-            groupCollapsed: X({}, d, {
+            groupCollapsed: ie({}, d, {
               value: bt
             }),
-            groupEnd: X({}, d, {
+            groupEnd: ie({}, d, {
               value: tt
             })
           });
         }
-        pe < 0 && O("disabledDepth fell below zero. This is a bug in React. Please file an issue.");
+        pe < 0 && T("disabledDepth fell below zero. This is a bug in React. Please file an issue.");
       }
     }
-    var rt = j.ReactCurrentDispatcher, P;
+    var rt = P.ReactCurrentDispatcher, C;
     function xe(d, g, b) {
       {
-        if (P === void 0)
+        if (C === void 0)
           try {
             throw Error();
           } catch (L) {
             var k = L.stack.trim().match(/\n( *(at )?)/);
-            P = k && k[1] || "";
+            C = k && k[1] || "";
           }
         return `
-` + P + d;
+` + C + d;
       }
     }
     var Be = !1, qe;
@@ -259,29 +259,29 @@ function Tn() {
           }), typeof Reflect == "object" && Reflect.construct) {
             try {
               Reflect.construct(I, []);
-            } catch (ee) {
-              k = ee;
+            } catch (Z) {
+              k = Z;
             }
             Reflect.construct(d, [], I);
           } else {
             try {
               I.call();
-            } catch (ee) {
-              k = ee;
+            } catch (Z) {
+              k = Z;
             }
             d.call(I.prototype);
           }
         } else {
           try {
             throw Error();
-          } catch (ee) {
-            k = ee;
+          } catch (Z) {
+            k = Z;
           }
           d();
         }
-      } catch (ee) {
-        if (ee && k && typeof ee.stack == "string") {
-          for (var A = ee.stack.split(`
+      } catch (Z) {
+        if (Z && k && typeof Z.stack == "string") {
+          for (var A = Z.stack.split(`
 `), K = k.stack.split(`
 `), q = A.length - 1, z = K.length - 1; q >= 1 && z >= 0 && A[q] !== K[z]; )
             z--;
@@ -340,17 +340,17 @@ function Tn() {
         }
       return "";
     }
-    var C = Object.prototype.hasOwnProperty, F = {}, Q = j.ReactDebugCurrentFrame;
-    function Z(d) {
+    var O = Object.prototype.hasOwnProperty, F = {}, X = P.ReactDebugCurrentFrame;
+    function Q(d) {
       if (d) {
         var g = d._owner, b = _(d.type, d._source, g ? g.type : null);
-        Q.setExtraStackFrame(b);
+        X.setExtraStackFrame(b);
       } else
-        Q.setExtraStackFrame(null);
+        X.setExtraStackFrame(null);
     }
     function Gt(d, g, b, k, L) {
       {
-        var W = Function.call.bind(C);
+        var W = Function.call.bind(O);
         for (var I in d)
           if (W(d, I)) {
             var A = void 0;
@@ -363,7 +363,7 @@ function Tn() {
             } catch (q) {
               A = q;
             }
-            A && !(A instanceof Error) && (Z(L), O("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", k || "React class", b, I, typeof A), Z(null)), A instanceof Error && !(A.message in F) && (F[A.message] = !0, Z(L), O("Failed %s type: %s", b, A.message), Z(null));
+            A && !(A instanceof Error) && (Q(L), T("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", k || "React class", b, I, typeof A), Q(null)), A instanceof Error && !(A.message in F) && (F[A.message] = !0, Q(L), T("Failed %s type: %s", b, A.message), Q(null));
           }
       }
     }
@@ -389,9 +389,9 @@ function Tn() {
     }
     function Ar(d) {
       if (rn(d))
-        return O("The provided key is an unsupported type %s. This value must be coerced to a string before before using it here.", tn(d)), Rr(d);
+        return T("The provided key is an unsupported type %s. This value must be coerced to a string before before using it here.", tn(d)), Rr(d);
     }
-    var nt = j.ReactCurrentOwner, sn = {
+    var nt = P.ReactCurrentOwner, sn = {
       key: !0,
       ref: !0,
       __self: !0,
@@ -399,7 +399,7 @@ function Tn() {
     }, $r, Ir, Kt;
     Kt = {};
     function nn(d) {
-      if (C.call(d, "ref")) {
+      if (O.call(d, "ref")) {
         var g = Object.getOwnPropertyDescriptor(d, "ref").get;
         if (g && g.isReactWarning)
           return !1;
@@ -407,7 +407,7 @@ function Tn() {
       return d.ref !== void 0;
     }
     function an(d) {
-      if (C.call(d, "key")) {
+      if (O.call(d, "key")) {
         var g = Object.getOwnPropertyDescriptor(d, "key").get;
         if (g && g.isReactWarning)
           return !1;
@@ -417,13 +417,13 @@ function Tn() {
     function on(d, g) {
       if (typeof d.ref == "string" && nt.current && g && nt.current.stateNode !== g) {
         var b = J(nt.current.type);
-        Kt[b] || (O('Component "%s" contains the string ref "%s". Support for string refs will be removed in a future major release. This case cannot be automatically converted to an arrow function. We ask you to manually fix this case by using useRef() or createRef() instead. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-string-ref', J(nt.current.type), d.ref), Kt[b] = !0);
+        Kt[b] || (T('Component "%s" contains the string ref "%s". Support for string refs will be removed in a future major release. This case cannot be automatically converted to an arrow function. We ask you to manually fix this case by using useRef() or createRef() instead. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-string-ref', J(nt.current.type), d.ref), Kt[b] = !0);
       }
     }
     function cn(d, g) {
       {
         var b = function() {
-          $r || ($r = !0, O("%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://reactjs.org/link/special-props)", g));
+          $r || ($r = !0, T("%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://reactjs.org/link/special-props)", g));
         };
         b.isReactWarning = !0, Object.defineProperty(d, "key", {
           get: b,
@@ -434,7 +434,7 @@ function Tn() {
     function ln(d, g) {
       {
         var b = function() {
-          Ir || (Ir = !0, O("%s: `ref` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://reactjs.org/link/special-props)", g));
+          Ir || (Ir = !0, T("%s: `ref` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://reactjs.org/link/special-props)", g));
         };
         b.isReactWarning = !0, Object.defineProperty(d, "ref", {
           get: b,
@@ -476,7 +476,7 @@ function Tn() {
         var W, I = {}, A = null, K = null;
         b !== void 0 && (Ar(b), A = "" + b), an(g) && (Ar(g.key), A = "" + g.key), nn(g) && (K = g.ref, on(g, L));
         for (W in g)
-          C.call(g, W) && !sn.hasOwnProperty(W) && (I[W] = g[W]);
+          O.call(g, W) && !sn.hasOwnProperty(W) && (I[W] = g[W]);
         if (d && d.defaultProps) {
           var q = d.defaultProps;
           for (W in q)
@@ -489,7 +489,7 @@ function Tn() {
         return un(d, A, K, L, k, nt.current, I);
       }
     }
-    var Xt = j.ReactCurrentOwner, Dr = j.ReactDebugCurrentFrame;
+    var Xt = P.ReactCurrentOwner, Dr = P.ReactDebugCurrentFrame;
     function ze(d) {
       if (d) {
         var g = d._owner, b = _(d.type, d._source, g ? g.type : null);
@@ -540,7 +540,7 @@ Check the top-level render call using <` + b + ">.");
           return;
         Lr[b] = !0;
         var k = "";
-        d && d._owner && d._owner !== Xt.current && (k = " It was passed a child from " + J(d._owner.type) + "."), ze(d), O('Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.', b, k), ze(null);
+        d && d._owner && d._owner !== Xt.current && (k = " It was passed a child from " + J(d._owner.type) + "."), ze(d), T('Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.', b, k), ze(null);
       }
     }
     function Ur(d, g) {
@@ -582,9 +582,9 @@ Check the top-level render call using <` + b + ">.");
         } else if (g.PropTypes !== void 0 && !Qt) {
           Qt = !0;
           var L = J(g);
-          O("Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?", L || "Unknown");
+          T("Component %s declared `PropTypes` instead of `propTypes`. Did you misspell the property assignment?", L || "Unknown");
         }
-        typeof g.getDefaultProps == "function" && !g.getDefaultProps.isReactClassApproved && O("getDefaultProps is only used on classic React.createClass definitions. Use a static property named `defaultProps` instead.");
+        typeof g.getDefaultProps == "function" && !g.getDefaultProps.isReactClassApproved && T("getDefaultProps is only used on classic React.createClass definitions. Use a static property named `defaultProps` instead.");
       }
     }
     function pn(d) {
@@ -592,11 +592,11 @@ Check the top-level render call using <` + b + ">.");
         for (var g = Object.keys(d.props), b = 0; b < g.length; b++) {
           var k = g[b];
           if (k !== "children" && k !== "key") {
-            ze(d), O("Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.", k), ze(null);
+            ze(d), T("Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.", k), ze(null);
             break;
           }
         }
-        d.ref !== null && (ze(d), O("Invalid attribute `ref` supplied to `React.Fragment`."), ze(null));
+        d.ref !== null && (ze(d), T("Invalid attribute `ref` supplied to `React.Fragment`."), ze(null));
       }
     }
     var Fr = {};
@@ -609,7 +609,7 @@ Check the top-level render call using <` + b + ">.");
           var K = hn();
           K ? A += K : A += Mr();
           var q;
-          d === null ? q = "null" : Jt(d) ? q = "array" : d !== void 0 && d.$$typeof === t ? (q = "<" + (J(d.type) || "Unknown") + " />", A = " Did you accidentally export a JSX literal instead of a component?") : q = typeof d, O("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", q, A);
+          d === null ? q = "null" : Jt(d) ? q = "array" : d !== void 0 && d.$$typeof === t ? (q = "<" + (J(d.type) || "Unknown") + " />", A = " Did you accidentally export a JSX literal instead of a component?") : q = typeof d, T("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", q, A);
         }
         var z = dn(d, g, b, L, W);
         if (z == null)
@@ -623,17 +623,17 @@ Check the top-level render call using <` + b + ">.");
                   Ur(ae[Ve], d);
                 Object.freeze && Object.freeze(ae);
               } else
-                O("React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead.");
+                T("React.jsx: Static children should always be an array. You are likely explicitly calling React.jsxs or React.jsxDEV. Use the Babel transform instead.");
             else
               Ur(ae, d);
         }
-        if (C.call(g, "key")) {
-          var $e = J(d), ee = Object.keys(g).filter(function(bn) {
+        if (O.call(g, "key")) {
+          var $e = J(d), Z = Object.keys(g).filter(function(bn) {
             return bn !== "key";
-          }), er = ee.length > 0 ? "{key: someKey, " + ee.join(": ..., ") + ": ...}" : "{key: someKey}";
+          }), er = Z.length > 0 ? "{key: someKey, " + Z.join(": ..., ") + ": ...}" : "{key: someKey}";
           if (!Fr[$e + er]) {
-            var wn = ee.length > 0 ? "{" + ee.join(": ..., ") + ": ...}" : "{}";
-            O(`A props object containing a "key" prop is being spread into JSX:
+            var wn = Z.length > 0 ? "{" + Z.join(": ..., ") + ": ...}" : "{}";
+            T(`A props object containing a "key" prop is being spread into JSX:
   let props = %s;
   <%s {...props} />
 React keys must be passed directly to JSX without using spread:
@@ -927,7 +927,7 @@ class Vn {
     });
   }
 }
-var re = {}, Tr = {}, Mt = {}, mt = {}, Lt = {}, Nt = {}, Hn = function() {
+var te = {}, Tr = {}, Mt = {}, mt = {}, Lt = {}, Nt = {}, Hn = function() {
   if (typeof self < "u")
     return self;
   if (typeof window < "u")
@@ -1821,21 +1821,21 @@ Tr.default = fi;
 var Ze = ce && ce.__importDefault || function(s) {
   return s && s.__esModule ? s : { default: s };
 };
-Object.defineProperty(re, "__esModule", { value: !0 });
-re.PostgrestError = re.PostgrestBuilder = re.PostgrestTransformBuilder = re.PostgrestFilterBuilder = re.PostgrestQueryBuilder = re.PostgrestClient = void 0;
+Object.defineProperty(te, "__esModule", { value: !0 });
+te.PostgrestError = te.PostgrestBuilder = te.PostgrestTransformBuilder = te.PostgrestFilterBuilder = te.PostgrestQueryBuilder = te.PostgrestClient = void 0;
 const Ps = Ze(Tr);
-re.PostgrestClient = Ps.default;
+te.PostgrestClient = Ps.default;
 const Cs = Ze(Mt);
-re.PostgrestQueryBuilder = Cs.default;
+te.PostgrestQueryBuilder = Cs.default;
 const Rs = Ze(mt);
-re.PostgrestFilterBuilder = Rs.default;
+te.PostgrestFilterBuilder = Rs.default;
 const As = Ze(Lt);
-re.PostgrestTransformBuilder = As.default;
+te.PostgrestTransformBuilder = As.default;
 const $s = Ze(Nt);
-re.PostgrestBuilder = $s.default;
+te.PostgrestBuilder = $s.default;
 const Is = Ze(Ut);
-re.PostgrestError = Is.default;
-var gi = re.default = {
+te.PostgrestError = Is.default;
+var gi = te.default = {
   PostgrestClient: Ps.default,
   PostgrestQueryBuilder: Cs.default,
   PostgrestFilterBuilder: Rs.default,
@@ -1855,10 +1855,10 @@ var Ke;
 (function(s) {
   s[s.connecting = 0] = "connecting", s[s.open = 1] = "open", s[s.closing = 2] = "closing", s[s.closed = 3] = "closed";
 })(Ke || (Ke = {}));
-var ne;
+var se;
 (function(s) {
   s.closed = "closed", s.errored = "errored", s.joined = "joined", s.joining = "joining", s.leaving = "leaving";
-})(ne || (ne = {}));
+})(se || (se = {}));
 var de;
 (function(s) {
   s.close = "phx_close", s.error = "phx_error", s.join = "phx_join", s.reply = "phx_reply", s.leave = "phx_leave", s.access_token = "access_token";
@@ -2235,18 +2235,18 @@ var ye;
 })(ye || (ye = {}));
 class jr {
   constructor(e, t = { config: {} }, r) {
-    this.topic = e, this.params = t, this.socket = r, this.bindings = {}, this.state = ne.closed, this.joinedOnce = !1, this.pushBuffer = [], this.subTopic = e.replace(/^realtime:/i, ""), this.params.config = Object.assign({
+    this.topic = e, this.params = t, this.socket = r, this.bindings = {}, this.state = se.closed, this.joinedOnce = !1, this.pushBuffer = [], this.subTopic = e.replace(/^realtime:/i, ""), this.params.config = Object.assign({
       broadcast: { ack: !1, self: !1 },
       presence: { key: "" },
       private: !1
     }, t.config), this.timeout = this.socket.timeout, this.joinPush = new rr(this, de.join, this.params, this.timeout), this.rejoinTimer = new Ms(() => this._rejoinUntilConnected(), this.socket.reconnectAfterMs), this.joinPush.receive("ok", () => {
-      this.state = ne.joined, this.rejoinTimer.reset(), this.pushBuffer.forEach((n) => n.send()), this.pushBuffer = [];
+      this.state = se.joined, this.rejoinTimer.reset(), this.pushBuffer.forEach((n) => n.send()), this.pushBuffer = [];
     }), this._onClose(() => {
-      this.rejoinTimer.reset(), this.socket.log("channel", `close ${this.topic} ${this._joinRef()}`), this.state = ne.closed, this.socket._remove(this);
+      this.rejoinTimer.reset(), this.socket.log("channel", `close ${this.topic} ${this._joinRef()}`), this.state = se.closed, this.socket._remove(this);
     }), this._onError((n) => {
-      this._isLeaving() || this._isClosed() || (this.socket.log("channel", `error ${this.topic}`, n), this.state = ne.errored, this.rejoinTimer.scheduleTimeout());
+      this._isLeaving() || this._isClosed() || (this.socket.log("channel", `error ${this.topic}`, n), this.state = se.errored, this.rejoinTimer.scheduleTimeout());
     }), this.joinPush.receive("timeout", () => {
-      this._isJoining() && (this.socket.log("channel", `timeout ${this.topic}`, this.joinPush.timeout), this.state = ne.errored, this.rejoinTimer.scheduleTimeout());
+      this._isJoining() && (this.socket.log("channel", `timeout ${this.topic}`, this.joinPush.timeout), this.state = se.errored, this.rejoinTimer.scheduleTimeout());
     }), this._on(de.reply, {}, (n, i) => {
       this._trigger(this._replyEventName(i), n);
     }), this.presence = new ht(this), this.broadcastEndpointURL = Ns(this.socket.endPoint) + "/api/broadcast", this.private = this.params.config.private || !1;
@@ -2273,8 +2273,8 @@ class jr {
         } else {
           const f = this.bindings.postgres_changes, m = (h = f == null ? void 0 : f.length) !== null && h !== void 0 ? h : 0, w = [];
           for (let y = 0; y < m; y++) {
-            const x = f[y], { filter: { event: R, schema: j, table: O, filter: E } } = x, S = l && l[y];
-            if (S && S.event === R && S.schema === j && S.table === O && S.filter === E)
+            const x = f[y], { filter: { event: R, schema: P, table: T, filter: E } } = x, S = l && l[y];
+            if (S && S.event === R && S.schema === P && S.table === T && S.filter === E)
               w.push(Object.assign(Object.assign({}, x), { id: S.id }));
             else {
               this.unsubscribe(), e == null || e(ye.CHANNEL_ERROR, new Error("mismatch between server and client bindings for postgres changes"));
@@ -2367,7 +2367,7 @@ class jr {
    * channel.unsubscribe().receive("ok", () => alert("left!") )
    */
   unsubscribe(e = this.timeout) {
-    this.state = ne.leaving;
+    this.state = se.leaving;
     const t = () => {
       this.socket.log("channel", `leave ${this.topic}`), this._trigger(de.close, "leave", this._joinRef());
     };
@@ -2426,28 +2426,28 @@ class jr {
       var w, y, x;
       return ((w = m.filter) === null || w === void 0 ? void 0 : w.event) === "*" || ((x = (y = m.filter) === null || y === void 0 ? void 0 : y.event) === null || x === void 0 ? void 0 : x.toLocaleLowerCase()) === a;
     }).map((m) => m.callback(f, r)) : (i = this.bindings[a]) === null || i === void 0 || i.filter((m) => {
-      var w, y, x, R, j, O;
+      var w, y, x, R, P, T;
       if (["broadcast", "presence", "postgres_changes"].includes(a))
         if ("id" in m) {
           const E = m.id, S = (w = m.filter) === null || w === void 0 ? void 0 : w.event;
           return E && ((y = t.ids) === null || y === void 0 ? void 0 : y.includes(E)) && (S === "*" || (S == null ? void 0 : S.toLocaleLowerCase()) === ((x = t.data) === null || x === void 0 ? void 0 : x.type.toLocaleLowerCase()));
         } else {
-          const E = (j = (R = m == null ? void 0 : m.filter) === null || R === void 0 ? void 0 : R.event) === null || j === void 0 ? void 0 : j.toLocaleLowerCase();
-          return E === "*" || E === ((O = t == null ? void 0 : t.event) === null || O === void 0 ? void 0 : O.toLocaleLowerCase());
+          const E = (P = (R = m == null ? void 0 : m.filter) === null || R === void 0 ? void 0 : R.event) === null || P === void 0 ? void 0 : P.toLocaleLowerCase();
+          return E === "*" || E === ((T = t == null ? void 0 : t.event) === null || T === void 0 ? void 0 : T.toLocaleLowerCase());
         }
       else
         return m.type.toLocaleLowerCase() === a;
     }).map((m) => {
       if (typeof f == "object" && "ids" in f) {
-        const w = f.data, { schema: y, table: x, commit_timestamp: R, type: j, errors: O } = w;
+        const w = f.data, { schema: y, table: x, commit_timestamp: R, type: P, errors: T } = w;
         f = Object.assign(Object.assign({}, {
           schema: y,
           table: x,
           commit_timestamp: R,
-          eventType: j,
+          eventType: P,
           new: {},
           old: {},
-          errors: O
+          errors: T
         }), this._getPayloadRecords(w));
       }
       m.callback(f, r);
@@ -2455,19 +2455,19 @@ class jr {
   }
   /** @internal */
   _isClosed() {
-    return this.state === ne.closed;
+    return this.state === se.closed;
   }
   /** @internal */
   _isJoined() {
-    return this.state === ne.joined;
+    return this.state === se.joined;
   }
   /** @internal */
   _isJoining() {
-    return this.state === ne.joining;
+    return this.state === se.joining;
   }
   /** @internal */
   _isLeaving() {
-    return this.state === ne.leaving;
+    return this.state === se.leaving;
   }
   /** @internal */
   _replyEventName(e) {
@@ -2529,7 +2529,7 @@ class jr {
   }
   /** @internal */
   _rejoin(e = this.timeout) {
-    this._isLeaving() || (this.socket._leaveOpenTopic(this.topic), this.state = ne.joining, this.joinPush.resend(e));
+    this._isLeaving() || (this.socket._leaveOpenTopic(this.topic), this.state = se.joining, this.joinPush.resend(e));
   }
   /** @internal */
   _getPayloadRecords(e) {
@@ -2605,7 +2605,7 @@ class Ci {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-C5QgXh98.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-CznvtFDK.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -2990,7 +2990,7 @@ function Fs(s, e, t, r, n) {
     return vt(s, "DELETE", e, r, n, t);
   });
 }
-var te = function(s, e, t, r) {
+var ee = function(s, e, t, r) {
   function n(i) {
     return i instanceof t ? i : new t(function(a) {
       a(i);
@@ -3041,7 +3041,7 @@ class Fi {
    * @param fileBody The body of the file to be stored in the bucket.
    */
   uploadOrUpdate(e, t, r, n) {
-    return te(this, void 0, void 0, function* () {
+    return ee(this, void 0, void 0, function* () {
       try {
         let i;
         const a = Object.assign(Object.assign({}, Xr), n);
@@ -3067,7 +3067,7 @@ class Fi {
    * @param fileBody The body of the file to be stored in the bucket.
    */
   upload(e, t, r) {
-    return te(this, void 0, void 0, function* () {
+    return ee(this, void 0, void 0, function* () {
       return this.uploadOrUpdate("POST", e, t, r);
     });
   }
@@ -3078,7 +3078,7 @@ class Fi {
    * @param fileBody The body of the file to be stored in the bucket.
    */
   uploadToSignedUrl(e, t, r, n) {
-    return te(this, void 0, void 0, function* () {
+    return ee(this, void 0, void 0, function* () {
       const i = this._removeEmptyFolders(e), a = this._getFinalPath(i), o = new URL(this.url + `/object/upload/sign/${a}`);
       o.searchParams.set("token", t);
       try {
@@ -3109,7 +3109,7 @@ class Fi {
    * @param options.upsert If set to true, allows the file to be overwritten if it already exists.
    */
   createSignedUploadUrl(e, t) {
-    return te(this, void 0, void 0, function* () {
+    return ee(this, void 0, void 0, function* () {
       try {
         let r = this._getFinalPath(e);
         const n = Object.assign({}, this.headers);
@@ -3132,7 +3132,7 @@ class Fi {
    * @param fileBody The body of the file to be stored in the bucket.
    */
   update(e, t, r) {
-    return te(this, void 0, void 0, function* () {
+    return ee(this, void 0, void 0, function* () {
       return this.uploadOrUpdate("PUT", e, t, r);
     });
   }
@@ -3144,7 +3144,7 @@ class Fi {
    * @param options The destination options.
    */
   move(e, t, r) {
-    return te(this, void 0, void 0, function* () {
+    return ee(this, void 0, void 0, function* () {
       try {
         return { data: yield Te(this.fetch, `${this.url}/object/move`, {
           bucketId: this.bucketId,
@@ -3167,7 +3167,7 @@ class Fi {
    * @param options The destination options.
    */
   copy(e, t, r) {
-    return te(this, void 0, void 0, function* () {
+    return ee(this, void 0, void 0, function* () {
       try {
         return { data: { path: (yield Te(this.fetch, `${this.url}/object/copy`, {
           bucketId: this.bucketId,
@@ -3191,7 +3191,7 @@ class Fi {
    * @param options.transform Transform the asset before serving it to the client.
    */
   createSignedUrl(e, t, r) {
-    return te(this, void 0, void 0, function* () {
+    return ee(this, void 0, void 0, function* () {
       try {
         let n = this._getFinalPath(e), i = yield Te(this.fetch, `${this.url}/object/sign/${n}`, Object.assign({ expiresIn: t }, r != null && r.transform ? { transform: r.transform } : {}), { headers: this.headers });
         const a = r != null && r.download ? `&download=${r.download === !0 ? "" : r.download}` : "";
@@ -3211,7 +3211,7 @@ class Fi {
    * @param options.download triggers the file as a download if set to true. Set this parameter as the name of the file if you want to trigger the download with a different filename.
    */
   createSignedUrls(e, t, r) {
-    return te(this, void 0, void 0, function* () {
+    return ee(this, void 0, void 0, function* () {
       try {
         const n = yield Te(this.fetch, `${this.url}/object/sign/${this.bucketId}`, { expiresIn: t, paths: e }, { headers: this.headers }), i = r != null && r.download ? `&download=${r.download === !0 ? "" : r.download}` : "";
         return {
@@ -3232,7 +3232,7 @@ class Fi {
    * @param options.transform Transform the asset before serving it to the client.
    */
   download(e, t) {
-    return te(this, void 0, void 0, function* () {
+    return ee(this, void 0, void 0, function* () {
       const n = typeof (t == null ? void 0 : t.transform) < "u" ? "render/image/authenticated" : "object", i = this.transformOptsToQueryString((t == null ? void 0 : t.transform) || {}), a = i ? `?${i}` : "";
       try {
         const o = this._getFinalPath(e);
@@ -3252,7 +3252,7 @@ class Fi {
    * @param path
    */
   info(e) {
-    return te(this, void 0, void 0, function* () {
+    return ee(this, void 0, void 0, function* () {
       const t = this._getFinalPath(e);
       try {
         const r = yield It(this.fetch, `${this.url}/object/info/${t}`, {
@@ -3271,7 +3271,7 @@ class Fi {
    * @param path
    */
   exists(e) {
-    return te(this, void 0, void 0, function* () {
+    return ee(this, void 0, void 0, function* () {
       const t = this._getFinalPath(e);
       try {
         return yield Ni(this.fetch, `${this.url}/object/${t}`, {
@@ -3311,7 +3311,7 @@ class Fi {
    * @param paths An array of files to delete, including the path and file name. For example [`'folder/image.png'`].
    */
   remove(e) {
-    return te(this, void 0, void 0, function* () {
+    return ee(this, void 0, void 0, function* () {
       try {
         return { data: yield Fs(this.fetch, `${this.url}/object/${this.bucketId}`, { prefixes: e }, { headers: this.headers }), error: null };
       } catch (t) {
@@ -3385,7 +3385,7 @@ class Fi {
    * @param path The folder path.
    */
   list(e, t, r) {
-    return te(this, void 0, void 0, function* () {
+    return ee(this, void 0, void 0, function* () {
       try {
         const n = Object.assign(Object.assign(Object.assign({}, Ui), t), { prefix: e || "" });
         return { data: yield Te(this.fetch, `${this.url}/object/list/${this.bucketId}`, n, { headers: this.headers }, r), error: null };
@@ -3842,7 +3842,7 @@ class Cr extends Error {
     super(e), this.__isAuthError = !0, this.name = "AuthError", this.status = t, this.code = r;
   }
 }
-function T(s) {
+function j(s) {
   return typeof s == "object" && s !== null && "__isAuthError" in s;
 }
 class ba extends Cr {
@@ -3851,7 +3851,7 @@ class ba extends Cr {
   }
 }
 function xa(s) {
-  return T(s) && s.name === "AuthApiError";
+  return j(s) && s.name === "AuthApiError";
 }
 class Vs extends Cr {
   constructor(e, t) {
@@ -3869,7 +3869,7 @@ class Ee extends We {
   }
 }
 function Sa(s) {
-  return T(s) && s.name === "AuthSessionMissingError";
+  return j(s) && s.name === "AuthSessionMissingError";
 }
 class nr extends We {
   constructor() {
@@ -3895,7 +3895,7 @@ class jt extends We {
   }
 }
 function ka(s) {
-  return T(s) && s.name === "AuthImplicitGrantRedirectError";
+  return j(s) && s.name === "AuthImplicitGrantRedirectError";
 }
 class es extends We {
   constructor(e, t = null) {
@@ -3916,7 +3916,7 @@ class wr extends We {
   }
 }
 function ir(s) {
-  return T(s) && s.name === "AuthRetryableFetchError";
+  return j(s) && s.name === "AuthRetryableFetchError";
 }
 class ts extends We {
   constructor(e, t, r) {
@@ -4055,7 +4055,7 @@ class Ia {
         noResolveJson: !0
       }), { data: null, error: null };
     } catch (r) {
-      if (T(r))
+      if (j(r))
         return { data: null, error: r };
       throw r;
     }
@@ -4074,7 +4074,7 @@ class Ia {
         xform: je
       });
     } catch (r) {
-      if (T(r))
+      if (j(r))
         return { data: { user: null }, error: r };
       throw r;
     }
@@ -4096,7 +4096,7 @@ class Ia {
         redirectTo: t == null ? void 0 : t.redirectTo
       });
     } catch (t) {
-      if (T(t))
+      if (j(t))
         return {
           data: {
             properties: null,
@@ -4120,7 +4120,7 @@ class Ia {
         xform: je
       });
     } catch (t) {
-      if (T(t))
+      if (j(t))
         return { data: { user: null }, error: t };
       throw t;
     }
@@ -4151,7 +4151,7 @@ class Ia {
         u[`${x}Page`] = y;
       }), u.total = parseInt(f)), { data: Object.assign(Object.assign({}, h), u), error: null };
     } catch (u) {
-      if (T(u))
+      if (j(u))
         return { data: { users: [] }, error: u };
       throw u;
     }
@@ -4170,7 +4170,7 @@ class Ia {
         xform: je
       });
     } catch (t) {
-      if (T(t))
+      if (j(t))
         return { data: { user: null }, error: t };
       throw t;
     }
@@ -4190,7 +4190,7 @@ class Ia {
         xform: je
       });
     } catch (r) {
-      if (T(r))
+      if (j(r))
         return { data: { user: null }, error: r };
       throw r;
     }
@@ -4214,7 +4214,7 @@ class Ia {
         xform: je
       });
     } catch (r) {
-      if (T(r))
+      if (j(r))
         return { data: { user: null }, error: r };
       throw r;
     }
@@ -4227,7 +4227,7 @@ class Ia {
       });
       return { data: t, error: r };
     } catch (t) {
-      if (T(t))
+      if (j(t))
         return { data: null, error: t };
       throw t;
     }
@@ -4238,7 +4238,7 @@ class Ia {
         headers: this.headers
       }), error: null };
     } catch (t) {
-      if (T(t))
+      if (j(t))
         return { data: null, error: t };
       throw t;
     }
@@ -4409,7 +4409,7 @@ class gt {
       }
       return await this._recoverAndRefresh(), { error: null };
     } catch (t) {
-      return T(t) ? { error: t } : {
+      return j(t) ? { error: t } : {
         error: new Vs("Unexpected error during initialization", t)
       };
     } finally {
@@ -4437,7 +4437,7 @@ class gt {
       const c = a.session, u = a.user;
       return a.session && (await this._saveSession(a.session), await this._notifyAllSubscribers("SIGNED_IN", c)), { data: { user: u, session: c }, error: null };
     } catch (i) {
-      if (T(i))
+      if (j(i))
         return { data: { user: null, session: null }, error: i };
       throw i;
     }
@@ -4493,7 +4493,7 @@ class gt {
       const c = a.session, u = a.user;
       return a.session && (await this._saveSession(a.session), await this._notifyAllSubscribers("SIGNED_IN", c)), { data: { user: u, session: c }, error: null };
     } catch (i) {
-      if (T(i))
+      if (j(i))
         return { data: { user: null, session: null }, error: i };
       throw i;
     }
@@ -4539,7 +4539,7 @@ class gt {
         error: n
       });
     } catch (t) {
-      if (T(t))
+      if (j(t))
         return { data: { user: null, session: null }, error: t };
       throw t;
     }
@@ -4581,7 +4581,7 @@ class gt {
         error: new nr()
       } : (i.session && (await this._saveSession(i.session), await this._notifyAllSubscribers("SIGNED_IN", i.session)), { data: Object.assign(Object.assign({}, i), { redirectType: n ?? null }), error: a });
     } catch (i) {
-      if (T(i))
+      if (j(i))
         return { data: { user: null, session: null, redirectType: null }, error: i };
       throw i;
     }
@@ -4608,7 +4608,7 @@ class gt {
         error: new nr()
       } : (c.session && (await this._saveSession(c.session), await this._notifyAllSubscribers("SIGNED_IN", c.session)), { data: c, error: u });
     } catch (t) {
-      if (T(t))
+      if (j(t))
         return { data: { user: null, session: null }, error: t };
       throw t;
     }
@@ -4666,7 +4666,7 @@ class gt {
       }
       throw new Tt("You must provide either an email or phone number.");
     } catch (o) {
-      if (T(o))
+      if (j(o))
         return { data: { user: null, session: null }, error: o };
       throw o;
     }
@@ -4692,7 +4692,7 @@ class gt {
       const c = a.session, u = a.user;
       return c != null && c.access_token && (await this._saveSession(c), await this._notifyAllSubscribers(e.type == "recovery" ? "PASSWORD_RECOVERY" : "SIGNED_IN", c)), { data: { user: u, session: c }, error: null };
     } catch (n) {
-      if (T(n))
+      if (j(n))
         return { data: { user: null, session: null }, error: n };
       throw n;
     }
@@ -4721,7 +4721,7 @@ class gt {
         xform: Pa
       });
     } catch (i) {
-      if (T(i))
+      if (j(i))
         return { data: null, error: i };
       throw i;
     }
@@ -4748,7 +4748,7 @@ class gt {
         return { data: { user: null, session: null }, error: n };
       });
     } catch (e) {
-      if (T(e))
+      if (j(e))
         return { data: { user: null, session: null }, error: e };
       throw e;
     }
@@ -4783,7 +4783,7 @@ class gt {
       }
       throw new Tt("You must provide either an email or phone number and a type");
     } catch (t) {
-      if (T(t))
+      if (j(t))
         return { data: { user: null, session: null }, error: t };
       throw t;
     }
@@ -4911,7 +4911,7 @@ class gt {
         });
       });
     } catch (t) {
-      if (T(t))
+      if (j(t))
         return Sa(t) && (await this._removeSession(), await Ot(this.storage, `${this.storageKey}-code-verifier`)), { data: { user: null }, error: t };
       throw t;
     }
@@ -4945,7 +4945,7 @@ class gt {
         return a.user = u.user, await this._saveSession(a), await this._notifyAllSubscribers("USER_UPDATED", a), { data: { user: a.user }, error: null };
       });
     } catch (r) {
-      if (T(r))
+      if (j(r))
         return { data: { user: null }, error: r };
       throw r;
     }
@@ -4993,7 +4993,7 @@ class gt {
       }
       return { data: { user: i.user, session: i }, error: null };
     } catch (t) {
-      if (T(t))
+      if (j(t))
         return { data: { session: null, user: null }, error: t };
       throw t;
     }
@@ -5023,7 +5023,7 @@ class gt {
         return i ? { data: { user: null, session: null }, error: i } : n ? { data: { user: n.user, session: n }, error: null } : { data: { user: null, session: null }, error: null };
       });
     } catch (t) {
-      if (T(t))
+      if (j(t))
         return { data: { user: null, session: null }, error: t };
       throw t;
     }
@@ -5054,11 +5054,11 @@ class gt {
       if (t === "pkce") {
         if (this._debug("#_initialize()", "begin", "is PKCE flow", !0), !e.code)
           throw new es("No code detected.");
-        const { data: j, error: O } = await this._exchangeCodeForSession(e.code);
-        if (O)
-          throw O;
+        const { data: P, error: T } = await this._exchangeCodeForSession(e.code);
+        if (T)
+          throw T;
         const E = new URL(window.location.href);
-        return E.searchParams.delete("code"), window.history.replaceState(window.history.state, "", E.toString()), { data: { session: j.session, redirectType: null }, error: null };
+        return E.searchParams.delete("code"), window.history.replaceState(window.history.state, "", E.toString()), { data: { session: P.session, redirectType: null }, error: null };
       }
       const { provider_token: r, provider_refresh_token: n, access_token: i, refresh_token: a, expires_in: o, expires_at: c, token_type: u } = e;
       if (!i || !o || !a || !u)
@@ -5085,7 +5085,7 @@ class gt {
       };
       return window.location.hash = "", this._debug("#_getSessionFromURL()", "clearing window.location.hash"), { data: { session: R, redirectType: e.type }, error: null };
     } catch (r) {
-      if (T(r))
+      if (j(r))
         return { data: { session: null, redirectType: null }, error: r };
       throw r;
     }
@@ -5185,7 +5185,7 @@ class gt {
         redirectTo: t.redirectTo
       });
     } catch (i) {
-      if (T(i))
+      if (j(i))
         return { data: null, error: i };
       throw i;
     }
@@ -5201,7 +5201,7 @@ class gt {
         throw r;
       return { data: { identities: (e = t.user.identities) !== null && e !== void 0 ? e : [] }, error: null };
     } catch (t) {
-      if (T(t))
+      if (j(t))
         return { data: null, error: t };
       throw t;
     }
@@ -5233,7 +5233,7 @@ class gt {
         throw n;
       return ge() && !(!((t = e.options) === null || t === void 0) && t.skipBrowserRedirect) && window.location.assign(r == null ? void 0 : r.url), { data: { provider: e.provider, url: r == null ? void 0 : r.url }, error: null };
     } catch (r) {
-      if (T(r))
+      if (j(r))
         return { data: { provider: e.provider, url: null }, error: r };
       throw r;
     }
@@ -5254,7 +5254,7 @@ class gt {
         });
       });
     } catch (t) {
-      if (T(t))
+      if (j(t))
         return { data: null, error: t };
       throw t;
     }
@@ -5278,7 +5278,7 @@ class gt {
         Date.now() + a - r < ct;
       });
     } catch (r) {
-      if (this._debug(t, "error", r), T(r))
+      if (this._debug(t, "error", r), j(r))
         return { data: { session: null, user: null }, error: r };
       throw r;
     } finally {
@@ -5344,7 +5344,7 @@ class gt {
       const o = { session: i.session, error: null };
       return this.refreshingDeferred.resolve(o), o;
     } catch (i) {
-      if (this._debug(n, "error", i), T(i)) {
+      if (this._debug(n, "error", i), j(i)) {
         const a = { session: null, error: i };
         return ir(i) || await this._removeSession(), (t = this.refreshingDeferred) === null || t === void 0 || t.resolve(a), a;
       }
@@ -5548,7 +5548,7 @@ class gt {
         });
       });
     } catch (t) {
-      if (T(t))
+      if (j(t))
         return { data: null, error: t };
       throw t;
     }
@@ -5568,7 +5568,7 @@ class gt {
         return u ? { data: null, error: u } : (e.factorType === "totp" && (!((n = c == null ? void 0 : c.totp) === null || n === void 0) && n.qr_code) && (c.totp.qr_code = `data:image/svg+xml;utf-8,${c.totp.qr_code}`), { data: c, error: null });
       });
     } catch (t) {
-      if (T(t))
+      if (j(t))
         return { data: null, error: t };
       throw t;
     }
@@ -5592,7 +5592,7 @@ class gt {
           return o ? { data: null, error: o } : (await this._saveSession(Object.assign({ expires_at: Math.round(Date.now() / 1e3) + a.expires_in }, a)), await this._notifyAllSubscribers("MFA_CHALLENGE_VERIFIED", a), { data: a, error: o });
         });
       } catch (t) {
-        if (T(t))
+        if (j(t))
           return { data: null, error: t };
         throw t;
       }
@@ -5614,7 +5614,7 @@ class gt {
           });
         });
       } catch (t) {
-        if (T(t))
+        if (j(t))
           return { data: null, error: t };
         throw t;
       }
@@ -7219,8 +7219,8 @@ function rc() {
     function y(E, S, M) {
       return S();
     }
-    var x = typeof window < "u" && typeof window.document < "u" && typeof window.document.createElement < "u", R = !x, j = R ? y : m, O = e.useSyncExternalStore !== void 0 ? e.useSyncExternalStore : j;
-    lr.useSyncExternalStore = O, typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ < "u" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop == "function" && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
+    var x = typeof window < "u" && typeof window.document < "u" && typeof window.document.createElement < "u", R = !x, P = R ? y : m, T = e.useSyncExternalStore !== void 0 ? e.useSyncExternalStore : P;
+    lr.useSyncExternalStore = T, typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ < "u" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop == "function" && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
   }(), lr;
 }
 var ms;
@@ -7256,18 +7256,18 @@ function sc() {
     } else y = w.current;
     w = o(function() {
       function R(M) {
-        if (!j) {
-          if (j = !0, O = M, M = f(M), m !== void 0 && y.hasValue) {
+        if (!P) {
+          if (P = !0, T = M, M = f(M), m !== void 0 && y.hasValue) {
             var D = y.value;
             if (m(D, M)) return E = D;
           }
           return E = M;
         }
-        if (D = E, r(O, M)) return D;
+        if (D = E, r(T, M)) return D;
         var Y = f(M);
-        return m !== void 0 && m(D, Y) ? D : (O = M, E = Y);
+        return m !== void 0 && m(D, Y) ? D : (T = M, E = Y);
       }
-      var j = !1, O, E, S = h === void 0 ? null : h;
+      var P = !1, T, E, S = h === void 0 ? null : h;
       return [function() {
         return R(l());
       }, S === null ? void 0 : function() {
@@ -7307,30 +7307,30 @@ function nc() {
         hasValue: !1,
         value: null
       }, x.current = R) : R = x.current;
-      var j = c(function() {
+      var P = c(function() {
         var M = !1, D, Y, le = function(fe) {
           if (!M) {
             M = !0, D = fe;
             var J = w(fe);
             if (y !== void 0 && R.hasValue) {
-              var X = R.value;
-              if (y(X, J))
-                return Y = X, X;
+              var ie = R.value;
+              if (y(ie, J))
+                return Y = ie, ie;
             }
             return Y = J, J;
           }
-          var pe = D, se = Y;
+          var pe = D, re = Y;
           if (n(pe, fe))
-            return se;
+            return re;
           var me = w(fe);
-          return y !== void 0 && y(se, me) ? se : (D = fe, Y = me, me);
+          return y !== void 0 && y(re, me) ? re : (D = fe, Y = me, me);
         }, V = m === void 0 ? null : m, be = function() {
           return le(f());
         }, Re = V === null ? void 0 : function() {
           return le(V());
         };
         return [be, Re];
-      }, [f, m, w, y]), O = j[0], E = j[1], S = i(h, O, E);
+      }, [f, m, w, y]), T = P[0], E = P[1], S = i(h, T, E);
       return o(function() {
         R.hasValue = !0, R.value = S;
       }, [S]), u(S), S;
@@ -7640,7 +7640,7 @@ to {
     forwards;
 `, Wc = ({ toast: s }) => {
   let { icon: e, type: t, iconTheme: r } = s;
-  return e !== void 0 ? typeof e == "string" ? ie.createElement(Fc, null, e) : e : t === "blank" ? null : ie.createElement(Nc, null, ie.createElement($c, { ...r }), t !== "loading" && ie.createElement(Lc, null, t === "error" ? ie.createElement(Rc, { ...r }) : ie.createElement(Mc, { ...r })));
+  return e !== void 0 ? typeof e == "string" ? ne.createElement(Fc, null, e) : e : t === "blank" ? null : ne.createElement(Nc, null, ne.createElement($c, { ...r }), t !== "loading" && ne.createElement(Lc, null, t === "error" ? ne.createElement(Rc, { ...r }) : ne.createElement(Mc, { ...r })));
 }, Bc = (s) => `
 0% {transform: translate3d(0,${s * -200}%,0) scale(.6); opacity:.5;}
 100% {transform: translate3d(0,0,0) scale(1); opacity:1;}
@@ -7670,11 +7670,11 @@ to {
   let t = s.includes("top") ? 1 : -1, [r, n] = xc() ? [zc, Vc] : [Bc(t), qc(t)];
   return { animation: e ? `${_e(r)} 0.35s cubic-bezier(.21,1.02,.73,1) forwards` : `${_e(n)} 0.4s forwards cubic-bezier(.06,.71,.55,1)` };
 };
-ie.memo(({ toast: s, position: e, style: t, children: r }) => {
-  let n = s.height ? Gc(s.position || e || "top-center", s.visible) : { opacity: 0 }, i = ie.createElement(Wc, { toast: s }), a = ie.createElement(Yc, { ...s.ariaProps }, kr(s.message, s));
-  return ie.createElement(Hc, { className: s.className, style: { ...n, ...t, ...s.style } }, typeof r == "function" ? r({ icon: i, message: a }) : ie.createElement(ie.Fragment, null, i, a));
+ne.memo(({ toast: s, position: e, style: t, children: r }) => {
+  let n = s.height ? Gc(s.position || e || "top-center", s.visible) : { opacity: 0 }, i = ne.createElement(Wc, { toast: s }), a = ne.createElement(Yc, { ...s.ariaProps }, kr(s.message, s));
+  return ne.createElement(Hc, { className: s.className, style: { ...n, ...t, ...s.style } }, typeof r == "function" ? r({ icon: i, message: a }) : ne.createElement(ne.Fragment, null, i, a));
 });
-_c(ie.createElement);
+_c(ne.createElement);
 zt`
   z-index: 9999;
   > * {
@@ -7745,13 +7745,13 @@ const Jc = async (s, e, t, r) => {
         try {
           const { response: x, isLiveChatRequested: R } = await Jc(t, r, o, l);
           console.log(`Got OpenAI response for ${a}:`, x);
-          const j = {
+          const P = {
             conversation_id: r,
             content: x,
             sender_type: "bot",
             user_id: null
-          }, { error: O } = await U.from("messages").insert(j);
-          if (O) throw O;
+          }, { error: T } = await U.from("messages").insert(P);
+          if (T) throw T;
           if (R) {
             const { error: E } = await U.from("conversations").update({
               requested_live_at: (/* @__PURE__ */ new Date()).toISOString()
@@ -7815,54 +7815,54 @@ const Jc = async (s, e, t, r) => {
   }
 );
 function el({ domainId: s }) {
-  const [e, t] = G(!1), [r, n] = G(""), [i, a] = G([]), [o, c] = G([]), [u, l] = G("history"), [h, f] = G(null), [m, w] = G(!1), [y] = G(/* @__PURE__ */ new Set()), [x, R] = G(null), [j, O] = G(null), E = qr(null), [S, M] = G(!1), D = qr(null), { sendMessage: Y } = Kc(), [le, V] = G(!1), [be, Re] = G(window.innerWidth), [fe, J] = G(!0), [X, pe] = G(!1);
+  const [e, t] = G(!1), [r, n] = G(""), [i, a] = G([]), [o, c] = G([]), [u, l] = G("history"), [h, f] = G(null), [m, w] = G(!1), [y] = G(/* @__PURE__ */ new Set()), [x, R] = G(null), [P, T] = G(null), E = qr(null), [S, M] = G(!1), D = qr(null), { sendMessage: Y } = Kc(), [le, V] = G(!1), [be, Re] = G(window.innerWidth), [fe, J] = G(!0), [ie, pe] = G(!1);
   ue(() => {
     const v = () => {
       Re(window.innerWidth);
     };
     return window.addEventListener("resize", v), () => window.removeEventListener("resize", v);
   }, []);
-  const se = () => window.matchMedia("(max-width: 640px)").matches, me = (v, _) => _.some(
-    (C) => (
+  const re = () => window.matchMedia("(max-width: 640px)").matches, me = (v, _) => _.some(
+    (O) => (
       // Check for exact ID match
-      C.id === v.id || // Check for temp ID being replaced by real ID
-      C.id.startsWith("temp-") && C.content === v.content && C.sender_type === v.sender_type || // Check for exact content match within a small time window (2 seconds)
-      C.content === v.content && C.sender_type === v.sender_type && Math.abs(new Date(C.created_at).getTime() - new Date(v.created_at).getTime()) < 2e3
+      O.id === v.id || // Check for temp ID being replaced by real ID
+      O.id.startsWith("temp-") && O.content === v.content && O.sender_type === v.sender_type || // Check for exact content match within a small time window (2 seconds)
+      O.content === v.content && O.sender_type === v.sender_type && Math.abs(new Date(O.created_at).getTime() - new Date(v.created_at).getTime()) < 2e3
     )
   );
   ue(() => {
-    if (!j) return;
+    if (!P) return;
     const v = U.channel("new-conversations").on(
       "postgres_changes",
       {
         event: "INSERT",
         schema: "public",
         table: "conversations",
-        filter: `session_id=eq.${j}`
+        filter: `session_id=eq.${P}`
       },
       (_) => {
         if (_.eventType === "INSERT") {
-          const C = _.new;
-          c((F) => [C, ...F]);
+          const O = _.new;
+          c((F) => [O, ...F]);
         }
       }
     ).subscribe();
     return () => {
       v.unsubscribe();
     };
-  }, [j]), ue(() => {
-    if (!j) return;
+  }, [P]), ue(() => {
+    if (!P) return;
     const v = U.channel("conversations-updates").on(
       "postgres_changes",
       {
         event: "*",
         schema: "public",
         table: "conversations",
-        filter: `session_id=eq.${j}`
+        filter: `session_id=eq.${P}`
       },
       (_) => {
         _.eventType === "UPDATE" && (c(
-          (C) => C.map(
+          (O) => O.map(
             (F) => F.id === _.new.id ? { ...F, ..._.new } : F
           )
         ), _.new.id === h && M(_.new.status === "archived"));
@@ -7871,14 +7871,14 @@ function el({ domainId: s }) {
     return () => {
       v.unsubscribe();
     };
-  }, [j, h]), ue(() => {
+  }, [P, h]), ue(() => {
     var v;
     e && (i.length > 0 || S) && ((v = E.current) == null || v.scrollIntoView({ behavior: "smooth" }));
   }, [i, e, S]);
   const et = async () => {
-    if (j)
+    if (P)
       try {
-        const { data: v, error: _ } = await U.from("conversations").select("*").eq("session_id", j).order("last_message_at", { ascending: !1 });
+        const { data: v, error: _ } = await U.from("conversations").select("*").eq("session_id", P).order("last_message_at", { ascending: !1 });
         if (_) throw _;
         c(v || []);
       } catch (v) {
@@ -7886,8 +7886,8 @@ function el({ domainId: s }) {
       }
   };
   ue(() => {
-    j && et();
-  }, [j]);
+    P && et();
+  }, [P]);
   const _t = async () => {
     o.filter((v) => v.status === "active").length >= 5 || (a([]), f(null), M(!1), Ae(null), V(!1), l("chat"));
   }, wt = () => {
@@ -7896,7 +7896,7 @@ function el({ domainId: s }) {
     try {
       f(v.id), M(v.status === "archived"), Ae(null), V(!1);
       const { data: _ } = await U.from("messages").select("*").eq("conversation_id", v.id).order("created_at", { ascending: !0 });
-      _ && (a(_), y.clear(), _.forEach((C) => y.add(C.id))), v.status === "archived" && Ae(v.rating || null), l("chat");
+      _ && (a(_), y.clear(), _.forEach((O) => y.add(O.id))), v.status === "archived" && Ae(v.rating || null), l("chat");
     } catch (_) {
       console.error("Error loading conversation:", _);
     }
@@ -7942,14 +7942,14 @@ function el({ domainId: s }) {
       },
       (_) => {
         if (console.log("Received real-time event:", _), _.eventType === "INSERT") {
-          const C = _.new;
-          console.log("New message:", C), a((F) => {
-            if (me(C, F))
+          const O = _.new;
+          console.log("New message:", O), a((F) => {
+            if (me(O, F))
               return console.log("Message already exists, skipping"), F;
-            const Q = F.filter(
-              (Z) => !(Z.id.startsWith("temp-") && Z.content === C.content && Z.sender_type === C.sender_type)
+            const X = F.filter(
+              (Q) => !(Q.id.startsWith("temp-") && Q.content === O.content && Q.sender_type === O.sender_type)
             );
-            return y.add(C.id), C.sender_type === "bot" && tt(), console.log("Adding new message to state"), [...Q, C];
+            return y.add(O.id), O.sender_type === "bot" && tt(), console.log("Adding new message to state"), [...X, O];
           });
         }
       }
@@ -7962,26 +7962,26 @@ function el({ domainId: s }) {
   }, [h, e]), ue(() => {
     (async () => {
       let _ = localStorage.getItem(Ss);
-      _ || (_ = window.crypto.randomUUID(), localStorage.setItem(Ss, _)), O(_), await xt(_);
+      _ || (_ = window.crypto.randomUUID(), localStorage.setItem(Ss, _)), T(_), await xt(_);
     })();
   }, []);
   const xt = async (v) => {
     try {
-      const { data: _, error: C } = await U.from("conversations").select("*").eq("session_id", v).eq("status", "active").order("last_message_at", { ascending: !1 }).limit(1);
-      if (C) throw C;
+      const { data: _, error: O } = await U.from("conversations").select("*").eq("session_id", v).eq("status", "active").order("last_message_at", { ascending: !1 }).limit(1);
+      if (O) throw O;
       if (!_ || _.length === 0) {
         console.log("No active conversations found for this session");
         return;
       }
-      const F = _[0], Q = /* @__PURE__ */ new Date();
-      if (Q.setDate(Q.getDate() - Xc), new Date(F.last_message_at) < Q) {
+      const F = _[0], X = /* @__PURE__ */ new Date();
+      if (X.setDate(X.getDate() - Xc), new Date(F.last_message_at) < X) {
         await U.from("conversations").update({ status: "archived" }).eq("id", F.id);
         return;
       }
       f(F.id);
-      const { data: Z } = await U.from("messages").select("*").eq("conversation_id", F.id).order("created_at", { ascending: !0 });
-      if (Z) {
-        const Gt = Z.filter((St) => y.has(St.id) ? !1 : (y.add(St.id), !0));
+      const { data: Q } = await U.from("messages").select("*").eq("conversation_id", F.id).order("created_at", { ascending: !0 });
+      if (Q) {
+        const Gt = Q.filter((St) => y.has(St.id) ? !1 : (y.add(St.id), !0));
         a(Gt);
       }
     } catch (_) {
@@ -7994,24 +7994,24 @@ function el({ domainId: s }) {
         await U.auth.signInAnonymously();
         const { data: { user: F } } = await U.auth.getUser();
         if (!F) throw new Error("Failed to create anonymous session");
-        const { data: Q, error: Z } = await U.from("conversations").insert({
+        const { data: X, error: Q } = await U.from("conversations").insert({
           domain_id: s,
           user_id: F.id,
-          session_id: j,
+          session_id: P,
           last_message_at: (/* @__PURE__ */ new Date()).toISOString(),
           status: "active"
         }).select().single();
-        if (Z) throw Z;
-        return Q.id;
+        if (Q) throw Q;
+        return X.id;
       }
-      const { data: _, error: C } = await U.from("conversations").insert({
+      const { data: _, error: O } = await U.from("conversations").insert({
         domain_id: s,
         user_id: v.id,
-        session_id: j,
+        session_id: P,
         last_message_at: (/* @__PURE__ */ new Date()).toISOString(),
         status: "active"
       }).select().single();
-      if (C) throw C;
+      if (O) throw O;
       return _.id;
     } catch (v) {
       throw console.error("Error creating conversation:", v), v;
@@ -8021,15 +8021,15 @@ function el({ domainId: s }) {
       w(!0), R(null);
       const { data: { user: _ } } = await U.auth.getUser();
       _ || await U.auth.signInAnonymously();
-      const C = h || await Ht();
-      h || f(C);
+      const O = h || await Ht();
+      h || f(O);
       const F = {
         id: `temp-${Date.now()}`,
         content: v,
         sender_type: "user",
         created_at: (/* @__PURE__ */ new Date()).toISOString()
       };
-      a((Q) => me(F, Q) ? Q : [...Q, F]), await Y(v, C), n("");
+      a((X) => me(F, X) ? X : [...X, F]), await Y(v, O), n("");
     } catch (_) {
       console.error("Error sending message:", _), R("Failed to send message. Please try again.");
     } finally {
@@ -8081,7 +8081,7 @@ function el({ domainId: s }) {
       }
     })();
   }, [s]);
-  const [P, xe] = G({
+  const [C, xe] = G({
     chatbotName: "Chatbot",
     greetingMessage: "Hello! How can I help you today?",
     color: "#FF6B00",
@@ -8093,7 +8093,7 @@ function el({ domainId: s }) {
     logoUrl: null,
     ...Rt
   }), Be = {
-    backgroundColor: P.color
+    backgroundColor: C.color
   }, qe = async () => {
     if (h)
       try {
@@ -8109,7 +8109,7 @@ function el({ domainId: s }) {
         const { error: _ } = await U.from("conversations").update({ rating: v }).eq("id", h);
         if (_) throw _;
         Ae(v), c(
-          (C) => C.map(
+          (O) => O.map(
             (F) => F.id === h ? { ...F, rating: v } : F
           )
         );
@@ -8119,36 +8119,40 @@ function el({ domainId: s }) {
   };
   return ue(() => {
     h && (async () => {
-      const { data: _ } = await U.from("conversations").select("live_mode").eq("id", h).single();
-      _ && (pe(_.live_mode), console.log("Live mode set to:", _.live_mode));
+      const { data: _, error: O } = await U.from("conversations").select("live_mode").eq("id", h).single();
+      if (O) {
+        console.error("Error fetching conversation details:", O);
+        return;
+      }
+      _ && (console.log("Fetched conversation:", _), pe(_.live_mode), console.log("Live mode set to:", _.live_mode));
     })();
   }, [h]), /* @__PURE__ */ p.jsxs(
     "div",
     {
-      className: `fixed ${P.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`,
-      style: { [P.verticalPosition]: P.verticalOffset },
+      className: `fixed ${C.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`,
+      style: { [C.verticalPosition]: C.verticalOffset },
       children: [
         e && /* @__PURE__ */ p.jsxs(
           "div",
           {
-            className: `${se() ? "fixed inset-0 w-full h-full flex flex-col" : "mb-4 bg-white rounded-lg shadow-xl overflow-hidden"}`,
+            className: `${re() ? "fixed inset-0 w-full h-full flex flex-col" : "mb-4 bg-white rounded-lg shadow-xl overflow-hidden"}`,
             style: {
-              width: se() ? "100%" : P.chatWidth
+              width: re() ? "100%" : C.chatWidth
             },
             children: [
-              /* @__PURE__ */ p.jsxs("div", { className: "p-4 border-b flex items-center gap-3", style: { backgroundColor: P.color }, children: [
+              /* @__PURE__ */ p.jsxs("div", { className: "p-4 border-b flex items-center gap-3", style: { backgroundColor: C.color }, children: [
                 /* @__PURE__ */ p.jsxs("div", { className: "relative flex-shrink-0", children: [
-                  /* @__PURE__ */ p.jsx($t, { config: P }),
+                  /* @__PURE__ */ p.jsx($t, { config: C }),
                   /* @__PURE__ */ p.jsx("div", { className: "absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white", style: Be })
                 ] }),
-                /* @__PURE__ */ p.jsx("div", { className: "flex-1", children: /* @__PURE__ */ p.jsx("h3", { className: "font-medium", style: { color: P.headerTextColor }, children: P.chatbotName }) }),
+                /* @__PURE__ */ p.jsx("div", { className: "flex-1", children: /* @__PURE__ */ p.jsx("h3", { className: "font-medium", style: { color: C.headerTextColor }, children: C.chatbotName }) }),
                 u === "chat" ? /* @__PURE__ */ p.jsxs("div", { className: "flex items-center gap-2", children: [
                   /* @__PURE__ */ p.jsx(
                     "button",
                     {
                       onClick: wt,
                       className: "flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm",
-                      style: { color: P.headerTextColor },
+                      style: { color: C.headerTextColor },
                       title: "Chat history",
                       children: /* @__PURE__ */ p.jsx(In, { className: "h-4 w-4" })
                     }
@@ -8158,7 +8162,7 @@ function el({ domainId: s }) {
                     {
                       onClick: qe,
                       className: "flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm",
-                      style: { color: P.headerTextColor },
+                      style: { color: C.headerTextColor },
                       title: "Refresh chat",
                       children: /* @__PURE__ */ p.jsx(Mn, { className: "h-4 w-4" })
                     }
@@ -8168,7 +8172,7 @@ function el({ domainId: s }) {
                     {
                       onClick: () => t(!1),
                       className: "flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm",
-                      style: { color: P.headerTextColor },
+                      style: { color: C.headerTextColor },
                       title: "Close chat",
                       children: /* @__PURE__ */ p.jsx(tr, { className: "h-4 w-4" })
                     }
@@ -8178,7 +8182,7 @@ function el({ domainId: s }) {
                   {
                     onClick: () => t(!1),
                     className: "flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm",
-                    style: { color: P.headerTextColor },
+                    style: { color: C.headerTextColor },
                     title: "Close chat",
                     children: /* @__PURE__ */ p.jsx(tr, { className: "h-4 w-4" })
                   }
@@ -8187,9 +8191,9 @@ function el({ domainId: s }) {
               /* @__PURE__ */ p.jsx(
                 "div",
                 {
-                  className: `overflow-y-auto p-4 bg-white relative ${se() ? "flex-1" : ""}`,
+                  className: `overflow-y-auto p-4 bg-white relative ${re() ? "flex-1" : ""}`,
                   style: {
-                    height: se() ? "auto" : u === "history" ? "calc(" + P.chatHeight + " + 107px)" : P.chatHeight
+                    height: re() ? "auto" : u === "history" ? "calc(" + C.chatHeight + " + 107px)" : C.chatHeight
                   },
                   children: u === "history" ? /* @__PURE__ */ p.jsxs("div", { className: "space-y-4 h-full", children: [
                     /* @__PURE__ */ p.jsxs("div", { className: "flex justify-between items-center mb-4", children: [
@@ -8200,16 +8204,16 @@ function el({ domainId: s }) {
                           {
                             onClick: _t,
                             className: "flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm",
-                            style: { backgroundColor: P.color, color: P.headerTextColor },
+                            style: { backgroundColor: C.color, color: C.headerTextColor },
                             disabled: o.filter((v) => v.status === "active").length >= 5,
-                            title: !se() && o.filter((v) => v.status === "active").length >= 5 ? "You can only have 5 active conversations at a time." : "",
+                            title: !re() && o.filter((v) => v.status === "active").length >= 5 ? "You can only have 5 active conversations at a time." : "",
                             children: [
                               /* @__PURE__ */ p.jsx($n, { className: "h-4 w-4" }),
                               "Start New Chat"
                             ]
                           }
                         ),
-                        se() && o.filter((v) => v.status === "active").length >= 5 && fe && /* @__PURE__ */ p.jsxs("div", { className: "flex items-center gap-1 text-xs text-gray-600", children: [
+                        re() && o.filter((v) => v.status === "active").length >= 5 && fe && /* @__PURE__ */ p.jsxs("div", { className: "flex items-center gap-1 text-xs text-gray-600", children: [
                           /* @__PURE__ */ p.jsx("span", { children: "Maximum 5 active conversations allowed" }),
                           /* @__PURE__ */ p.jsx(
                             "button",
@@ -8243,10 +8247,10 @@ function el({ domainId: s }) {
                     o.length === 0 && /* @__PURE__ */ p.jsx("div", { className: "flex flex-col items-center justify-center h-full text-center", children: /* @__PURE__ */ p.jsx("p", { className: "mb-4", children: "No previous conversations found" }) })
                   ] }) : /* @__PURE__ */ p.jsxs("div", { className: "space-y-4", children: [
                     u === "chat" && /* @__PURE__ */ p.jsxs("div", { className: "flex gap-2", children: [
-                      /* @__PURE__ */ p.jsx($t, { size: "sm", config: P }),
-                      /* @__PURE__ */ p.jsxs("div", { className: "p-3 rounded-lg max-w-[80%]", style: { backgroundColor: P.agentMessageColor }, children: [
-                        /* @__PURE__ */ p.jsx("p", { className: "text-sm", style: { color: P.agentMessageTextColor }, children: P.greetingMessage }),
-                        /* @__PURE__ */ p.jsx("span", { className: "text-xs mt-1 block opacity-75", style: { color: P.agentMessageTextColor }, children: Pt(/* @__PURE__ */ new Date(), "h:mm a") })
+                      /* @__PURE__ */ p.jsx($t, { size: "sm", config: C }),
+                      /* @__PURE__ */ p.jsxs("div", { className: "p-3 rounded-lg max-w-[80%]", style: { backgroundColor: C.agentMessageColor }, children: [
+                        /* @__PURE__ */ p.jsx("p", { className: "text-sm", style: { color: C.agentMessageTextColor }, children: C.greetingMessage }),
+                        /* @__PURE__ */ p.jsx("span", { className: "text-xs mt-1 block opacity-75", style: { color: C.agentMessageTextColor }, children: Pt(/* @__PURE__ */ new Date(), "h:mm a") })
                       ] })
                     ] }),
                     i.map((v) => /* @__PURE__ */ p.jsxs(
@@ -8254,20 +8258,20 @@ function el({ domainId: s }) {
                       {
                         className: `flex gap-2 ${v.sender_type === "user" ? "justify-end" : ""}`,
                         children: [
-                          v.sender_type === "bot" && /* @__PURE__ */ p.jsx($t, { size: "sm", config: P }),
+                          v.sender_type === "bot" && /* @__PURE__ */ p.jsx($t, { size: "sm", config: C }),
                           /* @__PURE__ */ p.jsxs(
                             "div",
                             {
                               className: "p-3 rounded-lg max-w-[80%]",
                               style: {
-                                backgroundColor: v.sender_type === "user" ? P.userMessageColor : P.agentMessageColor
+                                backgroundColor: v.sender_type === "user" ? C.userMessageColor : C.agentMessageColor
                               },
                               children: [
                                 /* @__PURE__ */ p.jsx("p", { className: "text-sm", style: {
-                                  color: v.sender_type === "user" ? P.userMessageTextColor : P.agentMessageTextColor
+                                  color: v.sender_type === "user" ? C.userMessageTextColor : C.agentMessageTextColor
                                 }, children: v.content }),
                                 /* @__PURE__ */ p.jsx("span", { className: "text-xs mt-1 block opacity-75", style: {
-                                  color: v.sender_type === "user" ? P.userMessageTextColor : P.agentMessageTextColor
+                                  color: v.sender_type === "user" ? C.userMessageTextColor : C.agentMessageTextColor
                                 }, children: Pt(new Date(v.created_at), "h:mm a") })
                               ]
                             }
@@ -8277,8 +8281,7 @@ function el({ domainId: s }) {
                       },
                       v.id
                     )),
-                    console.log("isLoading:", m, "isLiveMode:", X),
-                    m && !X && /* @__PURE__ */ p.jsx(Qc, { config: P }),
+                    m && /* @__PURE__ */ p.jsx(Qc, { config: C }),
                     S && /* @__PURE__ */ p.jsxs("div", { className: "flex flex-col items-center gap-3 my-4", children: [
                       /* @__PURE__ */ p.jsxs("div", { className: "bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600", children: [
                         /* @__PURE__ */ p.jsx(An, { className: "h-4 w-4" }),
@@ -8341,7 +8344,7 @@ function el({ domainId: s }) {
                       onChange: (v) => n(v.target.value),
                       placeholder: "Type your message...",
                       className: "w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 pr-10 disabled:opacity-50 disabled:cursor-not-allowed",
-                      style: { "--tw-ring-color": P.color },
+                      style: { "--tw-ring-color": C.color },
                       disabled: m || S
                     }
                   ) }),
@@ -8375,9 +8378,9 @@ function el({ domainId: s }) {
           {
             className: "rounded-full text-white flex items-center justify-center shadow-lg",
             style: {
-              backgroundColor: P.color,
-              width: P.toggleButtonSize,
-              height: P.toggleButtonSize
+              backgroundColor: C.color,
+              width: C.toggleButtonSize,
+              height: C.toggleButtonSize
             },
             onClick: () => t(!e),
             children: e ? /* @__PURE__ */ p.jsx("span", { style: { fontSize: "24px" }, children: "×" }) : /* @__PURE__ */ p.jsx(Zc, {})
@@ -8397,4 +8400,4 @@ tl();
 export {
   kn as g
 };
-//# sourceMappingURL=main-CostnkDL.js.map
+//# sourceMappingURL=main-D4i0edpe.js.map
