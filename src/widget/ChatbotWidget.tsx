@@ -215,10 +215,15 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   }, [sessionId, conversationId]);
 
   useEffect(() => {
+    // Scroll to the bottom when messages change and the chat is expanded
     if (isExpanded && (messages.length > 0 || isArchived)) {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [messages, isExpanded, isArchived]);
+    // Additional check for live mode
+    if (isExpanded && conversations.find(c => c.id === conversationId)?.live_mode) {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages, isExpanded, isArchived, conversationId]);
 
   // Load conversation history
   const loadConversationHistory = async () => {
