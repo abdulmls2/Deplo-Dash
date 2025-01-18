@@ -70,39 +70,39 @@ function Tn() {
       var g = y && d[y] || d[x];
       return typeof g == "function" ? g : null;
     }
-    var P = e.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+    var j = e.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
     function O(d) {
       {
-        for (var g = arguments.length, b = new Array(g > 1 ? g - 1 : 0), k = 1; k < g; k++)
-          b[k - 1] = arguments[k];
-        E("error", d, b);
+        for (var g = arguments.length, w = new Array(g > 1 ? g - 1 : 0), k = 1; k < g; k++)
+          w[k - 1] = arguments[k];
+        E("error", d, w);
       }
     }
-    function E(d, g, b) {
+    function E(d, g, w) {
       {
-        var k = P.ReactDebugCurrentFrame, N = k.getStackAddendum();
-        N !== "" && (g += "%s", b = b.concat([N]));
-        var F = b.map(function(I) {
+        var k = j.ReactDebugCurrentFrame, N = k.getStackAddendum();
+        N !== "" && (g += "%s", w = w.concat([N]));
+        var F = w.map(function(I) {
           return String(I);
         });
         F.unshift("Warning: " + g), Function.prototype.apply.call(console[d], console, F);
       }
     }
-    var S = !1, L = !1, D = !1, G = !1, ce = !1, V;
+    var S = !1, M = !1, D = !1, G = !1, ce = !1, V;
     V = Symbol.for("react.module.reference");
     function xe(d) {
-      return !!(typeof d == "string" || typeof d == "function" || d === n || d === a || ce || d === i || d === l || d === h || G || d === _ || S || L || D || typeof d == "object" && d !== null && (d.$$typeof === m || d.$$typeof === f || d.$$typeof === o || d.$$typeof === c || d.$$typeof === u || // This needs to include all possible module reference object
+      return !!(typeof d == "string" || typeof d == "function" || d === n || d === a || ce || d === i || d === l || d === h || G || d === _ || S || M || D || typeof d == "object" && d !== null && (d.$$typeof === m || d.$$typeof === f || d.$$typeof === o || d.$$typeof === c || d.$$typeof === u || // This needs to include all possible module reference object
       // types supported by any Flight configuration anywhere since
       // we don't know which Flight build this will end up being used
       // with.
       d.$$typeof === V || d.getModuleId !== void 0));
     }
-    function Re(d, g, b) {
+    function Re(d, g, w) {
       var k = d.displayName;
       if (k)
         return k;
       var N = g.displayName || g.name || "";
-      return N !== "" ? b + "(" + N + ")" : b;
+      return N !== "" ? w + "(" + N + ")" : w;
     }
     function de(d) {
       return d.displayName || "Context";
@@ -134,8 +134,8 @@ function Tn() {
             var g = d;
             return de(g) + ".Consumer";
           case o:
-            var b = d;
-            return de(b._context) + ".Provider";
+            var w = d;
+            return de(w._context) + ".Provider";
           case u:
             return Re(d, d.render, "ForwardRef");
           case f:
@@ -214,8 +214,8 @@ function Tn() {
         he < 0 && O("disabledDepth fell below zero. This is a bug in React. Please file an issue.");
       }
     }
-    var Ae = P.ReactCurrentDispatcher, Be;
-    function qe(d, g, b) {
+    var Ae = j.ReactCurrentDispatcher, Be;
+    function qe(d, g, w) {
       {
         if (Be === void 0)
           try {
@@ -237,9 +237,9 @@ function Tn() {
       if (!d || fe)
         return "";
       {
-        var b = ve.get(d);
-        if (b !== void 0)
-          return b;
+        var w = ve.get(d);
+        if (w !== void 0)
+          return w;
       }
       var k;
       fe = !0;
@@ -304,18 +304,18 @@ function Tn() {
       var He = d ? d.displayName || d.name : "", $e = He ? qe(He) : "";
       return typeof d == "function" && ve.set(d, $e), $e;
     }
-    function v(d, g, b) {
+    function v(d, g, w) {
       return st(d, !1);
     }
-    function w(d) {
+    function b(d) {
       var g = d.prototype;
       return !!(g && g.isReactComponent);
     }
-    function T(d, g, b) {
+    function P(d, g, w) {
       if (d == null)
         return "";
       if (typeof d == "function")
-        return st(d, w(d));
+        return st(d, b(d));
       if (typeof d == "string")
         return qe(d);
       switch (d) {
@@ -329,41 +329,41 @@ function Tn() {
           case u:
             return v(d.render);
           case f:
-            return T(d.type, g, b);
+            return P(d.type, g, w);
           case m: {
             var k = d, N = k._payload, F = k._init;
             try {
-              return T(F(N), g, b);
+              return P(F(N), g, w);
             } catch {
             }
           }
         }
       return "";
     }
-    var M = Object.prototype.hasOwnProperty, Q = {}, ne = P.ReactDebugCurrentFrame;
+    var L = Object.prototype.hasOwnProperty, Q = {}, ne = j.ReactDebugCurrentFrame;
     function ze(d) {
       if (d) {
-        var g = d._owner, b = T(d.type, d._source, g ? g.type : null);
-        ne.setExtraStackFrame(b);
+        var g = d._owner, w = P(d.type, d._source, g ? g.type : null);
+        ne.setExtraStackFrame(w);
       } else
         ne.setExtraStackFrame(null);
     }
-    function kt(d, g, b, k, N) {
+    function kt(d, g, w, k, N) {
       {
-        var F = Function.call.bind(M);
+        var F = Function.call.bind(L);
         for (var I in d)
           if (F(d, I)) {
             var A = void 0;
             try {
               if (typeof d[I] != "function") {
-                var X = Error((k || "React class") + ": " + b + " type `" + I + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof d[I] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
+                var X = Error((k || "React class") + ": " + w + " type `" + I + "` is invalid; it must be a function, usually from the `prop-types` package, but received `" + typeof d[I] + "`.This often happens because of typos such as `PropTypes.function` instead of `PropTypes.func`.");
                 throw X.name = "Invariant Violation", X;
               }
-              A = d[I](g, I, k, b, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
+              A = d[I](g, I, k, w, null, "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED");
             } catch (q) {
               A = q;
             }
-            A && !(A instanceof Error) && (ze(N), O("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", k || "React class", b, I, typeof A), ze(null)), A instanceof Error && !(A.message in Q) && (Q[A.message] = !0, ze(N), O("Failed %s type: %s", b, A.message), ze(null));
+            A && !(A instanceof Error) && (ze(N), O("%s: type specification of %s `%s` is invalid; the type checker function must return `null` or an `Error` but returned a %s. You may have forgotten to pass an argument to the type checker creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and shape all require an argument).", k || "React class", w, I, typeof A), ze(null)), A instanceof Error && !(A.message in Q) && (Q[A.message] = !0, ze(N), O("Failed %s type: %s", w, A.message), ze(null));
           }
       }
     }
@@ -373,8 +373,8 @@ function Tn() {
     }
     function tn(d) {
       {
-        var g = typeof Symbol == "function" && Symbol.toStringTag, b = g && d[Symbol.toStringTag] || d.constructor.name || "Object";
-        return b;
+        var g = typeof Symbol == "function" && Symbol.toStringTag, w = g && d[Symbol.toStringTag] || d.constructor.name || "Object";
+        return w;
       }
     }
     function rn(d) {
@@ -391,7 +391,7 @@ function Tn() {
       if (rn(d))
         return O("The provided key is an unsupported type %s. This value must be coerced to a string before before using it here.", tn(d)), Cr(d);
     }
-    var nt = P.ReactCurrentOwner, sn = {
+    var nt = j.ReactCurrentOwner, sn = {
       key: !0,
       ref: !0,
       __self: !0,
@@ -399,7 +399,7 @@ function Tn() {
     }, Ar, $r, Jt;
     Jt = {};
     function nn(d) {
-      if (M.call(d, "ref")) {
+      if (L.call(d, "ref")) {
         var g = Object.getOwnPropertyDescriptor(d, "ref").get;
         if (g && g.isReactWarning)
           return !1;
@@ -407,7 +407,7 @@ function Tn() {
       return d.ref !== void 0;
     }
     function an(d) {
-      if (M.call(d, "key")) {
+      if (L.call(d, "key")) {
         var g = Object.getOwnPropertyDescriptor(d, "key").get;
         if (g && g.isReactWarning)
           return !1;
@@ -416,40 +416,40 @@ function Tn() {
     }
     function on(d, g) {
       if (typeof d.ref == "string" && nt.current && g && nt.current.stateNode !== g) {
-        var b = J(nt.current.type);
-        Jt[b] || (O('Component "%s" contains the string ref "%s". Support for string refs will be removed in a future major release. This case cannot be automatically converted to an arrow function. We ask you to manually fix this case by using useRef() or createRef() instead. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-string-ref', J(nt.current.type), d.ref), Jt[b] = !0);
+        var w = J(nt.current.type);
+        Jt[w] || (O('Component "%s" contains the string ref "%s". Support for string refs will be removed in a future major release. This case cannot be automatically converted to an arrow function. We ask you to manually fix this case by using useRef() or createRef() instead. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-string-ref', J(nt.current.type), d.ref), Jt[w] = !0);
       }
     }
     function cn(d, g) {
       {
-        var b = function() {
+        var w = function() {
           Ar || (Ar = !0, O("%s: `key` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://reactjs.org/link/special-props)", g));
         };
-        b.isReactWarning = !0, Object.defineProperty(d, "key", {
-          get: b,
+        w.isReactWarning = !0, Object.defineProperty(d, "key", {
+          get: w,
           configurable: !0
         });
       }
     }
     function ln(d, g) {
       {
-        var b = function() {
+        var w = function() {
           $r || ($r = !0, O("%s: `ref` is not a prop. Trying to access it will result in `undefined` being returned. If you need to access the same value within the child component, you should pass it as a different prop. (https://reactjs.org/link/special-props)", g));
         };
-        b.isReactWarning = !0, Object.defineProperty(d, "ref", {
-          get: b,
+        w.isReactWarning = !0, Object.defineProperty(d, "ref", {
+          get: w,
           configurable: !0
         });
       }
     }
-    var un = function(d, g, b, k, N, F, I) {
+    var un = function(d, g, w, k, N, F, I) {
       var A = {
         // This tag allows us to uniquely identify this as a React Element
         $$typeof: t,
         // Built-in properties that belong on the element
         type: d,
         key: g,
-        ref: b,
+        ref: w,
         props: I,
         // Record the component responsible for creating this element.
         _owner: F
@@ -471,12 +471,12 @@ function Tn() {
         value: N
       }), Object.freeze && (Object.freeze(A.props), Object.freeze(A)), A;
     };
-    function dn(d, g, b, k, N) {
+    function dn(d, g, w, k, N) {
       {
         var F, I = {}, A = null, X = null;
-        b !== void 0 && (Rr(b), A = "" + b), an(g) && (Rr(g.key), A = "" + g.key), nn(g) && (X = g.ref, on(g, N));
+        w !== void 0 && (Rr(w), A = "" + w), an(g) && (Rr(g.key), A = "" + g.key), nn(g) && (X = g.ref, on(g, N));
         for (F in g)
-          M.call(g, F) && !sn.hasOwnProperty(F) && (I[F] = g[F]);
+          L.call(g, F) && !sn.hasOwnProperty(F) && (I[F] = g[F]);
         if (d && d.defaultProps) {
           var q = d.defaultProps;
           for (F in q)
@@ -489,11 +489,11 @@ function Tn() {
         return un(d, A, X, N, k, nt.current, I);
       }
     }
-    var Kt = P.ReactCurrentOwner, Ir = P.ReactDebugCurrentFrame;
+    var Kt = j.ReactCurrentOwner, Ir = j.ReactDebugCurrentFrame;
     function Ve(d) {
       if (d) {
-        var g = d._owner, b = T(d.type, d._source, g ? g.type : null);
-        Ir.setExtraStackFrame(b);
+        var g = d._owner, w = P(d.type, d._source, g ? g.type : null);
+        Ir.setExtraStackFrame(w);
       } else
         Ir.setExtraStackFrame(null);
     }
@@ -522,10 +522,10 @@ Check the render method of \`` + d + "`.";
       {
         var g = Dr();
         if (!g) {
-          var b = typeof d == "string" ? d : d.displayName || d.name;
-          b && (g = `
+          var w = typeof d == "string" ? d : d.displayName || d.name;
+          w && (g = `
 
-Check the top-level render call using <` + b + ">.");
+Check the top-level render call using <` + w + ">.");
         }
         return g;
       }
@@ -535,12 +535,12 @@ Check the top-level render call using <` + b + ">.");
         if (!d._store || d._store.validated || d.key != null)
           return;
         d._store.validated = !0;
-        var b = fn(g);
-        if (Mr[b])
+        var w = fn(g);
+        if (Mr[w])
           return;
-        Mr[b] = !0;
+        Mr[w] = !0;
         var k = "";
-        d && d._owner && d._owner !== Kt.current && (k = " It was passed a child from " + J(d._owner.type) + "."), Ve(d), O('Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.', b, k), Ve(null);
+        d && d._owner && d._owner !== Kt.current && (k = " It was passed a child from " + J(d._owner.type) + "."), Ve(d), O('Each child in a list should have a unique "key" prop.%s%s See https://reactjs.org/link/warning-keys for more information.', w, k), Ve(null);
       }
     }
     function Nr(d, g) {
@@ -548,8 +548,8 @@ Check the top-level render call using <` + b + ">.");
         if (typeof d != "object")
           return;
         if (Gt(d))
-          for (var b = 0; b < d.length; b++) {
-            var k = d[b];
+          for (var w = 0; w < d.length; w++) {
+            var k = d[w];
             Qt(k) && Lr(k, g);
           }
         else if (Qt(d))
@@ -567,18 +567,18 @@ Check the top-level render call using <` + b + ">.");
         var g = d.type;
         if (g == null || typeof g == "string")
           return;
-        var b;
+        var w;
         if (typeof g == "function")
-          b = g.propTypes;
+          w = g.propTypes;
         else if (typeof g == "object" && (g.$$typeof === u || // Note: Memo only checks outer props here.
         // Inner props are checked in the reconciler.
         g.$$typeof === f))
-          b = g.propTypes;
+          w = g.propTypes;
         else
           return;
-        if (b) {
+        if (w) {
           var k = J(g);
-          kt(b, d.props, "prop", k, d);
+          kt(w, d.props, "prop", k, d);
         } else if (g.PropTypes !== void 0 && !Xt) {
           Xt = !0;
           var N = J(g);
@@ -589,8 +589,8 @@ Check the top-level render call using <` + b + ">.");
     }
     function pn(d) {
       {
-        for (var g = Object.keys(d.props), b = 0; b < g.length; b++) {
-          var k = g[b];
+        for (var g = Object.keys(d.props), w = 0; w < g.length; w++) {
+          var k = g[w];
           if (k !== "children" && k !== "key") {
             Ve(d), O("Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props.", k), Ve(null);
             break;
@@ -600,7 +600,7 @@ Check the top-level render call using <` + b + ">.");
       }
     }
     var Ur = {};
-    function Fr(d, g, b, k, N, F) {
+    function Fr(d, g, w, k, N, F) {
       {
         var I = xe(d);
         if (!I) {
@@ -611,7 +611,7 @@ Check the top-level render call using <` + b + ">.");
           var q;
           d === null ? q = "null" : Gt(d) ? q = "array" : d !== void 0 && d.$$typeof === t ? (q = "<" + (J(d.type) || "Unknown") + " />", A = " Did you accidentally export a JSX literal instead of a component?") : q = typeof d, O("React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", q, A);
         }
-        var z = dn(d, g, b, N, F);
+        var z = dn(d, g, w, N, F);
         if (z == null)
           return z;
         if (I) {
@@ -627,7 +627,7 @@ Check the top-level render call using <` + b + ">.");
             else
               Nr(ie, d);
         }
-        if (M.call(g, "key")) {
+        if (L.call(g, "key")) {
           var $e = J(d), Z = Object.keys(g).filter(function(bn) {
             return bn !== "key";
           }), Zt = Z.length > 0 ? "{key: someKey, " + Z.join(": ..., ") + ": ...}" : "{key: someKey}";
@@ -644,11 +644,11 @@ React keys must be passed directly to JSX without using spread:
         return d === n ? pn(z) : gn(z), z;
       }
     }
-    function mn(d, g, b) {
-      return Fr(d, g, b, !0);
+    function mn(d, g, w) {
+      return Fr(d, g, w, !0);
     }
-    function vn(d, g, b) {
-      return Fr(d, g, b, !1);
+    function vn(d, g, w) {
+      return Fr(d, g, w, !1);
     }
     var yn = vn, _n = mn;
     at.Fragment = n, at.jsx = yn, at.jsxs = _n;
@@ -2273,8 +2273,8 @@ class Tr {
         } else {
           const f = this.bindings.postgres_changes, m = (h = f == null ? void 0 : f.length) !== null && h !== void 0 ? h : 0, _ = [];
           for (let y = 0; y < m; y++) {
-            const x = f[y], { filter: { event: C, schema: P, table: O, filter: E } } = x, S = l && l[y];
-            if (S && S.event === C && S.schema === P && S.table === O && S.filter === E)
+            const x = f[y], { filter: { event: C, schema: j, table: O, filter: E } } = x, S = l && l[y];
+            if (S && S.event === C && S.schema === j && S.table === O && S.filter === E)
               _.push(Object.assign(Object.assign({}, x), { id: S.id }));
             else {
               this.unsubscribe(), e == null || e(_e.CHANNEL_ERROR, new Error("mismatch between server and client bindings for postgres changes"));
@@ -2426,25 +2426,25 @@ class Tr {
       var _, y, x;
       return ((_ = m.filter) === null || _ === void 0 ? void 0 : _.event) === "*" || ((x = (y = m.filter) === null || y === void 0 ? void 0 : y.event) === null || x === void 0 ? void 0 : x.toLocaleLowerCase()) === a;
     }).map((m) => m.callback(f, r)) : (i = this.bindings[a]) === null || i === void 0 || i.filter((m) => {
-      var _, y, x, C, P, O;
+      var _, y, x, C, j, O;
       if (["broadcast", "presence", "postgres_changes"].includes(a))
         if ("id" in m) {
           const E = m.id, S = (_ = m.filter) === null || _ === void 0 ? void 0 : _.event;
           return E && ((y = t.ids) === null || y === void 0 ? void 0 : y.includes(E)) && (S === "*" || (S == null ? void 0 : S.toLocaleLowerCase()) === ((x = t.data) === null || x === void 0 ? void 0 : x.type.toLocaleLowerCase()));
         } else {
-          const E = (P = (C = m == null ? void 0 : m.filter) === null || C === void 0 ? void 0 : C.event) === null || P === void 0 ? void 0 : P.toLocaleLowerCase();
+          const E = (j = (C = m == null ? void 0 : m.filter) === null || C === void 0 ? void 0 : C.event) === null || j === void 0 ? void 0 : j.toLocaleLowerCase();
           return E === "*" || E === ((O = t == null ? void 0 : t.event) === null || O === void 0 ? void 0 : O.toLocaleLowerCase());
         }
       else
         return m.type.toLocaleLowerCase() === a;
     }).map((m) => {
       if (typeof f == "object" && "ids" in f) {
-        const _ = f.data, { schema: y, table: x, commit_timestamp: C, type: P, errors: O } = _;
+        const _ = f.data, { schema: y, table: x, commit_timestamp: C, type: j, errors: O } = _;
         f = Object.assign(Object.assign({}, {
           schema: y,
           table: x,
           commit_timestamp: C,
-          eventType: P,
+          eventType: j,
           new: {},
           old: {},
           errors: O
@@ -2605,7 +2605,7 @@ class Ci {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-DC-2Vivv.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-BJxwfymU.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -3842,7 +3842,7 @@ class Pr extends Error {
     super(e), this.__isAuthError = !0, this.name = "AuthError", this.status = t, this.code = r;
   }
 }
-function j(s) {
+function T(s) {
   return typeof s == "object" && s !== null && "__isAuthError" in s;
 }
 class ba extends Pr {
@@ -3851,7 +3851,7 @@ class ba extends Pr {
   }
 }
 function xa(s) {
-  return j(s) && s.name === "AuthApiError";
+  return T(s) && s.name === "AuthApiError";
 }
 class zs extends Pr {
   constructor(e, t) {
@@ -3869,7 +3869,7 @@ class Ee extends We {
   }
 }
 function Sa(s) {
-  return j(s) && s.name === "AuthSessionMissingError";
+  return T(s) && s.name === "AuthSessionMissingError";
 }
 class sr extends We {
   constructor() {
@@ -3895,7 +3895,7 @@ class Pt extends We {
   }
 }
 function ka(s) {
-  return j(s) && s.name === "AuthImplicitGrantRedirectError";
+  return T(s) && s.name === "AuthImplicitGrantRedirectError";
 }
 class Zr extends We {
   constructor(e, t = null) {
@@ -3916,7 +3916,7 @@ class _r extends We {
   }
 }
 function nr(s) {
-  return j(s) && s.name === "AuthRetryableFetchError";
+  return T(s) && s.name === "AuthRetryableFetchError";
 }
 class es extends We {
   constructor(e, t, r) {
@@ -4055,7 +4055,7 @@ class Ia {
         noResolveJson: !0
       }), { data: null, error: null };
     } catch (r) {
-      if (j(r))
+      if (T(r))
         return { data: null, error: r };
       throw r;
     }
@@ -4074,7 +4074,7 @@ class Ia {
         xform: je
       });
     } catch (r) {
-      if (j(r))
+      if (T(r))
         return { data: { user: null }, error: r };
       throw r;
     }
@@ -4096,7 +4096,7 @@ class Ia {
         redirectTo: t == null ? void 0 : t.redirectTo
       });
     } catch (t) {
-      if (j(t))
+      if (T(t))
         return {
           data: {
             properties: null,
@@ -4120,7 +4120,7 @@ class Ia {
         xform: je
       });
     } catch (t) {
-      if (j(t))
+      if (T(t))
         return { data: { user: null }, error: t };
       throw t;
     }
@@ -4151,7 +4151,7 @@ class Ia {
         u[`${x}Page`] = y;
       }), u.total = parseInt(f)), { data: Object.assign(Object.assign({}, h), u), error: null };
     } catch (u) {
-      if (j(u))
+      if (T(u))
         return { data: { users: [] }, error: u };
       throw u;
     }
@@ -4170,7 +4170,7 @@ class Ia {
         xform: je
       });
     } catch (t) {
-      if (j(t))
+      if (T(t))
         return { data: { user: null }, error: t };
       throw t;
     }
@@ -4190,7 +4190,7 @@ class Ia {
         xform: je
       });
     } catch (r) {
-      if (j(r))
+      if (T(r))
         return { data: { user: null }, error: r };
       throw r;
     }
@@ -4214,7 +4214,7 @@ class Ia {
         xform: je
       });
     } catch (r) {
-      if (j(r))
+      if (T(r))
         return { data: { user: null }, error: r };
       throw r;
     }
@@ -4227,7 +4227,7 @@ class Ia {
       });
       return { data: t, error: r };
     } catch (t) {
-      if (j(t))
+      if (T(t))
         return { data: null, error: t };
       throw t;
     }
@@ -4238,7 +4238,7 @@ class Ia {
         headers: this.headers
       }), error: null };
     } catch (t) {
-      if (j(t))
+      if (T(t))
         return { data: null, error: t };
       throw t;
     }
@@ -4409,7 +4409,7 @@ class gt {
       }
       return await this._recoverAndRefresh(), { error: null };
     } catch (t) {
-      return j(t) ? { error: t } : {
+      return T(t) ? { error: t } : {
         error: new zs("Unexpected error during initialization", t)
       };
     } finally {
@@ -4437,7 +4437,7 @@ class gt {
       const c = a.session, u = a.user;
       return a.session && (await this._saveSession(a.session), await this._notifyAllSubscribers("SIGNED_IN", c)), { data: { user: u, session: c }, error: null };
     } catch (i) {
-      if (j(i))
+      if (T(i))
         return { data: { user: null, session: null }, error: i };
       throw i;
     }
@@ -4493,7 +4493,7 @@ class gt {
       const c = a.session, u = a.user;
       return a.session && (await this._saveSession(a.session), await this._notifyAllSubscribers("SIGNED_IN", c)), { data: { user: u, session: c }, error: null };
     } catch (i) {
-      if (j(i))
+      if (T(i))
         return { data: { user: null, session: null }, error: i };
       throw i;
     }
@@ -4539,7 +4539,7 @@ class gt {
         error: n
       });
     } catch (t) {
-      if (j(t))
+      if (T(t))
         return { data: { user: null, session: null }, error: t };
       throw t;
     }
@@ -4581,7 +4581,7 @@ class gt {
         error: new sr()
       } : (i.session && (await this._saveSession(i.session), await this._notifyAllSubscribers("SIGNED_IN", i.session)), { data: Object.assign(Object.assign({}, i), { redirectType: n ?? null }), error: a });
     } catch (i) {
-      if (j(i))
+      if (T(i))
         return { data: { user: null, session: null, redirectType: null }, error: i };
       throw i;
     }
@@ -4608,7 +4608,7 @@ class gt {
         error: new sr()
       } : (c.session && (await this._saveSession(c.session), await this._notifyAllSubscribers("SIGNED_IN", c.session)), { data: c, error: u });
     } catch (t) {
-      if (j(t))
+      if (T(t))
         return { data: { user: null, session: null }, error: t };
       throw t;
     }
@@ -4666,7 +4666,7 @@ class gt {
       }
       throw new jt("You must provide either an email or phone number.");
     } catch (o) {
-      if (j(o))
+      if (T(o))
         return { data: { user: null, session: null }, error: o };
       throw o;
     }
@@ -4692,7 +4692,7 @@ class gt {
       const c = a.session, u = a.user;
       return c != null && c.access_token && (await this._saveSession(c), await this._notifyAllSubscribers(e.type == "recovery" ? "PASSWORD_RECOVERY" : "SIGNED_IN", c)), { data: { user: u, session: c }, error: null };
     } catch (n) {
-      if (j(n))
+      if (T(n))
         return { data: { user: null, session: null }, error: n };
       throw n;
     }
@@ -4721,7 +4721,7 @@ class gt {
         xform: Pa
       });
     } catch (i) {
-      if (j(i))
+      if (T(i))
         return { data: null, error: i };
       throw i;
     }
@@ -4748,7 +4748,7 @@ class gt {
         return { data: { user: null, session: null }, error: n };
       });
     } catch (e) {
-      if (j(e))
+      if (T(e))
         return { data: { user: null, session: null }, error: e };
       throw e;
     }
@@ -4783,7 +4783,7 @@ class gt {
       }
       throw new jt("You must provide either an email or phone number and a type");
     } catch (t) {
-      if (j(t))
+      if (T(t))
         return { data: { user: null, session: null }, error: t };
       throw t;
     }
@@ -4911,7 +4911,7 @@ class gt {
         });
       });
     } catch (t) {
-      if (j(t))
+      if (T(t))
         return Sa(t) && (await this._removeSession(), await Tt(this.storage, `${this.storageKey}-code-verifier`)), { data: { user: null }, error: t };
       throw t;
     }
@@ -4945,7 +4945,7 @@ class gt {
         return a.user = u.user, await this._saveSession(a), await this._notifyAllSubscribers("USER_UPDATED", a), { data: { user: a.user }, error: null };
       });
     } catch (r) {
-      if (j(r))
+      if (T(r))
         return { data: { user: null }, error: r };
       throw r;
     }
@@ -4993,7 +4993,7 @@ class gt {
       }
       return { data: { user: i.user, session: i }, error: null };
     } catch (t) {
-      if (j(t))
+      if (T(t))
         return { data: { session: null, user: null }, error: t };
       throw t;
     }
@@ -5023,7 +5023,7 @@ class gt {
         return i ? { data: { user: null, session: null }, error: i } : n ? { data: { user: n.user, session: n }, error: null } : { data: { user: null, session: null }, error: null };
       });
     } catch (t) {
-      if (j(t))
+      if (T(t))
         return { data: { user: null, session: null }, error: t };
       throw t;
     }
@@ -5054,11 +5054,11 @@ class gt {
       if (t === "pkce") {
         if (this._debug("#_initialize()", "begin", "is PKCE flow", !0), !e.code)
           throw new Zr("No code detected.");
-        const { data: P, error: O } = await this._exchangeCodeForSession(e.code);
+        const { data: j, error: O } = await this._exchangeCodeForSession(e.code);
         if (O)
           throw O;
         const E = new URL(window.location.href);
-        return E.searchParams.delete("code"), window.history.replaceState(window.history.state, "", E.toString()), { data: { session: P.session, redirectType: null }, error: null };
+        return E.searchParams.delete("code"), window.history.replaceState(window.history.state, "", E.toString()), { data: { session: j.session, redirectType: null }, error: null };
       }
       const { provider_token: r, provider_refresh_token: n, access_token: i, refresh_token: a, expires_in: o, expires_at: c, token_type: u } = e;
       if (!i || !o || !a || !u)
@@ -5085,7 +5085,7 @@ class gt {
       };
       return window.location.hash = "", this._debug("#_getSessionFromURL()", "clearing window.location.hash"), { data: { session: C, redirectType: e.type }, error: null };
     } catch (r) {
-      if (j(r))
+      if (T(r))
         return { data: { session: null, redirectType: null }, error: r };
       throw r;
     }
@@ -5185,7 +5185,7 @@ class gt {
         redirectTo: t.redirectTo
       });
     } catch (i) {
-      if (j(i))
+      if (T(i))
         return { data: null, error: i };
       throw i;
     }
@@ -5201,7 +5201,7 @@ class gt {
         throw r;
       return { data: { identities: (e = t.user.identities) !== null && e !== void 0 ? e : [] }, error: null };
     } catch (t) {
-      if (j(t))
+      if (T(t))
         return { data: null, error: t };
       throw t;
     }
@@ -5233,7 +5233,7 @@ class gt {
         throw n;
       return pe() && !(!((t = e.options) === null || t === void 0) && t.skipBrowserRedirect) && window.location.assign(r == null ? void 0 : r.url), { data: { provider: e.provider, url: r == null ? void 0 : r.url }, error: null };
     } catch (r) {
-      if (j(r))
+      if (T(r))
         return { data: { provider: e.provider, url: null }, error: r };
       throw r;
     }
@@ -5254,7 +5254,7 @@ class gt {
         });
       });
     } catch (t) {
-      if (j(t))
+      if (T(t))
         return { data: null, error: t };
       throw t;
     }
@@ -5278,7 +5278,7 @@ class gt {
         Date.now() + a - r < ct;
       });
     } catch (r) {
-      if (this._debug(t, "error", r), j(r))
+      if (this._debug(t, "error", r), T(r))
         return { data: { session: null, user: null }, error: r };
       throw r;
     } finally {
@@ -5344,7 +5344,7 @@ class gt {
       const o = { session: i.session, error: null };
       return this.refreshingDeferred.resolve(o), o;
     } catch (i) {
-      if (this._debug(n, "error", i), j(i)) {
+      if (this._debug(n, "error", i), T(i)) {
         const a = { session: null, error: i };
         return nr(i) || await this._removeSession(), (t = this.refreshingDeferred) === null || t === void 0 || t.resolve(a), a;
       }
@@ -5548,7 +5548,7 @@ class gt {
         });
       });
     } catch (t) {
-      if (j(t))
+      if (T(t))
         return { data: null, error: t };
       throw t;
     }
@@ -5568,7 +5568,7 @@ class gt {
         return u ? { data: null, error: u } : (e.factorType === "totp" && (!((n = c == null ? void 0 : c.totp) === null || n === void 0) && n.qr_code) && (c.totp.qr_code = `data:image/svg+xml;utf-8,${c.totp.qr_code}`), { data: c, error: null });
       });
     } catch (t) {
-      if (j(t))
+      if (T(t))
         return { data: null, error: t };
       throw t;
     }
@@ -5592,7 +5592,7 @@ class gt {
           return o ? { data: null, error: o } : (await this._saveSession(Object.assign({ expires_at: Math.round(Date.now() / 1e3) + a.expires_in }, a)), await this._notifyAllSubscribers("MFA_CHALLENGE_VERIFIED", a), { data: a, error: o });
         });
       } catch (t) {
-        if (j(t))
+        if (T(t))
           return { data: null, error: t };
         throw t;
       }
@@ -5614,7 +5614,7 @@ class gt {
           });
         });
       } catch (t) {
-        if (j(t))
+        if (T(t))
           return { data: null, error: t };
         throw t;
       }
@@ -7159,16 +7159,16 @@ function rc() {
     var e = Ue, t = e.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
     function r(E) {
       {
-        for (var S = arguments.length, L = new Array(S > 1 ? S - 1 : 0), D = 1; D < S; D++)
-          L[D - 1] = arguments[D];
-        n("error", E, L);
+        for (var S = arguments.length, M = new Array(S > 1 ? S - 1 : 0), D = 1; D < S; D++)
+          M[D - 1] = arguments[D];
+        n("error", E, M);
       }
     }
-    function n(E, S, L) {
+    function n(E, S, M) {
       {
         var D = t.ReactDebugCurrentFrame, G = D.getStackAddendum();
-        G !== "" && (S += "%s", L = L.concat([G]));
-        var ce = L.map(function(V) {
+        G !== "" && (S += "%s", M = M.concat([G]));
+        var ce = M.map(function(V) {
           return String(V);
         });
         ce.unshift("Warning: " + S), Function.prototype.apply.call(console[E], console, ce);
@@ -7178,7 +7178,7 @@ function rc() {
       return E === S && (E !== 0 || 1 / E === 1 / S) || E !== E && S !== S;
     }
     var a = typeof Object.is == "function" ? Object.is : i, o = e.useState, c = e.useEffect, u = e.useLayoutEffect, l = e.useDebugValue, h = !1, f = !1;
-    function m(E, S, L) {
+    function m(E, S, M) {
       h || e.startTransition !== void 0 && (h = !0, r("You are using an outdated, pre-release alpha of React 18 that does not support useSyncExternalStore. The use-sync-external-store shim will not work correctly. Upgrade to a newer pre-release."));
       var D = S();
       if (!f) {
@@ -7208,18 +7208,18 @@ function rc() {
       }, [E]), l(D), D;
     }
     function _(E) {
-      var S = E.getSnapshot, L = E.value;
+      var S = E.getSnapshot, M = E.value;
       try {
         var D = S();
-        return !a(L, D);
+        return !a(M, D);
       } catch {
         return !0;
       }
     }
-    function y(E, S, L) {
+    function y(E, S, M) {
       return S();
     }
-    var x = typeof window < "u" && typeof window.document < "u" && typeof window.document.createElement < "u", C = !x, P = C ? y : m, O = e.useSyncExternalStore !== void 0 ? e.useSyncExternalStore : P;
+    var x = typeof window < "u" && typeof window.document < "u" && typeof window.document.createElement < "u", C = !x, j = C ? y : m, O = e.useSyncExternalStore !== void 0 ? e.useSyncExternalStore : j;
     cr.useSyncExternalStore = O, typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ < "u" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop == "function" && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
   }(), cr;
 }
@@ -7255,19 +7255,19 @@ function sc() {
       _.current = y;
     } else y = _.current;
     _ = o(function() {
-      function C(L) {
-        if (!P) {
-          if (P = !0, O = L, L = f(L), m !== void 0 && y.hasValue) {
+      function C(M) {
+        if (!j) {
+          if (j = !0, O = M, M = f(M), m !== void 0 && y.hasValue) {
             var D = y.value;
-            if (m(D, L)) return E = D;
+            if (m(D, M)) return E = D;
           }
-          return E = L;
+          return E = M;
         }
-        if (D = E, r(O, L)) return D;
-        var G = f(L);
-        return m !== void 0 && m(D, G) ? D : (O = L, E = G);
+        if (D = E, r(O, M)) return D;
+        var G = f(M);
+        return m !== void 0 && m(D, G) ? D : (O = M, E = G);
       }
-      var P = !1, O, E, S = h === void 0 ? null : h;
+      var j = !1, O, E, S = h === void 0 ? null : h;
       return [function() {
         return C(l());
       }, S === null ? void 0 : function() {
@@ -7307,10 +7307,10 @@ function nc() {
         hasValue: !1,
         value: null
       }, x.current = C) : C = x.current;
-      var P = c(function() {
-        var L = !1, D, G, ce = function(de) {
-          if (!L) {
-            L = !0, D = de;
+      var j = c(function() {
+        var M = !1, D, G, ce = function(de) {
+          if (!M) {
+            M = !0, D = de;
             var J = _(de);
             if (y !== void 0 && C.hasValue) {
               var H = C.value;
@@ -7330,7 +7330,7 @@ function nc() {
           return ce(V());
         };
         return [xe, Re];
-      }, [f, m, _, y]), O = P[0], E = P[1], S = i(h, O, E);
+      }, [f, m, _, y]), O = j[0], E = j[1], S = i(h, O, E);
       return o(function() {
         C.hasValue = !0, C.value = S;
       }, [S]), u(S), S;
@@ -7745,12 +7745,12 @@ const Jc = async (s, e, t, r) => {
         try {
           const { response: x, isLiveChatRequested: C } = await Jc(t, r, o, l);
           console.log(`Got OpenAI response for ${a}:`, x);
-          const P = {
+          const j = {
             conversation_id: r,
             content: x,
             sender_type: "bot",
             user_id: null
-          }, { error: O } = await W.from("messages").insert(P);
+          }, { error: O } = await W.from("messages").insert(j);
           if (O) throw O;
           if (C) {
             const { error: E } = await W.from("conversations").update({
@@ -7816,90 +7816,90 @@ const Jc = async (s, e, t, r) => {
 );
 function el({ domainId: s }) {
   var st;
-  const [e, t] = K(!1), [r, n] = K(""), [i, a] = K([]), [o, c] = K([]), [u, l] = K("history"), [h, f] = K(null), [m, _] = K(!1), [y] = K(/* @__PURE__ */ new Set()), [x, C] = K(null), [P, O] = K(null), E = Br(null), [S, L] = K(!1), D = Br(null), { sendMessage: G } = Kc(), [ce, V] = K(!1), [xe, Re] = K(window.innerWidth), [de, J] = K(!0);
+  const [e, t] = K(!1), [r, n] = K(""), [i, a] = K([]), [o, c] = K([]), [u, l] = K("history"), [h, f] = K(null), [m, _] = K(!1), [y] = K(/* @__PURE__ */ new Set()), [x, C] = K(null), [j, O] = K(null), E = Br(null), [S, M] = K(!1), D = Br(null), { sendMessage: G } = Kc(), [ce, V] = K(!1), [xe, Re] = K(window.innerWidth), [de, J] = K(!0);
   ge(() => {
     const v = () => {
       Re(window.innerWidth);
     };
     return window.addEventListener("resize", v), () => window.removeEventListener("resize", v);
   }, []);
-  const H = () => window.matchMedia("(max-width: 640px)").matches, he = (v, w) => w.some(
-    (T) => (
+  const H = () => window.matchMedia("(max-width: 640px)").matches, he = (v, b) => b.some(
+    (P) => (
       // Check for exact ID match
-      T.id === v.id || // Check for temp ID being replaced by real ID
-      T.id.startsWith("temp-") && T.content === v.content && T.sender_type === v.sender_type || // Check for exact content match within a small time window (2 seconds)
-      T.content === v.content && T.sender_type === v.sender_type && Math.abs(new Date(T.created_at).getTime() - new Date(v.created_at).getTime()) < 2e3
+      P.id === v.id || // Check for temp ID being replaced by real ID
+      P.id.startsWith("temp-") && P.content === v.content && P.sender_type === v.sender_type || // Check for exact content match within a small time window (2 seconds)
+      P.content === v.content && P.sender_type === v.sender_type && Math.abs(new Date(P.created_at).getTime() - new Date(v.created_at).getTime()) < 2e3
     )
   );
   ge(() => {
-    if (!P) return;
+    if (!j) return;
     const v = W.channel("new-conversations").on(
       "postgres_changes",
       {
         event: "INSERT",
         schema: "public",
         table: "conversations",
-        filter: `session_id=eq.${P}`
+        filter: `session_id=eq.${j}`
       },
-      (w) => {
-        if (w.eventType === "INSERT") {
-          const T = w.new;
-          c((M) => [T, ...M]);
+      (b) => {
+        if (b.eventType === "INSERT") {
+          const P = b.new;
+          c((L) => [P, ...L]);
         }
       }
     ).subscribe();
     return () => {
       v.unsubscribe();
     };
-  }, [P]), ge(() => {
-    if (!P) return;
+  }, [j]), ge(() => {
+    if (!j) return;
     const v = W.channel("conversations-updates").on(
       "postgres_changes",
       {
         event: "*",
         schema: "public",
         table: "conversations",
-        filter: `session_id=eq.${P}`
+        filter: `session_id=eq.${j}`
       },
-      (w) => {
-        w.eventType === "UPDATE" && (c(
-          (T) => T.map(
-            (M) => M.id === w.new.id ? { ...M, ...w.new } : M
+      (b) => {
+        b.eventType === "UPDATE" && (c(
+          (P) => P.map(
+            (L) => L.id === b.new.id ? { ...L, ...b.new } : L
           )
-        ), w.new.id === h && L(w.new.status === "archived"));
+        ), b.new.id === h && M(b.new.status === "archived"));
       }
     ).subscribe();
     return () => {
       v.unsubscribe();
     };
-  }, [P, h]), ge(() => {
-    var v, w, T;
-    e && (i.length > 0 || S) && ((v = E.current) == null || v.scrollIntoView({ behavior: "smooth" })), e && ((w = o.find((M) => M.id === h)) != null && w.live_mode) && ((T = E.current) == null || T.scrollIntoView({ behavior: "smooth" }));
-  }, [i, e, S, h]);
+  }, [j, h]), ge(() => {
+    var v;
+    e && (i.length > 0 || S) && ((v = E.current) == null || v.scrollIntoView({ behavior: "smooth" }));
+  }, [i, e, S]);
   const me = async () => {
-    if (P)
+    if (j)
       try {
-        const { data: v, error: w } = await W.from("conversations").select("*").eq("session_id", P).order("last_message_at", { ascending: !1 });
-        if (w) throw w;
+        const { data: v, error: b } = await W.from("conversations").select("*").eq("session_id", j).order("last_message_at", { ascending: !1 });
+        if (b) throw b;
         c(v || []);
       } catch (v) {
         console.error("Error loading conversation history:", v);
       }
   };
   ge(() => {
-    P && me();
-  }, [P]);
+    j && me();
+  }, [j]);
   const Se = async () => {
-    o.filter((v) => v.status === "active").length >= 5 || (a([]), f(null), L(!1), ve(null), V(!1), l("chat"));
+    o.filter((v) => v.status === "active").length >= 5 || (a([]), f(null), M(!1), ve(null), V(!1), l("chat"));
   }, _t = () => {
-    l("history"), a([]), f(null), L(!1), me();
+    l("history"), a([]), f(null), M(!1), me();
   }, wt = async (v) => {
     try {
-      f(v.id), L(v.status === "archived"), ve(null), V(!1);
-      const { data: w } = await W.from("messages").select("*").eq("conversation_id", v.id).order("created_at", { ascending: !0 });
-      w && (a(w), y.clear(), w.forEach((T) => y.add(T.id))), v.status === "archived" && ve(v.rating || null), l("chat");
-    } catch (w) {
-      console.error("Error loading conversation:", w);
+      f(v.id), M(v.status === "archived"), ve(null), V(!1);
+      const { data: b } = await W.from("messages").select("*").eq("conversation_id", v.id).order("created_at", { ascending: !0 });
+      b && (a(b), y.clear(), b.forEach((P) => y.add(P.id))), v.status === "archived" && ve(v.rating || null), l("chat");
+    } catch (b) {
+      console.error("Error loading conversation:", b);
     }
   };
   ge(() => {
@@ -7912,8 +7912,8 @@ function el({ domainId: s }) {
         table: "conversations",
         filter: `id=eq.${h}`
       },
-      (w) => {
-        w.new.status === "archived" ? (L(!0), tt()) : L(!1);
+      (b) => {
+        b.new.status === "archived" ? (M(!0), tt()) : M(!1);
       }
     ).subscribe();
     return () => {
@@ -7941,98 +7941,98 @@ function el({ domainId: s }) {
         table: "messages",
         filter: `conversation_id=eq.${h}`
       },
-      (w) => {
-        if (console.log("Received real-time event:", w), w.eventType === "INSERT") {
-          const T = w.new;
-          console.log("New message:", T), a((M) => {
-            if (he(T, M))
-              return console.log("Message already exists, skipping"), M;
-            const Q = M.filter(
-              (ne) => !(ne.id.startsWith("temp-") && ne.content === T.content && ne.sender_type === T.sender_type)
+      (b) => {
+        if (console.log("Received real-time event:", b), b.eventType === "INSERT") {
+          const P = b.new;
+          console.log("New message:", P), a((L) => {
+            if (he(P, L))
+              return console.log("Message already exists, skipping"), L;
+            const Q = L.filter(
+              (ne) => !(ne.id.startsWith("temp-") && ne.content === P.content && ne.sender_type === P.sender_type)
             );
-            return y.add(T.id), T.sender_type === "bot" && tt(), console.log("Adding new message to state"), [...Q, T];
+            return y.add(P.id), P.sender_type === "bot" && tt(), console.log("Adding new message to state"), [...Q, P];
           });
         }
       }
     );
-    return v.subscribe((w) => {
-      console.log("Subscription status:", w);
+    return v.subscribe((b) => {
+      console.log("Subscription status:", b);
     }), () => {
       console.log("Cleaning up subscription for conversation:", h), v.unsubscribe();
     };
   }, [h, e]), ge(() => {
     (async () => {
-      let w = localStorage.getItem(xs);
-      w || (w = window.crypto.randomUUID(), localStorage.setItem(xs, w)), O(w), await bt(w);
+      let b = localStorage.getItem(xs);
+      b || (b = window.crypto.randomUUID(), localStorage.setItem(xs, b)), O(b), await bt(b);
     })();
   }, []);
   const bt = async (v) => {
     try {
-      const { data: w, error: T } = await W.from("conversations").select("*").eq("session_id", v).eq("status", "active").order("last_message_at", { ascending: !1 }).limit(1);
-      if (T) throw T;
-      if (!w || w.length === 0) {
+      const { data: b, error: P } = await W.from("conversations").select("*").eq("session_id", v).eq("status", "active").order("last_message_at", { ascending: !1 }).limit(1);
+      if (P) throw P;
+      if (!b || b.length === 0) {
         console.log("No active conversations found for this session");
         return;
       }
-      const M = w[0], Q = /* @__PURE__ */ new Date();
-      if (Q.setDate(Q.getDate() - Xc), new Date(M.last_message_at) < Q) {
-        await W.from("conversations").update({ status: "archived" }).eq("id", M.id);
+      const L = b[0], Q = /* @__PURE__ */ new Date();
+      if (Q.setDate(Q.getDate() - Xc), new Date(L.last_message_at) < Q) {
+        await W.from("conversations").update({ status: "archived" }).eq("id", L.id);
         return;
       }
-      f(M.id);
-      const { data: ne } = await W.from("messages").select("*").eq("conversation_id", M.id).order("created_at", { ascending: !0 });
+      f(L.id);
+      const { data: ne } = await W.from("messages").select("*").eq("conversation_id", L.id).order("created_at", { ascending: !0 });
       if (ne) {
         const ze = ne.filter((kt) => y.has(kt.id) ? !1 : (y.add(kt.id), !0));
         a(ze);
       }
-    } catch (w) {
-      w instanceof Error && !w.message.includes("no rows returned") && (console.error("Error loading existing conversation:", w), C("Failed to load conversation history"));
+    } catch (b) {
+      b instanceof Error && !b.message.includes("no rows returned") && (console.error("Error loading existing conversation:", b), C("Failed to load conversation history"));
     }
   }, xt = async () => {
     try {
       const { data: { user: v } } = await W.auth.getUser();
       if (!v) {
         await W.auth.signInAnonymously();
-        const { data: { user: M } } = await W.auth.getUser();
-        if (!M) throw new Error("Failed to create anonymous session");
+        const { data: { user: L } } = await W.auth.getUser();
+        if (!L) throw new Error("Failed to create anonymous session");
         const { data: Q, error: ne } = await W.from("conversations").insert({
           domain_id: s,
-          user_id: M.id,
-          session_id: P,
+          user_id: L.id,
+          session_id: j,
           last_message_at: (/* @__PURE__ */ new Date()).toISOString(),
           status: "active"
         }).select().single();
         if (ne) throw ne;
         return Q.id;
       }
-      const { data: w, error: T } = await W.from("conversations").insert({
+      const { data: b, error: P } = await W.from("conversations").insert({
         domain_id: s,
         user_id: v.id,
-        session_id: P,
+        session_id: j,
         last_message_at: (/* @__PURE__ */ new Date()).toISOString(),
         status: "active"
       }).select().single();
-      if (T) throw T;
-      return w.id;
+      if (P) throw P;
+      return b.id;
     } catch (v) {
       throw console.error("Error creating conversation:", v), v;
     }
   }, St = async (v) => {
     try {
       _(!0), C(null);
-      const { data: { user: w } } = await W.auth.getUser();
-      w || await W.auth.signInAnonymously();
-      const T = h || await xt();
-      h || f(T);
-      const M = {
+      const { data: { user: b } } = await W.auth.getUser();
+      b || await W.auth.signInAnonymously();
+      const P = h || await xt();
+      h || f(P);
+      const L = {
         id: `temp-${Date.now()}`,
         content: v,
         sender_type: "user",
         created_at: (/* @__PURE__ */ new Date()).toISOString()
       };
-      a((Q) => he(M, Q) ? Q : [...Q, M]), await G(v, T), n("");
-    } catch (w) {
-      console.error("Error sending message:", w), C("Failed to send message. Please try again.");
+      a((Q) => he(L, Q) ? Q : [...Q, L]), await G(v, P), n("");
+    } catch (b) {
+      console.error("Error sending message:", b), C("Failed to send message. Please try again.");
     } finally {
       _(!1);
     }
@@ -8042,17 +8042,17 @@ function el({ domainId: s }) {
   ge(() => {
     s && (async () => {
       try {
-        const { data: w } = await W.from("domain_settings").select("*").eq("domain_id", s).single();
-        Ae(w ? {
-          chatbotName: w.chatbot_name,
-          greetingMessage: w.greeting_message || "Hello! How can I help you today?",
-          color: w.primary_color || "#FF6B00",
-          headerTextColor: w.header_text_color || "#000000",
-          agentMessageColor: w.agent_message_color || "#E5E7EB",
-          userMessageColor: w.user_message_color || "#FFF1E7",
-          agentMessageTextColor: w.agent_message_text_color || "#000000",
-          userMessageTextColor: w.user_message_text_color || "#000000",
-          logoUrl: w.logo_url,
+        const { data: b } = await W.from("domain_settings").select("*").eq("domain_id", s).single();
+        Ae(b ? {
+          chatbotName: b.chatbot_name,
+          greetingMessage: b.greeting_message || "Hello! How can I help you today?",
+          color: b.primary_color || "#FF6B00",
+          headerTextColor: b.header_text_color || "#000000",
+          agentMessageColor: b.agent_message_color || "#E5E7EB",
+          userMessageColor: b.user_message_color || "#FFF1E7",
+          agentMessageTextColor: b.agent_message_text_color || "#000000",
+          userMessageTextColor: b.user_message_text_color || "#000000",
+          logoUrl: b.logo_url,
           ...At
         } : {
           chatbotName: "Friendly Assistant",
@@ -8066,8 +8066,8 @@ function el({ domainId: s }) {
           logoUrl: null,
           ...At
         });
-      } catch (w) {
-        console.error("Error fetching chatbot config:", w), Ae({
+      } catch (b) {
+        console.error("Error fetching chatbot config:", b), Ae({
           chatbotName: "Friendly Assistant",
           greetingMessage: "Hello! How can I help you today?",
           color: "#FF6B00",
@@ -8100,22 +8100,22 @@ function el({ domainId: s }) {
       try {
         a([]), y.clear();
         const { data: v } = await W.from("messages").select("*").eq("conversation_id", h).order("created_at", { ascending: !0 });
-        v && (a(v), v.forEach((w) => y.add(w.id)));
+        v && (a(v), v.forEach((b) => y.add(b.id)));
       } catch (v) {
         console.error("Error refreshing chat:", v), C("Failed to refresh chat");
       }
   }, [fe, ve] = K(null), rt = async (v) => {
     if (h)
       try {
-        const { error: w } = await W.from("conversations").update({ rating: v }).eq("id", h);
-        if (w) throw w;
+        const { error: b } = await W.from("conversations").update({ rating: v }).eq("id", h);
+        if (b) throw b;
         ve(v), c(
-          (T) => T.map(
-            (M) => M.id === h ? { ...M, rating: v } : M
+          (P) => P.map(
+            (L) => L.id === h ? { ...L, rating: v } : L
           )
         );
-      } catch (w) {
-        console.error("Error rating conversation:", w);
+      } catch (b) {
+        console.error("Error rating conversation:", b);
       }
   };
   return /* @__PURE__ */ p.jsxs(
@@ -8392,4 +8392,4 @@ tl();
 export {
   kn as g
 };
-//# sourceMappingURL=main-NsFTDBcB.js.map
+//# sourceMappingURL=main-MwEgQsdQ.js.map
