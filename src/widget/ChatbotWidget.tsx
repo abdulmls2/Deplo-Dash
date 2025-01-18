@@ -336,7 +336,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     }
   };
 
-  // Add real-time subscription for messages
+  // Modify the real-time subscription logic
   useEffect(() => {
     if (!conversationId) {
       console.log('No conversation ID yet, skipping subscription');
@@ -361,6 +361,30 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
             const newMessage = payload.new as Message;
             console.log('New message:', newMessage);
 
+            // Check if conversation is in live mode before setting loading state
+            const checkLiveMode = async () => {
+              try {
+                // Fetch the current conversation to check live mode status
+                const { data: conversationData, error } = await supabase
+                  .from('conversations')
+                  .select('requested_live_at')
+                  .eq('id', conversationId)
+                  .single();
+
+                if (error) throw error;
+
+                // If live mode is active, don't set loading to false
+                if (conversationData.requested_live_at) {
+                  setIsLoading(true);
+                } else {
+                  setIsLoading(false);
+                }
+              } catch (error) {
+                console.error('Error checking live mode:', error);
+                setIsLoading(false);
+              }
+            };
+
             setMessages(prevMessages => {
               // Use the enhanced duplicate detection
               if (isMessageDuplicate(newMessage, prevMessages)) {
@@ -381,6 +405,9 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
               // Play sound for all bot messages, regardless of widget state
               if (newMessage.sender_type === 'bot') {
                 playNotificationSound();
+                
+                // Check and potentially update loading state
+                checkLiveMode();
               }
 
               console.log('Adding new message to state');
