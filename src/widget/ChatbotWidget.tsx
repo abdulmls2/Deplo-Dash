@@ -905,7 +905,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
                   )}
                 </div>
               ))}
-              {isLoading && !isRequestingLiveChat && <TypingIndicator config={config} />}
+              {isLoading && <TypingIndicator config={config} />}
               {isArchived && (
                 <div className="flex flex-col items-center gap-3 my-4">
                   <div className="bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600">
