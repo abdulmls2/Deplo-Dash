@@ -2605,7 +2605,7 @@ class Ci {
         close: () => {
           this.conn = null;
         }
-      }), import("./browser-LHEM49Ej.js").then((e) => e.b).then(({ default: e }) => {
+      }), import("./browser-lyMi93-X.js").then((e) => e.b).then(({ default: e }) => {
         this.conn = new e(this.endpointURL(), void 0, {
           headers: this.headers
         }), this.setupConnection();
@@ -7787,7 +7787,7 @@ const Jc = async (s, e, t, r) => {
       className: `${t} rounded-full object-cover flex-shrink-0`
     }
   ) : /* @__PURE__ */ p.jsx("div", { className: `${t} rounded-full bg-gray-100 flex-shrink-0 flex items-center justify-center`, children: /* @__PURE__ */ p.jsx("span", { className: s === "sm" ? "text-base" : "text-lg", children: "🤖" }) });
-}, Qc = ({ config: s }) => /* @__PURE__ */ p.jsxs("div", { className: "flex gap-2", children: [
+}, Qc = ({ config: s, liveMode: e }) => /* @__PURE__ */ p.jsxs("div", { className: "flex gap-2", children: [
   /* @__PURE__ */ p.jsx($t, { size: "sm", config: s }),
   /* @__PURE__ */ p.jsx("div", { className: "p-3 rounded-lg", style: { backgroundColor: "#E5E7EB" }, children: /* @__PURE__ */ p.jsxs("div", { className: "flex gap-2", children: [
     /* @__PURE__ */ p.jsx("div", { className: "w-2 h-2 bg-gray-500 rounded-full animate-bounce", style: { animationDelay: "0ms" } }),
@@ -8272,7 +8272,7 @@ function el({ domainId: s }) {
                       },
                       v.id
                     )),
-                    m && !ne && /* @__PURE__ */ p.jsx(Qc, { config: C }),
+                    m && !S && !ne && !isLiveMode && /* @__PURE__ */ p.jsx(Qc, { config: C, liveMode: isLiveMode }),
                     S && /* @__PURE__ */ p.jsxs("div", { className: "flex flex-col items-center gap-3 my-4", children: [
                       /* @__PURE__ */ p.jsxs("div", { className: "bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2 text-gray-600", children: [
                         /* @__PURE__ */ p.jsx(An, { className: "h-4 w-4" }),
@@ -8391,4 +8391,4 @@ tl();
 export {
   kn as g
 };
-//# sourceMappingURL=main-CGVlVW7c.js.map
+//# sourceMappingURL=main-DPKT9vZr.js.map
