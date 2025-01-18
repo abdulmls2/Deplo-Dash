@@ -582,21 +582,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     await sendMessage(message.trim());
   };
 
-  const [config, setConfig] = useState<ChatbotConfig>({
-    chatbotName: 'Chatbot',
-    greetingMessage: 'Hello! How can I help you today?',
-    color: '#FF6B00', // Default color (not used initially)
-    headerTextColor: '#000000',
-    agentMessageColor: '#E5E7EB',
-    userMessageColor: '#FFF1E7',
-    agentMessageTextColor: '#000000',
-    userMessageTextColor: '#000000',
-    logoUrl: null,
-    ...LAYOUT_CONFIG
-  });
-
-  const [isConfigLoaded, setIsConfigLoaded] = useState(false); // New loading state
-
   useEffect(() => {
     const fetchConfig = async () => {
       try {
@@ -607,36 +592,48 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
           .single();
 
         if (data) {
-          setConfig(prevConfig => ({
-            ...prevConfig,
+          setConfig({
             chatbotName: data.chatbot_name,
             greetingMessage: data.greeting_message || 'Hello! How can I help you today?',
-            color: data.primary_color || prevConfig.color, // Use fetched color or keep default
-            headerTextColor: data.header_text_color || prevConfig.headerTextColor,
-            agentMessageColor: data.agent_message_color || prevConfig.agentMessageColor,
-            userMessageColor: data.user_message_color || prevConfig.userMessageColor,
-            agentMessageTextColor: data.agent_message_text_color || prevConfig.agentMessageTextColor,
-            userMessageTextColor: data.user_message_text_color || prevConfig.userMessageTextColor,
+            color: data.primary_color || '#FF6B00',
+            headerTextColor: data.header_text_color || '#000000',
+            agentMessageColor: data.agent_message_color || '#E5E7EB',
+            userMessageColor: data.user_message_color || '#FFF1E7',
+            agentMessageTextColor: data.agent_message_text_color || '#000000',
+            userMessageTextColor: data.user_message_text_color || '#000000',
             logoUrl: data.logo_url,
-          }));
+            ...LAYOUT_CONFIG
+          });
+        } else {
+          // Use default config if no settings exist
+          setConfig({
+            chatbotName: 'Friendly Assistant',
+            greetingMessage: 'Hello! How can I help you today?',
+            color: '#FF6B00',
+            headerTextColor: '#000000',
+            agentMessageColor: '#E5E7EB',
+            userMessageColor: '#FFF1E7',
+            agentMessageTextColor: '#000000',
+            userMessageTextColor: '#000000',
+            logoUrl: null,
+            ...LAYOUT_CONFIG
+          });
         }
       } catch (error) {
         console.error('Error fetching chatbot config:', error);
         // Use default config on error
-        setConfig(prevConfig => ({
-          ...prevConfig,
+        setConfig({
           chatbotName: 'Friendly Assistant',
           greetingMessage: 'Hello! How can I help you today?',
-          color: prevConfig.color, // Keep default color
-          headerTextColor: prevConfig.headerTextColor,
-          agentMessageColor: prevConfig.agentMessageColor,
-          userMessageColor: prevConfig.userMessageColor,
-          agentMessageTextColor: prevConfig.agentMessageTextColor,
-          userMessageTextColor: prevConfig.user_message_text_color,
+          color: '#FF6B00',
+          headerTextColor: '#000000',
+          agentMessageColor: '#E5E7EB',
+          userMessageColor: '#FFF1E7',
+          agentMessageTextColor: '#000000',
+          userMessageTextColor: '#000000',
           logoUrl: null,
-        }));
-      } finally {
-        setIsConfigLoaded(true); // Set loading state to true after fetching
+          ...LAYOUT_CONFIG
+        });
       }
     };
 
@@ -645,10 +642,18 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     }
   }, [domainId]);
 
-  // Render the chatbot only if the configuration is loaded
-  if (!isConfigLoaded) {
-    return null; // Or a loading spinner/component
-  }
+  const [config, setConfig] = useState<ChatbotConfig>({
+    chatbotName: 'Chatbot',
+    greetingMessage: 'Hello! How can I help you today?',
+    color: '#FF6B00', 
+    headerTextColor: '#000000',
+    agentMessageColor: '#E5E7EB',
+    userMessageColor: '#FFF1E7',
+    agentMessageTextColor: '#000000',
+    userMessageTextColor: '#000000',
+    logoUrl: null,
+    ...LAYOUT_CONFIG
+  });
 
   const buttonStyle = {
     backgroundColor: config.color,
