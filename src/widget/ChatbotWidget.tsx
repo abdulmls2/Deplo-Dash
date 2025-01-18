@@ -261,7 +261,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
     setConversationId(null);
     setIsArchived(false);
     loadConversationHistory(); // Refresh conversation history when going back to history view
-    console.log('Navigated back to history view and refreshed conversation history.'); // Log for testing
   };
 
   const handleSelectConversation = async (conversation: Conversation) => {
