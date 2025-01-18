@@ -121,6 +121,7 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const [isRequestingLiveChat, setIsRequestingLiveChat] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showMobileMessage, setShowMobileMessage] = useState(true);
+  const [isLiveMode, setIsLiveMode] = useState(false);
 
   // Add window resize listener
   useEffect(() => {
@@ -528,9 +529,9 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   };
 
   const sendMessage = async (content: string) => {
-    try {
-      if (isLiveMode) return; // Prevent sending message if in live mode
+    if (isLiveMode) return; // Prevent sending message if in live mode
 
+    try {
       setIsLoading(true);
       setError(null);
 
