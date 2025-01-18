@@ -121,7 +121,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
   const [isRequestingLiveChat, setIsRequestingLiveChat] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [showMobileMessage, setShowMobileMessage] = useState(true);
-  const [isLiveMode, setIsLiveMode] = useState(false);
 
   // Add window resize listener
   useEffect(() => {
@@ -738,32 +737,6 @@ export default function ChatbotWidget({ domainId }: { domainId: string }) {
       setError('Failed to request live chat. Please try again.');
     }
   };
-
-  useEffect(() => {
-    if (conversationId) {
-      // Fetch the conversation details to set live mode
-      const fetchConversationDetails = async () => {
-        const { data: conversation, error } = await supabase
-          .from('conversations')
-          .select('live_mode')
-          .eq('id', conversationId)
-          .single();
-
-        if (error) {
-          console.error('Error fetching conversation details:', error);
-          return;
-        }
-
-        if (conversation) {
-          console.log('Fetched conversation:', conversation); // Debugging statement
-          setIsLiveMode(conversation.live_mode); // Set the live mode state
-          console.log('Live mode set to:', conversation.live_mode); // Debugging statement
-        }
-      };
-
-      fetchConversationDetails();
-    }
-  }, [conversationId]);
 
   return (
     <div className={`fixed ${config.verticalPosition}-0 right-6 flex flex-col items-end z-[9999]`} 
