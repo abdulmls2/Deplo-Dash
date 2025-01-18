@@ -13,6 +13,8 @@ export default function Dashboard() {
   const [ratings, setRatings] = useState({ good: 0, ok: 0, bad: 0 });
   const [liveConversations, setLiveConversations] = useState(0);
   const [botConversations, setBotConversations] = useState(0);
+  const [averageBotConversationTime, setAverageBotConversationTime] = useState('0 minutes');
+  const [averageLiveAgentConversationTime, setAverageLiveAgentConversationTime] = useState('0 minutes');
 
   useEffect(() => {
     fetchData(selectedDate);
@@ -32,6 +34,8 @@ export default function Dashboard() {
     await fetchRatings(startOfDay, endOfDay);
     await fetchLiveConversations(startOfDay, endOfDay);
     await fetchBotConversations(startOfDay, endOfDay);
+    await fetchAverageBotConversationTime(startOfDay, endOfDay);
+    await fetchAverageLiveAgentConversationTime(startOfDay, endOfDay);
   }
 
   async function fetchTodayConversations(startOfDay: Date, endOfDay: Date) {
@@ -93,6 +97,66 @@ export default function Dashboard() {
 
     if (!error && count !== null) {
       setBotConversations(count);
+    }
+  }
+
+  async function fetchAverageBotConversationTime(startOfDay: Date, endOfDay: Date) {
+    const { data, error } = await supabase
+      .from('conversations')
+      .select('created_at, last_message_at')
+      .eq('live_mode', false)
+      .eq('status', 'archived')
+      .gte('created_at', startOfDay.toISOString())
+      .lte('created_at', endOfDay.toISOString())
+      .eq('domain_id', currentDomain?.id);
+
+    if (!error && data) {
+      const totalDuration = data.reduce((acc, conv) => {
+        const createdAt = new Date(conv.created_at);
+        const lastMessageAt = new Date(conv.last_message_at);
+        const duration = (lastMessageAt.getTime() - createdAt.getTime()) / 1000;
+        return acc + duration;
+      }, 0);
+
+      const averageDuration = data.length > 0 ? totalDuration / data.length : 0;
+
+      const minutes = Math.floor(averageDuration / 60);
+      const seconds = Math.round(averageDuration % 60);
+
+      const timeString = `${minutes} minute${minutes !== 1 ? 's' : ''}` + 
+                         (seconds > 0 ? ` and ${seconds} second${seconds !== 1 ? 's' : ''}` : '');
+
+      setAverageBotConversationTime(timeString);
+    }
+  }
+
+  async function fetchAverageLiveAgentConversationTime(startOfDay: Date, endOfDay: Date) {
+    const { data, error } = await supabase
+      .from('conversations')
+      .select('created_at, last_message_at')
+      .eq('live_mode', true)
+      .eq('status', 'archived')
+      .gte('created_at', startOfDay.toISOString())
+      .lte('created_at', endOfDay.toISOString())
+      .eq('domain_id', currentDomain?.id);
+
+    if (!error && data) {
+      const totalDuration = data.reduce((acc, conv) => {
+        const createdAt = new Date(conv.created_at);
+        const lastMessageAt = new Date(conv.last_message_at);
+        const duration = (lastMessageAt.getTime() - createdAt.getTime()) / 1000;
+        return acc + duration;
+      }, 0);
+
+      const averageDuration = data.length > 0 ? totalDuration / data.length : 0;
+
+      const minutes = Math.floor(averageDuration / 60);
+      const seconds = Math.round(averageDuration % 60);
+
+      const timeString = `${minutes} minute${minutes !== 1 ? 's' : ''}` + 
+                         (seconds > 0 ? ` and ${seconds} second${seconds !== 1 ? 's' : ''}` : '');
+
+      setAverageLiveAgentConversationTime(timeString);
     }
   }
 
@@ -170,19 +234,19 @@ export default function Dashboard() {
           Icon={Users}
         />
         <StatsCard 
-          title="Good Rating" 
+          title="Good Ratings" 
           value={ratings.good.toString()}
           Icon={Users}
           className="bg-green-50"
         />
         <StatsCard 
-          title="OK Rating" 
+          title="OK Ratings" 
           value={ratings.ok.toString()}
           Icon={Users}
           className="bg-yellow-50"
         />
         <StatsCard 
-          title="Bad Rating" 
+          title="Bad Ratings" 
           value={ratings.bad.toString()}
           Icon={Users}
           className="bg-red-50"
@@ -193,10 +257,21 @@ export default function Dashboard() {
           Icon={Users}
         />
         <StatsCard 
-          title="AI Agent Conversations"
-          value={botConversations.toString()}
+          title="AI Agent Conversations" 
+          value={botConversations.toString()} 
           Icon={Users}
         />
+        <StatsCard 
+          title="AI Agent Average Conversation Time" 
+          value={averageBotConversationTime} 
+          Icon={Users}
+        />
+        <StatsCard 
+          title="Live Agent Average Conversation Time" 
+          value={averageLiveAgentConversationTime} 
+          Icon={Users}
+        />
+        {/* 
         <StatsCard 
           title="Appointments" 
           value="0" 
@@ -207,6 +282,7 @@ export default function Dashboard() {
           value="$0" 
           Icon={DollarSign}
         />
+        */}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
