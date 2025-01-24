@@ -3,7 +3,8 @@ export const generateBotResponse = async (
   message: string, 
   conversationId: string,
   prompt?: string,
-  trainingData?: string[]
+  trainingData?: string[],
+  messageHistory?: { role: 'user' | 'bot', content: string }[]
 ): Promise<{ response: string; isLiveChatRequested: boolean }> => {
   try {
     // Always use the absolute URL for the API endpoint
@@ -19,7 +20,11 @@ export const generateBotResponse = async (
         message,
         conversationId,
         customPrompt: prompt,
-        trainingData
+        trainingData,
+        messageHistory: messageHistory?.map(msg => ({
+          role: msg.role === 'user' ? 'user' : 'assistant',
+          content: msg.content
+        }))
       })
     });
 

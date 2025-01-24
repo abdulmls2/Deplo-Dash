@@ -62,7 +62,7 @@ export default async function handler(
       });
     }
 
-    const { message, chatbotName, customPrompt } = req.body;
+    const { message, chatbotName, customPrompt, messageHistory } = req.body;
 
     // Validate request body
     if (!message) {
@@ -81,14 +81,18 @@ export default async function handler(
     const { trainingData } = req.body;
     const systemPrompt = customPrompt 
       ? `${customPrompt}\n\nIf the user requests to speak with a live agent, human, or real person (examples: "can I speak to a human", "I want to talk to a real person", "connect me to an agent", etc.), respond with exactly this message:\n\n"[LIVE_CHAT_REQUESTED]I'll connect you with a live agent. Please wait a moment while I transfer your chat."\n\nHere is some additional context to help you answer questions:\n\nTraining Data:\n${trainingData?.join('\n') || 'No training data'}`
-      : null;
+      : DEFAULT_PROMPT;
+
+    // Build messages array with history
+    const messages = [
+      { role: "system", content: systemPrompt },
+      ...(messageHistory || []),
+      { role: "user", content: message }
+    ];
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: systemPrompt || DEFAULT_PROMPT },
-        { role: "user", content: message }
-      ],
+      model: "gpt-4-turbo-preview",
+      messages: messages,
     });
 
     const response = completion.choices[0]?.message?.content || 'Sorry, I could not generate a response.';

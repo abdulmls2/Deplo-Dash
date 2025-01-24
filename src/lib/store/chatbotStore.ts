@@ -51,12 +51,33 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
         console.error('Error fetching training data:', trainingError.message);
       }
 
+      // Fetch last 10 messages from the conversation
+      const { data: messageHistory, error: historyError } = await supabase
+        .from('messages')
+        .select('content, sender_type')
+        .eq('conversation_id', conversationId)
+        .order('created_at', { ascending: false })
+        .limit(10);
+
+      if (historyError) {
+        console.error('Error fetching message history:', historyError.message);
+      }
+
+      // Convert messages to the format expected by OpenAI
+      const formattedHistory = messageHistory
+        ?.reverse()
+        ?.map(msg => ({
+          role: msg.sender_type as 'user' | 'bot',
+          content: msg.content
+        })) || [];
+
       const trainingContents = trainingData?.map(entry => entry.content) || [];
 
       // Always send as user message with null user_id to indicate it's from the widget
       console.log(`Sending user message from ${chatbotName}:`, {
         message: content,
-        trainingData: trainingContents.length > 0 ? trainingContents : 'No training data'
+        trainingData: trainingContents.length > 0 ? trainingContents : 'No training data',
+        messageHistory: formattedHistory
       });
 
       const messageData = {
@@ -85,7 +106,13 @@ export const useChatbotStore = create<ChatbotStore>((set, get) => ({
       if (!conversationData.live_mode) {
         console.log(`Live mode disabled for ${chatbotName}, generating OpenAI response`);
         try {
-          const { response: botResponse, isLiveChatRequested } = await generateBotResponse(content, conversationId, prompt, trainingContents);
+          const { response: botResponse, isLiveChatRequested } = await generateBotResponse(
+            content, 
+            conversationId, 
+            prompt, 
+            trainingContents,
+            formattedHistory
+          );
           console.log(`Got OpenAI response for ${chatbotName}:`, botResponse);
           
           // Send bot response
