@@ -7,6 +7,9 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || '',
 });
 
+// Add conversation history map
+const conversationHistory = new Map<string, { role: "user" | "assistant" | "system", content: string }[]>();
+
 const DEFAULT_PROMPT = `You are a helpful customer support assistant. Your goal is to provide clear, accurate, and friendly responses to customer inquiries. Keep your responses concise but informative. If you don't know something, be honest about it.
 
 If the user requests to speak with a live agent, human, or real person (examples: "live chat", "can I speak to a human", "I want to talk to a real person", "connect me to an agent", etc.), respond with exactly this message:
@@ -62,7 +65,7 @@ export default async function handler(
       });
     }
 
-    const { message, chatbotName, customPrompt } = req.body;
+    const { message, chatbotName, customPrompt, conversationId } = req.body;
 
     // Validate request body
     if (!message) {
@@ -77,22 +80,35 @@ export default async function handler(
       console.log('Using default prompt');
     }
 
-    // Combine prompt with training data if available
-    const { trainingData } = req.body;
-    const systemPrompt = customPrompt 
-      ? `${customPrompt}\n\nIf the user requests to speak with a live agent, human, or real person (examples: "can I speak to a human", "I want to talk to a real person", "connect me to an agent", etc.), respond with exactly this message:\n\n"[LIVE_CHAT_REQUESTED]I'll connect you with a live agent. Please wait a moment while I transfer your chat."\n\nHere is some additional context to help you answer questions:\n\nTraining Data:\n${trainingData?.join('\n') || 'No training data'}`
-      : null;
+    // Get or initialize conversation history
+    if (!conversationHistory.has(conversationId)) {
+      conversationHistory.set(conversationId, [
+        { 
+          role: "system", 
+          content: customPrompt 
+            ? `${customPrompt}\n\nIf the user requests to speak with a live agent, human, or real person (examples: "can I speak to a human", "I want to talk to a real person", "connect me to an agent", etc.), respond with exactly this message:\n\n"[LIVE_CHAT_REQUESTED]I'll connect you with a live agent. Please wait a moment while I transfer your chat."\n\nHere is some additional context to help you answer questions:\n\nTraining Data:\n${trainingData?.join('\n') || 'No training data'}`
+            : DEFAULT_PROMPT 
+        }
+      ]);
+    }
+
+    // Get current history and add user message
+    const history = conversationHistory.get(conversationId)!;
+    history.push({ role: "user", content: message });
+
+    // Limit history to last 10 messages to prevent token limit issues
+    const recentHistory = history.slice(-10);
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: systemPrompt || DEFAULT_PROMPT },
-        { role: "user", content: message }
-      ],
+      messages: recentHistory,
     });
 
     const response = completion.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
     console.log('OpenAI API response:', response);
+    
+    // Add assistant response to history
+    history.push({ role: "assistant", content: response });
     
     // Check if response contains live chat request
     const isLiveChatRequested = response.includes('[LIVE_CHAT_REQUESTED]');
