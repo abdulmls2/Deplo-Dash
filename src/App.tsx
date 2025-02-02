@@ -54,7 +54,7 @@ export default function App() {
           currentPage={currentPage}
           onPageChange={setCurrentPage}
         />
-        <div className={`transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-20'}`}>
+        <div className={`transition-all duration-300 ${isSidebarOpen ? 'ml-52' : 'ml-20'}`}>
           <Header />
           <main>
             {currentPage === 'dashboard' && <Dashboard />}

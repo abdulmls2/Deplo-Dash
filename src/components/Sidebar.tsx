@@ -79,46 +79,26 @@ export default function Sidebar({ isOpen, toggleSidebar, currentPage, onPageChan
     return defaultMenuItems;
   });
 
-  const [draggedItem, setDraggedItem] = useState<number | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
-
   const handleDragStart = (index: number) => {
-    setDraggedItem(index);
-    setIsDragging(true);
+    // Removed drag-and-drop functionality
   };
 
   const handleDragOver = (e: React.DragEvent, index: number) => {
-    e.preventDefault();
-    if (draggedItem === null || !isDragging) return;
-    
-    setMenuItems(prevItems => {
-      const items = [...prevItems];
-      const draggedItemContent = items[draggedItem];
-      items.splice(draggedItem, 1);
-      items.splice(index, 0, draggedItemContent);
-      return items;
-    });
-    setDraggedItem(index);
+    // Removed drag-and-drop functionality
   };
 
   const handleDragEnd = () => {
-    if (isDragging) {
-      const orderToSave = menuItems.map(item => item.id);
-      localStorage.setItem('sidebarOrder', JSON.stringify(orderToSave));
-      setIsDragging(false);
-      setDraggedItem(null);
-    }
+    // Removed drag-and-drop functionality
   };
 
   const resetOrder = () => {
-    localStorage.removeItem('sidebarOrder');
-    setMenuItems(defaultMenuItems);
+    // Removed reset order functionality
   };
 
   return (
     <div 
       className={`bg-white h-screen shadow-lg transition-all duration-300 ${
-        isOpen ? 'w-64' : 'w-20'
+        isOpen ? 'w-52' : 'w-20'
       } flex flex-col fixed left-0 top-0`}
     >
       <div className="flex items-center p-4 border-b">
@@ -146,17 +126,10 @@ export default function Sidebar({ isOpen, toggleSidebar, currentPage, onPageChan
         {menuItems.map((item, index) => (
           <div
             key={item.id}
-            draggable
-            onDragStart={() => handleDragStart(index)}
-            onDragOver={(e) => handleDragOver(e, index)}
-            onDragEnd={handleDragEnd}
-            className={`w-full flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 cursor-move
+            className={`w-full flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 cursor-pointer
               ${!isOpen && 'justify-center'}
               ${currentPage === item.id ? 'bg-orange-50 text-orange-600' : ''}`}
           >
-            {isOpen && (
-              <GripVertical className="h-4 w-4 mr-2 text-gray-400" />
-            )}
             <button
               onClick={() => onPageChange(item.id)}
               className="flex items-center flex-1"
@@ -167,15 +140,6 @@ export default function Sidebar({ isOpen, toggleSidebar, currentPage, onPageChan
           </div>
         ))}
       </nav>
-
-      {isOpen && (
-        <button
-          onClick={resetOrder}
-          className="m-4 p-2 text-sm text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded"
-        >
-          Reset Menu Order
-        </button>
-      )}
     </div>
   );
 }
