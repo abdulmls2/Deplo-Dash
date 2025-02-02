@@ -142,15 +142,15 @@ export default function Conversations() {
             ))}
           </div>
           
-          <div className="flex gap-2">
-            <div className="relative" ref={tagManagerRef}>
+          <div className="flex items-center gap-1.5">
+            <div className="relative flex-1" ref={tagManagerRef}>
               <button
                 onClick={() => setShowTagManager(!showTagManager)}
-                className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs bg-gray-300 text-black-600 hover:bg-gray-200 w-auto"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium bg-white border border-gray-200 hover:bg-gray-50 w-full"
               >
-                <TagIcon className="h-3 w-3" />
+                <TagIcon className="h-3.5 w-3.5 text-gray-500" />
                 <span>Tags</span>
-                <ChevronDown className="h-3 w-3 ml-auto" />
+                <ChevronDown className="h-3.5 w-3.5 ml-auto text-gray-400" />
               </button>
 
               {showTagManager && (
@@ -163,11 +163,11 @@ export default function Conversations() {
             <div className="relative" ref={sortMenuRef}>
               <button
                 onClick={() => setShowSortMenu(!showSortMenu)}
-                className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs bg-gray-300 text-black-600 hover:bg-gray-200 w-auto"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium bg-white border border-gray-200 hover:bg-gray-50"
               >
-                <ArrowUpDown className="h-3 w-3" />
+                <ArrowUpDown className="h-3.5 w-3.5 text-gray-500" />
                 <span>Sort</span>
-                <ChevronDown className="h-3 w-3 ml-auto" />
+                <ChevronDown className="h-3.5 w-3.5 ml-1 text-gray-400" />
               </button>
 
               {showSortMenu && (
@@ -197,11 +197,11 @@ export default function Conversations() {
             <div className="relative" ref={ratingMenuRef}>
               <button
                 onClick={() => setShowRatingMenu(!showRatingMenu)}
-                className="flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs bg-gray-300 text-black-600 hover:bg-gray-200 w-auto"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium bg-white border border-gray-200 hover:bg-gray-50"
               >
-                <ThumbsUp className="h-3 w-3" />
+                <ThumbsUp className="h-3.5 w-3.5 text-gray-500" />
                 <span>Rating</span>
-                <ChevronDown className="h-3 w-3 ml-auto" />
+                <ChevronDown className="h-3.5 w-3.5 ml-1 text-gray-400" />
               </button>
 
               {showRatingMenu && (
