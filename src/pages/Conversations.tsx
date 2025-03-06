@@ -15,29 +15,29 @@ const initialFilters = [
     icon: Mail, 
     label: 'Active', 
     id: 'active', 
-    activeColor: 'bg-green-600 text-white hover:bg-green-700',
-    inactiveColor: 'bg-green-200 text-green-800 hover:bg-green-200'
+    activeColor: 'bg-[#EFF6FF] text-blue-600',
+    inactiveColor: 'bg-white text-[#000000] hover:bg-gray-50'
   },
   { 
     icon: Clock, 
     label: 'Urgent', 
     id: 'urgent', 
-    activeColor: 'bg-red-600 text-white hover:bg-red-700',
-    inactiveColor: 'bg-red-200 text-red-800 hover:bg-red-200'
+    activeColor: 'bg-[#EFF6FF] text-blue-600',
+    inactiveColor: 'bg-white text-[#000000] hover:bg-gray-50'
   },
   { 
     icon: MessageCircleOff, 
     label: 'Closed', 
     id: 'closed', 
-    activeColor: 'bg-gray-900 text-white hover:bg-gray-800',
-    inactiveColor: 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+    activeColor: 'bg-[#EFF6FF] text-blue-600',
+    inactiveColor: 'bg-white text-[#000000] hover:bg-gray-50'
   },
   { 
     icon: Mail, 
     label: 'All', 
     id: 'all', 
-    activeColor: 'bg-blue-600 text-white hover:bg-blue-700',
-    inactiveColor: 'bg-blue-200 text-blue-800 hover:bg-blue-200'
+    activeColor: 'bg-[#EFF6FF] text-blue-600',
+    inactiveColor: 'bg-white text-[#000000] hover:bg-gray-50'
   },
 ];
 
