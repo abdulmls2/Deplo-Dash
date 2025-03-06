@@ -105,7 +105,7 @@ export default function Sidebar({ isOpen, toggleSidebar, currentPage, onPageChan
         {isOpen && (
           <button 
             onClick={() => onPageChange('dashboard')}
-            className="text-xl font-bold text-orange-500 hover:text-orange-600"
+            className="text-xl font-bold text-[#2563EB] hover:text-[#2563EB]/90"
           >
             dashboard.ai
           </button>
@@ -128,7 +128,7 @@ export default function Sidebar({ isOpen, toggleSidebar, currentPage, onPageChan
             key={item.id}
             className={`w-full flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 cursor-pointer
               ${!isOpen && 'justify-center'}
-              ${currentPage === item.id ? 'bg-orange-50 text-orange-600' : ''}`}
+              ${currentPage === item.id ? 'bg-[#EFF6FF] text-[#2563EB]' : ''}`}
           >
             <button
               onClick={() => onPageChange(item.id)}
