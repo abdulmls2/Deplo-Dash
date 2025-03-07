@@ -115,7 +115,7 @@ export default function Conversations() {
   return (
     <div className="flex h-[calc(100vh-4rem)]">
       {/* Left Panel */}
-      <div className="w-96 border-r border-gray-200 flex flex-col">
+      <div className="w-[445px] border-r border-gray-200 flex flex-col">
         <div className="p-4 border-b border-gray-200">
           <div className="flex flex-wrap gap-2 mb-4 items-center justify-start">
             {initialFilters.map((filter) => (

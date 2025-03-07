@@ -60,8 +60,8 @@ export default function MessageList({ conversationId }: MessageListProps) {
             <div
               className={`max-w-[70%] rounded-lg p-4 ${
                 message.sender_type === 'user'
-                  ? 'bg-gray-100 text-gray-800'
-                  : 'bg-gray-900 text-white'
+                  ? 'bg-white text-gray-800'
+                  : 'bg-blue-500 text-white'
               }`}
             >
               <p className="text-sm">{message.content}</p>
