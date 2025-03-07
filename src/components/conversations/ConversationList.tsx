@@ -103,55 +103,75 @@ export default function ConversationList({ onSelectConversation, selectedId }: C
           <button
             key={conversation.id}
             onClick={() => {
-              // Mark as read only for live chat conversations that are unread
               if (conversation.requested_live_at && !conversation.is_read) {
                 markConversationAsRead(conversation.id);
               }
-              // Then select the conversation
               onSelectConversation(conversation.id);
             }}
-            className={`w-full flex items-start gap-3 p-4 hover:bg-gray-50 border-b border-gray-200 text-left transition-colors ${
-              selectedId === conversation.id ? 'bg-gray-50' : ''
-            } ${conversation.requested_live_at && !conversation.is_read ? 'bg-blue-50 border-l-4 border-l-blue-500' : ''}`}
+            className={`w-full flex items-start gap-4 p-5 text-left transition-all duration-200
+              ${selectedId === conversation.id 
+                ? 'bg-gray-50 shadow-sm' 
+                : 'hover:bg-gray-50/50'
+              }
+              ${conversation.requested_live_at && !conversation.is_read 
+                ? 'border-l-4 border-l-blue-500 bg-blue-50' 
+                : 'border-l-4 border-l-transparent'
+              }
+              border-b border-gray-100
+            `}
           >
-            <div className="rounded-full bg-gray-100 p-2">
-              <User className="h-5 w-5 text-gray-600" />
+            <div className={`shrink-0 rounded-full p-2.5 transition-colors
+              ${selectedId === conversation.id 
+                ? 'bg-blue-50' 
+                : 'bg-gray-100'
+              }`}>
+              <User className={`h-5 w-5 
+                ${selectedId === conversation.id 
+                  ? 'text-blue-600' 
+                  : 'text-gray-600'
+                }`} 
+              />
             </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex justify-between items-center mb-1">
-                <span className="font-medium text-gray-900">
+
+            <div className="flex-1 min-w-0 space-y-1">
+              <div className="flex justify-between items-center">
+                <span className={`font-medium truncate
+                  ${selectedId === conversation.id 
+                    ? 'text-blue-600' 
+                    : 'text-gray-900'
+                  }`}>
                   {conversation.title || 'New Conversation'}
                 </span>
                 {conversation.last_message_at && (
-                  <span className="text-sm text-gray-500">
+                  <span className="text-xs text-gray-500 shrink-0 ml-2">
                     {formatDistanceToNowWithJustNow(new Date(conversation.last_message_at))}
                   </span>
                 )}
               </div>
               
               {latestMessages[conversation.id] && (
-                <p className="text-sm text-gray-600 truncate mb-1">
+                <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
                   {latestMessages[conversation.id]}
                 </p>
               )}
               
-              {conversation.tags && conversation.tags.length > 0 && (
-                <div className="flex flex-wrap gap-1 mt-1">
-                  {conversation.tags.map((tag) => (
-                    <span
-                      key={tag.id}
-                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs text-white"
-                      style={{ backgroundColor: tag.color }}
-                    >
-                      <Tag className="h-3 w-3" />
-                      {tag.name}
-                    </span>
-                  ))}
-                </div>
-              )}
-              
-              {conversation.requested_live_at && (
-                <div className="mt-2 flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                {conversation.tags && conversation.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1">
+                    {conversation.tags.map((tag) => (
+                      <span
+                        key={tag.id}
+                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs text-white"
+                        style={{ backgroundColor: tag.color }}
+                      >
+                        <Tag className="h-3 w-3" />
+                        {tag.name}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                
+                {conversation.requested_live_at && (
                   <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
                     conversation.status === 'archived' 
                       ? 'bg-blue-100 text-black-800' 
@@ -161,8 +181,8 @@ export default function ConversationList({ onSelectConversation, selectedId }: C
                       ? 'Requested Live Chat' 
                       : `Waiting for agent • ${formatWaitingTime(conversation.requested_live_at)}`}
                   </span>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </button>
         ))
