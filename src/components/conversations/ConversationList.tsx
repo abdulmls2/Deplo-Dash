@@ -108,7 +108,7 @@ export default function ConversationList({ onSelectConversation, selectedId }: C
               }
               onSelectConversation(conversation.id);
             }}
-            className={`w-full flex items-start gap-4 p-5 text-left transition-all duration-200
+            className={`w-full flex items-start gap-4 px-5 py-4 text-left transition-all duration-200
               ${selectedId === conversation.id 
                 ? 'bg-gray-50 shadow-sm' 
                 : 'hover:bg-gray-50/50'
