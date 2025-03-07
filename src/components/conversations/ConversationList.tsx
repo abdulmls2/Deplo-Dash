@@ -117,7 +117,7 @@ export default function ConversationList({ onSelectConversation, selectedId }: C
                 ? 'border-l-4 border-l-blue-500 bg-blue-50' 
                 : 'border-l-4 border-l-transparent'
               }
-              border-b border-gray-100
+              border-b border-gray-200
             `}
           >
             <div className={`shrink-0 rounded-full p-2.5 transition-colors
